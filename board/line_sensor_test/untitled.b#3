@@ -229,36 +229,65 @@ MELF 0.10 W</description>
 </package>
 </packages>
 </library>
-<library name="LOGIC-74HC4051PW_TSSOP16_">
+<library name="74HC4067">
 <packages>
-<package name="TSSOP16-0.65-5X4.4MM">
-<description>&lt;b&gt;TSOP16&lt;/b&gt;&lt;p&gt;
-thin small outline package</description>
-<wire x1="-2.5" y1="2.2" x2="2.5" y2="2.2" width="0.127" layer="21"/>
-<wire x1="2.5" y1="2.2" x2="2.5" y2="-2.2" width="0.127" layer="21"/>
-<wire x1="2.5" y1="-2.2" x2="-2.119" y2="-2.2" width="0.127" layer="21"/>
-<wire x1="-2.119" y1="-2.2" x2="-2.5" y2="-1.819" width="0.127" layer="21"/>
-<wire x1="-2.5" y1="-1.819" x2="-2.5" y2="2.2" width="0.127" layer="21"/>
-<circle x="-3.175" y="-1.905" radius="0.381" width="0" layer="21"/>
-<text x="-3.179340625" y="-1.907609375" size="0.890215625" layer="25" ratio="11" rot="R90">&gt;NAME</text>
-<text x="3.81185" y="-1.90591875" size="0.88943125" layer="27" ratio="11" rot="R90">&gt;VALUE</text>
-<rectangle x1="-2.54026875" y1="-2.15923125" x2="2.54" y2="2.159" layer="39"/>
-<smd name="1" x="-2.325" y="-2.925" dx="0.5" dy="1.2" layer="1"/>
-<smd name="2" x="-1.625" y="-2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="3" x="-0.975" y="-2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="4" x="-0.325" y="-2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="5" x="0.325" y="-2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="6" x="0.975" y="-2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="7" x="1.625" y="-2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="8" x="2.325" y="-2.925" dx="0.5" dy="1.2" layer="1"/>
-<smd name="9" x="2.325" y="2.925" dx="0.5" dy="1.2" layer="1"/>
-<smd name="10" x="1.625" y="2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="11" x="0.975" y="2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="12" x="0.325" y="2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="13" x="-0.325" y="2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="14" x="-0.975" y="2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="15" x="-1.625" y="2.925" dx="0.4" dy="1.2" layer="1"/>
-<smd name="16" x="-2.325" y="2.925" dx="0.5" dy="1.2" layer="1"/>
+<package name="SSOP24">
+<description>&lt;b&gt;Shrink Small Outline Package&lt;/b&gt; SSOP-24&lt;p&gt;</description>
+<wire x1="-4.45" y1="-2.6" x2="4.45" y2="-2.6" width="0.2032" layer="21"/>
+<wire x1="4.45" y1="-2.6" x2="4.45" y2="2.6" width="0.2032" layer="21"/>
+<wire x1="4.45" y1="2.6" x2="-4.45" y2="2.6" width="0.2032" layer="21"/>
+<wire x1="-4.45" y1="2.6" x2="-4.45" y2="-2.6" width="0.2032" layer="21"/>
+<circle x="-3.55" y="-1.625" radius="0.4422" width="0" layer="21"/>
+<text x="-4.826" y="-2.6299" size="1.27" layer="25" rot="R90">&gt;NAME</text>
+<text x="-3.2499" y="-0.68" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-3.7528" y1="-3.937" x2="-3.3972" y2="-2.6416" layer="51"/>
+<rectangle x1="-3.1029" y1="-3.937" x2="-2.7473" y2="-2.6416" layer="51"/>
+<rectangle x1="-2.4529" y1="-3.937" x2="-2.0973" y2="-2.6416" layer="51"/>
+<rectangle x1="-1.8029" y1="-3.937" x2="-1.4473" y2="-2.6416" layer="51"/>
+<rectangle x1="-1.1529" y1="-3.937" x2="-0.7973" y2="-2.6416" layer="51"/>
+<rectangle x1="-0.5029" y1="-3.937" x2="-0.1473" y2="-2.6416" layer="51"/>
+<rectangle x1="0.1471" y1="-3.937" x2="0.5027" y2="-2.6416" layer="51"/>
+<rectangle x1="0.7973" y1="-3.937" x2="1.1529" y2="-2.6416" layer="51"/>
+<rectangle x1="1.4473" y1="-3.937" x2="1.8029" y2="-2.6416" layer="51"/>
+<rectangle x1="2.0973" y1="-3.937" x2="2.4529" y2="-2.6416" layer="51"/>
+<rectangle x1="2.7473" y1="-3.937" x2="3.1029" y2="-2.6416" layer="51"/>
+<rectangle x1="3.3973" y1="-3.937" x2="3.7529" y2="-2.6416" layer="51"/>
+<rectangle x1="3.3973" y1="2.6416" x2="3.7529" y2="3.937" layer="51"/>
+<rectangle x1="2.7473" y1="2.6416" x2="3.1029" y2="3.937" layer="51"/>
+<rectangle x1="2.0973" y1="2.6416" x2="2.4529" y2="3.937" layer="51"/>
+<rectangle x1="1.4473" y1="2.6416" x2="1.8029" y2="3.937" layer="51"/>
+<rectangle x1="0.7973" y1="2.6416" x2="1.1529" y2="3.937" layer="51"/>
+<rectangle x1="0.1471" y1="2.6416" x2="0.5027" y2="3.937" layer="51"/>
+<rectangle x1="-0.5029" y1="2.6416" x2="-0.1473" y2="3.937" layer="51"/>
+<rectangle x1="-1.1529" y1="2.6416" x2="-0.7973" y2="3.937" layer="51"/>
+<rectangle x1="-1.8029" y1="2.6416" x2="-1.4473" y2="3.937" layer="51"/>
+<rectangle x1="-2.4529" y1="2.6416" x2="-2.0973" y2="3.937" layer="51"/>
+<rectangle x1="-3.1029" y1="2.6416" x2="-2.7473" y2="3.937" layer="51"/>
+<rectangle x1="-3.7528" y1="2.6416" x2="-3.3972" y2="3.937" layer="51"/>
+<smd name="1" x="-3.575" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="2" x="-2.925" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="3" x="-2.275" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="4" x="-1.625" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="5" x="-0.975" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="6" x="-0.325" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="7" x="0.325" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="8" x="0.975" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="9" x="1.625" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="10" x="2.275" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="11" x="2.925" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="12" x="3.575" y="-3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="15" x="2.275" y="3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="16" x="1.625" y="3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="17" x="0.975" y="3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="18" x="0.325" y="3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="19" x="-0.325" y="3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="20" x="-0.975" y="3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="21" x="-1.625" y="3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="22" x="-2.275" y="3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="23" x="-2.925" y="3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="24" x="-3.575" y="3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="14" x="2.925" y="3.625" dx="0.4" dy="1.25" layer="1"/>
+<smd name="13" x="3.575" y="3.625" dx="0.4" dy="1.25" layer="1"/>
 </package>
 </packages>
 </library>
@@ -787,49 +816,27 @@ design rules under a new name.</description>
 <element name="LED30" library="adafruit" package="WS2812B-NARROW" value="WS2812B_5050N" x="-4.9128375" y="46.74253125" smashed="yes" rot="R186">
 <attribute name="NAME" x="-8.220265625" y="44.798659375" size="0.8128" layer="25" ratio="10" rot="R96"/>
 </element>
-<element name="U1" library="LOGIC-74HC4051PW_TSSOP16_" package="TSSOP16-0.65-5X4.4MM" value="LOGIC-74HC4051PW(TSSOP16)" x="-44.45" y="-271.78" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="-44.45" y="-271.78" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" 1 Circuit IC Switch 8:1 120Ohm 16-TSSOP " x="-44.45" y="-271.78" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Nexperia USA" x="-44.45" y="-271.78" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="74HC4051PW" x="-44.45" y="-271.78" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="-47.629340625" y="-273.687609375" size="0.890215625" layer="25" ratio="11" rot="R90"/>
-<attribute name="PACKAGE" value="TSSOP-16 Texas Instruments" x="-44.45" y="-271.78" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="-44.45" y="-271.78" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/74HC4051PW/?ref=eda" x="-44.45" y="-271.78" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-40.63815" y="-273.68591875" size="0.88943125" layer="27" ratio="11" rot="R90"/>
+<element name="U1" library="74HC4067" package="SSOP24" value="74HC4067SSOP-24" x="-6.35" y="-34.29" smashed="yes" rot="R270">
+<attribute name="AVAILABILITY" value="In Stock" x="-6.35" y="-34.29" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="DESCRIPTION" value=" Analog Switch/Analog Multiplexer Single 16:1 24-Pin SSOP T/R " x="-6.35" y="-34.29" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MF" value="Nexperia" x="-6.35" y="-34.29" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="MP" value="74HC4067" x="-6.35" y="-34.29" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="NAME" x="-8.9799" y="-29.464" size="1.27" layer="25"/>
+<attribute name="PACKAGE" value="None" x="-6.35" y="-34.29" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PRICE" value="None" x="-6.35" y="-34.29" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/74HC4067/?ref=eda" x="-6.35" y="-34.29" size="1.778" layer="27" rot="R270" display="off"/>
+<attribute name="VALUE" x="-7.03" y="-31.0401" size="1.27" layer="27" rot="R270"/>
 </element>
-<element name="U2" library="LOGIC-74HC4051PW_TSSOP16_" package="TSSOP16-0.65-5X4.4MM" value="LOGIC-74HC4051PW(TSSOP16)" x="-44.45" y="-279.4" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="-44.45" y="-279.4" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" 1 Circuit IC Switch 8:1 120Ohm 16-TSSOP " x="-44.45" y="-279.4" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Nexperia USA" x="-44.45" y="-279.4" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="74HC4051PW" x="-44.45" y="-279.4" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="-47.629340625" y="-281.307609375" size="0.890215625" layer="25" ratio="11" rot="R90"/>
-<attribute name="PACKAGE" value="TSSOP-16 Texas Instruments" x="-44.45" y="-279.4" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="-44.45" y="-279.4" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/74HC4051PW/?ref=eda" x="-44.45" y="-279.4" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-40.63815" y="-281.30591875" size="0.88943125" layer="27" ratio="11" rot="R90"/>
-</element>
-<element name="U3" library="LOGIC-74HC4051PW_TSSOP16_" package="TSSOP16-0.65-5X4.4MM" value="LOGIC-74HC4051PW(TSSOP16)" x="-44.45" y="-287.02" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="-44.45" y="-287.02" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" 1 Circuit IC Switch 8:1 120Ohm 16-TSSOP " x="-44.45" y="-287.02" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Nexperia USA" x="-44.45" y="-287.02" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="74HC4051PW" x="-44.45" y="-287.02" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="-47.629340625" y="-288.927609375" size="0.890215625" layer="25" ratio="11" rot="R90"/>
-<attribute name="PACKAGE" value="TSSOP-16 Texas Instruments" x="-44.45" y="-287.02" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="-44.45" y="-287.02" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/74HC4051PW/?ref=eda" x="-44.45" y="-287.02" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-40.63815" y="-288.92591875" size="0.88943125" layer="27" ratio="11" rot="R90"/>
-</element>
-<element name="U4" library="LOGIC-74HC4051PW_TSSOP16_" package="TSSOP16-0.65-5X4.4MM" value="LOGIC-74HC4051PW(TSSOP16)" x="-44.45" y="-294.64" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="-44.45" y="-294.64" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" 1 Circuit IC Switch 8:1 120Ohm 16-TSSOP " x="-44.45" y="-294.64" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Nexperia USA" x="-44.45" y="-294.64" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="74HC4051PW" x="-44.45" y="-294.64" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="-47.629340625" y="-296.547609375" size="0.890215625" layer="25" ratio="11" rot="R90"/>
-<attribute name="PACKAGE" value="TSSOP-16 Texas Instruments" x="-44.45" y="-294.64" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="-44.45" y="-294.64" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/74HC4051PW/?ref=eda" x="-44.45" y="-294.64" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-40.63815" y="-296.54591875" size="0.88943125" layer="27" ratio="11" rot="R90"/>
+<element name="U2" library="74HC4067" package="SSOP24" value="74HC4067SSOP-24" x="5.08" y="-34.29" smashed="yes" rot="R90">
+<attribute name="AVAILABILITY" value="In Stock" x="5.08" y="-34.29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="DESCRIPTION" value=" Analog Switch/Analog Multiplexer Single 16:1 24-Pin SSOP T/R " x="5.08" y="-34.29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MF" value="Nexperia" x="5.08" y="-34.29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="MP" value="74HC4067" x="5.08" y="-34.29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="NAME" x="7.7099" y="-39.116" size="1.27" layer="25" rot="R180"/>
+<attribute name="PACKAGE" value="None" x="5.08" y="-34.29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PRICE" value="None" x="5.08" y="-34.29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/74HC4067/?ref=eda" x="5.08" y="-34.29" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="5.76" y="-37.5399" size="1.27" layer="27" rot="R90"/>
 </element>
 </elements>
 <signals>
