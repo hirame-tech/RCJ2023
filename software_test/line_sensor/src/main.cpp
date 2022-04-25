@@ -1,21 +1,26 @@
-//とりあえずディレクトリを作ってファイルを入れるテスト
-//ここだとビルド時に影響しないか不安だから適当に動かしてもらっておｋ
-//一応プルのテスト
 #include<Arduino.h>
 
-int val = [30]
+int censor_port[29] = {
+    //任意のポート番号を入力　値,値,値,・・・
+};
 
-const int censorPIN = 13  //任意のポート番号
+int censor_value[29] = {};
 
 void setup(){
-  pinMode(censorPIN,INPUT);
-  Serial.begin(115200);
-  
+    Serial.begin(9600);
 }
 
 void loop(){
-  val[0] = analogRead(censorPIN);
-  Serial.println(val[0]);
-  delay(100);
-
+    for(int i=0; i < 30;i++){
+        censor_value[i] = analogRead(censor_port[i]);
+        Serial.print("censor");
+        Serial.println(censor_port[i]);
+        Serial.print(" = ");
+        Serial.println(censor_value[i]);
+        Serial.print("\n");
+        delay(100);
+    }
 }
+
+//スケッチの動作確認済み
+//ボード上での動作についてはわからん
