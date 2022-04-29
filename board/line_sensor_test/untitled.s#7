@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -3736,6 +3736,11 @@ type 0309, grid 2.5 mm</description>
 <wire x1="269.24" y1="-5.08" x2="269.24" y2="-2.54" width="0.1524" layer="91"/>
 <wire x1="269.24" y1="-2.54" x2="264.16" y2="-2.54" width="0.1524" layer="91"/>
 <junction x="264.16" y="-2.54"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="CHAN8"/>
+<wire x1="363.22" y1="-25.4" x2="358.14" y2="-25.4" width="0.1524" layer="91"/>
+<label x="358.14" y="-25.4" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="A25" class="0">

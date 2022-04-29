@@ -3881,6 +3881,11 @@ W = angled&lt;p&gt;
 <wire x1="248.92" y1="-2.54" x2="243.84" y2="-2.54" width="0.1524" layer="91"/>
 <junction x="243.84" y="-2.54"/>
 </segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="CHAN6"/>
+<wire x1="363.22" y1="-20.32" x2="358.14" y2="-20.32" width="0.1524" layer="91"/>
+<label x="358.14" y="-20.32" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
 </net>
 <net name="A23" class="0">
 <segment>
@@ -3892,6 +3897,11 @@ W = angled&lt;p&gt;
 <wire x1="259.08" y1="-5.08" x2="259.08" y2="-2.54" width="0.1524" layer="91"/>
 <wire x1="259.08" y1="-2.54" x2="254" y2="-2.54" width="0.1524" layer="91"/>
 <junction x="254" y="-2.54"/>
+</segment>
+<segment>
+<pinref part="U1" gate="G$1" pin="CHAN7"/>
+<wire x1="363.22" y1="-22.86" x2="350.52" y2="-22.86" width="0.1524" layer="91"/>
+<label x="350.52" y="-22.86" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="A24" class="0">

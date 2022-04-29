@@ -3001,6 +3001,7 @@ W = angled&lt;p&gt;
 <part name="GND1" library="supply" deviceset="GND" device=""/>
 <part name="SV1" library="con-lstb" library_urn="urn:adsk.eagle:library:162" deviceset="MA06-2" device="" package3d_urn="urn:adsk.eagle:package:8342/1"/>
 <part name="GND4" library="supply" deviceset="GND" device=""/>
+<part name="U$4" library="supply" deviceset="VCC" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -3279,6 +3280,9 @@ W = angled&lt;p&gt;
 </instance>
 <instance part="GND4" gate="1" x="464.82" y="-58.42" smashed="yes">
 <attribute name="VALUE" x="462.534" y="-60.96" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="U$4" gate="G$1" x="464.82" y="-35.56" smashed="yes">
+<attribute name="VALUE" x="462.534" y="-34.798" size="1.778" layer="96" font="vector"/>
 </instance>
 </instances>
 <busses>
@@ -3620,6 +3624,12 @@ W = angled&lt;p&gt;
 <wire x1="396.24" y1="-5.08" x2="388.62" y2="-5.08" width="0.1524" layer="91"/>
 <junction x="396.24" y="-5.08"/>
 <pinref part="U$3" gate="G$1" pin="VCC"/>
+</segment>
+<segment>
+<pinref part="SV1" gate="1" pin="6"/>
+<wire x1="454.66" y1="-45.72" x2="464.82" y2="-45.72" width="0.1524" layer="91"/>
+<wire x1="464.82" y1="-45.72" x2="464.82" y2="-38.1" width="0.1524" layer="91"/>
+<pinref part="U$4" gate="G$1" pin="VCC"/>
 </segment>
 </net>
 <net name="A6" class="0">
@@ -4477,18 +4487,6 @@ W = angled&lt;p&gt;
 <wire x1="7.62" y1="63.5" x2="-2.54" y2="63.5" width="0.1524" layer="91"/>
 </segment>
 </net>
-<net name="N$5" class="0">
-<segment>
-<pinref part="U1" gate="G$1" pin="S0"/>
-<wire x1="388.62" y1="-20.32" x2="457.2" y2="-20.32" width="0.1524" layer="91"/>
-</segment>
-</net>
-<net name="N$7" class="0">
-<segment>
-<pinref part="U1" gate="G$1" pin="S1"/>
-<wire x1="388.62" y1="-22.86" x2="457.2" y2="-22.86" width="0.1524" layer="91"/>
-</segment>
-</net>
 <net name="N$8" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="S2"/>
@@ -4501,7 +4499,10 @@ W = angled&lt;p&gt;
 <net name="N$9" class="0">
 <segment>
 <pinref part="U1" gate="G$1" pin="S3"/>
-<wire x1="388.62" y1="-27.94" x2="434.34" y2="-27.94" width="0.1524" layer="91"/>
+<wire x1="388.62" y1="-27.94" x2="459.74" y2="-27.94" width="0.1524" layer="91"/>
+<pinref part="SV1" gate="1" pin="4"/>
+<wire x1="459.74" y1="-27.94" x2="459.74" y2="-43.18" width="0.1524" layer="91"/>
+<wire x1="459.74" y1="-43.18" x2="454.66" y2="-43.18" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="AIN1" class="0">
@@ -4556,6 +4557,24 @@ W = angled&lt;p&gt;
 <wire x1="457.2" y1="-71.12" x2="457.2" y2="-53.34" width="0.1524" layer="91"/>
 <pinref part="SV1" gate="1" pin="12"/>
 <wire x1="457.2" y1="-53.34" x2="454.66" y2="-53.34" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$15" class="0">
+<segment>
+<pinref part="SV1" gate="1" pin="5"/>
+<wire x1="439.42" y1="-45.72" x2="434.34" y2="-45.72" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="S1"/>
+<wire x1="388.62" y1="-22.86" x2="434.34" y2="-22.86" width="0.1524" layer="91"/>
+<wire x1="434.34" y1="-45.72" x2="434.34" y2="-22.86" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$16" class="0">
+<segment>
+<pinref part="SV1" gate="1" pin="3"/>
+<wire x1="439.42" y1="-43.18" x2="436.88" y2="-43.18" width="0.1524" layer="91"/>
+<pinref part="U1" gate="G$1" pin="S0"/>
+<wire x1="388.62" y1="-20.32" x2="436.88" y2="-20.32" width="0.1524" layer="91"/>
+<wire x1="436.88" y1="-43.18" x2="436.88" y2="-20.32" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
