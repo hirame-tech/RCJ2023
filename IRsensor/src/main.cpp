@@ -2,9 +2,9 @@
 
 int pin[]={
   NULL,NULL,NULL,NULL,
-  NULL,NULL,NULL,NULL,
-  18,17,16,15,
-  14,NULL,NULL,NULL,
+  NULL,NULL,7,A5,
+  A4,A3,A2,A1,
+  A0,13, 5,10
   };
 
 void setup() {
