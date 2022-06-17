@@ -2,14 +2,14 @@
 #include<Adafruit_NeoPixel.h>
 
 #define BRIGHTNESS 200
-#define LED_PIN 6
+#define LED_PIN 9
 
 Adafruit_NeoPixel strip(30, LED_PIN, NEO_GRB + NEO_KHZ800);
 
 void get_linesensor(int *pins,int *a_pins,int*value);
 
-int set_port[4] = {8,9,10,11};
-int read_port[2] = {A0,A1};
+int set_port[8] = {7,8,6,10,3,2,4,5};
+int read_port[2] = {A1,A0};
 
 int sensor_value[30];
 int old_value[30];
@@ -33,7 +33,7 @@ void loop(){
         strip.setPixelColor(i, strip.Color(0,255,0));
     }
     strip.show();
-    
+
     get_linesensor(set_port,read_port,sensor_value);
     Serial.println((sensor_value[2]+old_value[2])/2);//簡易平滑化
     old_value[2] = sensor_value[2];
