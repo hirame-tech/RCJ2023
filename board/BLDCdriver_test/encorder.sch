@@ -639,8 +639,8 @@ Source: &lt;a href="http://ams.com/eng/content/download/725051/1853902/379375"&g
 <attribute name="NAME" x="67.183" y="41.3258" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="59.563" y="43.942" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="U$1" gate="G$1" x="5.08" y="45.72" smashed="yes">
-<attribute name="VALUE" x="2.794" y="46.482" size="1.778" layer="96" font="vector"/>
+<instance part="U$1" gate="G$1" x="2.54" y="45.72" smashed="yes">
+<attribute name="VALUE" x="0.254" y="46.482" size="1.778" layer="96" font="vector"/>
 </instance>
 <instance part="GND1" gate="1" x="-5.08" y="25.4" smashed="yes">
 <attribute name="VALUE" x="-7.366" y="22.86" size="1.778" layer="96" font="vector"/>
@@ -681,14 +681,6 @@ Source: &lt;a href="http://ams.com/eng/content/download/725051/1853902/379375"&g
 <nets>
 <net name="VCC" class="0">
 <segment>
-<pinref part="IC1" gate="G$1" pin="VDD"/>
-<pinref part="U$1" gate="G$1" pin="VCC"/>
-<wire x1="5.08" y1="33.02" x2="5.08" y2="40.64" width="0.1524" layer="91"/>
-<pinref part="IC1" gate="G$1" pin="I/PWM"/>
-<wire x1="5.08" y1="40.64" x2="5.08" y2="43.18" width="0.1524" layer="91"/>
-<junction x="5.08" y="40.64"/>
-</segment>
-<segment>
 <pinref part="5V" gate="1" pin="P"/>
 <wire x1="73.66" y1="40.64" x2="73.66" y2="43.18" width="0.1524" layer="91"/>
 <pinref part="U$2" gate="G$1" pin="VCC"/>
@@ -701,6 +693,16 @@ Source: &lt;a href="http://ams.com/eng/content/download/725051/1853902/379375"&g
 <pinref part="R1" gate="G$1" pin="1"/>
 <wire x1="-15.24" y1="55.88" x2="-15.24" y2="58.42" width="0.1524" layer="91"/>
 <pinref part="U$3" gate="G$1" pin="VCC"/>
+</segment>
+<segment>
+<pinref part="IC1" gate="G$1" pin="VDD"/>
+<pinref part="IC1" gate="G$1" pin="I/PWM"/>
+<wire x1="5.08" y1="33.02" x2="2.54" y2="33.02" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="33.02" x2="2.54" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="43.18" x2="2.54" y2="40.64" width="0.1524" layer="91"/>
+<wire x1="2.54" y1="40.64" x2="5.08" y2="40.64" width="0.1524" layer="91"/>
+<pinref part="U$1" gate="G$1" pin="VCC"/>
+<junction x="2.54" y="40.64"/>
 </segment>
 </net>
 <net name="GND" class="0">

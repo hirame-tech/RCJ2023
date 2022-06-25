@@ -602,7 +602,7 @@ Source: &lt;a href="http://ams.com/eng/content/download/725051/1853902/379375"&g
 <part name="C2" library="generic" deviceset="CAPACITOR" device="1608" value="1µF"/>
 <part name="GND3" library="supply" deviceset="GND" device=""/>
 <part name="LED1" library="generic" deviceset="LED" device="1608"/>
-<part name="R1" library="generic" deviceset="RESISTOR" device="1608"/>
+<part name="R1" library="generic" deviceset="RESISTOR" device="1608" value="1kΩ"/>
 <part name="GND4" library="supply" deviceset="GND" device=""/>
 <part name="U$3" library="supply" deviceset="VCC" device=""/>
 </parts>
