@@ -7,6 +7,10 @@ int pin[]={
   A0,13, 5,10
   };
 
+
+//prototype declaration
+get_IR(int *pins,int *datas);
+
 void setup() {
   for (int i = 0; i < 16; i++){
     pinMode(pin[i],INPUT);
@@ -16,5 +20,5 @@ void setup() {
 }
 
 void loop() {
-  
+  get_IR()
 }
