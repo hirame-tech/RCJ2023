@@ -1,4 +1,4 @@
-Information of mainborad constraction
+Information of mainborad structure
 
 ## Teensy4.0
 - Serial0 USB
