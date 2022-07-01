@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <func.hpp>
 
 #define pin_motorA 0 //undefine
 #define pin_motorB 0 //undefine

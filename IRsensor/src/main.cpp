@@ -7,10 +7,18 @@ int pin[]={
   A0,13, 5,10
   };
 
+
+//prototype declaration
+get_IR(int *pins,int *datas);
+
 void setup() {
-  // put your setup code here, to run once:
+  for (int i = 0; i < 16; i++){
+    pinMode(pin[i],INPUT);
+  }
+  Serial.begin(9600);
+  Serial1.begin(115200);
 }
 
 void loop() {
-  // put your main code here, to run repeatedly:
+  get_IR()
 }
