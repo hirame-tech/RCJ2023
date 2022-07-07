@@ -375,6 +375,62 @@
 </package3d>
 </packages3d>
 </library>
+<library name="led" urn="urn:adsk.eagle:library:259">
+<description>&lt;b&gt;LEDs&lt;/b&gt;&lt;p&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;&lt;br&gt;
+Extended by Federico Battaglin &lt;author&gt;&amp;lt;federico.rd@fdpinternational.com&amp;gt;&lt;/author&gt; with DUOLED</description>
+<packages>
+<package name="SML0603" urn="urn:adsk.eagle:footprint:15685/1" library_version="5">
+<description>&lt;b&gt;SML0603-XXX (HIGH INTENSITY) LED&lt;/b&gt;&lt;p&gt;
+&lt;table&gt;
+&lt;tr&gt;&lt;td&gt;AG3K&lt;/td&gt;&lt;td&gt;AQUA GREEN&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;B1K&lt;/td&gt;&lt;td&gt;SUPER BLUE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;R1K&lt;/td&gt;&lt;td&gt;SUPER RED&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;R3K&lt;/td&gt;&lt;td&gt;ULTRA RED&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;O3K&lt;/td&gt;&lt;td&gt;SUPER ORANGE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;O3KH&lt;/td&gt;&lt;td&gt;SOFT ORANGE&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Y3KH&lt;/td&gt;&lt;td&gt;SUPER YELLOW&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Y3K&lt;/td&gt;&lt;td&gt;SUPER YELLOW&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;2CW&lt;/td&gt;&lt;td&gt;WHITE&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+Source: http://www.ledtronics.com/ds/smd-0603/Dstr0092.pdf</description>
+<wire x1="-0.75" y1="0.35" x2="0.75" y2="0.35" width="0.1016" layer="51"/>
+<wire x1="0.75" y1="0.35" x2="0.75" y2="-0.35" width="0.1016" layer="51"/>
+<wire x1="0.75" y1="-0.35" x2="-0.75" y2="-0.35" width="0.1016" layer="51"/>
+<wire x1="-0.75" y1="-0.35" x2="-0.75" y2="0.35" width="0.1016" layer="51"/>
+<wire x1="-0.45" y1="0.3" x2="-0.45" y2="-0.3" width="0.1016" layer="51"/>
+<wire x1="0.45" y1="0.3" x2="0.45" y2="-0.3" width="0.1016" layer="51"/>
+<wire x1="-0.2" y1="0.35" x2="0.2" y2="0.35" width="0.1016" layer="21"/>
+<wire x1="-0.2" y1="-0.35" x2="0.2" y2="-0.35" width="0.1016" layer="21"/>
+<smd name="C" x="-0.75" y="0" dx="0.8" dy="0.8" layer="1"/>
+<smd name="A" x="0.75" y="0" dx="0.8" dy="0.8" layer="1"/>
+<text x="-1" y="1" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1" y="-2" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.4" y1="0.175" x2="0" y2="0.4" layer="51"/>
+<rectangle x1="-0.25" y1="0.175" x2="0" y2="0.4" layer="21"/>
+</package>
+</packages>
+<packages3d>
+<package3d name="SML0603" urn="urn:adsk.eagle:package:15832/1" type="box" library_version="5">
+<description>SML0603-XXX (HIGH INTENSITY) LED
+
+AG3KAQUA GREEN
+B1KSUPER BLUE
+R1KSUPER RED
+R3KULTRA RED
+O3KSUPER ORANGE
+O3KHSOFT ORANGE
+Y3KHSUPER YELLOW
+Y3KSUPER YELLOW
+2CWWHITE
+
+Source: http://www.ledtronics.com/ds/smd-0603/Dstr0092.pdf</description>
+<packageinstances>
+<packageinstance name="SML0603"/>
+</packageinstances>
+</package3d>
+</packages3d>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -634,6 +690,24 @@ design rules under a new name.</description>
 <attribute name="NAME" x="3.81" y="-36.576" size="1.778" layer="25" rot="R180"/>
 <attribute name="VALUE" x="4.445" y="-20.8359" size="1.778" layer="27" rot="R180"/>
 </element>
+<element name="TXLED" library="led" library_urn="urn:adsk.eagle:library:259" package="SML0603" package3d_urn="urn:adsk.eagle:package:15832/1" value="" x="-48.26" y="-53.34" smashed="yes">
+<attribute name="NAME" x="-49.26" y="-52.34" size="1.27" layer="25"/>
+<attribute name="POPULARITY" value="17" x="-48.26" y="-53.34" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-49.26" y="-55.34" size="1.27" layer="27"/>
+</element>
+<element name="LED2" library="led" library_urn="urn:adsk.eagle:library:259" package="SML0603" package3d_urn="urn:adsk.eagle:package:15832/1" value="" x="-48.26" y="-58.42" smashed="yes">
+<attribute name="NAME" x="-49.26" y="-57.42" size="1.27" layer="25"/>
+<attribute name="POPULARITY" value="17" x="-48.26" y="-58.42" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-49.26" y="-60.42" size="1.27" layer="27"/>
+</element>
+<element name="R4" library="generic" package="SMD1608" value="1k" x="-48.26" y="-62.23" smashed="yes">
+<attribute name="NAME" x="-49.06" y="-61.58" size="1.016" layer="25"/>
+<attribute name="VALUE" x="-49.06" y="-63.88" size="1.016" layer="27"/>
+</element>
+<element name="R5" library="generic" package="SMD1608" value="1k" x="-48.26" y="-66.04" smashed="yes">
+<attribute name="NAME" x="-49.06" y="-65.39" size="1.016" layer="25"/>
+<attribute name="VALUE" x="-49.06" y="-67.69" size="1.016" layer="27"/>
+</element>
 </elements>
 <signals>
 <signal name="GNDA">
@@ -660,6 +734,10 @@ design rules under a new name.</description>
 <contactref element="IR11" pad="2"/>
 <contactref element="IR13" pad="2"/>
 <contactref element="IR12" pad="2"/>
+<contactref element="TXLED" pad="C"/>
+<contactref element="LED2" pad="C"/>
+<wire x1="-49.01" y1="-53.34" x2="-49.01" y2="-58.42" width="0" layer="19" extent="1-1"/>
+<wire x1="-28.284271875" y1="-28.284271875" x2="-49.01" y2="-53.34" width="0" layer="19" extent="1-1"/>
 <wire x1="-15.3073375" y1="-36.95518125" x2="-28.284271875" y2="-28.284271875" width="0" layer="19" extent="1-1"/>
 <wire x1="-3.2" y1="-35.391" x2="-15.3073375" y2="-36.95518125" width="0" layer="19" extent="1-1"/>
 <wire x1="0" y1="-40" x2="-3.2" y2="-35.391" width="0" layer="19" extent="1-1"/>
@@ -736,9 +814,8 @@ design rules under a new name.</description>
 </signal>
 <signal name="N$44">
 <contactref element="U$1" pad="8"/>
-</signal>
-<signal name="N$64">
-<contactref element="IR7" pad="1"/>
+<contactref element="R5" pad="2"/>
+<wire x1="5.8" y1="-27.991" x2="-47.385" y2="-66.04" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$2">
 <contactref element="U$1" pad="20"/>
@@ -815,8 +892,13 @@ design rules under a new name.</description>
 <wire x1="0.8" y1="-35.391" x2="0.8" y2="-36.284" width="0.254" layer="1"/>
 <wire x1="0.8" y1="-36.284" x2="-1.016" y2="-38.1" width="0.254" layer="1"/>
 </signal>
-<signal name="N$16">
+<signal name="IR8">
 <contactref element="U$1" pad="41"/>
+<contactref element="IR8" pad="1"/>
+<wire x1="1.6" y1="-35.391" x2="1.6" y2="-37.16" width="0.254" layer="1"/>
+<wire x1="1.6" y1="-37.16" x2="2.54" y2="-38.1" width="0.254" layer="1"/>
+<wire x1="2.54" y1="-38.1" x2="12.787878125" y2="-38.1" width="0.254" layer="1"/>
+<wire x1="12.787878125" y1="-38.1" x2="12.96068125" y2="-37.927196875" width="0.254" layer="1"/>
 </signal>
 <signal name="IR11">
 <contactref element="U$1" pad="38"/>
@@ -905,9 +987,6 @@ design rules under a new name.</description>
 <contactref element="IR3" pad="1"/>
 </signal>
 <signal name="N$32">
-</signal>
-<signal name="N$33">
-<contactref element="IR8" pad="1"/>
 </signal>
 <signal name="IR13">
 <contactref element="IR13" pad="1"/>
@@ -1005,6 +1084,27 @@ design rules under a new name.</description>
 <wire x1="-20.32" y1="33.02" x2="-12.7" y2="36.195" width="0.254" layer="1"/>
 <wire x1="-12.7" y1="36.195" x2="-12.7" y2="37.084" width="0.254" layer="1"/>
 <wire x1="-12.7" y1="37.084" x2="-12.96068125" y2="37.927196875" width="0.254" layer="1"/>
+</signal>
+<signal name="IR7">
+<contactref element="U$1" pad="1"/>
+<contactref element="IR7" pad="1"/>
+<wire x1="5.8" y1="-33.591" x2="22.977540625" y2="-33.591" width="0.254" layer="1"/>
+<wire x1="22.977540625" y1="-33.591" x2="26.48821875" y2="-30.080321875" width="0.254" layer="1"/>
+</signal>
+<signal name="N$15">
+<contactref element="R4" pad="1"/>
+<contactref element="TXLED" pad="A"/>
+<wire x1="-47.51" y1="-53.34" x2="-49.135" y2="-62.23" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$11">
+<contactref element="U$1" pad="22"/>
+<contactref element="R4" pad="2"/>
+<wire x1="-4" y1="-23.791" x2="-47.385" y2="-62.23" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$16">
+<contactref element="R5" pad="1"/>
+<contactref element="LED2" pad="A"/>
+<wire x1="-47.51" y1="-58.42" x2="-49.135" y2="-66.04" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
