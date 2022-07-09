@@ -6,7 +6,7 @@
 <setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="50" unitdist="mil" unit="mm" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -169,11 +169,24 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="yes" active="yes"/>
 </layers>
 <board>
+<fusionsync huburn="a.cGVyc29uYWw6dWUyYjhiNWJj" projecturn="a.cGVyc29uYWw6dWUyYjhiNWJjIzIwMjIwNDE2NTE3MzEzNjU2" f3durn="urn:adsk.wipprod:dm.lineage:QmnGeXTNRAeKhx4INCeYVg" pcbguid="4ec2cbcd-acf4-449a-b6f9-ffbf14e4e948" lastpulledtime="" lastsyncedchangeguid="" latestrevisionid="35bf3ac2-7b0f-44c1-ad44-fa68e8f054e7" lastsyncedrevisionid="35bf3ac2-7b0f-44c1-ad44-fa68e8f054e7" lastboardhashguid="464d37e8-4348-2e39-bfe3-bf7dba089a4c" lastpushedtime="2022-07-01T20:14:15Z" linktopcb3d="%12"/>
 <plain>
-<wire x1="0" y1="0" x2="160" y2="0" width="0" layer="20"/>
-<wire x1="160" y1="0" x2="160" y2="100" width="0" layer="20"/>
-<wire x1="160" y1="100" x2="0" y2="100" width="0" layer="20"/>
-<wire x1="0" y1="100" x2="0" y2="0" width="0" layer="20"/>
+<wire x1="51.943" y1="-2.254" x2="51.943" y2="48.746" width="0.001" layer="20"/>
+<wire x1="47.943" y1="46.746" x2="3.943" y2="46.746" width="0.001" layer="20"/>
+<wire x1="-0.057" y1="48.746" x2="-0.057" y2="-2.254" width="0.001" layer="20"/>
+<wire x1="3.943" y1="-0.254" x2="47.943" y2="-0.254" width="0.001" layer="20"/>
+<wire x1="3.943" y1="48.746" x2="-0.057" y2="48.746" width="0.001" layer="20" curve="180"/>
+<circle x="1.943" y="48.746" radius="1.1" width="0.001" layer="20"/>
+<wire x1="3.943" y1="48.746" x2="3.943" y2="46.746" width="0.001" layer="20"/>
+<wire x1="47.943" y1="46.746" x2="47.943" y2="48.746" width="0.001" layer="20"/>
+<wire x1="51.943" y1="48.746" x2="47.943" y2="48.746" width="0.001" layer="20" curve="180"/>
+<circle x="49.943" y="48.746" radius="1.1" width="0.001" layer="20"/>
+<wire x1="47.943" y1="-0.254" x2="47.943" y2="-2.254" width="0.001" layer="20"/>
+<wire x1="47.943" y1="-2.254" x2="51.943" y2="-2.254" width="0.001" layer="20" curve="180"/>
+<circle x="49.943" y="-2.254" radius="1.1" width="0.001" layer="20"/>
+<wire x1="-0.057" y1="-2.254" x2="3.943" y2="-2.254" width="0.001" layer="20" curve="180"/>
+<circle x="1.943" y="-2.254" radius="1.1" width="0.001" layer="20"/>
+<wire x1="3.943" y1="-2.254" x2="3.943" y2="-0.254" width="0.001" layer="20"/>
 </plain>
 <libraries>
 <library name="fuse" urn="urn:adsk.eagle:library:233">
@@ -1227,6 +1240,11 @@ design rules under a new name.
 Since Version 8.2, EAGLE supports online libraries. The ids
 of those online libraries will not be understood (or retained)
 with this version.
+</note>
+<note version="8.3" severity="warning">
+Since Version 8.3, EAGLE supports Fusion synchronisation.
+This feature will not be available in this version and saving
+the document will break the link to the Fusion PCB feature.
 </note>
 <note version="8.3" severity="warning">
 Since Version 8.3, EAGLE supports URNs for individual library

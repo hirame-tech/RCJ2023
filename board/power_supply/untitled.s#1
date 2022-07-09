@@ -5234,10 +5234,6 @@ Source:  FDD4141.pdf</description>
 <wire x1="-6.35" y1="6.35" x2="6.35" y2="6.35" width="0.15" layer="51"/>
 <wire x1="6.35" y1="6.35" x2="6.35" y2="-6.35" width="0.15" layer="51"/>
 <wire x1="6.35" y1="-6.35" x2="-6.35" y2="-6.35" width="0.15" layer="51"/>
-<wire x1="-6.85" y1="-6.85" x2="-6.85" y2="6.85" width="0.1" layer="41"/>
-<wire x1="-6.85" y1="6.85" x2="6.85" y2="6.85" width="0.1" layer="41"/>
-<wire x1="6.85" y1="6.85" x2="6.85" y2="-6.85" width="0.1" layer="41"/>
-<wire x1="6.85" y1="-6.85" x2="-6.85" y2="-6.85" width="0.1" layer="41"/>
 <wire x1="-6.35" y1="6.35" x2="6.35" y2="6.35" width="0.15" layer="21"/>
 <wire x1="6.35" y1="-6.35" x2="6.35" y2="6.35" width="0.15" layer="21"/>
 <wire x1="-6.35" y1="-6.35" x2="6.35" y2="-6.35" width="0.15" layer="21"/>
@@ -5599,9 +5595,9 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <part name="R4" library="adafruit" deviceset="R-US_" device="M2012"/>
 <part name="C2" library="adafruit" deviceset="C-US" device="C2012"/>
 <part name="R6" library="adafruit" deviceset="FLIPFLOP-RES" device=""/>
-<part name="MD4" library="Rembrandt Electronics - JST XH Connectors v1-0" deviceset="JST-XH-02-PIN" device="-LONG-PAD"/>
+<part name="MAIN" library="Rembrandt Electronics - JST XH Connectors v1-0" deviceset="JST-XH-02-PIN" device="-LONG-PAD"/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="MD5" library="Rembrandt Electronics - JST XH Connectors v1-0" deviceset="JST-XH-02-PIN" device="-LONG-PAD"/>
+<part name="RASPI" library="Rembrandt Electronics - JST XH Connectors v1-0" deviceset="JST-XH-02-PIN" device="-LONG-PAD"/>
 <part name="IC1" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="*317" device="EMP" package3d_urn="urn:adsk.eagle:package:28541/2"/>
 <part name="C3" library="generic" deviceset="CAPACITOR" device="1608"/>
 <part name="C4" library="generic" deviceset="CAPACITOR" device="1608"/>
@@ -5706,20 +5702,20 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <attribute name="NAME" x="67.0814" y="-74.93" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="71.882" y="-74.93" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="MD4" gate="-2" x="78.74" y="-55.88" smashed="yes">
+<instance part="MAIN" gate="-2" x="78.74" y="-55.88" smashed="yes">
 <attribute name="NAME" x="81.28" y="-56.642" size="1.524" layer="95"/>
 </instance>
-<instance part="MD4" gate="-1" x="78.74" y="-53.34" smashed="yes">
+<instance part="MAIN" gate="-1" x="78.74" y="-53.34" smashed="yes">
 <attribute name="NAME" x="81.28" y="-54.102" size="1.524" layer="95"/>
 <attribute name="VALUE" x="77.978" y="-51.943" size="1.778" layer="96"/>
 </instance>
 <instance part="GND3" gate="1" x="-27.94" y="-93.98" smashed="yes">
 <attribute name="VALUE" x="-30.48" y="-96.52" size="1.778" layer="96"/>
 </instance>
-<instance part="MD5" gate="-2" x="78.74" y="-63.5" smashed="yes">
+<instance part="RASPI" gate="-2" x="78.74" y="-63.5" smashed="yes">
 <attribute name="NAME" x="81.28" y="-64.262" size="1.524" layer="95"/>
 </instance>
-<instance part="MD5" gate="-1" x="78.74" y="-60.96" smashed="yes">
+<instance part="RASPI" gate="-1" x="78.74" y="-60.96" smashed="yes">
 <attribute name="NAME" x="81.28" y="-61.722" size="1.524" layer="95"/>
 <attribute name="VALUE" x="77.978" y="-59.563" size="1.778" layer="96"/>
 </instance>
@@ -5823,7 +5819,7 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <wire x1="68.58" y1="-76.2" x2="68.58" y2="-88.9" width="0.1524" layer="91"/>
 <wire x1="68.58" y1="-88.9" x2="58.42" y2="-88.9" width="0.1524" layer="91"/>
 <junction x="58.42" y="-88.9"/>
-<pinref part="MD4" gate="-1" pin="S"/>
+<pinref part="MAIN" gate="-1" pin="S"/>
 <wire x1="76.2" y1="-53.34" x2="73.66" y2="-53.34" width="0.1524" layer="91"/>
 <wire x1="73.66" y1="-53.34" x2="73.66" y2="-60.96" width="0.1524" layer="91"/>
 <wire x1="73.66" y1="-60.96" x2="73.66" y2="-88.9" width="0.1524" layer="91"/>
@@ -5832,7 +5828,7 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <pinref part="GND3" gate="1" pin="GND"/>
 <wire x1="-27.94" y1="-88.9" x2="-27.94" y2="-91.44" width="0.1524" layer="91"/>
 <junction x="-27.94" y="-88.9"/>
-<pinref part="MD5" gate="-1" pin="S"/>
+<pinref part="RASPI" gate="-1" pin="S"/>
 <wire x1="76.2" y1="-60.96" x2="73.66" y2="-60.96" width="0.1524" layer="91"/>
 <junction x="73.66" y="-60.96"/>
 </segment>
@@ -5953,10 +5949,10 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <junction x="58.42" y="-55.88"/>
 <pinref part="R6" gate="G$1" pin="2"/>
 <wire x1="68.58" y1="-55.88" x2="68.58" y2="-66.04" width="0.1524" layer="91"/>
-<pinref part="MD4" gate="-2" pin="S"/>
+<pinref part="MAIN" gate="-2" pin="S"/>
 <wire x1="68.58" y1="-55.88" x2="71.12" y2="-55.88" width="0.1524" layer="91"/>
 <junction x="68.58" y="-55.88"/>
-<pinref part="MD5" gate="-2" pin="S"/>
+<pinref part="RASPI" gate="-2" pin="S"/>
 <wire x1="71.12" y1="-55.88" x2="76.2" y2="-55.88" width="0.1524" layer="91"/>
 <wire x1="76.2" y1="-63.5" x2="71.12" y2="-63.5" width="0.1524" layer="91"/>
 <wire x1="71.12" y1="-63.5" x2="71.12" y2="-55.88" width="0.1524" layer="91"/>
