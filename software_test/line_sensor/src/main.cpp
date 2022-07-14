@@ -3,7 +3,6 @@
 
 #define BRIGHTNESS 0
 #define LED_PIN 9
-#define N 15
 
 Adafruit_NeoPixel strip(30, LED_PIN, NEO_GRB + NEO_KHZ800);
 
@@ -11,6 +10,7 @@ void get_linesensor(int *pins, int *a_pins, int *value);
 
 int set_port[8] = {7, 8, 6, 10, 3, 2, 4, 5};
 int read_port[2] = {A1, A0};
+int n;//読み込むポートを指定(0~29)
 
 int sensor_value[30];
 int old_value[30];
@@ -38,11 +38,11 @@ void loop() {
     strip.show();
 
     get_linesensor(set_port, read_port, sensor_value);
-    Serial.println((sensor_value[N]));  //簡易平滑化
+    Serial.println((sensor_value[n]));
 }
 
 void get_linesensor(int *pins, int *a_pins, int *value) {
-    /*int i = N;
+    /*int i = n;
     for (int num = 4; num < 8; num++) {
         if (bitRead(i, num) == 1) {
             digitalWrite(pins[num], HIGH);
@@ -52,7 +52,7 @@ void get_linesensor(int *pins, int *a_pins, int *value) {
     }
 
     value[i] = analogRead(a_pins[1]);*/
-    uint8_t mux_channel[15][4] = {
+    uint8_t mux_channel[16][4] = {
         {0, 0, 0, 0},  // 0
         {1, 0, 0, 0},  // 1
         {0, 1, 0, 0},  // 2
@@ -68,33 +68,38 @@ void get_linesensor(int *pins, int *a_pins, int *value) {
         {0, 0, 1, 1},  // 12
         {1, 0, 1, 1},  // 13
         {0, 1, 1, 1},  // 14
+        {1, 1, 1, 1}   // 15
     };
 
     int i;
-    for (i = 4; i < 8; i++) {
-        digitalWrite(set_port[i], mux_channel[N][i]);
+    if (n >= 16) {
+        for (i = 0; i < 4; i++) {
+            digitalWrite(set_port[i + 4], mux_channel[n - 16][i]);
+        }
+        value[n] = analogRead(a_pins[1]);
+    } else {
+        for (i = 0; i < 4; i++) {
+            digitalWrite(set_port[i], mux_channel[n][i]);
+        }
+        value[n] = analogRead(a_pins[0]);
     }
-    value[N] = analogRead(a_pins[1]);
 }
 
-//スケッチの動作確認済み
-//ボード上での動作についてはわからん
-
 /*
-0 PT1
-
-15 PT16
-
- 0 PT18
- 1 PT19
- 2 PT20
-
- 6 24
-12 30
-13
-
-15 27
-
-
-
-*/
+n PT
+PIN0
+  0 1
+  1 2
+  2 3
+  中略
+  14 15
+  15 16(なんで？？）
+PIN1
+  16 17
+  17 18
+  18 19
+  19 20
+  20 21
+　中略
+  29 30
+ */
