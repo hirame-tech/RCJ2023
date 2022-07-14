@@ -1,5 +1,7 @@
 #include <Arduino.h>
 
+#define CYCLE_TIME 833
+#define SENSOR_NUMBER 16
 int pin[]={
   NULL,NULL,NULL,NULL,
   NULL,NULL,7,A5,
@@ -9,10 +11,12 @@ int pin[]={
 
 
 //prototype declaration
-get_IR(int *pins,int *datas);
+void get_IR(int *pins,int *datas);
+int Ball_angle(int *datas);
+int Ball_distance(int *datas);
 
 void setup() {
-  for (int i = 0; i < 16; i++){
+  for (int i = 0; i < SENSOR_NUMBER; i++){
     pinMode(pin[i],INPUT);
   }
   Serial.begin(9600);
@@ -20,5 +24,63 @@ void setup() {
 }
 
 void loop() {
-  get_IR()
+  int sensor_data[SENSOR_NUMBER],distance,angle;
+  get_IR(pin,sensor_data);
+  distance = Ball_distance(sensor_data);
+  angle = Ball_angle(sensor_data);
+
+  Serial.write();
+
+}
+
+void get_IR(int *pins,int *datas){
+  int start_time;
+  //初期化
+  for (int i = 0; i < SENSOR_NUMBER; i++){
+    datas[i] = 0;
+  }
+  //計測
+  const unsigned long start_time= micros();
+  do{
+    for (int i = 0; i < SENSOR_NUMBER; i++){
+      datas[i] += digitalRead(pins[i]);
+    }
+  }while ((micros() - start_time) < CYCLE_TIME);
+  
+}
+
+/*
+* @brief get angle
+* @return 0~15
+*/
+int Ball_angle(int *datas){
+  int max,index;
+  max = 0;
+  index = 0;
+  for (int i = 0; i < SENSOR_NUMBER; i++){
+    if(datas[i] > max){
+      max = datas[i];
+      index = i;
+    }
+  }
+
+  return index;  
+}
+
+/*
+* @brief get distance
+* @return 0~15
+*/
+int Ball_distance(int *datas){
+  int distance = 0;
+  for (int i = 0; i < SENSOR_NUMBER; i++){
+    distance += (datas[i] > 0);
+  }
+  if(distance == 1){
+    distance = 2;
+  }
+  if(distance != 0){
+    distance -= 1;
+  }
+  return distance;  
 }
