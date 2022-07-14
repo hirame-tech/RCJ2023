@@ -52,7 +52,7 @@ void get_linesensor(int *pins, int *a_pins, int *value) {
     }
 
     value[i] = analogRead(a_pins[1]);*/
-    uint8_t mux_channel[16][4] = {
+    uint8_t mux_channel[15][4] = {
         {0, 0, 0, 0},  // 0
         {1, 0, 0, 0},  // 1
         {0, 1, 0, 0},  // 2
@@ -68,7 +68,6 @@ void get_linesensor(int *pins, int *a_pins, int *value) {
         {0, 0, 1, 1},  // 12
         {1, 0, 1, 1},  // 13
         {0, 1, 1, 1},  // 14
-        {1, 1, 1, 1}   // 15
     };
 
     int i;
@@ -92,38 +91,10 @@ void get_linesensor(int *pins, int *a_pins, int *value) {
 
  6 24
 12 30
-13 
+13
 
 15 27
 
 
 
 */
-
-void test(void) {
-    uint8_t mux_channel[16][4] = {
-        {0, 0, 0, 0},  // 0
-        {1, 0, 0, 0},  // 1
-        {0, 1, 0, 0},  // 2
-        {1, 1, 0, 0},  // 3
-        {0, 0, 1, 0},  // 4
-        {1, 0, 1, 0},  // 5
-        {0, 1, 1, 0},  // 6
-        {1, 1, 1, 0},  // 7
-        {0, 0, 0, 1},  // 8
-        {1, 0, 0, 1},  // 9
-        {0, 1, 0, 1},  // 10
-        {1, 1, 0, 1},  // 11
-        {0, 0, 1, 1},  // 12
-        {1, 0, 1, 1},  // 13
-        {0, 1, 1, 1},  // 14
-        {1, 1, 1, 1}   // 15
-    };
-
-    int set_port[8] = {7, 8, 6, 10, 3, 2, 4, 5};
-    int read_port[2] = {A1, A0};
-    int i;
-    for (i = 0; i < 4; i++) {
-        digitalWrite(set_port[i], mux_channel[N][i]);
-    }
-}
