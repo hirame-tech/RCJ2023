@@ -10,14 +10,13 @@ void get_linesensor(int *pins, int *a_pins, int *value);
 
 int set_port[8] = {7, 8, 6, 10, 3, 2, 4, 5};
 int read_port[2] = {A1, A0};
-int n;//読み込むポートを指定(0~29)
 
-int sensor_value[30];
-int old_value[30];
+int sensor_value[30];  //読み込んだ値を格納
+
 void set_pin() {
-    int i;
-    for (i = 0; i < 8; i++) {
-        pinMode(set_port[i], OUTPUT);
+    int j;
+    for (j = 0; j < 8; j++) {
+        pinMode(set_port[j], OUTPUT);
     }
     pinMode(read_port[0], INPUT);  // 0~14
     pinMode(read_port[1], INPUT);  // 15~30
@@ -32,26 +31,26 @@ void setup() {
 }
 
 void loop() {
-    for (int i = 0; i < 30; i++) {
-        strip.setPixelColor(i, strip.Color(0, 255, 0));
+    for (int j = 0; j < 30; j++) {
+        strip.setPixelColor(j, strip.Color(0, 255, 0));
     }
     strip.show();
 
     get_linesensor(set_port, read_port, sensor_value);
-    Serial.println((sensor_value[n]));
+    Serial.println((sensor_value[29]));
 }
 
 void get_linesensor(int *pins, int *a_pins, int *value) {
-    /*int i = n;
+    /*int j = n;
     for (int num = 4; num < 8; num++) {
-        if (bitRead(i, num) == 1) {
+        if (bitRead(j, num) == 1) {
             digitalWrite(pins[num], HIGH);
         } else {
             digitalWrite(pins[num], LOW);
         }
     }
 
-    value[i] = analogRead(a_pins[1]);*/
+    value[j] = analogRead(a_pins[1]);*/
     uint8_t mux_channel[16][4] = {
         {0, 0, 0, 0},  // 0
         {1, 0, 0, 0},  // 1
@@ -71,17 +70,19 @@ void get_linesensor(int *pins, int *a_pins, int *value) {
         {1, 1, 1, 1}   // 15
     };
 
-    int i;
-    if (n >= 16) {
-        for (i = 0; i < 4; i++) {
-            digitalWrite(set_port[i + 4], mux_channel[n - 16][i]);
+    int i, j;
+
+    for (i = 0; i < 16; i++) {
+        for (j = 0; j < 4; j++) {
+            digitalWrite(set_port[j], mux_channel[i][j]);
         }
-        value[n] = analogRead(a_pins[1]);
-    } else {
-        for (i = 0; i < 4; i++) {
-            digitalWrite(set_port[i], mux_channel[n][i]);
+        value[i] = analogRead(a_pins[0]);
+    }
+    for (i = 16; i < 30; i++) {
+        for (j = 0; j < 4; j++) {
+            digitalWrite(set_port[j + 4], mux_channel[i - 16][j]);
         }
-        value[n] = analogRead(a_pins[0]);
+        value[i] = analogRead(a_pins[1]);
     }
 }
 
