@@ -5563,6 +5563,78 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 </deviceset>
 </devicesets>
 </library>
+<library name="buzzer" urn="urn:adsk.eagle:library:113">
+<description>&lt;b&gt;Speakers and Buzzers&lt;/b&gt;&lt;p&gt;
+&lt;ul&gt;Distributors:
+&lt;li&gt;Buerklin
+&lt;li&gt;Spoerle
+&lt;li&gt;Schukat
+&lt;/ul&gt;
+&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
+<packages>
+<package name="F/TMB" urn="urn:adsk.eagle:footprint:5217/1" library_version="1">
+<description>&lt;b&gt;BUZZER&lt;/b&gt;</description>
+<wire x1="3.429" y1="2.54" x2="4.191" y2="2.54" width="0.1524" layer="21"/>
+<wire x1="3.81" y1="2.159" x2="3.81" y2="2.921" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="6.096" width="0.1524" layer="21"/>
+<circle x="0" y="0" radius="1.27" width="0.1524" layer="21"/>
+<circle x="3.81" y="2.54" radius="0.762" width="0.1524" layer="21"/>
+<pad name="-" x="-3.81" y="0" drill="1.016" diameter="2.159" shape="octagon"/>
+<pad name="+" x="3.81" y="0" drill="1.016" diameter="2.159" shape="octagon"/>
+<text x="-3.81" y="-3.81" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
+<text x="3.302" y="5.715" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+</package>
+</packages>
+<packages3d>
+<package3d name="F/TMB" urn="urn:adsk.eagle:package:5260/1" type="box" library_version="1">
+<description>BUZZER</description>
+<packageinstances>
+<packageinstance name="F/TMB"/>
+</packageinstances>
+</package3d>
+</packages3d>
+<symbols>
+<symbol name="B" urn="urn:adsk.eagle:symbol:5216/1" library_version="1">
+<wire x1="-2.54" y1="5.08" x2="5.08" y2="5.08" width="0.254" layer="94" curve="180"/>
+<wire x1="-2.54" y1="5.08" x2="1.27" y2="5.08" width="0.254" layer="94"/>
+<wire x1="1.27" y1="1.27" x2="1.27" y2="5.08" width="0.1524" layer="94"/>
+<wire x1="1.27" y1="5.08" x2="5.08" y2="5.08" width="0.254" layer="94"/>
+<wire x1="2.54" y1="-2.54" x2="2.54" y2="1.397" width="0.1524" layer="94"/>
+<wire x1="0" y1="-2.54" x2="0" y2="1.397" width="0.1524" layer="94"/>
+<text x="-2.54" y="6.35" size="1.778" layer="95">&gt;NAME</text>
+<text x="5.08" y="0" size="1.778" layer="96">&gt;VALUE</text>
+<pin name="-" x="5.08" y="-2.54" visible="pad" length="short" direction="pas" rot="R180"/>
+<pin name="+" x="-2.54" y="-2.54" visible="pad" length="short" direction="pas"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="F/TMB" urn="urn:adsk.eagle:component:5296/1" prefix="SG" library_version="1">
+<description>&lt;b&gt;BUZZER&lt;/b&gt;&lt;p&gt; Source: Buerklin</description>
+<gates>
+<gate name="1" symbol="B" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="F/TMB">
+<connects>
+<connect gate="1" pin="+" pad="+"/>
+<connect gate="1" pin="-" pad="-"/>
+</connects>
+<package3dinstances>
+<package3dinstance package3d_urn="urn:adsk.eagle:package:5260/1"/>
+</package3dinstances>
+<technologies>
+<technology name="">
+<attribute name="MF" value="" constant="no"/>
+<attribute name="MPN" value="" constant="no"/>
+<attribute name="OC_FARNELL" value="unknown" constant="no"/>
+<attribute name="OC_NEWARK" value="unknown" constant="no"/>
+</technology>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -5602,16 +5674,16 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <part name="C3" library="generic" deviceset="CAPACITOR" device="1608"/>
 <part name="C4" library="generic" deviceset="CAPACITOR" device="1608"/>
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R2" library="adafruit" deviceset="R-US_" device="M2012"/>
 <part name="U$4" library="by_hirame" deviceset="R-TRIM" device=""/>
 <part name="R5" library="adafruit" deviceset="R-US_" device="M2012" value="10k"/>
 <part name="R7" library="adafruit" deviceset="R-US_" device="M2012" value="10k"/>
+<part name="SG1" library="buzzer" library_urn="urn:adsk.eagle:library:113" deviceset="F/TMB" device="" package3d_urn="urn:adsk.eagle:package:5260/1"/>
+<part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
 <plain>
-<text x="-68.58" y="0" size="1.778" layer="91">buzzer</text>
 </plain>
 <instances>
 <instance part="GND1" gate="1" x="38.1" y="7.62" smashed="yes">
@@ -5734,9 +5806,6 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <instance part="GND4" gate="1" x="-22.86" y="30.48" smashed="yes">
 <attribute name="VALUE" x="-25.4" y="27.94" size="1.778" layer="96"/>
 </instance>
-<instance part="GND5" gate="1" x="-45.72" y="-10.16" smashed="yes">
-<attribute name="VALUE" x="-48.26" y="-12.7" size="1.778" layer="96"/>
-</instance>
 <instance part="R2" gate="G$1" x="5.08" y="7.62" smashed="yes" rot="R90">
 <attribute name="NAME" x="3.5814" y="3.81" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="8.382" y="3.81" size="1.778" layer="96" rot="R90"/>
@@ -5752,6 +5821,13 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <instance part="R7" gate="G$1" x="-10.16" y="5.08" smashed="yes" rot="R180">
 <attribute name="NAME" x="-6.35" y="3.5814" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="-6.35" y="8.382" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="SG1" gate="1" x="-53.34" y="2.54" smashed="yes" rot="MR0">
+<attribute name="NAME" x="-50.8" y="8.89" size="1.778" layer="95" rot="MR0"/>
+<attribute name="VALUE" x="-58.42" y="2.54" size="1.778" layer="96" rot="MR0"/>
+</instance>
+<instance part="GND5" gate="1" x="-63.5" y="-10.16" smashed="yes">
+<attribute name="VALUE" x="-66.04" y="-12.7" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -5846,9 +5922,13 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <pinref part="GND4" gate="1" pin="GND"/>
 </segment>
 <segment>
+<pinref part="SG1" gate="1" pin="-"/>
+<wire x1="-58.42" y1="0" x2="-63.5" y2="0" width="0.1524" layer="91"/>
+<wire x1="-63.5" y1="0" x2="-63.5" y2="-5.08" width="0.1524" layer="91"/>
 <pinref part="U$3" gate="G$1" pin="GND"/>
-<wire x1="-43.18" y1="-5.08" x2="-45.72" y2="-5.08" width="0.1524" layer="91"/>
-<wire x1="-45.72" y1="-5.08" x2="-45.72" y2="-7.62" width="0.1524" layer="91"/>
+<wire x1="-43.18" y1="-5.08" x2="-63.5" y2="-5.08" width="0.1524" layer="91"/>
+<wire x1="-63.5" y1="-5.08" x2="-63.5" y2="-7.62" width="0.1524" layer="91"/>
+<junction x="-63.5" y="-5.08"/>
 <pinref part="GND5" gate="1" pin="GND"/>
 </segment>
 </net>
@@ -5995,24 +6075,18 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <junction x="5.08" y="15.24"/>
 </segment>
 </net>
-<net name="N$6" class="0">
-<segment>
-<pinref part="U$3" gate="G$1" pin="4"/>
-<wire x1="-43.18" y1="0" x2="-53.34" y2="0" width="0.1524" layer="91"/>
-<wire x1="-53.34" y1="0" x2="-53.34" y2="10.16" width="0.1524" layer="91"/>
-<wire x1="-53.34" y1="10.16" x2="-73.66" y2="10.16" width="0.1524" layer="91"/>
-<wire x1="-73.66" y1="10.16" x2="-73.66" y2="-10.16" width="0.1524" layer="91"/>
-<wire x1="-73.66" y1="-10.16" x2="-53.34" y2="-10.16" width="0.1524" layer="91"/>
-<wire x1="-53.34" y1="-10.16" x2="-53.34" y2="0" width="0.1524" layer="91"/>
-<junction x="-53.34" y="0"/>
-<label x="-53.34" y="0" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-</net>
 <net name="N$10" class="0">
 <segment>
 <pinref part="R7" gate="G$1" pin="2"/>
 <pinref part="U$3" gate="G$1" pin="2"/>
 <wire x1="-15.24" y1="5.08" x2="-17.78" y2="5.08" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$6" class="0">
+<segment>
+<pinref part="U$3" gate="G$1" pin="4"/>
+<pinref part="SG1" gate="1" pin="+"/>
+<wire x1="-43.18" y1="0" x2="-50.8" y2="0" width="0.1524" layer="91"/>
 </segment>
 </net>
 </nets>
