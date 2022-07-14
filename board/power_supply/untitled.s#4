@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -4887,14 +4887,14 @@ An 0805 resistor inside a standard 1/4W 5% resistor. Makes for easy mods</descri
 <wire x1="2.286" y1="-1.016" x2="2.54" y2="0" width="0.2032" layer="94"/>
 <text x="-3.81" y="1.4986" size="1.778" layer="95">&gt;NAME</text>
 <text x="-3.81" y="-3.302" size="1.778" layer="96">&gt;VALUE</text>
-<pin name="3" x="5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1" rot="R180"/>
 <pin name="1" x="-5.08" y="0" visible="off" length="short" direction="pas" swaplevel="1"/>
 <polygon width="0.254" layer="94">
 <vertex x="0" y="1.27"/>
 <vertex x="-1.27" y="2.54"/>
 <vertex x="1.27" y="2.54"/>
 </polygon>
-<pin name="2" x="0" y="6.35" length="middle" rot="R270"/>
+<pin name="2" x="0" y="4.572" length="short" rot="R270"/>
+<pin name="P$1" x="5.08" y="0" length="short" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -4924,7 +4924,7 @@ An 0805 resistor inside a standard 1/4W 5% resistor. Makes for easy mods</descri
 <connects>
 <connect gate="G$1" pin="1" pad="P$1"/>
 <connect gate="G$1" pin="2" pad="P$2"/>
-<connect gate="G$1" pin="3" pad="P$3"/>
+<connect gate="G$1" pin="P$1" pad="P$3"/>
 </connects>
 <technologies>
 <technology name=""/>
@@ -5597,7 +5597,6 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <part name="R3" library="adafruit" deviceset="R-US_" device="M2012"/>
 <part name="C1" library="adafruit" deviceset="C-US" device="C2012"/>
 <part name="R4" library="adafruit" deviceset="R-US_" device="M2012"/>
-<part name="U$4" library="by_hirame" deviceset="R-TRIM" device=""/>
 <part name="C2" library="adafruit" deviceset="C-US" device="C2012"/>
 <part name="R6" library="adafruit" deviceset="FLIPFLOP-RES" device=""/>
 <part name="MD4" library="Rembrandt Electronics - JST XH Connectors v1-0" deviceset="JST-XH-02-PIN" device="-LONG-PAD"/>
@@ -5609,6 +5608,7 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="R2" library="adafruit" deviceset="R-US_" device="M2012"/>
+<part name="U$4" library="by_hirame" deviceset="R-TRIM" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -5696,10 +5696,6 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <attribute name="NAME" x="46.7614" y="-87.63" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="51.562" y="-87.63" size="1.778" layer="96" rot="R90"/>
 </instance>
-<instance part="U$4" gate="G$1" x="48.26" y="-73.66" smashed="yes" rot="R270">
-<attribute name="NAME" x="49.7586" y="-69.85" size="1.778" layer="95" rot="R270"/>
-<attribute name="VALUE" x="44.958" y="-69.85" size="1.778" layer="96" rot="R270"/>
-</instance>
 <instance part="C2" gate="G$1" x="58.42" y="-68.58" smashed="yes">
 <attribute name="NAME" x="59.436" y="-67.945" size="1.778" layer="95"/>
 <attribute name="VALUE" x="59.436" y="-72.771" size="1.778" layer="96"/>
@@ -5746,6 +5742,10 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <instance part="R2" gate="G$1" x="5.08" y="7.62" smashed="yes" rot="R90">
 <attribute name="NAME" x="3.5814" y="3.81" size="1.778" layer="95" rot="R90"/>
 <attribute name="VALUE" x="8.382" y="3.81" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="U$4" gate="G$1" x="48.26" y="-73.66" smashed="yes" rot="R270">
+<attribute name="NAME" x="49.7586" y="-69.85" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="44.958" y="-69.85" size="1.778" layer="96" rot="R270"/>
 </instance>
 </instances>
 <busses>
@@ -5961,11 +5961,11 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <net name="N$7" class="0">
 <segment>
 <pinref part="R4" gate="G$1" pin="2"/>
-<pinref part="U$4" gate="G$1" pin="3"/>
-<pinref part="U$4" gate="G$1" pin="2"/>
-<wire x1="48.26" y1="-78.74" x2="54.61" y2="-78.74" width="0.1524" layer="91"/>
-<wire x1="54.61" y1="-78.74" x2="54.61" y2="-73.66" width="0.1524" layer="91"/>
+<wire x1="48.26" y1="-78.74" x2="52.832" y2="-78.74" width="0.1524" layer="91"/>
+<pinref part="U$4" gate="G$1" pin="P$1"/>
 <junction x="48.26" y="-78.74"/>
+<pinref part="U$4" gate="G$1" pin="2"/>
+<wire x1="52.832" y1="-73.66" x2="52.832" y2="-78.74" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$11" class="0">

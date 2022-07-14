@@ -4059,15 +4059,15 @@ Source: www.kingbright.com</description>
 <part name="U$1" library="adafruit" deviceset="ATMEGA32U4" device="-AU"/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GNDA" device=""/>
 <part name="JP1" library="adafruit" deviceset="PINHD-1X8" device="BIG"/>
-<part name="C3" library="generic" deviceset="CAPACITOR" device="1608"/>
-<part name="C4" library="generic" deviceset="CAPACITOR" device="1608"/>
-<part name="R1" library="generic" deviceset="RESISTOR-US" device="1608"/>
-<part name="R2" library="generic" deviceset="RESISTOR-US" device="1608"/>
-<part name="C5" library="generic" deviceset="CAPACITOR" device="1608"/>
+<part name="C3" library="generic" deviceset="CAPACITOR" device="1608" value="0.1uF"/>
+<part name="C4" library="generic" deviceset="CAPACITOR" device="1608" value="1uF"/>
+<part name="R1" library="generic" deviceset="RESISTOR-US" device="1608" value="22"/>
+<part name="R2" library="generic" deviceset="RESISTOR-US" device="1608" value="22"/>
+<part name="C5" library="generic" deviceset="CAPACITOR" device="1608" value="1uF"/>
 <part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
-<part name="R3" library="generic" deviceset="RESISTOR-US" device="1608"/>
-<part name="C1" library="generic" deviceset="CAPACITOR" device="1608"/>
-<part name="C2" library="generic" deviceset="CAPACITOR" device="1608"/>
+<part name="R3" library="generic" deviceset="RESISTOR-US" device="1608" value="10k"/>
+<part name="C1" library="generic" deviceset="CAPACITOR" device="1608" value="22pF"/>
+<part name="C2" library="generic" deviceset="CAPACITOR" device="1608" value="22pF"/>
 <part name="TXLED" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="SML0603" package3d_urn="urn:adsk.eagle:package:15832/1"/>
 <part name="RXLED" library="led" library_urn="urn:adsk.eagle:library:259" deviceset="LED" device="SML0603" package3d_urn="urn:adsk.eagle:package:15832/1"/>
 <part name="R4" library="generic" deviceset="RESISTOR-US" device="1608" value="1k"/>
