@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="1" unitdist="mm" unit="mm" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
@@ -169,7 +169,7 @@
 <layer number="255" name="routoute" color="7" fill="1" visible="yes" active="yes"/>
 </layers>
 <board>
-<fusionsync huburn="a.cGVyc29uYWw6dWUyYjhiNWJj" projecturn="a.cGVyc29uYWw6dWUyYjhiNWJjIzIwMjIwNDE2NTE3MzEzNjU2" f3durn="urn:adsk.wipprod:dm.lineage:QmnGeXTNRAeKhx4INCeYVg" pcbguid="" lastpulledtime="" lastsyncedchangeguid="" latestrevisionid="b83a574e-0160-4f8e-8456-9f8577d503a8" lastsyncedrevisionid="b83a574e-0160-4f8e-8456-9f8577d503a8" lastboardhashguid="a0df0de1-b480-8f0f-8af4-34f871867293" lastpushedtime="2022-07-09T12:07:00Z" linktopcb3d="%12"/>
+<fusionsync huburn="a.cGVyc29uYWw6dWUyYjhiNWJj" projecturn="a.cGVyc29uYWw6dWUyYjhiNWJjIzIwMjIwNDE2NTE3MzEzNjU2" f3durn="urn:adsk.wipprod:dm.lineage:QmnGeXTNRAeKhx4INCeYVg" pcbguid="" lastpulledtime="" lastsyncedchangeguid="" latestrevisionid="b83a574e-0160-4f8e-8456-9f8577d503a8" lastsyncedrevisionid="b83a574e-0160-4f8e-8456-9f8577d503a8" lastboardhashguid="a0df0de1-b480-8f0f-8af4-34f871867293" lastpushedtime="2022-07-09T12:07:00Z" linktopcb3d="true"/>
 <plain>
 <wire x1="51.943" y1="-2.254" x2="51.943" y2="48.746" width="0.001" layer="20"/>
 <wire x1="47.943" y1="46.746" x2="3.943" y2="46.746" width="0.001" layer="20"/>
@@ -884,11 +884,11 @@ design rules under a new name.</description>
 <attribute name="POPULARITY" value="14" x="3.81" y="11.43" size="1.778" layer="27" display="off"/>
 <attribute name="VALUE" x="3.81" y="12.63" size="0.0254" layer="27"/>
 </element>
-<element name="R1" library="adafruit" package="M2012" value="" x="31.75" y="15.748" smashed="yes">
+<element name="R1" library="adafruit" package="M2012" value="300Ω" x="31.75" y="15.748" smashed="yes">
 <attribute name="NAME" x="27.432" y="15.24" size="1.27" layer="25"/>
 <attribute name="VALUE" x="30.734" y="13.462" size="1.27" layer="27"/>
 </element>
-<element name="U$2" library="by_hirame" package="SMD-R-TRIM" value="SMD-R-TRIM" x="31.75" y="19.05" smashed="yes"/>
+<element name="U$2" library="by_hirame" package="SMD-R-TRIM" value="2.2kΩ" x="31.75" y="19.05" smashed="yes"/>
 <element name="MD1" library="Rembrandt Electronics - JST XH Connectors v1-0" package="JST-XH-02-PACKAGE-LONG-PAD" value="JST-XH-02-PIN-LONG-PAD" x="46.101" y="22.098" smashed="yes" rot="R270">
 <attribute name="NAME" x="43.37" y="20.82" size="1.016" layer="25" ratio="10" rot="R90"/>
 </element>
@@ -916,23 +916,23 @@ design rules under a new name.</description>
 <attribute name="PRICE" value="None" x="21.209" y="37.846" size="1.778" layer="27" rot="R180" display="off"/>
 <attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/OKL-T/6-W12P-C/?ref=eda" x="21.209" y="37.846" size="1.778" layer="27" rot="R180" display="off"/>
 </element>
-<element name="R3" library="adafruit" package="M2012" value="" x="20.955" y="30.226" smashed="yes">
+<element name="R3" library="adafruit" package="M2012" value="20kΩ" x="20.955" y="30.226" smashed="yes">
 <attribute name="NAME" x="22.987" y="29.591" size="1.27" layer="25"/>
 <attribute name="VALUE" x="19.939" y="27.94" size="1.27" layer="27"/>
 </element>
-<element name="C1" library="adafruit" package="C2012" value="" x="20.955" y="28.067" smashed="yes" rot="R180">
+<element name="C1" library="adafruit" package="C2012" value="22uF 25V" x="20.955" y="28.067" smashed="yes" rot="R180">
 <attribute name="NAME" x="25.4" y="28.702" size="1.27" layer="25" rot="R180"/>
 <attribute name="VALUE" x="21.844" y="30.353" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="R4" library="adafruit" package="M2012" value="" x="8.255" y="30.226" smashed="yes">
+<element name="R4" library="adafruit" package="M2012" value="1.2kΩ" x="8.255" y="30.226" smashed="yes">
 <attribute name="NAME" x="7.239" y="27.813" size="1.27" layer="25"/>
 <attribute name="VALUE" x="7.239" y="27.94" size="1.27" layer="27"/>
 </element>
-<element name="C2" library="adafruit" package="C2012" value="" x="13.589" y="27.94" smashed="yes">
+<element name="C2" library="adafruit" package="C2012" value="10uF 10V" x="13.589" y="27.94" smashed="yes">
 <attribute name="NAME" x="15.748" y="27.305" size="1.27" layer="25"/>
 <attribute name="VALUE" x="12.7" y="25.654" size="1.27" layer="27"/>
 </element>
-<element name="R6" library="adafruit" package="0805-THM" value="" x="12.7" y="35.56" smashed="yes" rot="R270">
+<element name="R6" library="adafruit" package="0805-THM" value="1.2KΩ  1/6W" x="12.7" y="35.56" smashed="yes" rot="R270">
 <attribute name="NAME" x="14.224" y="38.608" size="1.27" layer="25" ratio="10" rot="R270"/>
 <attribute name="VALUE" x="9.925" y="38.6906" size="1.27" layer="27" ratio="10" rot="R270"/>
 </element>
@@ -946,24 +946,24 @@ design rules under a new name.</description>
 <attribute name="NAME" x="19.685" y="1.8542" size="1.27" layer="25" rot="R180"/>
 <attribute name="VALUE" x="24.13" y="7.6708" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="C3" library="generic" package="SMD1608" value="" x="21.59" y="11.684" smashed="yes">
+<element name="C3" library="generic" package="SMD1608" value="0.1uF" x="21.59" y="11.684" smashed="yes">
 <attribute name="NAME" x="20.79" y="12.334" size="1.016" layer="25"/>
 <attribute name="VALUE" x="20.79" y="10.034" size="1.016" layer="27"/>
 </element>
-<element name="C4" library="generic" package="SMD1608" value="" x="25.146" y="2.413" smashed="yes">
+<element name="C4" library="generic" package="SMD1608" value="0.1uF" x="25.146" y="2.413" smashed="yes">
 <attribute name="NAME" x="24.346" y="3.063" size="1.016" layer="25"/>
 <attribute name="VALUE" x="24.346" y="0.763" size="1.016" layer="27"/>
 </element>
-<element name="R2" library="adafruit" package="M2012" value="" x="31.75" y="13.462" smashed="yes" rot="R180">
+<element name="R2" library="adafruit" package="M2012" value="470kΩ" x="31.75" y="13.462" smashed="yes" rot="R180">
 <attribute name="NAME" x="29.718" y="14.097" size="1.27" layer="25" rot="R180"/>
 <attribute name="VALUE" x="32.766" y="15.748" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="U$4" library="by_hirame" package="R-TRIM" value="R-TRIM" x="8.128" y="36.703" smashed="yes" rot="R270"/>
+<element name="U$4" library="by_hirame" package="R-TRIM" value="20kΩ" x="8.128" y="36.703" smashed="yes" rot="R270"/>
 <element name="R5" library="adafruit" package="M2012" value="10k" x="28.448" y="10.033" smashed="yes" rot="R180">
 <attribute name="NAME" x="29.464" y="9.017" size="1.27" layer="25" rot="R180"/>
 <attribute name="VALUE" x="29.464" y="12.319" size="1.27" layer="27" rot="R180"/>
 </element>
-<element name="R7" library="adafruit" package="M2012" value="10k" x="28.448" y="5.08" smashed="yes">
+<element name="R7" library="adafruit" package="M2012" value="300Ω" x="28.448" y="5.08" smashed="yes">
 <attribute name="NAME" x="27.432" y="6.096" size="1.27" layer="25"/>
 <attribute name="VALUE" x="27.432" y="2.794" size="1.27" layer="27"/>
 </element>

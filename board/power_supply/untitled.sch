@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.1">
+<eagle version="9.6.2">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -5651,8 +5651,8 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <part name="F1" library="fuse" library_urn="urn:adsk.eagle:library:233" deviceset="SHK20L" device="" package3d_urn="urn:adsk.eagle:package:14071/1"/>
 <part name="PAD3" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="3,81/1,4" device="" package3d_urn="urn:adsk.eagle:package:30835/1"/>
 <part name="PAD1" library="wirepad" library_urn="urn:adsk.eagle:library:412" deviceset="3,81/1,4" device="" package3d_urn="urn:adsk.eagle:package:30835/1"/>
-<part name="R1" library="adafruit" deviceset="R-US_" device="M2012"/>
-<part name="U$2" library="by_hirame" deviceset="SMD-R-TRIM" device=""/>
+<part name="R1" library="adafruit" deviceset="R-US_" device="M2012" value="300Ω"/>
+<part name="U$2" library="by_hirame" deviceset="SMD-R-TRIM" device="" value="2.2kΩ"/>
 <part name="MD1" library="Rembrandt Electronics - JST XH Connectors v1-0" deviceset="JST-XH-02-PIN" device="-LONG-PAD"/>
 <part name="MD2" library="Rembrandt Electronics - JST XH Connectors v1-0" deviceset="JST-XH-02-PIN" device="-LONG-PAD"/>
 <part name="KICK" library="Rembrandt Electronics - JST XH Connectors v1-0" deviceset="JST-XH-02-PIN" device="-LONG-PAD"/>
@@ -5662,22 +5662,22 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <part name="U$3" library="attiny85" deviceset="ATTINY85" device=""/>
 <part name="MD3" library="OKL-T_6-W12P-C" deviceset="OKL-T/6-W12P-C" device="MURATA_OKL-T-6-W12P-C_0_0"/>
 <part name="P+3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="VCC" device=""/>
-<part name="R3" library="adafruit" deviceset="R-US_" device="M2012"/>
-<part name="C1" library="adafruit" deviceset="C-US" device="C2012"/>
-<part name="R4" library="adafruit" deviceset="R-US_" device="M2012"/>
-<part name="C2" library="adafruit" deviceset="C-US" device="C2012"/>
-<part name="R6" library="adafruit" deviceset="FLIPFLOP-RES" device=""/>
+<part name="R3" library="adafruit" deviceset="R-US_" device="M2012" value="20kΩ"/>
+<part name="C1" library="adafruit" deviceset="C-US" device="C2012" value="22uF 25V"/>
+<part name="R4" library="adafruit" deviceset="R-US_" device="M2012" value="1.2kΩ"/>
+<part name="C2" library="adafruit" deviceset="C-US" device="C2012" value="10uF 10V"/>
+<part name="R6" library="adafruit" deviceset="FLIPFLOP-RES" device="" value="1.2KΩ  1/6W"/>
 <part name="MAIN" library="Rembrandt Electronics - JST XH Connectors v1-0" deviceset="JST-XH-02-PIN" device="-LONG-PAD"/>
 <part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="RASPI" library="Rembrandt Electronics - JST XH Connectors v1-0" deviceset="JST-XH-02-PIN" device="-LONG-PAD"/>
 <part name="IC1" library="linear" library_urn="urn:adsk.eagle:library:262" deviceset="*317" device="EMP" package3d_urn="urn:adsk.eagle:package:28541/2"/>
-<part name="C3" library="generic" deviceset="CAPACITOR" device="1608"/>
-<part name="C4" library="generic" deviceset="CAPACITOR" device="1608"/>
+<part name="C3" library="generic" deviceset="CAPACITOR" device="1608" value="0.1uF"/>
+<part name="C4" library="generic" deviceset="CAPACITOR" device="1608" value="0.1uF"/>
 <part name="GND4" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R2" library="adafruit" deviceset="R-US_" device="M2012"/>
-<part name="U$4" library="by_hirame" deviceset="R-TRIM" device=""/>
+<part name="R2" library="adafruit" deviceset="R-US_" device="M2012" value="470kΩ"/>
+<part name="U$4" library="by_hirame" deviceset="R-TRIM" device="" value="20kΩ"/>
 <part name="R5" library="adafruit" deviceset="R-US_" device="M2012" value="10k"/>
-<part name="R7" library="adafruit" deviceset="R-US_" device="M2012" value="10k"/>
+<part name="R7" library="adafruit" deviceset="R-US_" device="M2012" value="300Ω"/>
 <part name="SG1" library="buzzer" library_urn="urn:adsk.eagle:library:113" deviceset="F/TMB" device="" package3d_urn="urn:adsk.eagle:package:5260/1"/>
 <part name="GND5" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
