@@ -40,17 +40,13 @@ void loop() {
     Serial.println((sensor_value[29]));
 }
 
+/*
+* @brief get linesensor value
+* @param pins digitalpin number
+* @param a_pins analogpin number
+* @param value return sensor value
+*/
 void get_linesensor(int *pins, int *a_pins, int *value) {
-    /*int j = n;
-    for (int num = 4; num < 8; num++) {
-        if (bitRead(j, num) == 1) {
-            digitalWrite(pins[num], HIGH);
-        } else {
-            digitalWrite(pins[num], LOW);
-        }
-    }
-
-    value[j] = analogRead(a_pins[1]);*/
     uint8_t mux_channel[16][4] = {
         {0, 0, 0, 0},  // 0
         {1, 0, 0, 0},  // 1
