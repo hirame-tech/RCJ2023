@@ -14,8 +14,8 @@ int read_port[2] = {A1, A0};
 int sensor_value[30];  //読み込んだ値を格納
 
 void set_pin() {
-    int j;
-    for (j = 0; j < 8; j++) {
+    int i;
+    for (i = 0; i < 8; i++) {
         pinMode(set_port[j], OUTPUT);
     }
     pinMode(read_port[0], INPUT);  // 0~14
@@ -31,8 +31,8 @@ void setup() {
 }
 
 void loop() {
-    for (int j = 0; j < 30; j++) {
-        strip.setPixelColor(j, strip.Color(0, 255, 0));
+    for (int i = 0; i < 30; i++) {
+        strip.setPixelColor(i, strip.Color(0, 255, 0));
     }
     strip.show();
 
