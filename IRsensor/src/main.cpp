@@ -25,11 +25,13 @@ void setup() {
 
 void loop() {
   int sensor_data[SENSOR_NUMBER],distance,angle;
+  uint8_t send_data;
   get_IR(pin,sensor_data);
-  distance = Ball_distance(sensor_data);
-  angle = Ball_angle(sensor_data);
-
-  Serial.write();
+  distance = Ball_distance(sensor_data) & 0x0F;
+  angle = Ball_angle(sensor_data) & 0xF;
+  send_data = ((distance << 4) + angle) & 0xFF;
+  
+  Serial.write(sensor_data);
 
 }
 

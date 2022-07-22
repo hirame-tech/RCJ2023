@@ -1,32 +1,23 @@
 #include <Arduino.h>
 #include <func.hpp>
 
-#define pin_motorA 0 //undefine
-#define pin_motorB 0 //undefine
-#define pin_motorC 0 //undefine
-#define pin_motorD 0 //undefine
+Serial1 motor0;
+Serial2 motor1;
+Serial3 motor2;
+Serial4 motor3;
 
 //prototype declaration
-void pin_setup();
-void motor(int direction,int speed);
-void get_IR();
+
 
 void setup() {
   pin_setup();
   Serial.begin(115200);
+  motor0 begin(115200);
+  motor1.begin(115200);
+  motor2.begin(115200);
+  motor3.begin(115200);
 }
 
 void loop() {
   
-}
-
-void pin_setup(){
-  pinMode(pin_motorA,OUTPUT);
-  pinMode(pin_motorB,OUTPUT);
-  pinMode(pin_motorC,OUTPUT);
-  pinMode(pin_motorD,OUTPUT);
-}
-
-void motor(int direction,int speed){
-
 }
