@@ -8,9 +8,12 @@
 #define LB D4
 #define LC D5
 
-#define OFFSET 5//機械角
-#define MOTOR_SPEED 127
-int offset = 30;
+#define OFFSET 5//機械角で
+#define MOTOR_SPEED 200
+
+#define DELAYTIME 1000
+
+#define OFFSET 0//30
 int old;
 
 const int pins[] = {HA,LA,HB,LB,HC,LC};
@@ -24,6 +27,7 @@ int direction;
 //prototype declaration
 
 void fets(int H_pin,int L_pin,int duty,int mode);
+float caluculate_electorical_angle(int offset);
 
 void setup() {
   Serial.begin(9600);
@@ -42,32 +46,12 @@ void setup() {
   digitalWrite(25,HIGH);//OFF
   delay(2000);
 }
+
 float angle_e = 30;
+
 void loop() {
-  float val;
-  
-  val = angleSensor.getRotationInDegrees();//OFFSET;
-  if(val < 0){
-    val += 360;
-  }else if(val > 360){
-    val -= 360;
-  }
-  //caluculate electorical angle
-  //angle_e = val * 14  + offset;
-  //angle_e = angle_e - 360*((int)angle_e / 360);
+  //float val = caluculate_electorical_angle(OFFSET);
   /*
-  if((millis() - old) > 100){
-      angle_e += 60;
-      old = millis();
-  }
-  */
- /*
-  if(angle_e < 0){
-    angle_e += 360;
-  }else if(angle_e > 360){
-    angle_e -= 360;
-  }
-  
   //u
   if(angle_e < 120){
     digitalWrite(16,LOW);
@@ -110,9 +94,61 @@ void loop() {
       old =millis();
   }
   */
-  fets(HA,LA,MOTOR_SPEED,1);
+  /*
+  fets(HA,LA,MOTOR_SPEED,1);//0
+  fets(HB,LB,MOTOR_SPEED,-1);
+  fets(HC,LC,MOTOR_SPEED,0); 
+
+  delayMicroseconds(DELAYTIME);
+
+  fets(HA,LA,MOTOR_SPEED,1);//60
+  fets(HB,LB,MOTOR_SPEED,0);
+  fets(HC,LC,MOTOR_SPEED,-1);
+
+  delayMicroseconds(DELAYTIME);
+
+  fets(HA,LA,MOTOR_SPEED,0);//120
   fets(HB,LB,MOTOR_SPEED,1);
-  fets(HC,LC,MOTOR_SPEED,1);
+  fets(HC,LC,MOTOR_SPEED,-1);
+
+  delayMicroseconds(DELAYTIME);
+
+  fets(HA,LA,MOTOR_SPEED,-1);//180
+  fets(HB,LB,MOTOR_SPEED,1);
+  fets(HC,LC,MOTOR_SPEED,0);
+
+  delayMicroseconds(DELAYTIME);
+
+  fets(HA,LA,MOTOR_SPEED,-1);//240
+  fets(HB,LB,MOTOR_SPEED,0);
+  fets(HC,LC,MOTOR_SPEED,1); 
+
+  delayMicroseconds(DELAYTIME);
+
+  fets(HA,LA,MOTOR_SPEED,0);//300
+  fets(HB,LB,MOTOR_SPEED,-1);
+  fets(HC,LC,MOTOR_SPEED,1);  
+  
+  delayMicroseconds(DELAYTIME); 
+  */
+  
+  fets(HA,LA,MOTOR_SPEED,1);
+  fets(HB,LB,MOTOR_SPEED,0);
+  fets(HC,LC,MOTOR_SPEED,-1);
+}
+
+float caluculate_electorical_angle(int offset){
+  float val = angleSensor.getRotationInDegrees();
+  //caluculate electorical angle
+  float angle_electorical = val * 14  + offset;
+  angle_electorical = angle_electorical - 360*((int)angle_electorical / 360);
+  if(angle_electorical < 0){
+    angle_electorical += 360;
+  }else if(angle_electorical > 360){
+    angle_electorical -= 360;
+  }
+
+  return angle_electorical;
 }
 
 void fets(int H_pin,int L_pin,int duty,int mode){

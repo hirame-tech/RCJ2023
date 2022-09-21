@@ -1,23 +1,27 @@
 #include <Arduino.h>
-#include <func.hpp>
+//#include <func.hpp>
 
-Serial1 motor0;
-Serial2 motor1;
-Serial3 motor2;
-Serial4 motor3;
+#define SERIAL Serial8
 
 //prototype declaration
 
 
 void setup() {
-  pin_setup();
+  //pin_setup();
   Serial.begin(115200);
-  motor0 begin(115200);
-  motor1.begin(115200);
-  motor2.begin(115200);
-  motor3.begin(115200);
+  SERIAL.begin(115200);
+  //motor1.begin(115200);
+  //motor2.begin(115200);
+  //motor3.begin(115200);
 }
 
 void loop() {
-  
+  static int val = 0;
+  Serial.print("hello world! :");
+  SERIAL.write(172);
+  if(SERIAL.available() > 0){
+    val = SERIAL.read();
+  }
+  Serial.println(val);
+  delay(10);
 }
