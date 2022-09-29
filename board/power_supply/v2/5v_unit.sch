@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.6.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -4740,24 +4740,66 @@ Number of pins: &lt;b&gt;2&lt;/b&gt;&lt;b&gt;&lt;P&gt;
 <wire x1="-6.35" y1="6.35" x2="6.35" y2="6.35" width="0.15" layer="51"/>
 <wire x1="6.35" y1="6.35" x2="6.35" y2="-6.35" width="0.15" layer="51"/>
 <wire x1="6.35" y1="-6.35" x2="-6.35" y2="-6.35" width="0.15" layer="51"/>
-<wire x1="-6.35" y1="6.35" x2="6.35" y2="6.35" width="0.15" layer="21"/>
-<wire x1="6.35" y1="-6.35" x2="6.35" y2="6.35" width="0.15" layer="21"/>
-<wire x1="-6.35" y1="-6.35" x2="6.35" y2="-6.35" width="0.15" layer="21"/>
-<wire x1="-6.35" y1="-6.35" x2="-6.35" y2="6.35" width="0.15" layer="21"/>
+<wire x1="-6.1" y1="6.1" x2="6.1" y2="6.1" width="0.15" layer="21"/>
+<wire x1="6.1" y1="-6.1" x2="6.1" y2="6.1" width="0.15" layer="21"/>
+<wire x1="-6.1" y1="-6.1" x2="6.1" y2="-6.1" width="0.15" layer="21"/>
+<wire x1="-6.1" y1="-6.1" x2="-6.1" y2="6.1" width="0.15" layer="21"/>
 <text x="-6.35" y="6.95" size="1" layer="25">&gt;NAME</text>
 <circle x="-7.245" y="0" radius="0.25" width="0" layer="21"/>
-<smd name="1" x="-4.572" y="0" dx="1.143" dy="1.143" layer="1"/>
-<smd name="10" x="-4.572" y="-2.286" dx="1.143" dy="1.143" layer="1"/>
-<smd name="9" x="-4.572" y="-4.572" dx="1.143" dy="1.143" layer="1"/>
-<smd name="8" x="-2.286" y="-4.572" dx="1.143" dy="1.143" layer="1"/>
-<smd name="7" x="0" y="-4.572" dx="1.143" dy="1.143" layer="1"/>
-<smd name="12" x="2.286" y="-4.572" dx="1.143" dy="1.143" layer="1"/>
-<smd name="6" x="4.572" y="-4.572" dx="1.143" dy="1.143" layer="1"/>
-<smd name="11" x="4.572" y="-2.286" dx="1.143" dy="1.143" layer="1"/>
-<smd name="5" x="4.572" y="0" dx="1.143" dy="1.143" layer="1"/>
-<smd name="4" x="4.572" y="3.429" dx="1.905" dy="4.191" layer="1"/>
-<smd name="3" x="1.143" y="4.572" dx="4.191" dy="1.905" layer="1"/>
-<smd name="2" x="-3.429" y="4.572" dx="4.191" dy="1.905" layer="1"/>
+<smd name="1" x="-4.6" y="0" dx="1" dy="1" layer="1" stop="no" cream="no"/>
+<smd name="10" x="-4.6" y="-2.29" dx="1" dy="1" layer="1" stop="no" cream="no"/>
+<smd name="9" x="-4.6" y="-4.6" dx="1" dy="1" layer="1" stop="no" cream="no"/>
+<smd name="6" x="4.6" y="-4.58" dx="1" dy="1" layer="1" stop="no" cream="no"/>
+<smd name="11" x="4.6" y="-2.29" dx="1" dy="1" layer="1" stop="no" cream="no"/>
+<smd name="5" x="4.6" y="0" dx="1" dy="1" layer="1" stop="no" cream="no"/>
+<smd name="4" x="4.585" y="3.435" dx="1.77" dy="4.07" layer="1" stop="no" cream="no"/>
+<smd name="3" x="1.145" y="4.585" dx="4.07" dy="1.77" layer="1" stop="no" cream="no"/>
+<smd name="2" x="-3.435" y="4.585" dx="4.07" dy="1.77" layer="1" stop="no" cream="no"/>
+<rectangle x1="-7.1" y1="3.98" x2="-5.47" y2="5.18" layer="1"/>
+<rectangle x1="-2.89" y1="5.47" x2="-1.69" y2="7.1" layer="1"/>
+<rectangle x1="-0.6" y1="5.47" x2="0.6" y2="7.1" layer="1"/>
+<rectangle x1="1.69" y1="5.47" x2="2.89" y2="7.1" layer="1"/>
+<rectangle x1="1.69" y1="-7.1" x2="2.89" y2="-4.1" layer="1"/>
+<rectangle x1="5" y1="-1.5" x2="6.2" y2="1.5" layer="1" rot="R270"/>
+<rectangle x1="5.47" y1="3.98" x2="7.1" y2="5.18" layer="1"/>
+<rectangle x1="5" y1="-6.08" x2="6.2" y2="-3.08" layer="1" rot="R270"/>
+<rectangle x1="-0.6" y1="-7.1" x2="0.6" y2="-4.1" layer="1"/>
+<rectangle x1="-2.89" y1="-7.1" x2="-1.69" y2="-4.1" layer="1"/>
+<rectangle x1="-7.1" y1="-5.2" x2="-4.1" y2="-4" layer="1"/>
+<rectangle x1="-7.1" y1="-2.91" x2="-4.1" y2="-1.71" layer="1"/>
+<rectangle x1="-7.1" y1="-0.62" x2="-4.1" y2="0.58" layer="1"/>
+<rectangle x1="5.6" y1="-2.89" x2="7.1" y2="-1.69" layer="1"/>
+<rectangle x1="-7.1" y1="3.98" x2="-5.47" y2="5.18" layer="31"/>
+<rectangle x1="-2.89" y1="5.47" x2="-1.69" y2="7.1" layer="31"/>
+<rectangle x1="-0.6" y1="5.47" x2="0.6" y2="7.1" layer="31"/>
+<rectangle x1="1.69" y1="5.47" x2="2.89" y2="7.1" layer="31"/>
+<rectangle x1="1.69" y1="-7.1" x2="2.89" y2="-4.1" layer="31"/>
+<rectangle x1="5" y1="-1.5" x2="6.2" y2="1.5" layer="31" rot="R270"/>
+<rectangle x1="5.47" y1="3.98" x2="7.1" y2="5.18" layer="31"/>
+<rectangle x1="5" y1="-6.08" x2="6.2" y2="-3.08" layer="31" rot="R270"/>
+<rectangle x1="-0.6" y1="-7.1" x2="0.6" y2="-4.1" layer="31"/>
+<rectangle x1="-2.89" y1="-7.1" x2="-1.69" y2="-4.1" layer="31"/>
+<rectangle x1="-7.1" y1="-5.2" x2="-4.1" y2="-4" layer="31"/>
+<rectangle x1="-7.1" y1="-2.91" x2="-4.1" y2="-1.71" layer="31"/>
+<rectangle x1="-7.1" y1="-0.62" x2="-4.1" y2="0.58" layer="31"/>
+<rectangle x1="5.6" y1="-2.89" x2="7.1" y2="-1.69" layer="31"/>
+<rectangle x1="-7.1" y1="3.98" x2="-5.47" y2="5.18" layer="29"/>
+<rectangle x1="-2.89" y1="5.47" x2="-1.69" y2="7.1" layer="29"/>
+<rectangle x1="-0.6" y1="5.47" x2="0.6" y2="7.1" layer="29"/>
+<rectangle x1="1.69" y1="5.47" x2="2.89" y2="7.1" layer="29"/>
+<rectangle x1="1.69" y1="-7.1" x2="2.89" y2="-4.1" layer="29"/>
+<rectangle x1="5" y1="-1.5" x2="6.2" y2="1.5" layer="29" rot="R270"/>
+<rectangle x1="5.47" y1="3.98" x2="7.1" y2="5.18" layer="29"/>
+<rectangle x1="5" y1="-6.08" x2="6.2" y2="-3.08" layer="29" rot="R270"/>
+<rectangle x1="-0.6" y1="-7.1" x2="0.6" y2="-4.1" layer="29"/>
+<rectangle x1="-2.89" y1="-7.1" x2="-1.69" y2="-4.1" layer="29"/>
+<rectangle x1="-7.1" y1="-5.2" x2="-4.1" y2="-4" layer="29"/>
+<rectangle x1="-7.1" y1="-2.91" x2="-4.1" y2="-1.71" layer="29"/>
+<rectangle x1="-7.1" y1="-0.62" x2="-4.1" y2="0.58" layer="29"/>
+<rectangle x1="5.6" y1="-2.89" x2="7.1" y2="-1.69" layer="29"/>
+<smd name="P$1" x="-2.286" y="-5.715" dx="0.3048" dy="0.1524" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="P$2" x="0" y="-5.715" dx="0.3048" dy="0.1524" layer="1" stop="no" thermals="no" cream="no"/>
+<smd name="P$3" x="2.286" y="-5.715" dx="0.3048" dy="0.1524" layer="1" stop="no" thermals="no" cream="no"/>
 </package>
 </packages>
 <symbols>
@@ -4805,11 +4847,11 @@ Number of pins: &lt;b&gt;2&lt;/b&gt;&lt;b&gt;&lt;P&gt;
 <device name="MURATA_OKL-T-6-W12P-C_0_0" package="MURATA_OKL-T-6-W12P-C_0">
 <connects>
 <connect gate="G$0" pin="1_GROUND" pad="3"/>
-<connect gate="G$0" pin="1_NC" pad="8"/>
-<connect gate="G$0" pin="2_GROUND" pad="7"/>
+<connect gate="G$0" pin="1_NC" pad="P$1"/>
+<connect gate="G$0" pin="2_GROUND" pad="P$2"/>
 <connect gate="G$0" pin="2_NC" pad="9"/>
 <connect gate="G$0" pin="3_NC" pad="11"/>
-<connect gate="G$0" pin="4_NC" pad="12"/>
+<connect gate="G$0" pin="4_NC" pad="P$3"/>
 <connect gate="G$0" pin="ON/OFF_CONTROL" pad="1"/>
 <connect gate="G$0" pin="POWER_GOOD_OUT" pad="10"/>
 <connect gate="G$0" pin="SENSE" pad="5"/>
