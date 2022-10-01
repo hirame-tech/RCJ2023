@@ -8,17 +8,15 @@
 #define LB D4
 #define LC D5
 
-#define OFFSET 180 + 10 //機械角で
-#define MOTOR_SPEED 90
+#define OFFSET 180 + 10 //電気角
+#define MOTOR_SPEED 60
 
 #define DELAYTIME 4
-
-#define OFFSET 0//30
 int old;
 
 const int pins[] = {HA,LA,HB,LB,HC,LC};
 
-AS5048A angleSensor(CSPIN, false);
+AS5048A angleSensor(NULL,false);
 
 int direction;
 
@@ -31,8 +29,10 @@ int caluculate_electorical_angle(int offset);
 
 void setup() {
   Serial.begin(9600);
+  Serial1.begin(9600);
   angleSensor.begin();
-  pinMode(D7,INPUT);
+
+  pinMode(D7,INPUT);//何これ
   analogWriteFreq(20000);//5kHz
   for (int i = 0; i < 6; i++){
     pinMode(pins[i],OUTPUT);
@@ -48,59 +48,64 @@ void setup() {
   delay(2000);
 }
 
-float angle_e = 30;
-
 void loop() {
-  //int val = caluculate_electorical_angle(OFFSET);
+  const int angle = 0;
   static int val = 0;
+  static int offset = 0;
   static unsigned long time = micros();
+  if(Serial1.available()){
+    offset = Serial1.read();
+  }
   if((micros() - time) > (DELAYTIME*1000 + 100)){
-    Serial.print(caluculate_electorical_angle(OFFSET));
-    Serial.print(",");
-    Serial.print(val);
+    //val = caluculate_electorical_angle(OFFSET);
+    //Serial.print(angle);
+    //Serial.print(",");
+    //Serial.print(val);
     val += 60;
+    //val = 0;
     time = micros();
   }
   if(val >300) val -= 360;
   //
   switch (val){
     case 0:
-      fets(HA,LA,MOTOR_SPEED,1);//0//180
+      fets(HA,LA,MOTOR_SPEED,1);//0//60
       fets(HB,LB,MOTOR_SPEED,-1);
       fets(HC,LC,MOTOR_SPEED,0);
-      
+      Serial.println(caluculate_electorical_angle(offset));
       break;
     case 60:
-      fets(HA,LA,MOTOR_SPEED,1);//60//00
+      fets(HA,LA,MOTOR_SPEED,1);//60//120
       fets(HB,LB,MOTOR_SPEED,0);
       fets(HC,LC,MOTOR_SPEED,-1);
-      
       break;
     case 120:
-      fets(HA,LA,MOTOR_SPEED,0);//120//60
+      fets(HA,LA,MOTOR_SPEED,0);//120//180
       fets(HB,LB,MOTOR_SPEED,1);
       fets(HC,LC,MOTOR_SPEED,-1);
       
       break;
     case 180:
-      fets(HA,LA,MOTOR_SPEED,-1);//180
+      fets(HA,LA,MOTOR_SPEED,-1);//180//240
       fets(HB,LB,MOTOR_SPEED,1);
       fets(HC,LC,MOTOR_SPEED,0);
       break;
     case 240:
-      fets(HA,LA,MOTOR_SPEED,-1);//240
+      fets(HA,LA,MOTOR_SPEED,-1);//240//300
       fets(HB,LB,MOTOR_SPEED,0);
       fets(HC,LC,MOTOR_SPEED,1);
+      
       break;
     case 300:
-      fets(HA,LA,MOTOR_SPEED,0);//300
+      fets(HA,LA,MOTOR_SPEED,0);//300//0
       fets(HB,LB,MOTOR_SPEED,-1);
       fets(HC,LC,MOTOR_SPEED,1);
       break;
     default:
       break;
   }
-  Serial.println();
+  //Serial.println();
+  //delayMicroseconds(1000);
   /*
   fets(HA,LA,MOTOR_SPEED,1);
   fets(HB,LB,MOTOR_SPEED,0);
@@ -111,18 +116,25 @@ void loop() {
 int caluculate_electorical_angle(int offset){
   static float old_val;
   float tmp = angleSensor.getRotationInDegrees();
+  String error = angleSensor.getErrors();
 
-  if(tmp != 180.0000){
+  if(error == ""){
     float val = tmp;
     //caluculate electorical angle
-    float angle_electorical = val * 14  + offset;
+    float angle_electorical = val * 7  + offset;
     angle_electorical = angle_electorical - 360*((int)angle_electorical / 360);
+
     if(angle_electorical < 0){
       angle_electorical += 360;
     }else if(angle_electorical > 360){
       angle_electorical -= 360;
     }
-    angle_electorical = ((int)angle_electorical / 60) *60;
+
+    int angle_electorical_int = ((int)angle_electorical / 60) *60;
+    angle_electorical_int -= 60;
+    if(angle_electorical_int == -60){
+      angle_electorical_int = 360;
+    }
     old_val = angle_electorical;
     return angle_electorical;
   }else{
@@ -139,11 +151,11 @@ void fets(int H_pin,int L_pin,int duty,int mode){
     break;
   case 0://free
     analogWrite(H_pin,0);
-    analogWrite(L_pin,200);
+    analogWrite(L_pin,255);
     break;
   case -1://connect low
     analogWrite(H_pin,0);
-    analogWrite(L_pin,0);
+    analogWrite(L_pin,duty);
     break;
   default:
     Serial.printf("fets : exception of (int)mode\n");
