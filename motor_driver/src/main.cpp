@@ -33,7 +33,7 @@ void setup() {
   angleSensor.begin();
 
   pinMode(D7,INPUT);//何これ
-  analogWriteFreq(20000);//5kHz
+  analogWriteFreq(10000);//5kHz
   for (int i = 0; i < 6; i++){
     pinMode(pins[i],OUTPUT);
     digitalWrite(pins[i],LOW);
@@ -66,13 +66,14 @@ void loop() {
     time = micros();
   }
   if(val >300) val -= 360;
-  //
+  if(val <  0) val += 360;
+  /*
   switch (val){
     case 0:
       fets(HA,LA,MOTOR_SPEED,1);//0//60
       fets(HB,LB,MOTOR_SPEED,-1);
       fets(HC,LC,MOTOR_SPEED,0);
-      Serial.println(caluculate_electorical_angle(offset));
+      //Serial.println(caluculate_electorical_angle(offset));
       break;
     case 60:
       fets(HA,LA,MOTOR_SPEED,1);//60//120
@@ -83,7 +84,6 @@ void loop() {
       fets(HA,LA,MOTOR_SPEED,0);//120//180
       fets(HB,LB,MOTOR_SPEED,1);
       fets(HC,LC,MOTOR_SPEED,-1);
-      
       break;
     case 180:
       fets(HA,LA,MOTOR_SPEED,-1);//180//240
@@ -94,7 +94,6 @@ void loop() {
       fets(HA,LA,MOTOR_SPEED,-1);//240//300
       fets(HB,LB,MOTOR_SPEED,0);
       fets(HC,LC,MOTOR_SPEED,1);
-      
       break;
     case 300:
       fets(HA,LA,MOTOR_SPEED,0);//300//0
@@ -104,13 +103,12 @@ void loop() {
     default:
       break;
   }
+  */
   //Serial.println();
   //delayMicroseconds(1000);
-  /*
   fets(HA,LA,MOTOR_SPEED,1);
-  fets(HB,LB,MOTOR_SPEED,0);
-  fets(HC,LC,MOTOR_SPEED,-1);
-  */
+  fets(HB,LB,MOTOR_SPEED,1);
+  fets(HC,LC,MOTOR_SPEED,1);
 }
 
 int caluculate_electorical_angle(int offset){

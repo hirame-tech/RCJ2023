@@ -44,11 +44,17 @@ void setup() {
 }
 
 void loop() {
+  static float old_val = 0;
   //int val = caluculate_electorical_angle(OFFSET);
-  Serial.print(angleSensor.getErrors());
-  Serial.print(",");
-  Serial.println(angleSensor.getRotationInDegrees());
-
+  float val = angleSensor.getRotationInDegrees();
+  String error = angleSensor.getErrors();
+  //delay(10);
+  if(error == ""){
+    Serial.println(val);
+    old_val = val;
+  }else{
+    Serial.println(old_val);
+  }
   delay(10);
 }
 
