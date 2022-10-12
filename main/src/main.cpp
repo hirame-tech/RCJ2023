@@ -1,7 +1,7 @@
 #include <Arduino.h>
 //#include <func.hpp>
 
-#define SERIAL Serial8
+#define SERIAL Serial1
 
 //prototype declaration
 
@@ -23,5 +23,4 @@ void loop() {
     val = SERIAL.read();
   }
   Serial.println(val);
-  delay(10);
 }

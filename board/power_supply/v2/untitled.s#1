@@ -3047,7 +3047,7 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 </symbol>
 </symbols>
 <devicesets>
-<deviceset name="F/TMB" urn="urn:adsk.eagle:component:5296/1" prefix="SG" library_version="1">
+<deviceset name="F/TMB" urn="urn:adsk.eagle:component:5296/2" prefix="SG" library_version="2">
 <description>&lt;b&gt;BUZZER&lt;/b&gt;&lt;p&gt; Source: Buerklin</description>
 <gates>
 <gate name="1" symbol="B" x="0" y="0"/>
@@ -3067,6 +3067,7 @@ Operational amplifiers,  comparators, voltage regulators, ADCs, DACs, etc.&lt;p&
 <attribute name="MPN" value="" constant="no"/>
 <attribute name="OC_FARNELL" value="unknown" constant="no"/>
 <attribute name="OC_NEWARK" value="unknown" constant="no"/>
+<attribute name="POPULARITY" value="1" constant="no"/>
 </technology>
 </technologies>
 </device>
