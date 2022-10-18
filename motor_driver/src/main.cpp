@@ -33,7 +33,7 @@ void setup() {
   angleSensor.begin();
 
   pinMode(D7,INPUT);//何これ
-  analogWriteFreq(10000);//5kHz
+  analogWriteFreq(10000);//10kHz
   for (int i = 0; i < 6; i++){
     pinMode(pins[i],OUTPUT);
     digitalWrite(pins[i],LOW);
