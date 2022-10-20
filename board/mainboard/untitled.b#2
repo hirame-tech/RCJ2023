@@ -618,6 +618,25 @@ Number of pins: &lt;b&gt;4&lt;/b&gt;&lt;b&gt;&lt;P&gt;
 </package>
 </packages>
 </library>
+<library name="adafruit">
+<packages>
+<package name="SOT23">
+<description>&lt;b&gt;SOT-23&lt;/b&gt;</description>
+<wire x1="1.4224" y1="0.6604" x2="1.4224" y2="-0.6604" width="0.1524" layer="51"/>
+<wire x1="1.4224" y1="-0.6604" x2="-1.4224" y2="-0.6604" width="0.1524" layer="51"/>
+<wire x1="-1.4224" y1="-0.6604" x2="-1.4224" y2="0.6604" width="0.1524" layer="51"/>
+<wire x1="-1.4224" y1="0.6604" x2="1.4224" y2="0.6604" width="0.1524" layer="51"/>
+<smd name="3" x="0" y="1.1" dx="1" dy="1.4" layer="1"/>
+<smd name="2" x="0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
+<smd name="1" x="-0.95" y="-1.1" dx="1" dy="1.4" layer="1"/>
+<text x="-1.905" y="1.905" size="1.27" layer="25">&gt;NAME</text>
+<text x="-1.905" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.2286" y1="0.7112" x2="0.2286" y2="1.2954" layer="51"/>
+<rectangle x1="0.7112" y1="-1.2954" x2="1.1684" y2="-0.7112" layer="51"/>
+<rectangle x1="-1.1684" y1="-1.2954" x2="-0.7112" y2="-0.7112" layer="51"/>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -860,6 +879,30 @@ design rules under a new name.
 <attribute name="NAME" x="-10.2362" y="3.0988" size="1.27" layer="25" ratio="10"/>
 <attribute name="VALUE" x="-10.16" y="-1.905" size="1.27" layer="27"/>
 </element>
+<element name="Q1" library="adafruit" package="SOT23" value="" x="-43.18" y="-25.4" smashed="yes">
+<attribute name="NAME" x="-45.085" y="-23.495" size="1.27" layer="25"/>
+<attribute name="VALUE" x="-45.085" y="-28.575" size="1.27" layer="27"/>
+</element>
+<element name="R3" library="generic" package="SMD1608" value="" x="-44.45" y="-30.48" smashed="yes">
+<attribute name="NAME" x="-45.25" y="-29.83" size="1.016" layer="25"/>
+<attribute name="VALUE" x="-45.25" y="-32.13" size="1.016" layer="27"/>
+</element>
+<element name="R4" library="generic" package="SMD1608" value="" x="-44.45" y="-34.29" smashed="yes">
+<attribute name="NAME" x="-45.25" y="-33.64" size="1.016" layer="25"/>
+<attribute name="VALUE" x="-45.25" y="-35.94" size="1.016" layer="27"/>
+</element>
+<element name="Q2" library="adafruit" package="SOT23" value="" x="-43.18" y="-39.37" smashed="yes">
+<attribute name="NAME" x="-45.085" y="-37.465" size="1.27" layer="25"/>
+<attribute name="VALUE" x="-45.085" y="-42.545" size="1.27" layer="27"/>
+</element>
+<element name="R5" library="generic" package="SMD1608" value="" x="-44.45" y="-44.45" smashed="yes">
+<attribute name="NAME" x="-45.25" y="-43.8" size="1.016" layer="25"/>
+<attribute name="VALUE" x="-45.25" y="-46.1" size="1.016" layer="27"/>
+</element>
+<element name="R6" library="generic" package="SMD1608" value="" x="-40.64" y="-44.45" smashed="yes">
+<attribute name="NAME" x="-41.44" y="-43.8" size="1.016" layer="25"/>
+<attribute name="VALUE" x="-41.44" y="-46.1" size="1.016" layer="27"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -892,13 +935,17 @@ design rules under a new name.
 <contactref element="MD2" pad="1"/>
 <contactref element="MD3" pad="1"/>
 <contactref element="JP1" pad="8"/>
-<wire x1="34.29" y1="15.875" x2="40.64" y2="15.875" width="0" layer="19" extent="1-1"/>
-<wire x1="29.21" y1="5.715" x2="34.29" y2="15.875" width="0" layer="19" extent="1-1"/>
-<wire x1="-21.59" y1="12.7" x2="29.21" y2="5.715" width="0" layer="19" extent="1-1"/>
-<wire x1="-24.13" y1="12.7" x2="-21.59" y2="12.7" width="0" layer="19" extent="1-1"/>
-<wire x1="-34.29" y1="8.255" x2="-24.13" y2="12.7" width="0" layer="19" extent="1-1"/>
-<wire x1="-40.64" y1="8.255" x2="-34.29" y2="8.255" width="0" layer="19" extent="1-1"/>
-<wire x1="8.89" y1="1.27" x2="-34.29" y2="8.255" width="0" layer="19" extent="1-1"/>
+<contactref element="R3" pad="1"/>
+<contactref element="R5" pad="1"/>
+<wire x1="-45.325" y1="-30.48" x2="-45.325" y2="-44.45" width="0" layer="19" extent="1-1"/>
+<wire x1="-40.64" y1="8.255" x2="-45.325" y2="-30.48" width="0" layer="19" extent="1-1"/>
+<wire x1="-34.29" y1="8.255" x2="-40.64" y2="8.255" width="0" layer="19" extent="1-1"/>
+<wire x1="-24.13" y1="12.7" x2="-34.29" y2="8.255" width="0" layer="19" extent="1-1"/>
+<wire x1="-21.59" y1="12.7" x2="-24.13" y2="12.7" width="0" layer="19" extent="1-1"/>
+<wire x1="8.89" y1="1.27" x2="-21.59" y2="12.7" width="0" layer="19" extent="1-1"/>
+<wire x1="29.21" y1="5.715" x2="8.89" y2="1.27" width="0" layer="19" extent="1-1"/>
+<wire x1="34.29" y1="15.875" x2="29.21" y2="5.715" width="0" layer="19" extent="1-1"/>
+<wire x1="40.64" y1="15.875" x2="34.29" y2="15.875" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="CAM_TX">
 <contactref element="RASPI" pad="8"/>
@@ -953,7 +1000,15 @@ design rules under a new name.
 <signal name="+3V3">
 <contactref element="U$1" pad="P$11"/>
 <contactref element="SV1" pad="9"/>
-<wire x1="2.54" y1="-13.97" x2="24.13" y2="5.715" width="0" layer="19" extent="1-1"/>
+<contactref element="R4" pad="1"/>
+<contactref element="Q1" pad="1"/>
+<contactref element="R6" pad="1"/>
+<contactref element="Q2" pad="1"/>
+<wire x1="-44.13" y1="-40.47" x2="-41.515" y2="-44.45" width="0" layer="19" extent="1-1"/>
+<wire x1="-45.325" y1="-34.29" x2="-44.13" y2="-40.47" width="0" layer="19" extent="1-1"/>
+<wire x1="-44.13" y1="-26.5" x2="-45.325" y2="-34.29" width="0" layer="19" extent="1-1"/>
+<wire x1="2.54" y1="-13.97" x2="-44.13" y2="-26.5" width="0" layer="19" extent="1-1"/>
+<wire x1="24.13" y1="5.715" x2="2.54" y2="-13.97" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="LINE_LED">
 <contactref element="SV1" pad="7"/>
@@ -1072,17 +1127,39 @@ design rules under a new name.
 <signal name="RESET">
 <contactref element="JP1" pad="5"/>
 </signal>
-<signal name="IR_RX_5">
-<contactref element="JP1" pad="4"/>
-</signal>
-<signal name="IR_TX_5">
-<contactref element="JP1" pad="3"/>
-</signal>
 <signal name="IR_D+">
 <contactref element="JP1" pad="2"/>
 </signal>
 <signal name="IR_D-">
 <contactref element="JP1" pad="1"/>
+</signal>
+<signal name="IR_TX">
+<contactref element="R4" pad="2"/>
+<contactref element="Q1" pad="2"/>
+<contactref element="U$1" pad="P$2"/>
+<wire x1="-42.23" y1="-26.5" x2="-43.575" y2="-34.29" width="0" layer="19" extent="1-1"/>
+<wire x1="1.27" y1="5.715" x2="-42.23" y2="-26.5" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$4">
+<contactref element="Q1" pad="3"/>
+<contactref element="R3" pad="2"/>
+<contactref element="JP1" pad="3"/>
+<wire x1="-43.18" y1="-24.3" x2="-43.575" y2="-30.48" width="0" layer="19" extent="1-1"/>
+<wire x1="-3.81" y1="1.27" x2="-43.18" y2="-24.3" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="IR_RX">
+<contactref element="R6" pad="2"/>
+<contactref element="Q2" pad="2"/>
+<contactref element="U$1" pad="P$48"/>
+<wire x1="-42.23" y1="-40.47" x2="-39.765" y2="-44.45" width="0" layer="19" extent="1-1"/>
+<wire x1="-1.27" y1="5.715" x2="-42.23" y2="-40.47" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$6">
+<contactref element="Q2" pad="3"/>
+<contactref element="R5" pad="2"/>
+<contactref element="JP1" pad="4"/>
+<wire x1="-43.18" y1="-38.27" x2="-43.575" y2="-44.45" width="0" layer="19" extent="1-1"/>
+<wire x1="-1.27" y1="1.27" x2="-43.18" y2="-38.27" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
