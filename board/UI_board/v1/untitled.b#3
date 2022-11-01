@@ -3,10 +3,10 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="50" unitdist="mil" unit="mm" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -218,95 +218,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <vertex x="-0.3175" y="-0.3175"/>
 </polygon>
 </package>
-<package name="SMD1608">
-<description>1608M 0603</description>
-<wire x1="-0.725" y1="0.35" x2="0.725" y2="0.35" width="0.1016" layer="51"/>
-<wire x1="0.725" y1="-0.35" x2="-0.725" y2="-0.35" width="0.1016" layer="51"/>
-<smd name="1" x="-0.875" y="0" dx="1.05" dy="1.08" layer="1"/>
-<smd name="2" x="0.875" y="0" dx="1.05" dy="1.08" layer="1"/>
-<text x="-0.8" y="0.65" size="1.016" layer="25">&gt;NAME</text>
-<text x="-0.8" y="-1.65" size="1.016" layer="27">&gt;VALUE</text>
-<rectangle x1="-0.8" y1="-0.4" x2="-0.45" y2="0.4" layer="51"/>
-<rectangle x1="0.45" y1="-0.4" x2="0.8" y2="0.4" layer="51"/>
-<rectangle x1="-1.4" y1="-0.8" x2="1.4" y2="0.8" layer="39"/>
-</package>
-</packages>
-</library>
-<library name="pinhead">
-<description>&lt;b&gt;Simple Pin Header Connectors&lt;/b&gt;&lt;p&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
-<packages>
-<package name="1X10">
-<description>&lt;b&gt;PIN HEADER&lt;/b&gt; - 0.1"</description>
-<wire x1="12.7" y1="-1.27" x2="-12.7" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="-12.7" y1="1.27" x2="-12.7" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="12.7" y1="1.27" x2="12.7" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="-12.7" y1="1.27" x2="-10.16" y2="1.27" width="0.254" layer="21"/>
-<wire x1="-10.16" y1="1.27" x2="12.7" y2="1.27" width="0.254" layer="21"/>
-<wire x1="-10.16" y1="1.27" x2="-10.16" y2="-1.27" width="0.254" layer="21"/>
-<pad name="1" x="-11.43" y="0" drill="1.016" shape="square" rot="R90"/>
-<pad name="2" x="-8.89" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="3" x="-6.35" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="4" x="-3.81" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="5" x="-1.27" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="6" x="1.27" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="7" x="3.81" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="8" x="6.35" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="9" x="8.89" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="10" x="11.43" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<text x="-12.7762" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-12.7" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="8.636" y1="-0.254" x2="9.144" y2="0.254" layer="51"/>
-<rectangle x1="6.096" y1="-0.254" x2="6.604" y2="0.254" layer="51"/>
-<rectangle x1="3.556" y1="-0.254" x2="4.064" y2="0.254" layer="51"/>
-<rectangle x1="1.016" y1="-0.254" x2="1.524" y2="0.254" layer="51"/>
-<rectangle x1="-1.524" y1="-0.254" x2="-1.016" y2="0.254" layer="51"/>
-<rectangle x1="-4.064" y1="-0.254" x2="-3.556" y2="0.254" layer="51"/>
-<rectangle x1="-6.604" y1="-0.254" x2="-6.096" y2="0.254" layer="51"/>
-<rectangle x1="-9.144" y1="-0.254" x2="-8.636" y2="0.254" layer="51"/>
-<rectangle x1="-11.684" y1="-0.254" x2="-11.176" y2="0.254" layer="51"/>
-<rectangle x1="11.176" y1="-0.254" x2="11.684" y2="0.254" layer="51"/>
-</package>
-<package name="1X02">
-<description>&lt;b&gt;PIN HEADER&lt;/b&gt; - 0.1"</description>
-<wire x1="-2.54" y1="1.27" x2="-2.54" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="2.54" y1="-1.27" x2="-2.54" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="-2.54" y1="1.27" x2="0" y2="1.27" width="0.254" layer="21"/>
-<wire x1="0" y1="1.27" x2="2.54" y2="1.27" width="0.254" layer="21"/>
-<wire x1="2.54" y1="1.27" x2="2.54" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="0" y1="1.27" x2="0" y2="-1.27" width="0.254" layer="21"/>
-<pad name="1" x="-1.27" y="0" drill="1.016" shape="square" rot="R90"/>
-<pad name="2" x="1.27" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<text x="-2.6162" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-2.54" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-1.524" y1="-0.254" x2="-1.016" y2="0.254" layer="51"/>
-<rectangle x1="1.016" y1="-0.254" x2="1.524" y2="0.254" layer="51"/>
-</package>
-<package name="1X07">
-<description>&lt;b&gt;PIN HEADER&lt;/b&gt; - 0.1"</description>
-<wire x1="8.89" y1="-1.27" x2="-8.89" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="-8.89" y1="1.27" x2="-8.89" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="8.89" y1="1.27" x2="8.89" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="8.89" y1="1.27" x2="-6.35" y2="1.27" width="0.254" layer="21"/>
-<wire x1="-6.35" y1="1.27" x2="-8.89" y2="1.27" width="0.254" layer="21"/>
-<wire x1="-6.35" y1="1.27" x2="-6.35" y2="-1.27" width="0.254" layer="21"/>
-<pad name="1" x="-7.62" y="0" drill="1.016" shape="square" rot="R90"/>
-<pad name="2" x="-5.08" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="3" x="-2.54" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="4" x="0" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="5" x="2.54" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="6" x="5.08" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<pad name="7" x="7.62" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<text x="-8.9662" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-8.89" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="4.826" y1="-0.254" x2="5.334" y2="0.254" layer="51"/>
-<rectangle x1="2.286" y1="-0.254" x2="2.794" y2="0.254" layer="51"/>
-<rectangle x1="-0.254" y1="-0.254" x2="0.254" y2="0.254" layer="51"/>
-<rectangle x1="-2.794" y1="-0.254" x2="-2.286" y2="0.254" layer="51"/>
-<rectangle x1="-5.334" y1="-0.254" x2="-4.826" y2="0.254" layer="51"/>
-<rectangle x1="-7.874" y1="-0.254" x2="-7.366" y2="0.254" layer="51"/>
-<rectangle x1="7.366" y1="-0.254" x2="7.874" y2="0.254" layer="51"/>
-</package>
 </packages>
 </library>
 </libraries>
@@ -496,87 +407,35 @@ design rules under a new name.
 </pass>
 </autorouter>
 <elements>
-<element name="GYRO_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="8.89" y="7.62" smashed="yes" rot="R90">
-<attribute name="NAME" x="6.223" y="7.62" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center"/>
-<attribute name="PROD_ID" value="SWCH-08247" x="12.7" y="24.13" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SF_SKU" value="COM-08720" x="12.7" y="24.13" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="11.557" y="7.62" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="top-center"/>
+<element name="GYRO_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="-16.51" y="3.81" smashed="yes">
+<attribute name="NAME" x="-16.51" y="6.477" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
+<attribute name="PROD_ID" value="SWCH-08247" x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="SF_SKU" value="COM-08720" x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-16.51" y="1.143" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
-<element name="IR_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="34.29" y="7.62" smashed="yes" rot="R90">
-<attribute name="NAME" x="31.623" y="7.62" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center"/>
-<attribute name="PROD_ID" value="SWCH-08247" x="38.1" y="31.75" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SF_SKU" value="COM-08720" x="38.1" y="31.75" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="36.957" y="7.62" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="top-center"/>
+<element name="IR_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="-24.13" y="3.81" smashed="yes">
+<attribute name="NAME" x="-24.13" y="6.477" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
+<attribute name="PROD_ID" value="SWCH-08247" x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="SF_SKU" value="COM-08720" x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-24.13" y="1.143" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
-<element name="LED1" library="generic" package="LED1608" value="LED1608" x="24.13" y="16.51" smashed="yes">
-<attribute name="NAME" x="23.33" y="17.16" size="1.016" layer="25"/>
-<attribute name="VALUE" x="23.33" y="14.81" size="1.016" layer="27"/>
+<element name="LED1" library="generic" package="LED1608" value="LED1608" x="-26.67" y="10.16" smashed="yes">
+<attribute name="NAME" x="-27.47" y="10.81" size="1.016" layer="25"/>
+<attribute name="VALUE" x="-27.47" y="8.46" size="1.016" layer="27"/>
 </element>
-<element name="LED2" library="generic" package="LED1608" value="LED1608" x="19.05" y="16.51" smashed="yes" rot="R180">
-<attribute name="NAME" x="19.85" y="15.86" size="1.016" layer="25" rot="R180"/>
-<attribute name="VALUE" x="19.85" y="18.21" size="1.016" layer="27" rot="R180"/>
+<element name="LED2" library="generic" package="LED1608" value="LED1608" x="-19.05" y="16.51" smashed="yes">
+<attribute name="NAME" x="-19.85" y="17.16" size="1.016" layer="25"/>
+<attribute name="VALUE" x="-19.85" y="14.81" size="1.016" layer="27"/>
 </element>
-<element name="LED3" library="generic" package="LED1608" value="LED1608" x="45.72" y="7.62" smashed="yes" rot="R270">
-<attribute name="NAME" x="46.37" y="8.42" size="1.016" layer="25" rot="R270"/>
-<attribute name="VALUE" x="44.02" y="8.42" size="1.016" layer="27" rot="R270"/>
+<element name="LED3" library="generic" package="LED1608" value="LED1608" x="-26.67" y="16.51" smashed="yes">
+<attribute name="NAME" x="-27.47" y="17.16" size="1.016" layer="25"/>
+<attribute name="VALUE" x="-27.47" y="14.81" size="1.016" layer="27"/>
 </element>
-<element name="MAIN_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="21.59" y="7.62" smashed="yes" rot="R90">
-<attribute name="NAME" x="18.923" y="7.62" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center"/>
-<attribute name="PROD_ID" value="SWCH-08247" x="31.75" y="24.13" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="SF_SKU" value="COM-08720" x="31.75" y="24.13" size="1.778" layer="27" rot="R90" display="off"/>
-<attribute name="VALUE" x="24.257" y="7.62" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="top-center"/>
-</element>
-<element name="LED4" library="generic" package="LED1608" value="LED1608" x="10.16" y="20.32" smashed="yes" rot="R270">
-<attribute name="NAME" x="10.81" y="21.12" size="1.016" layer="25" rot="R270"/>
-<attribute name="VALUE" x="8.46" y="21.12" size="1.016" layer="27" rot="R270"/>
-</element>
-<element name="LED5" library="generic" package="LED1608" value="LED1608" x="12.7" y="20.32" smashed="yes" rot="R270">
-<attribute name="NAME" x="13.35" y="21.12" size="1.016" layer="25" rot="R270"/>
-<attribute name="VALUE" x="11" y="21.12" size="1.016" layer="27" rot="R270"/>
-</element>
-<element name="LED6" library="generic" package="LED1608" value="LED1608" x="15.24" y="20.32" smashed="yes" rot="R270">
-<attribute name="NAME" x="15.89" y="21.12" size="1.016" layer="25" rot="R270"/>
-<attribute name="VALUE" x="13.54" y="21.12" size="1.016" layer="27" rot="R270"/>
-</element>
-<element name="JP1" library="pinhead" package="1X10" value="" x="21.59" y="26.67" smashed="yes">
-<attribute name="NAME" x="8.8138" y="28.4988" size="1.27" layer="25" ratio="10"/>
-<attribute name="VALUE" x="8.89" y="23.495" size="1.27" layer="27"/>
-</element>
-<element name="R1" library="generic" package="SMD1608" value="" x="2.54" y="-2.54" smashed="yes">
-<attribute name="NAME" x="1.74" y="-1.89" size="1.016" layer="25"/>
-<attribute name="VALUE" x="1.74" y="-4.19" size="1.016" layer="27"/>
-</element>
-<element name="R2" library="generic" package="SMD1608" value="" x="2.54" y="-6.35" smashed="yes">
-<attribute name="NAME" x="1.74" y="-5.7" size="1.016" layer="25"/>
-<attribute name="VALUE" x="1.74" y="-8" size="1.016" layer="27"/>
-</element>
-<element name="R3" library="generic" package="SMD1608" value="" x="2.54" y="-10.16" smashed="yes">
-<attribute name="NAME" x="1.74" y="-9.51" size="1.016" layer="25"/>
-<attribute name="VALUE" x="1.74" y="-11.81" size="1.016" layer="27"/>
-</element>
-<element name="R4" library="generic" package="SMD1608" value="" x="2.54" y="-13.97" smashed="yes">
-<attribute name="NAME" x="1.74" y="-13.32" size="1.016" layer="25"/>
-<attribute name="VALUE" x="1.74" y="-15.62" size="1.016" layer="27"/>
-</element>
-<element name="R5" library="generic" package="SMD1608" value="" x="2.54" y="-17.78" smashed="yes">
-<attribute name="NAME" x="1.74" y="-17.13" size="1.016" layer="25"/>
-<attribute name="VALUE" x="1.74" y="-19.43" size="1.016" layer="27"/>
-</element>
-<element name="R6" library="generic" package="SMD1608" value="" x="2.54" y="-21.59" smashed="yes">
-<attribute name="NAME" x="1.74" y="-20.94" size="1.016" layer="25"/>
-<attribute name="VALUE" x="1.74" y="-23.24" size="1.016" layer="27"/>
-</element>
-<element name="JP2" library="pinhead" package="1X02" value="" x="29.21" y="5.08" smashed="yes" rot="MR90">
-<attribute name="NAME" x="31.0388" y="2.4638" size="1.27" layer="26" ratio="10" rot="MR90"/>
-<attribute name="VALUE" x="26.035" y="2.54" size="1.27" layer="28" rot="MR90"/>
-</element>
-<element name="JP3" library="pinhead" package="1X02" value="" x="13.97" y="5.08" smashed="yes" rot="MR90">
-<attribute name="NAME" x="15.7988" y="2.4638" size="1.27" layer="26" ratio="10" rot="MR90"/>
-<attribute name="VALUE" x="10.795" y="2.54" size="1.27" layer="28" rot="MR90"/>
-</element>
-<element name="JP4" library="pinhead" package="1X07" value="" x="21.59" y="13.97" smashed="yes" rot="MR0">
-<attribute name="NAME" x="30.5562" y="15.7988" size="1.27" layer="26" ratio="10" rot="MR0"/>
-<attribute name="VALUE" x="30.48" y="10.795" size="1.27" layer="28" rot="MR0"/>
+<element name="MAIN_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="-16.51" y="10.16" smashed="yes">
+<attribute name="NAME" x="-16.51" y="12.827" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
+<attribute name="PROD_ID" value="SWCH-08247" x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="SF_SKU" value="COM-08720" x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="VALUE" x="-16.51" y="7.493" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
 </element>
 </elements>
 <signals>
@@ -590,101 +449,38 @@ design rules under a new name.
 <contactref element="LED1" pad="K"/>
 <contactref element="LED3" pad="K"/>
 <contactref element="LED2" pad="K"/>
-<wire x1="6.985" y1="4.826" x2="6.985" y2="3.175" width="0.508" layer="1"/>
-<wire x1="7.62" y1="2.54" x2="6.985" y2="3.175" width="0.508" layer="1"/>
-<wire x1="6.985" y1="10.414" x2="6.985" y2="4.826" width="0.508" layer="1"/>
-<contactref element="LED4" pad="K"/>
-<contactref element="LED5" pad="K"/>
-<contactref element="LED6" pad="K"/>
-<contactref element="JP1" pad="10"/>
-<wire x1="32.385" y1="4.826" x2="32.385" y2="3.175" width="0.508" layer="1"/>
-<wire x1="32.385" y1="3.175" x2="31.75" y2="2.54" width="0.508" layer="1"/>
-<wire x1="19.05" y1="2.54" x2="31.75" y2="2.54" width="0.508" layer="1"/>
-<wire x1="19.05" y1="2.54" x2="7.62" y2="2.54" width="0.508" layer="1"/>
-<wire x1="19.685" y1="4.826" x2="19.685" y2="3.175" width="0.508" layer="1"/>
-<wire x1="19.685" y1="3.175" x2="19.05" y2="2.54" width="0.508" layer="1"/>
-<wire x1="31.75" y1="2.54" x2="44.45" y2="2.54" width="0.508" layer="1"/>
-<wire x1="44.45" y1="2.54" x2="45.72" y2="3.81" width="0.508" layer="1"/>
-<wire x1="45.72" y1="3.81" x2="45.72" y2="6.745" width="0.508" layer="1"/>
-<wire x1="19.685" y1="10.414" x2="19.685" y2="4.826" width="0.508" layer="1"/>
-<wire x1="32.385" y1="10.414" x2="32.385" y2="4.826" width="0.508" layer="1"/>
-<wire x1="25.005" y1="16.51" x2="33.02" y2="26.67" width="0" layer="19" extent="1-1"/>
-<wire x1="18.175" y1="16.51" x2="25.005" y2="16.51" width="0" layer="19" extent="1-1"/>
-<wire x1="15.24" y1="19.445" x2="18.175" y2="16.51" width="0" layer="19" extent="1-1"/>
-<wire x1="12.7" y1="19.445" x2="15.24" y2="19.445" width="0" layer="19" extent="1-1"/>
-<wire x1="10.16" y1="19.445" x2="12.7" y2="19.445" width="0" layer="19" extent="1-1"/>
-<wire x1="19.685" y1="10.414" x2="18.175" y2="16.51" width="0" layer="19" extent="1-1"/>
+<wire x1="-25.795" y1="10.16" x2="-26.924" y2="5.715" width="0" layer="19" extent="1-1"/>
+<wire x1="-21.336" y1="5.715" x2="-26.924" y2="5.715" width="0" layer="19" extent="1-1"/>
+<wire x1="-19.304" y1="5.715" x2="-21.336" y2="5.715" width="0" layer="19" extent="1-1"/>
+<wire x1="-13.716" y1="5.715" x2="-19.304" y2="5.715" width="0" layer="19" extent="1-1"/>
+<wire x1="-25.795" y1="16.51" x2="-25.795" y2="10.16" width="0" layer="19" extent="1-1"/>
+<wire x1="-19.304" y1="12.065" x2="-19.304" y2="5.715" width="0" layer="19" extent="1-1"/>
+<wire x1="-18.175" y1="16.51" x2="-19.304" y2="12.065" width="0" layer="19" extent="1-1"/>
+<wire x1="-13.716" y1="12.065" x2="-19.304" y2="12.065" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="IR_RESET">
 <contactref element="IR_RESET" pad="3"/>
 <contactref element="IR_RESET" pad="4"/>
-<wire x1="36.195" y1="10.414" x2="36.195" y2="4.826" width="0" layer="19" extent="1-1"/>
+<wire x1="-21.336" y1="1.905" x2="-26.924" y2="1.905" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GYRO_RESET">
 <contactref element="GYRO_RESET" pad="3"/>
 <contactref element="GYRO_RESET" pad="4"/>
-<wire x1="10.795" y1="4.826" x2="10.795" y2="10.414" width="0.508" layer="1"/>
+<wire x1="-13.716" y1="1.905" x2="-19.304" y2="1.905" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="MAIN_RESET">
 <contactref element="MAIN_RESET" pad="3"/>
 <contactref element="MAIN_RESET" pad="4"/>
-<wire x1="23.495" y1="10.414" x2="23.495" y2="4.826" width="0" layer="19" extent="1-1"/>
+<wire x1="-13.716" y1="8.255" x2="-19.304" y2="8.255" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="CAM_STATUS">
-<contactref element="JP1" pad="3"/>
-</signal>
-<signal name="GYRO_STATUS">
-<contactref element="JP1" pad="1"/>
-</signal>
-<signal name="IR_STATUS">
-<contactref element="JP1" pad="2"/>
-<contactref element="R5" pad="1"/>
-<wire x1="1.665" y1="-17.78" x2="12.7" y2="26.67" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$1">
-<contactref element="R1" pad="2"/>
+<signal name="GYRO_L">
 <contactref element="LED1" pad="A"/>
-<wire x1="3.415" y1="-2.54" x2="23.255" y2="16.51" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="N$2">
-<contactref element="R2" pad="2"/>
+<signal name="GYRO_R">
 <contactref element="LED2" pad="A"/>
-<wire x1="3.415" y1="-6.35" x2="19.925" y2="16.51" width="0" layer="19" extent="1-1"/>
 </signal>
-<signal name="N$3">
-<contactref element="R3" pad="2"/>
+<signal name="LINE">
 <contactref element="LED3" pad="A"/>
-<wire x1="3.415" y1="-10.16" x2="45.72" y2="8.495" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$4">
-<contactref element="R4" pad="2"/>
-<contactref element="LED4" pad="A"/>
-<wire x1="3.415" y1="-13.97" x2="10.16" y2="21.195" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$5">
-<contactref element="R5" pad="2"/>
-<contactref element="LED5" pad="A"/>
-<wire x1="3.415" y1="-17.78" x2="12.7" y2="21.195" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$6">
-<contactref element="R6" pad="2"/>
-<contactref element="LED6" pad="A"/>
-<wire x1="3.415" y1="-21.59" x2="15.24" y2="21.195" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$7">
-<contactref element="R6" pad="1"/>
-</signal>
-<signal name="N$8">
-<contactref element="R4" pad="1"/>
-</signal>
-<signal name="N$9">
-<contactref element="R3" pad="1"/>
-</signal>
-<signal name="N$10">
-<contactref element="R2" pad="1"/>
-</signal>
-<signal name="N$11">
-<contactref element="R1" pad="1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>

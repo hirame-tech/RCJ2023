@@ -3,10 +3,10 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="no"/>
+<setting alwaysvectorfont="yes"/>
 <setting verticaltext="up"/>
 </settings>
-<grid distance="50" unitdist="mil" unit="mil" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
+<grid distance="50" unitdist="mil" unit="mm" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
 <layers>
 <layer number="1" name="Top" color="4" fill="1" visible="yes" active="yes"/>
 <layer number="2" name="Route2" color="16" fill="1" visible="no" active="no"/>
@@ -407,35 +407,47 @@ design rules under a new name.
 </pass>
 </autorouter>
 <elements>
-<element name="GYRO_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="-16.51" y="3.81" smashed="yes">
-<attribute name="NAME" x="-16.51" y="6.477" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
-<attribute name="PROD_ID" value="SWCH-08247" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="SF_SKU" value="COM-08720" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-16.51" y="1.143" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
+<element name="GYRO_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="3.81" y="7.62" smashed="yes" rot="R90">
+<attribute name="NAME" x="1.143" y="7.62" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center"/>
+<attribute name="PROD_ID" value="SWCH-08247" x="7.62" y="24.13" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="SF_SKU" value="COM-08720" x="7.62" y="24.13" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="6.477" y="7.62" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="top-center"/>
 </element>
-<element name="IR_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="-24.13" y="3.81" smashed="yes">
-<attribute name="NAME" x="-24.13" y="6.477" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
-<attribute name="PROD_ID" value="SWCH-08247" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="SF_SKU" value="COM-08720" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-24.13" y="1.143" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
+<element name="IR_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="19.05" y="7.62" smashed="yes" rot="R90">
+<attribute name="NAME" x="16.383" y="7.62" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center"/>
+<attribute name="PROD_ID" value="SWCH-08247" x="22.86" y="31.75" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="SF_SKU" value="COM-08720" x="22.86" y="31.75" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="21.717" y="7.62" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="top-center"/>
 </element>
-<element name="LED1" library="generic" package="LED1608" value="LED1608" x="-26.67" y="10.16" smashed="yes">
-<attribute name="NAME" x="-27.47" y="10.81" size="1.016" layer="25"/>
-<attribute name="VALUE" x="-27.47" y="8.46" size="1.016" layer="27"/>
+<element name="LED1" library="generic" package="LED1608" value="LED1608" x="13.97" y="13.97" smashed="yes">
+<attribute name="NAME" x="13.17" y="14.62" size="1.016" layer="25"/>
+<attribute name="VALUE" x="13.17" y="12.27" size="1.016" layer="27"/>
 </element>
-<element name="LED2" library="generic" package="LED1608" value="LED1608" x="-19.05" y="16.51" smashed="yes">
-<attribute name="NAME" x="-19.85" y="17.16" size="1.016" layer="25"/>
-<attribute name="VALUE" x="-19.85" y="14.81" size="1.016" layer="27"/>
+<element name="LED2" library="generic" package="LED1608" value="LED1608" x="8.89" y="13.97" smashed="yes" rot="R180">
+<attribute name="NAME" x="9.69" y="13.32" size="1.016" layer="25" rot="R180"/>
+<attribute name="VALUE" x="9.69" y="15.67" size="1.016" layer="27" rot="R180"/>
 </element>
-<element name="LED3" library="generic" package="LED1608" value="LED1608" x="-26.67" y="16.51" smashed="yes">
-<attribute name="NAME" x="-27.47" y="17.16" size="1.016" layer="25"/>
-<attribute name="VALUE" x="-27.47" y="14.81" size="1.016" layer="27"/>
+<element name="LED3" library="generic" package="LED1608" value="LED1608" x="24.13" y="7.62" smashed="yes" rot="R90">
+<attribute name="NAME" x="23.48" y="6.82" size="1.016" layer="25" rot="R90"/>
+<attribute name="VALUE" x="25.83" y="6.82" size="1.016" layer="27" rot="R90"/>
 </element>
-<element name="MAIN_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="-16.51" y="10.16" smashed="yes">
-<attribute name="NAME" x="-16.51" y="12.827" size="0.6096" layer="25" font="vector" ratio="20" align="bottom-center"/>
-<attribute name="PROD_ID" value="SWCH-08247" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="SF_SKU" value="COM-08720" x="0" y="0" size="1.778" layer="27" display="off"/>
-<attribute name="VALUE" x="-16.51" y="7.493" size="0.6096" layer="27" font="vector" ratio="20" align="top-center"/>
+<element name="MAIN_RESET" library="SparkFun-Switches" package="TACTILE_SWITCH_SMD_5.2MM" value="" x="11.43" y="7.62" smashed="yes" rot="R90">
+<attribute name="NAME" x="8.763" y="7.62" size="0.6096" layer="25" font="vector" ratio="20" rot="R90" align="bottom-center"/>
+<attribute name="PROD_ID" value="SWCH-08247" x="21.59" y="24.13" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="SF_SKU" value="COM-08720" x="21.59" y="24.13" size="1.778" layer="27" rot="R90" display="off"/>
+<attribute name="VALUE" x="14.097" y="7.62" size="0.6096" layer="27" font="vector" ratio="20" rot="R90" align="top-center"/>
+</element>
+<element name="LED4" library="generic" package="LED1608" value="LED1608" x="2.54" y="-2.54" smashed="yes">
+<attribute name="NAME" x="1.74" y="-1.89" size="1.016" layer="25"/>
+<attribute name="VALUE" x="1.74" y="-4.24" size="1.016" layer="27"/>
+</element>
+<element name="LED5" library="generic" package="LED1608" value="LED1608" x="2.54" y="-7.62" smashed="yes">
+<attribute name="NAME" x="1.74" y="-6.97" size="1.016" layer="25"/>
+<attribute name="VALUE" x="1.74" y="-9.32" size="1.016" layer="27"/>
+</element>
+<element name="LED6" library="generic" package="LED1608" value="LED1608" x="2.54" y="-12.7" smashed="yes">
+<attribute name="NAME" x="1.74" y="-12.05" size="1.016" layer="25"/>
+<attribute name="VALUE" x="1.74" y="-14.4" size="1.016" layer="27"/>
 </element>
 </elements>
 <signals>
@@ -449,29 +461,37 @@ design rules under a new name.
 <contactref element="LED1" pad="K"/>
 <contactref element="LED3" pad="K"/>
 <contactref element="LED2" pad="K"/>
-<wire x1="-25.795" y1="10.16" x2="-26.924" y2="5.715" width="0" layer="19" extent="1-1"/>
-<wire x1="-21.336" y1="5.715" x2="-26.924" y2="5.715" width="0" layer="19" extent="1-1"/>
-<wire x1="-19.304" y1="5.715" x2="-21.336" y2="5.715" width="0" layer="19" extent="1-1"/>
-<wire x1="-13.716" y1="5.715" x2="-19.304" y2="5.715" width="0" layer="19" extent="1-1"/>
-<wire x1="-25.795" y1="16.51" x2="-25.795" y2="10.16" width="0" layer="19" extent="1-1"/>
-<wire x1="-19.304" y1="12.065" x2="-19.304" y2="5.715" width="0" layer="19" extent="1-1"/>
-<wire x1="-18.175" y1="16.51" x2="-19.304" y2="12.065" width="0" layer="19" extent="1-1"/>
-<wire x1="-13.716" y1="12.065" x2="-19.304" y2="12.065" width="0" layer="19" extent="1-1"/>
+<wire x1="1.905" y1="4.826" x2="1.905" y2="3.175" width="0.508" layer="1"/>
+<wire x1="1.905" y1="3.175" x2="2.54" y2="2.54" width="0.508" layer="1"/>
+<wire x1="1.905" y1="10.414" x2="1.905" y2="4.826" width="0.508" layer="1"/>
+<contactref element="LED4" pad="K"/>
+<contactref element="LED5" pad="K"/>
+<contactref element="LED6" pad="K"/>
+<wire x1="17.145" y1="10.414" x2="24.13" y2="8.495" width="0" layer="19" extent="1-1"/>
+<wire x1="14.845" y1="13.97" x2="17.145" y2="10.414" width="0" layer="19" extent="1-1"/>
+<wire x1="17.145" y1="4.826" x2="17.145" y2="10.414" width="0" layer="19" extent="1-1"/>
+<wire x1="9.525" y1="10.414" x2="14.845" y2="13.97" width="0" layer="19" extent="1-1"/>
+<wire x1="8.015" y1="13.97" x2="9.525" y2="10.414" width="0" layer="19" extent="1-1"/>
+<wire x1="9.525" y1="4.826" x2="9.525" y2="10.414" width="0" layer="19" extent="1-1"/>
+<wire x1="1.905" y1="10.414" x2="8.015" y2="13.97" width="0" layer="19" extent="1-1"/>
+<wire x1="3.415" y1="-2.54" x2="2.54" y2="2.54" width="0" layer="19" extent="1-1"/>
+<wire x1="3.415" y1="-7.62" x2="3.415" y2="-2.54" width="0" layer="19" extent="1-1"/>
+<wire x1="3.415" y1="-12.7" x2="3.415" y2="-7.62" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="IR_RESET">
 <contactref element="IR_RESET" pad="3"/>
 <contactref element="IR_RESET" pad="4"/>
-<wire x1="-21.336" y1="1.905" x2="-26.924" y2="1.905" width="0" layer="19" extent="1-1"/>
+<wire x1="20.955" y1="10.414" x2="20.955" y2="4.826" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GYRO_RESET">
 <contactref element="GYRO_RESET" pad="3"/>
 <contactref element="GYRO_RESET" pad="4"/>
-<wire x1="-13.716" y1="1.905" x2="-19.304" y2="1.905" width="0" layer="19" extent="1-1"/>
+<wire x1="5.715" y1="4.826" x2="5.715" y2="10.414" width="0.508" layer="1"/>
 </signal>
 <signal name="MAIN_RESET">
 <contactref element="MAIN_RESET" pad="3"/>
 <contactref element="MAIN_RESET" pad="4"/>
-<wire x1="-13.716" y1="8.255" x2="-19.304" y2="8.255" width="0" layer="19" extent="1-1"/>
+<wire x1="13.335" y1="10.414" x2="13.335" y2="4.826" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="GYRO_L">
 <contactref element="LED1" pad="A"/>
@@ -481,6 +501,15 @@ design rules under a new name.
 </signal>
 <signal name="LINE">
 <contactref element="LED3" pad="A"/>
+</signal>
+<signal name="CAM_STATUS">
+<contactref element="LED6" pad="A"/>
+</signal>
+<signal name="GYRO_STATUS">
+<contactref element="LED4" pad="A"/>
+</signal>
+<signal name="IR_STATUS">
+<contactref element="LED5" pad="A"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
