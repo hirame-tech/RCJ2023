@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE eagle SYSTEM "eagle.dtd">
-<eagle version="9.6.2">
+<eagle version="9.6.1">
 <drawing>
 <settings>
 <setting alwaysvectorfont="no"/>
@@ -1374,8 +1374,8 @@ Number of pins: &lt;b&gt;2&lt;/b&gt;&lt;b&gt;&lt;P&gt;
 <label x="17.78" y="116.84" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 <segment>
-<wire x1="177.8" y1="53.34" x2="152.4" y2="53.34" width="0.1524" layer="91"/>
-<label x="152.4" y="53.34" size="1.778" layer="95" rot="R180" xref="yes"/>
+<wire x1="177.8" y1="53.34" x2="160.02" y2="53.34" width="0.1524" layer="91"/>
+<label x="160.02" y="53.34" size="1.778" layer="95" rot="R180" xref="yes"/>
 <pinref part="JP5" gate="A" pin="15"/>
 </segment>
 </net>
