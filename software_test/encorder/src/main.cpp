@@ -53,6 +53,8 @@ void loop() {
     Serial.println(val);
     old_val = val;
   }else{
+    Serial.print(error);
+    Serial.print("  ");
     Serial.println(old_val);
   }
   delay(10);
