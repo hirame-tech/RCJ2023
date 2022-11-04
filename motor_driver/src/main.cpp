@@ -9,6 +9,7 @@
 #define LC D5
 
 #define OFFSET 180 + 10 //電気角
+#define PI 3.1415926535
 #define MOTOR_SPEED 20
 
 #define DELAYTIME 1000
@@ -52,6 +53,7 @@ void setup() {
   square_wave_drive(0);
   delay(100);
   square_wave_drive(-1);
+  delay(10);
 }
 
 void loop() {
@@ -176,5 +178,8 @@ void square_wave_drive(int angle){
 }
 
 void sin_wave_drive(int angle){
-  
+  float rad_angle = angle * PI / 180;
+  fets(HA,LA,MOTOR_SPEED,sin(rad_angle));
+  fets(HB,LB,MOTOR_SPEED,sin(rad_angle  +(PI / 3)));
+  fets(HB,LB,MOTOR_SPEED,sin(rad_angle  +(2 * PI / 3)));
 }
