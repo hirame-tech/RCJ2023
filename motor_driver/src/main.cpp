@@ -9,9 +9,9 @@
 #define LC D5
 
 #define OFFSET 180 + 10 //電気角
-#define MOTOR_SPEED 70
+#define MOTOR_SPEED 20
 
-#define DELAYTIME 4
+#define DELAYTIME 1000
 int old;
 
 const int pins[] = {HA,LA,HB,LB,HC,LC};
@@ -47,6 +47,11 @@ void setup() {
   digitalWrite(16,HIGH);//OFF
   digitalWrite(25,HIGH);//OFF
   delay(2000);
+
+  //始動シーケンス1
+  square_wave_drive(0);
+  delay(100);
+  square_wave_drive(-1);
 }
 
 void loop() {
@@ -163,6 +168,9 @@ void square_wave_drive(int angle){
       fets(HC,LC,MOTOR_SPEED,1);
       break;
     default:
+      fets(HA,LA,MOTOR_SPEED,0);//300//0
+      fets(HB,LB,MOTOR_SPEED,0);
+      fets(HC,LC,MOTOR_SPEED,0);
       break;
   }
 }
