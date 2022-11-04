@@ -38,8 +38,11 @@ void setup() {
   analogWriteFreq(5000);//10kHz
   for (int i = 0; i < 6; i++){
     pinMode(pins[i],OUTPUT);
-    digitalWrite(pins[i],LOW);
+    //digitalWrite(pins[i],LOW);
   }
+  fets(HA,LA,MOTOR_SPEED,0);
+  fets(HB,LB,MOTOR_SPEED,0);
+  fets(HC,LC,MOTOR_SPEED,0);
   //LEDs
 	pinMode(17,OUTPUT);
   pinMode(16,OUTPUT);
@@ -123,7 +126,7 @@ void fets(int H_pin,int L_pin,int duty,int mode){
     break;
   case 0://free
     analogWrite(H_pin,0);
-    analogWrite(L_pin,200);
+    analogWrite(L_pin,255);
     break;
   case -1://connect low
     analogWrite(H_pin,0);
