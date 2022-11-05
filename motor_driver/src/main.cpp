@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <SoftwareSerial.h>
 #include <AS5048A.h>
 #define CSPIN D6
 #define HA D0
@@ -7,8 +8,9 @@
 #define LA D3
 #define LB D4
 #define LC D5
+SoftwareSerial myserial(D7,17);
 
-#define OFFSET -225 //電気角//250
+#define OFFSET -260 //電気角//260
 #define PI 3.1415926535
 
 
@@ -41,7 +43,7 @@ int motor_speed = 1;
 
 void fets(int H_pin,int L_pin,int duty,int mode);
 int caluculate_electorical_angle(int offset);
-void square_wave_drive(int angle,int direction);
+void square_wave_drive(int angle,int speed,int direction);
 void sin_wave_drive(int angle,int r[]);
 int sign(int number);
 
@@ -57,18 +59,18 @@ void setup() {
   fets(HC,LC,MOTOR_SPEED,0);
   //LEDs
 	pinMode(17,OUTPUT);
-  pinMode(16,OUTPUT);
-  pinMode(25,OUTPUT);
-  digitalWrite(17,HIGH);//OFF
-  digitalWrite(16,HIGH);//OFF
-  digitalWrite(25,HIGH);//OFF
+  //pinMode(16,OUTPUT);
+  //pinMode(25,OUTPUT);
+  //digitalWrite(17,HIGH);//OFF
+  //digitalWrite(16,HIGH);//OFF
+  //digitalWrite(25,HIGH);//OFF
 
   for(int i=0; i<720; i++){
     _sin[i] = sin(i * PI / 180);
   }
 
   //始動シーケンス1
-  square_wave_drive(0,1);
+  square_wave_drive(0,100,1);
   delay(100);
   fets(HA,LA,MOTOR_SPEED,0);
   fets(HB,LB,MOTOR_SPEED,0);
@@ -79,7 +81,7 @@ void setup() {
 
 void setup1(){
   Serial.begin(9600);
-  Serial1.begin(9600);
+  myserial.begin(9600);
   angleSensor.begin();
 }
 
@@ -98,7 +100,7 @@ void loop() {
     val_sq += 60;
     time_sq = micros();
   }
-  */
+
 
   //正弦波駆動用
   
@@ -107,7 +109,7 @@ void loop() {
     val += 6;
     val_sq = (val/60)*60 + 60;
   }
-
+  */
   
   
   if(val >= 360) val -= 360;
@@ -117,9 +119,9 @@ void loop() {
   if(angle >= 360) angle -= 360;
   if(angle <  0) angle += 360;
   if(motor_speed >= 0){
-    square_wave_drive(angle,1);
+    square_wave_drive(angle,abs(motor_speed),1);
   }else{
-    square_wave_drive(angle,-1);
+    square_wave_drive(angle,abs(motor_speed),-1);
   }
   //sin_wave_drive(val,a);
 
@@ -128,10 +130,16 @@ void loop() {
 }
 
 void loop1(){
-  angle = caluculate_electorical_angle(OFFSET);
-  if(Serial1.available()){
-    motor_speed = Serial1.read() - 100;
+  if(motor_speed >= 0){
+    angle = caluculate_electorical_angle(OFFSET+35);
+  }else{
+    angle = caluculate_electorical_angle(OFFSET-35);
   }
+  angle = caluculate_electorical_angle(OFFSET);
+  if(myserial.available()){
+    motor_speed = (myserial.read()-100)*2;
+  }
+  //angleSensor.begin();
   //Serial.print(val_sq);
   //Serial.print(",");
   //Serial.println(val);
@@ -144,9 +152,9 @@ void loop1(){
   //Serial.print(val_sq);
   //Serial.print(",");
     //Serial.print(abs(val - encoder));
-    //Serial.print(",");
-    //Serial.print(",");
-  Serial.println(angle);
+  Serial.print(angle);
+  Serial.print(",");
+  Serial.println(motor_speed);
 }
 
 int caluculate_electorical_angle(int offset){
@@ -200,83 +208,83 @@ void fets(int H_pin,int L_pin,int duty,int mode){
   }
 }
 
-void square_wave_drive(int angle,int direction){
+void square_wave_drive(int angle,int speed,int direction){
   static int offset = 0;
   switch (direction){
     case 1:
       switch (angle){
         case 0:
-          fets(HA,LA,MOTOR_SPEED,1);//0//60
+          fets(HA,LA,speed,1);//0//60
           fets(HB,LB,0,1);
-          fets(HC,LC,MOTOR_SPEED,0);
+          fets(HC,LC,0,0);
           break;
-        case 60:
-          fets(HA,LA,MOTOR_SPEED,1);//60//120
-          fets(HB,LB,MOTOR_SPEED,0);
+        case 300:
+          fets(HA,LA,speed,1);//60//120
+          fets(HB,LB,0,0);
           fets(HC,LC,0,1);
           break;
-        case 120:
-          fets(HA,LA,MOTOR_SPEED,0);//120//180
-          fets(HB,LB,MOTOR_SPEED,1);
+        case 240:
+          fets(HA,LA,speed,0);//120//180
+          fets(HB,LB,speed,1);
           fets(HC,LC,0,1);
           break;
         case 180:
           fets(HA,LA,0,1);//180//240
-          fets(HB,LB,MOTOR_SPEED,1);
-          fets(HC,LC,MOTOR_SPEED,0);
+          fets(HB,LB,speed,1);
+          fets(HC,LC,speed,0);
           break;
-        case 240:
+        case 120:
           fets(HA,LA,0,1);//240//300
-          fets(HB,LB,MOTOR_SPEED,0);
-          fets(HC,LC,MOTOR_SPEED,1);
+          fets(HB,LB,speed,0);
+          fets(HC,LC,speed,1);
           break;
-        case 300:
-          fets(HA,LA,MOTOR_SPEED,0);//300//0
+        case 60:
+          fets(HA,LA,speed,0);//300//0
           fets(HB,LB,0,1);
-          fets(HC,LC,MOTOR_SPEED,1);
+          fets(HC,LC,speed,1);
           break;
         default:
-          fets(HA,LA,MOTOR_SPEED,0);
-          fets(HB,LB,MOTOR_SPEED,0);
-          fets(HC,LC,MOTOR_SPEED,0);
+          fets(HA,LA,speed,0);
+          fets(HB,LB,speed,0);
+          fets(HC,LC,speed,0);
           break;
       }
     case -1:
       switch (angle){
         case 0:
           fets(HA,LA,0,1);//0//60
-          fets(HB,LB,MOTOR_SPEED,1);
-          fets(HC,LC,MOTOR_SPEED,0);
+          fets(HB,LB,speed,1);
+          fets(HC,LC,speed,0);
           break;
         case 60:
           fets(HA,LA,0,1);//60//120
-          fets(HB,LB,MOTOR_SPEED,0);
-          fets(HC,LC,MOTOR_SPEED,1);
+          fets(HB,LB,speed,0);
+          fets(HC,LC,speed,1);
           break;
         case 120:
-          fets(HA,LA,MOTOR_SPEED,0);//120//180
+          fets(HA,LA,speed,0);//120//180
           fets(HB,LB,0,1);
-          fets(HC,LC,MOTOR_SPEED,1);
+          fets(HC,LC,speed,1);
           break;
         case 180:
-          fets(HA,LA,MOTOR_SPEED,1);//180//240
+          fets(HA,LA,speed,1);//180//240
           fets(HB,LB,0,1);
-          fets(HC,LC,MOTOR_SPEED,0);
+          fets(HC,LC,speed,0);
           break;
         case 240:
-          fets(HA,LA,MOTOR_SPEED,1);//240//300
-          fets(HB,LB,MOTOR_SPEED,0);
+          fets(HA,LA,speed,1);//240//300
+          fets(HB,LB,speed,0);
           fets(HC,LC,0,1);
           break;
         case 300:
-          fets(HA,LA,MOTOR_SPEED,0);//300//0
-          fets(HB,LB,MOTOR_SPEED,1);
+          fets(HA,LA,speed,0);//300//0
+          fets(HB,LB,speed,1);
           fets(HC,LC,0,1);
           break;
         default:
-          fets(HA,LA,MOTOR_SPEED,0);
-          fets(HB,LB,MOTOR_SPEED,0);
-          fets(HC,LC,MOTOR_SPEED,0);
+          fets(HA,LA,speed,0);
+          fets(HB,LB,speed,0);
+          fets(HC,LC,speed,0);
           break;
       }
   }
