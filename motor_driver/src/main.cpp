@@ -8,11 +8,11 @@
 #define LB D4
 #define LC D5
 
-#define OFFSET 180 + 10 //電気角
+#define OFFSET 75 //電気角
 #define PI 3.1415926535
-#define MOTOR_SPEED 20
+#define MOTOR_SPEED 60
 
-#define DELAYTIME 1000
+#define DELAYTIME 1
 int old;
 
 const int pins[] = {HA,LA,HB,LB,HC,LC};
@@ -20,7 +20,7 @@ const int pins[] = {HA,LA,HB,LB,HC,LC};
 AS5048A angleSensor(CSPIN,false);
 
 int direction;
-
+int a[3];
 //極対数　14
 
 //prototype declaration
@@ -28,6 +28,8 @@ int direction;
 void fets(int H_pin,int L_pin,int duty,int mode);
 int caluculate_electorical_angle(int offset);
 void square_wave_drive(int angle);
+void sin_wave_drive(int angle,int r[]);
+int sign(int number);
 
 void setup() {
   Serial.begin(9600);
@@ -35,7 +37,7 @@ void setup() {
   angleSensor.begin();
 
   pinMode(D7,INPUT);//何これ
-  analogWriteFreq(5000);//10kHz
+  analogWriteFreq(25000);//10kHz
   for (int i = 0; i < 6; i++){
     pinMode(pins[i],OUTPUT);
     //digitalWrite(pins[i],LOW);
@@ -57,35 +59,57 @@ void setup() {
   delay(100);
   square_wave_drive(-1);
   delay(10);
+
 }
 
 void loop() {
-  const int angle = 0;
+  static int angle = 0;
   static int val = 0;
   
   static unsigned long time = micros();
-  //if(Serial.available()){
-  //  offset = Serial.read();
-  //}
+  //矩形波駆動用
+  /*
   if((micros() - time) > (DELAYTIME*1000 + 100)){
-    //val = caluculate_electorical_angle(OFFSET);
-    //Serial.print(angle);
-    //Serial.print(",");
-    //Serial.print(val);
     val += 60;
-    //val = 0;
     time = micros();
   }
-  if(val >300) val -= 360;
+  */
+  angle = caluculate_electorical_angle(OFFSET) + 10;
+  //正弦波駆動用
+  if((micros() - time) > ((DELAYTIME*1000) / 60)){
+    val ++;
+    //Serial.print(a[0]);
+    //Serial.print(",");
+    //Serial.print(a[1]);
+    //Serial.print(",");
+    //Serial.print(a[2]);
+    
+    //Serial.print(val);
+    //Serial.print(",");
+    //Serial.print(abs(val - encoder));
+    //Serial.print(",");
+    //Serial.print(",");
+    //Serial.println(angle);
+    
+    time = micros();
+  }
+
+  if(val >= 360) val -= 360;
   if(val <  0) val += 360;
+  if(angle >= 360) angle -= 360;
+  if(angle <  0) angle += 360;
   
-  square_wave_drive(val);
-  
-  //Serial.println();
+  sin_wave_drive(val,a);
+  //fets(HA,LA,20,1);
+  //fets(HB,LB,20,-1);
+  //fets(HC,LC,0,0);
+
+
   //delayMicroseconds(1000);
   //fets(HA,LA,MOTOR_SPEED,1);
   //fets(HB,LB,MOTOR_SPEED,1);
   //fets(HC,LC,MOTOR_SPEED,1);
+  //delay(10);
 }
 
 int caluculate_electorical_angle(int offset){
@@ -96,7 +120,7 @@ int caluculate_electorical_angle(int offset){
   if(error == ""){
     float val = tmp;
     //caluculate electorical angle
-    float angle_electorical = val * 7  + offset;
+    float angle_electorical = val * 7  - offset;
     angle_electorical = angle_electorical - 360*((int)angle_electorical / 360);
 
     if(angle_electorical < 0){
@@ -105,13 +129,13 @@ int caluculate_electorical_angle(int offset){
       angle_electorical -= 360;
     }
 
-    int angle_electorical_int = ((int)angle_electorical / 60) *60;
-    angle_electorical_int -= 60;
-    if(angle_electorical_int == -60){
-      angle_electorical_int = 360;
-    }
-    old_val = angle_electorical;
-    return angle_electorical;
+    int angle_electorical_int = 360 - (int)angle_electorical;
+    //angle_electorical_int -= 60;
+    //if(angle_electorical_int == -60){
+    //  angle_electorical_int = 360;
+    //}
+    old_val = angle_electorical_int;
+    return angle_electorical_int;
   }else{
     return old_val;
   }
@@ -130,7 +154,7 @@ void fets(int H_pin,int L_pin,int duty,int mode){
     break;
   case -1://connect low
     analogWrite(H_pin,0);
-    analogWrite(L_pin,0);
+    analogWrite(L_pin,255-duty);
     break;
   default:
     Serial.printf("fets : exception of (int)mode\n");
@@ -180,9 +204,19 @@ void square_wave_drive(int angle){
   }
 }
 
-void sin_wave_drive(int angle){
+void sin_wave_drive(int angle,int r[]){
   float rad_angle = angle * PI / 180;
-  fets(HA,LA,MOTOR_SPEED,sin(rad_angle));
-  fets(HB,LB,MOTOR_SPEED,sin(rad_angle  +(PI / 3)));
-  fets(HB,LB,MOTOR_SPEED,sin(rad_angle  +(2 * PI / 3)));
+  int speed_A = (int)( MOTOR_SPEED*sin(rad_angle)/2 + MOTOR_SPEED/2);
+  int speed_B = (int)( MOTOR_SPEED*sin(rad_angle  +(PI * 2/ 3))/2 + MOTOR_SPEED/2);
+  int speed_C = (int)( MOTOR_SPEED*sin(rad_angle  +(PI * 4/3))/2 + MOTOR_SPEED/2);
+  r[0] = abs(speed_A) * sign(speed_A);
+  r[1] = abs(speed_B) * sign(speed_B);
+  r[2] = abs(speed_C) * sign(speed_C);
+  fets(HA,LA,abs(speed_A),sign(speed_A));
+  fets(HB,LB,abs(speed_B),sign(speed_B));
+  fets(HC,LC,abs(speed_C),sign(speed_C));
+}
+
+int sign(int n){
+  return (n>0)-(n<0);
 }
