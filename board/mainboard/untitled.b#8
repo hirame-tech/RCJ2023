@@ -1265,8 +1265,19 @@ design rules under a new name.
 <via x="0.635" y="-4.445" extent="1-16" drill="0.35"/>
 <wire x1="0.635" y1="-4.445" x2="-0.395" y2="-4.445" width="0.508" layer="1"/>
 <wire x1="0" y1="-10.668" x2="0" y2="-6.5814" width="0.508" layer="1"/>
-<wire x1="35.56" y1="15.875" x2="29.21" y2="27.545" width="0" layer="19" extent="1-1"/>
-<wire x1="-27.94" y1="13.335" x2="0.508" y2="2.667" width="0" layer="19" extent="1-1"/>
+<wire x1="29.083" y1="35.546" x2="22.846" y2="35.546" width="0.508" layer="1"/>
+<wire x1="22.846" y1="35.546" x2="18.415" y2="31.115" width="0.508" layer="1"/>
+<wire x1="18.415" y1="31.115" x2="18.415" y2="25.4" width="0.508" layer="1"/>
+<wire x1="18.415" y1="25.4" x2="19.685" y2="24.13" width="0.508" layer="1"/>
+<wire x1="19.685" y1="24.13" x2="28.575" y2="24.13" width="0.508" layer="1"/>
+<wire x1="28.575" y1="24.13" x2="29.845" y2="22.86" width="0.508" layer="1"/>
+<via x="29.845" y="19.685" extent="1-16" drill="0.35"/>
+<wire x1="29.845" y1="19.685" x2="31.115" y2="18.415" width="0.508" layer="16"/>
+<via x="31.115" y="18.415" extent="1-16" drill="0.35"/>
+<wire x1="31.115" y1="18.415" x2="33.655" y2="15.875" width="0.508" layer="1"/>
+<wire x1="33.655" y1="15.875" x2="35.56" y2="15.875" width="0.508" layer="1"/>
+<wire x1="29.845" y1="22.86" x2="29.845" y2="19.685" width="0.508" layer="1"/>
+<wire x1="-24.525" y1="-13.589" x2="-35.56" y2="8.255" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="CAM_TX">
 <contactref element="RASPI" pad="8"/>
@@ -1600,8 +1611,15 @@ design rules under a new name.
 <signal name="IR_RESET">
 <contactref element="IR" pad="5"/>
 <wire x1="1.27" y1="1.27" x2="10.16" y2="-7.62" width="0.508" layer="1"/>
-<wire x1="30.48" y1="-7.62" x2="31.75" y2="-8.89" width="0.508" layer="1"/>
-<wire x1="10.16" y1="-7.62" x2="30.48" y2="-7.62" width="0.508" layer="1"/>
+<wire x1="10.16" y1="-7.62" x2="17.145" y2="-7.62" width="0.508" layer="1"/>
+<wire x1="17.145" y1="-7.62" x2="30.48" y2="-7.62" width="0.508" layer="1"/>
+<wire x1="17.145" y1="-7.62" x2="17.78" y2="-8.255" width="0.508" layer="1"/>
+<wire x1="17.78" y1="-17.907" x2="18.288" y2="-18.415" width="0.508" layer="1"/>
+<wire x1="18.288" y1="-18.415" x2="21.336" y2="-18.415" width="0.508" layer="1"/>
+<wire x1="21.336" y1="-18.415" x2="21.463" y2="-18.288" width="0.508" layer="1"/>
+<wire x1="17.78" y1="-8.255" x2="17.78" y2="-17.907" width="0.508" layer="1"/>
+<contactref element="JP5" pad="3"/>
+<wire x1="21.463" y1="-18.288" x2="21.59" y2="-16.51" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="IR_D+">
 <contactref element="IR" pad="2"/>
