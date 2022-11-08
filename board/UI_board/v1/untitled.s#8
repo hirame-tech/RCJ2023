@@ -459,9 +459,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <part name="LED3" library="generic" deviceset="LED" device="1608"/>
 <part name="GND1" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="LED4" library="generic" deviceset="LED" device="1608"/>
-<part name="LED5" library="generic" deviceset="LED" device="1608"/>
-<part name="LED6" library="generic" deviceset="LED" device="1608"/>
 </parts>
 <sheets>
 <sheet>
@@ -494,15 +491,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 </instance>
 <instance part="GND2" gate="1" x="85.09" y="30.48" smashed="yes">
 <attribute name="VALUE" x="82.55" y="27.94" size="1.778" layer="96"/>
-</instance>
-<instance part="LED4" gate="G$1" x="104.14" y="62.23" smashed="yes">
-<attribute name="NAME" x="105.41" y="65.024" size="1.778" layer="95" font="vector"/>
-</instance>
-<instance part="LED5" gate="G$1" x="114.3" y="62.23" smashed="yes">
-<attribute name="NAME" x="115.57" y="65.024" size="1.778" layer="95" font="vector"/>
-</instance>
-<instance part="LED6" gate="G$1" x="124.46" y="62.23" smashed="yes">
-<attribute name="NAME" x="125.73" y="65.024" size="1.778" layer="95" font="vector"/>
 </instance>
 </instances>
 <busses>
@@ -547,18 +535,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <junction x="85.09" y="38.1"/>
 <wire x1="85.09" y1="38.1" x2="85.09" y2="33.02" width="0.1524" layer="91"/>
 <pinref part="GND2" gate="1" pin="GND"/>
-<wire x1="93.98" y1="38.1" x2="104.14" y2="38.1" width="0.1524" layer="91"/>
-<wire x1="104.14" y1="38.1" x2="104.14" y2="59.69" width="0.1524" layer="91"/>
-<junction x="93.98" y="38.1"/>
-<wire x1="104.14" y1="38.1" x2="114.3" y2="38.1" width="0.1524" layer="91"/>
-<wire x1="114.3" y1="38.1" x2="114.3" y2="59.69" width="0.1524" layer="91"/>
-<junction x="104.14" y="38.1"/>
-<wire x1="114.3" y1="38.1" x2="124.46" y2="38.1" width="0.1524" layer="91"/>
-<wire x1="124.46" y1="38.1" x2="124.46" y2="59.69" width="0.1524" layer="91"/>
-<junction x="114.3" y="38.1"/>
-<pinref part="LED4" gate="G$1" pin="K"/>
-<pinref part="LED5" gate="G$1" pin="K"/>
-<pinref part="LED6" gate="G$1" pin="K"/>
 </segment>
 </net>
 <net name="IR_RESET" class="0">
@@ -616,27 +592,6 @@ You are welcome to use this library for commercial purposes. For attribution, we
 <pinref part="LED3" gate="G$1" pin="A"/>
 <wire x1="93.98" y1="67.31" x2="93.98" y2="74.93" width="0.1524" layer="91"/>
 <label x="93.98" y="74.93" size="1.778" layer="95" rot="R90" xref="yes"/>
-</segment>
-</net>
-<net name="CAM_STATUS" class="0">
-<segment>
-<pinref part="LED6" gate="G$1" pin="A"/>
-<wire x1="124.46" y1="67.31" x2="124.46" y2="74.93" width="0.1524" layer="91"/>
-<label x="124.46" y="74.93" size="1.778" layer="95" rot="R90" xref="yes"/>
-</segment>
-</net>
-<net name="GYRO_STATUS" class="0">
-<segment>
-<pinref part="LED4" gate="G$1" pin="A"/>
-<wire x1="104.14" y1="67.31" x2="104.14" y2="74.93" width="0.1524" layer="91"/>
-<label x="104.14" y="74.93" size="1.778" layer="95" rot="R90" xref="yes"/>
-</segment>
-</net>
-<net name="IR_STATUS" class="0">
-<segment>
-<pinref part="LED5" gate="G$1" pin="A"/>
-<wire x1="114.3" y1="74.93" x2="114.3" y2="67.31" width="0.1524" layer="91"/>
-<label x="114.3" y="74.93" size="1.778" layer="95" rot="R90" xref="yes"/>
 </segment>
 </net>
 </nets>
