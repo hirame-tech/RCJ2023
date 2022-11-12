@@ -15,7 +15,6 @@ def addshape(binimg,img):
     nlabels,labels,stats,center=cv2.connectedComponentsWithStats(binimg)
     if nlabels!=1:
         big=np.argmax(stats[1:,4])+1 #the label of biggest blob
-        print(stats[big][4])
         cv2.rectangle(img,(stats[big][0],stats[big][1]),(stats[big][0]+stats[big][2],stats[big][1]+stats[big][3]),(0,255,0),thickness=10)
 
 
