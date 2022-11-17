@@ -1,5 +1,25 @@
 //#ifndef
 #define PI 3.1415926535
+
+struct LINEPIN
+{
+    int ICpin1[4];
+    int ICpin2[4];
+    int Apin1;
+    int Apin2;
+};
+
+struct LEDPIN
+{
+    int line_state;
+    int cam_state;
+    int gyro_state;
+    int IR_state;
+    int gyro_L;
+    int gyro_R;
+};
+
+
 /**
  * @brief convert degree to radian 
  * @param degree
@@ -23,7 +43,7 @@ float rad(int degree){
  * @param pins motor driver pins
  * 
  */
-void move(float detection_r,int speed,int jyro,float param[],int pins[]){
+void move(float detection_r,int speed,int gyro,float param[],int pins[]){
     float detection_r,p,i,d;
     float motor_speed[4];
     motor_speed[0] = speed * cos(- (PI/4) + detection_r);
@@ -63,4 +83,44 @@ int get_gyro(Stream *serial){
     }    
 }
 
+bool get_line(LINEPIN pins,int value[],int threshold){
+    int sum = 0;
+    uint8_t mux_channel[16][4] = {
+        {0, 0, 0, 0},  // 0
+        {1, 0, 0, 0},  // 1
+        {0, 1, 0, 0},  // 2
+        {1, 1, 0, 0},  // 3
+        {0, 0, 1, 0},  // 4
+        {1, 0, 1, 0},  // 5
+        {0, 1, 1, 0},  // 6
+        {1, 1, 1, 0},  // 7
+        {0, 0, 0, 1},  // 8
+        {1, 0, 0, 1},  // 9
+        {0, 1, 0, 1},  // 10
+        {1, 1, 0, 1},  // 11
+        {0, 0, 1, 1},  // 12
+        {1, 0, 1, 1},  // 13
+        {0, 1, 1, 1},  // 14
+        {1, 1, 1, 1}   // 15
+    };
+    for (int i = 0; i < 16; i++) {
+        for (int j = 0; j < 4; j++) {
+            digitalWrite(pins.ICpin1[j], mux_channel[i][j]);
+        }
+        value[i] = (analogRead(pins.Apin1) < threshold);
+        sum += value[i];
+    }
+    for (int i = 16; i < 30; i++) {
+        for (int j = 0; j < 4; j++) {
+            digitalWrite(pins.ICpin2[j], mux_channel[i - 16][j]);
+        }
+        value[i] = (analogRead(pins.Apin2) < threshold);
+        sum += value[i];
+    }
+    return (sum > 0);
+}
+
+float cal_line_direction(int values[]){
+    
+}
 //#endif
