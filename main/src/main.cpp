@@ -10,12 +10,6 @@
 
 
 LEDPIN led_pins;
-led_pins.line_state;
-led_pins.cam_state;
-led_pins.gyro_state;
-led_pins.IR_state;
-led_pins.gyro_L;
-led_pins.gyro_R;
 
 LINEPIN line_pins;
 
@@ -25,10 +19,18 @@ LINEPIN line_pins;
 void setup() {
   //pin_setup();
   Serial.begin(115200);
-  SERIAL.begin(115200);
+  //SERIAL.begin(115200);
   //motor1.begin(115200);
   //motor2.begin(115200);
   //motor3.begin(115200);
+
+led_pins.line_state = 1;
+led_pins.cam_state;
+led_pins.gyro_state;
+led_pins.IR_state;
+led_pins.gyro_L;
+led_pins.gyro_R;
+
 }
 
 void loop() {
@@ -40,14 +42,14 @@ void loop() {
   static int IR_distance;
 
   line_frag = get_line(line_pins,line_state,line_threshold);
-  gyro_angle = get_gyro(GYRO_SERIAL);
-  if(line_frag = 1){
+  gyro_angle = get_gyro(&GYRO_SERIAL);
+  if(line_frag == 1){
     //add motor stop process
 
     //add evacuation process
     
   }else{
-    get_IR(IR_SERIAL,IR_angle,IR_distance);
+    get_IR(&IR_SERIAL,&IR_angle,&IR_distance);
     if(IR_distance != 0){
       //add chase ball process
     }else{

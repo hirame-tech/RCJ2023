@@ -1,15 +1,15 @@
 //#ifndef
-#define PI 3.1415926535
+#include <Arduino.h>
 
-struct LINEPIN
-{
+struct LINEPIN{
     int ICpin1[4];
     int ICpin2[4];
     int Apin1;
     int Apin2;
 };
+//LINEPIN set_linepin();
 
-struct LEDPIN
+typedef struct ledpin
 {
     int line_state;
     int cam_state;
@@ -17,7 +17,9 @@ struct LEDPIN
     int IR_state;
     int gyro_L;
     int gyro_R;
-};
+}LEDPIN;
+
+//LEDPIN set_ledpins();
 
 
 /**
@@ -28,21 +30,23 @@ struct LEDPIN
 float rad(int degree){
     if(degree < 0){
         degree += 360;
-    }else(degree >= 360){
+    }
+    else if(degree >= 360){
         degree -=360;
     }
     return ((float)degree * PI /180);
 }
 
+
+
 /**
  * @brief move motor
- * @param detection_d move direction(radian)
+ * @param direction_d move direction(radian)
  * @param speed motor speed(0~255)
  * @param jyro jyro(0~255 senter:127)
  * @param param PID parameter
  * @param pins motor driver pins
  * 
- */
 void move(float detection_r,int speed,int gyro,float param[],int pins[]){
     float detection_r,p,i,d;
     float motor_speed[4];
@@ -57,6 +61,49 @@ void move(float detection_r,int speed,int gyro,float param[],int pins[]){
     
 
 }
+*/
+/**
+ * @brief move motor
+ * @param direction_r move direction(radian)
+ * @param speed motor speed(0~255)
+ * @param gyro jyro(0~255 senter:127)
+ * @param pins motor driver pins
+ */
+void move(float direction_r,int speed,int gyro,Stream *serial[]){
+    int p = 2;//比例定数
+    gyro -= 127;
+    float motor_speed[4];
+    int speed_sign[4];
+    motor_speed[0] = speed * cos(- (PI/4) + direction_r);
+    motor_speed[1] = speed * cos((PI/4) + direction_r);
+    motor_speed[2] = speed * cos(- (PI/4) + direction_r);
+    motor_speed[3] = speed * cos((PI/4) + direction_r);
+    
+    
+    motor_speed[0] += p*gyro;
+    motor_speed[1] += p*gyro;
+    motor_speed[2] -= p*gyro;
+    motor_speed[3] -= p*gyro;
+
+    //normalize and Serial send
+    int max = 0;
+    for(int i = 0; i < 4; i++){
+        if( 0 <= motor_speed[i]){
+            speed_sign[i] = 1;
+        }else{
+            speed_sign[i] = -1;
+            motor_speed[i] = abs(motor_speed[i]);
+        }
+        if(max < motor_speed[i]){
+            max = motor_speed[i];
+        }
+    }
+    for (int i = 0; i < 4; i++){
+        motor_speed[i] = speed_sign[i] * map(motor_speed[i],0,max,0,100);
+        serial[i]->write(int8_t(motor_speed[i]));
+    } 
+}
+
 /*
 * @brief get IR value
 * @param *serial Serial class which using IR
