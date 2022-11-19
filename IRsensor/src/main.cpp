@@ -2,9 +2,11 @@
 
 #define CYCLE_TIME 833
 #define SENSOR_NUMBER 16
+#define COEFFICIENT 2
+
 int pin[]={
-  NULL,NULL,NULL,NULL,
-  NULL,NULL,7,A5,
+  2,4,12,6,
+  8,9,7,A5,
   A4,A3,A2,A1,
   A0,13, 5,10
   };
@@ -30,13 +32,21 @@ void loop() {
   distance = Ball_distance(sensor_data) & 0x0F;
   angle = Ball_angle(sensor_data) & 0xF;
   send_data = ((distance << 4) + angle) & 0xFF;
-  
-  Serial.write(sensor_data);
-
+  /*
+  for (int i = 0; i < SENSOR_NUMBER; i++){
+    Serial.print(sensor_data[i]);
+    Serial.print(" : ");
+  }
+  */
+  //Serial.println();
+  if(distance != 0){
+    Serial.println(angle);
+  }else{
+    Serial.println("ball is not found.");
+  }
 }
 
 void get_IR(int *pins,int *datas){
-  int start_time;
   //初期化
   for (int i = 0; i < SENSOR_NUMBER; i++){
     datas[i] = 0;
@@ -45,10 +55,9 @@ void get_IR(int *pins,int *datas){
   const unsigned long start_time= micros();
   do{
     for (int i = 0; i < SENSOR_NUMBER; i++){
-      datas[i] += digitalRead(pins[i]);
+        datas[i] += (digitalRead(pins[i]) == LOW)*COEFFICIENT;
     }
   }while ((micros() - start_time) < CYCLE_TIME);
-  
 }
 
 /*
