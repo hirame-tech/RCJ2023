@@ -125,9 +125,14 @@ void get_IR(Stream *serial,float *detection_r,int *distance){
 * @return gyro value(0-255)
 */
 int get_gyro(Stream *serial){
+    static int value;
     if(serial->available()){
-        return serial->read();
-    }    
+        value = serial->read();
+        return value;
+        
+    }else{
+        return value;
+    }  
 }
 
 bool get_line(LINEPIN pins,int value[],int threshold){
