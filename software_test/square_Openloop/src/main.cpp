@@ -14,7 +14,7 @@ SoftwareSerial myserial(D7,17);
 #define PI 3.1415926535
 
 #define RPM 1000
-#define VOLT 8.2
+#define VOLT 7.4
 #define CAL_S(r,v) r/(400*v)*255
 #define CAL_D(r)   10000000/(r*7) * 1.5
 
@@ -41,7 +41,7 @@ void square_wave_drive(int angle);
 
 void setup() {
   
-  analogWriteFreq(60000);//60kHz
+  analogWriteFreq(10000);//60kHz
   for (int i = 0; i < 6; i++){
     pinMode(pins[i],OUTPUT);
   }
@@ -77,17 +77,17 @@ void loop() {
   }
   if(val_sq >= 360) val_sq -= 360;
   if(val_sq <  0) val_sq += 360;
-  //square_wave_drive(val_sq);
-  fets(HA,LA,MOTOR_SPEED,1);
-  fets(HB,LB,MOTOR_SPEED,1);
-  fets(HC,LC,MOTOR_SPEED,1);  
+  square_wave_drive(val_sq);
+  //fets(HA,LA,100,1);
+  //fets(HB,LB,100,1);
+  //fets(HC,LC,MOTOR_SPEED,1);  
 
   n = micros() - loop_time; 
   loop_time = micros();
 }
 
 void loop1(){
-  angle = caluculate_electorical_angle(OFFSET);
+  //angle = caluculate_electorical_angle(OFFSET);
 
   Serial.print(val_sq);
   Serial.print(",");
