@@ -774,7 +774,6 @@ design rules under a new name.</description>
 <wire x1="22.86" y1="30.48" x2="24.13" y2="31.75" width="0.6096" layer="1"/>
 <wire x1="22.86" y1="30.48" x2="24.13" y2="29.21" width="0.6096" layer="1"/>
 <wire x1="20.602" y1="21.7805" x2="23.6855" y2="21.7805" width="1.016" layer="1"/>
-<wire x1="23.6855" y1="21.7805" x2="23.749" y2="21.844" width="1.016" layer="1"/>
 </signal>
 <signal name="N$9">
 <contactref element="MD3" pad="6"/>
@@ -842,7 +841,6 @@ design rules under a new name.</description>
 <approved hash="19,1,701a54a530769498"/>
 <approved hash="19,1,413791e4d79f9d25"/>
 <approved hash="19,1,4dfdafce31223f09"/>
-<approved hash="19,1,dfa5ac99b76711cf"/>
 <approved hash="19,1,ebfd592037e80104"/>
 <approved hash="19,1,ddf66fc401283702"/>
 <approved hash="19,1,9500f3da74065882"/>
@@ -866,10 +864,9 @@ design rules under a new name.</description>
 <approved hash="19,1,a856028b4f13cc5b"/>
 <approved hash="19,1,6ea232ae5d2887db"/>
 <approved hash="19,1,684cf31ca58852da"/>
-<approved hash="23,1,0b302720249f088f"/>
-<approved hash="23,1,0063527b563e0426"/>
 <approved hash="19,1,d1f263c40d283b1a"/>
 <approved hash="19,1,4179a30c3de03391"/>
+<approved hash="19,1,a87a5dc69b031665"/>
 </errors>
 </board>
 </drawing>
