@@ -132,33 +132,33 @@ void square_wave_drive(int angle){
   static int offset = 0;
   switch (angle){
     case 0:
-      fets(HA,LA,MOTOR_SPEED,1);//0//60
+      fets(HA,LA,MOTOR_SPEED,1);
       fets(HB,LB,MOTOR_SPEED,-1);
       fets(HC,LC,MOTOR_SPEED,0);
       Serial.println(caluculate_electorical_angle(offset));
       break;
     case 60:
-      fets(HA,LA,MOTOR_SPEED,1);//60//120
+      fets(HA,LA,MOTOR_SPEED,1);
       fets(HB,LB,MOTOR_SPEED,0);
       fets(HC,LC,MOTOR_SPEED,-1);
       break;
     case 120:
-      fets(HA,LA,MOTOR_SPEED,0);//120//180
+      fets(HA,LA,MOTOR_SPEED,0);
       fets(HB,LB,MOTOR_SPEED,1);
       fets(HC,LC,MOTOR_SPEED,-1);
       break;
     case 180:
-      fets(HA,LA,MOTOR_SPEED,-1);//180//240
+      fets(HA,LA,MOTOR_SPEED,-1);
       fets(HB,LB,MOTOR_SPEED,1);
       fets(HC,LC,MOTOR_SPEED,0);
       break;
     case 240:
-      fets(HA,LA,MOTOR_SPEED,-1);//240//300
+      fets(HA,LA,MOTOR_SPEED,-1);
       fets(HB,LB,MOTOR_SPEED,0);
       fets(HC,LC,MOTOR_SPEED,1);
       break;
     case 300:
-      fets(HA,LA,MOTOR_SPEED,0);//300//0
+      fets(HA,LA,MOTOR_SPEED,0);
       fets(HB,LB,MOTOR_SPEED,-1);
       fets(HC,LC,MOTOR_SPEED,1);
       break;
