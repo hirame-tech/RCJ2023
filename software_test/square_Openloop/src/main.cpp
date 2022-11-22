@@ -38,14 +38,12 @@ int val_sq = 0;
 void fets(int H_pin,int L_pin,int duty,int mode);
 int caluculate_electorical_angle(int offset);
 void square_wave_drive(int angle);
-int sign(int number);
 
 void setup() {
   
   analogWriteFreq(60000);//60kHz
   for (int i = 0; i < 6; i++){
     pinMode(pins[i],OUTPUT);
-    //digitalWrite(pins[i],LOW);
   }
   fets(HA,LA,MOTOR_SPEED,0);
   fets(HB,LB,MOTOR_SPEED,0);
@@ -79,7 +77,10 @@ void loop() {
   }
   if(val_sq >= 360) val_sq -= 360;
   if(val_sq <  0) val_sq += 360;
-  square_wave_drive(val_sq);
+  //square_wave_drive(val_sq);
+  fets(HA,LA,MOTOR_SPEED,1);
+  fets(HB,LB,MOTOR_SPEED,1);
+  fets(HC,LC,MOTOR_SPEED,1);  
 
   n = micros() - loop_time; 
   loop_time = micros();
@@ -149,39 +150,39 @@ void square_wave_drive(int angle){
   static int offset = 0;
   switch (angle){
     case 0:
-      fets(HA,LA,MOTOR_SPEED,1);//0//60
-      fets(HB,LB,0,1);
-      fets(HC,LC,MOTOR_SPEED,0);
+      fets(HA,LA,MOTOR_SPEED,1);//HIGH
+      fets(HB,LB,0,1);//LOW
+      fets(HC,LC,0,0);//FREE
       break;
     case 60:
-      fets(HA,LA,MOTOR_SPEED,1);//60//120
-      fets(HB,LB,MOTOR_SPEED,0);
-      fets(HC,LC,0,1);
+      fets(HA,LA,MOTOR_SPEED,1);//HIGH
+      fets(HB,LB,0,0);//FREE
+      fets(HC,LC,0,1);//LOW
       break;
     case 120:
-      fets(HA,LA,MOTOR_SPEED,0);//120//180
-      fets(HB,LB,MOTOR_SPEED,1);
-      fets(HC,LC,0,1);
+      fets(HA,LA,0,0);//FREE
+      fets(HB,LB,MOTOR_SPEED,1);//HIGH
+      fets(HC,LC,0,1);//LOW
       break;
     case 180:
-      fets(HA,LA,0,1);//180//240
-      fets(HB,LB,MOTOR_SPEED,1);
-      fets(HC,LC,MOTOR_SPEED,0);
+      fets(HA,LA,0,1);//LOW
+      fets(HB,LB,MOTOR_SPEED,1);//HIGH
+      fets(HC,LC,0,0);//FREE
       break;
     case 240:
-      fets(HA,LA,0,1);//240//300
-      fets(HB,LB,MOTOR_SPEED,0);
-      fets(HC,LC,MOTOR_SPEED,1);
+      fets(HA,LA,0,1);//LOW
+      fets(HB,LB,0,0);//FREE
+      fets(HC,LC,MOTOR_SPEED,1);//HIGH
       break;
     case 300:
-      fets(HA,LA,MOTOR_SPEED,0);//300//0
-      fets(HB,LB,0,1);
-      fets(HC,LC,MOTOR_SPEED,1);
+      fets(HA,LA,0,0);//FREE
+      fets(HB,LB,0,1);//LOW
+      fets(HC,LC,MOTOR_SPEED,1);//HIGH
       break;
     default:
-      fets(HA,LA,MOTOR_SPEED,0);
-      fets(HB,LB,MOTOR_SPEED,0);
-      fets(HC,LC,MOTOR_SPEED,0);
+      fets(HA,LA,0,0);//FREE
+      fets(HB,LB,0,0);//FREE
+      fets(HC,LC,0,0);//FREE
       break;
   }
 }
