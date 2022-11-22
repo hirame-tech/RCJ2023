@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include <func.hpp>
 
-#define GYRO_SERIAL Serial1
+#define GYRO_SERIAL Serial7 //checked
 #define IR_SERIAL Serial2
 #define CAM_SERIAL Serial3
 
@@ -19,6 +19,7 @@ LINEPIN line_pins;
 void setup() {
   //pin_setup();
   Serial.begin(115200);
+  GYRO_SERIAL.begin(115200);
   //SERIAL.begin(115200);
   //motor1.begin(115200);
   //motor2.begin(115200);
@@ -34,6 +35,10 @@ led_pins.gyro_R;
 }
 
 void loop() {
+  Serial.println(get_gyro(&GYRO_SERIAL));
+  
+  delay(1);
+  /*
   static bool line_frag = 0;
   static int line_state[30];
   static int line_threshold = 500;
@@ -56,4 +61,5 @@ void loop() {
       //add move fixed position process
     }
   }
+  */
 }
