@@ -3,7 +3,7 @@
 <eagle version="9.6.2">
 <drawing>
 <settings>
-<setting alwaysvectorfont="yes"/>
+<setting alwaysvectorfont="no"/>
 <setting verticaltext="up"/>
 </settings>
 <grid distance="50" unitdist="mil" unit="mm" style="lines" multiple="1" display="no" altdistance="5" altunitdist="mil" altunit="mil"/>
@@ -171,18 +171,18 @@
 <board>
 <fusionsync huburn="a.cGVyc29uYWw6dWUyYjhiNWJj" projecturn="a.cGVyc29uYWw6dWUyYjhiNWJjIzIwMjIwNDE2NTE3MzEzNjU2" f3durn="urn:adsk.wipprod:dm.lineage:J4KWdsV-RwmCOziydWyP5A" pcbguid="" lastpulledtime="" lastsyncedchangeguid="" latestrevisionid="46676070-bb23-41f3-9839-3d353bdf0556" lastsyncedrevisionid="46676070-bb23-41f3-9839-3d353bdf0556" lastboardhashguid="7af40513-0a80-27c1-dc80-51a4a12e53d5" lastpushedtime="2022-10-04T02:11:47Z" linktopcb3d="true"/>
 <plain>
-<circle x="2.972209375" y="10.03331875" radius="1.05" width="0.001" layer="20"/>
 <circle x="23.083259375" y="2.542159375" radius="1.05" width="0.001" layer="20"/>
-<wire x1="1.558" y1="11.44753125" x2="2.07891875" y2="8.2439" width="0.001" layer="20" curve="108.47"/>
-<wire x1="2.07891875" y1="8.2439" x2="22.58841875" y2="0.60435" width="0.001" layer="20" curve="12.2"/>
-<wire x1="22.58841875" y1="0.60435" x2="25.083259375" y2="2.542159375" width="0.001" layer="20" curve="104.32"/>
-<wire x1="25.083259375" y1="2.542159375" x2="25.083259375" y2="51.943359375" width="0.001" layer="20"/>
+<wire x1="25.083259375" y1="51.943359375" x2="25.083259375" y2="2.542159375" width="0.001" layer="20"/>
 <wire x1="25.083259375" y1="51.943359375" x2="13.083259375" y2="51.943359375" width="0.001" layer="20"/>
 <wire x1="13.083259375" y1="51.943359375" x2="13.083259375" y2="39.943359375" width="0.001" layer="20"/>
 <wire x1="13.083259375" y1="39.943359375" x2="0" y2="26.8601" width="0.001" layer="20"/>
 <wire x1="0" y1="26.8601" x2="4.94975" y2="21.91035" width="0.001" layer="20"/>
-<wire x1="4.94975" y1="21.91035" x2="4.94975" y2="14.83928125" width="0.001" layer="20" curve="-90"/>
-<wire x1="4.94975" y1="14.83928125" x2="1.558" y2="11.44753125" width="0.001" layer="20"/>
+<wire x1="4.94975" y1="14.83928125" x2="4.94975" y2="21.91035" width="0.001" layer="20" curve="90"/>
+<wire x1="2.706109375" y1="7.933459375" x2="22.58841875" y2="0.60435" width="0.001" layer="20" curve="11.808321"/>
+<wire x1="22.58841875" y1="0.60435" x2="25.083259375" y2="2.542159375" width="0.001" layer="20" curve="104.324739"/>
+<circle x="3.818409375" y="10.17241875" radius="1.05" width="0.001" layer="20"/>
+<wire x1="2.05935" y1="11.948890625" x2="2.706109375" y2="7.933459375" width="0.001" layer="20" curve="108.864352"/>
+<wire x1="4.94975" y1="14.83928125" x2="2.05935" y2="11.948890625" width="0.001" layer="20"/>
 </plain>
 <libraries>
 <library name="adafruit">
