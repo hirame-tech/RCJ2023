@@ -170,14 +170,10 @@
 </layers>
 <board>
 <plain>
-<wire x1="0.37778125" y1="26.860090625" x2="5.32753125" y2="21.91035" width="0.001" layer="20"/>
-<wire x1="5.32753125" y1="21.91035" x2="5.32753125" y2="14.83928125" width="0.001" layer="20" curve="-90"/>
-<wire x1="5.32753125" y1="14.83928125" x2="0" y2="9.51175" width="0.001" layer="20"/>
-<wire x1="0" y1="9.51175" x2="25.461040625" y2="0" width="0.001" layer="20" curve="15.16"/>
-<wire x1="25.461040625" y1="0" x2="25.461040625" y2="51.943359375" width="0.001" layer="20"/>
-<wire x1="25.461040625" y1="51.943359375" x2="13.461040625" y2="51.943359375" width="0.001" layer="20"/>
-<wire x1="13.461040625" y1="51.943359375" x2="13.461040625" y2="39.943359375" width="0.001" layer="20"/>
-<wire x1="13.461040625" y1="39.943359375" x2="0.37778125" y2="26.860090625" width="0.001" layer="20"/>
+<wire x1="0" y1="0" x2="160" y2="0" width="0" layer="20"/>
+<wire x1="160" y1="0" x2="160" y2="100" width="0" layer="20"/>
+<wire x1="160" y1="100" x2="0" y2="100" width="0" layer="20"/>
+<wire x1="0" y1="100" x2="0" y2="0" width="0" layer="20"/>
 </plain>
 <libraries>
 <library name="adafruit">
@@ -328,56 +324,6 @@ Number of pins: &lt;b&gt;2&lt;/b&gt;&lt;b&gt;&lt;P&gt;
 <wire x1="5" y1="2.5" x2="-5" y2="2.5" width="0.1524" layer="21"/>
 </package>
 </packages>
-</library>
-<library name="pinhead">
-<description>&lt;b&gt;Simple Pin Header Connectors&lt;/b&gt;&lt;p&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
-<packages>
-<package name="1X02">
-<description>&lt;b&gt;PIN HEADER&lt;/b&gt; - 0.1"</description>
-<wire x1="-2.54" y1="1.27" x2="-2.54" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="2.54" y1="-1.27" x2="-2.54" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="-2.54" y1="1.27" x2="0" y2="1.27" width="0.254" layer="21"/>
-<wire x1="0" y1="1.27" x2="2.54" y2="1.27" width="0.254" layer="21"/>
-<wire x1="2.54" y1="1.27" x2="2.54" y2="-1.27" width="0.254" layer="21"/>
-<wire x1="0" y1="1.27" x2="0" y2="-1.27" width="0.254" layer="21"/>
-<pad name="1" x="-1.27" y="0" drill="1.016" shape="square" rot="R90"/>
-<pad name="2" x="1.27" y="0" drill="1.016" shape="octagon" rot="R90"/>
-<text x="-2.6162" y="1.8288" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-2.54" y="-3.175" size="1.27" layer="27">&gt;VALUE</text>
-<rectangle x1="-1.524" y1="-0.254" x2="-1.016" y2="0.254" layer="51"/>
-<rectangle x1="1.016" y1="-0.254" x2="1.524" y2="0.254" layer="51"/>
-</package>
-</packages>
-</library>
-<library name="buzzer" urn="urn:adsk.eagle:library:113">
-<description>&lt;b&gt;Speakers and Buzzers&lt;/b&gt;&lt;p&gt;
-&lt;ul&gt;Distributors:
-&lt;li&gt;Buerklin
-&lt;li&gt;Spoerle
-&lt;li&gt;Schukat
-&lt;/ul&gt;
-&lt;author&gt;Created by librarian@cadsoft.de&lt;/author&gt;</description>
-<packages>
-<package name="AL11P" urn="urn:adsk.eagle:footprint:5250/1" library_version="2">
-<description>&lt;b&gt;SPEAKER&lt;/b&gt;</description>
-<circle x="0" y="0" radius="5.715" width="0.1524" layer="21"/>
-<circle x="0" y="0" radius="6.223" width="0.1524" layer="21"/>
-<circle x="0" y="0" radius="1.016" width="0.1524" layer="21"/>
-<pad name="-" x="-2.286" y="0" drill="1.016" diameter="1.905" shape="octagon"/>
-<pad name="+" x="2.286" y="0" drill="1.016" diameter="1.905" shape="octagon"/>
-<text x="-3.175" y="6.35" size="1.27" layer="25" ratio="10">&gt;NAME</text>
-<text x="-3.81" y="-3.175" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
-</package>
-</packages>
-<packages3d>
-<package3d name="AL11P" urn="urn:adsk.eagle:package:5308/1" type="box" library_version="2">
-<description>SPEAKER</description>
-<packageinstances>
-<packageinstance name="AL11P"/>
-</packageinstances>
-</package3d>
-</packages3d>
 </library>
 </libraries>
 <attributes>
@@ -566,66 +512,45 @@ design rules under a new name.
 </pass>
 </autorouter>
 <elements>
-<element name="C1" library="adafruit" package="C2012" value="22uF 25V" x="17.526" y="33.528" smashed="yes" rot="R315">
-<attribute name="NAME" x="17.6158" y="34.8750375" size="1.27" layer="25" rot="R315"/>
-<attribute name="VALUE" x="15.280934375" y="32.54016875" size="1.27" layer="27" rot="R315"/>
+<element name="C1" library="adafruit" package="C2012" value="22uF 25V" x="-35.56" y="36.83" smashed="yes">
+<attribute name="NAME" x="-36.449" y="37.846" size="1.27" layer="25"/>
+<attribute name="VALUE" x="-36.449" y="34.544" size="1.27" layer="27"/>
 </element>
-<element name="C2" library="adafruit" package="C2012" value="10uF 10V" x="20.828" y="30.226" smashed="yes" rot="R135">
-<attribute name="NAME" x="20.7382" y="28.8789625" size="1.27" layer="25" rot="R135"/>
-<attribute name="VALUE" x="23.073065625" y="31.21383125" size="1.27" layer="27" rot="R135"/>
+<element name="C2" library="adafruit" package="C2012" value="10uF 10V" x="-20.32" y="43.18" smashed="yes">
+<attribute name="NAME" x="-21.209" y="44.196" size="1.27" layer="25"/>
+<attribute name="VALUE" x="-21.209" y="40.894" size="1.27" layer="27"/>
 </element>
-<element name="MAIN" library="Rembrandt Electronics - JST XH Connectors v1-0" package="JST-XH-02-PACKAGE-LONG-PAD" value="JST-XH-02-PIN-LONG-PAD" x="17.78" y="48.26" smashed="yes">
-<attribute name="NAME" x="13.525" y="46.22" size="1.016" layer="25" ratio="10" rot="R90"/>
-<attribute name="VALUE" x="14.4775" y="52.1525" size="1.016" layer="27" ratio="10"/>
+<element name="MAIN" library="Rembrandt Electronics - JST XH Connectors v1-0" package="JST-XH-02-PACKAGE-LONG-PAD" value="JST-XH-02-PIN-LONG-PAD" x="-27.94" y="19.05" smashed="yes">
+<attribute name="NAME" x="-32.195" y="17.01" size="1.016" layer="25" ratio="10" rot="R90"/>
+<attribute name="VALUE" x="-31.2425" y="22.9425" size="1.016" layer="27" ratio="10"/>
 </element>
-<element name="MD3" library="OKL-T_6-W12P-C" package="MURATA_OKL-T-6-W12P-C_0" value="OKL-T/6-W12P-CMURATA_OKL-T-6-W12P-C_0_0" x="18.669" y="16.129" smashed="yes">
-<attribute name="AVAILABILITY" value="In Stock" x="38.988996875" y="8.50899375" size="1.778" layer="27" display="off"/>
-<attribute name="DESCRIPTION" value=" Non-Isolated PoL Module DC DC Converter 1 Output 0.591 ~ 5.5V - - 6A 4.5V - 14V Input " x="38.988996875" y="8.50899375" size="1.778" layer="27" display="off"/>
-<attribute name="MF" value="Murata Power Solutions Inc." x="38.988996875" y="8.50899375" size="1.778" layer="27" display="off"/>
-<attribute name="MP" value="OKL-T/6-W12P-C" x="38.988996875" y="8.50899375" size="1.778" layer="27" display="off"/>
-<attribute name="NAME" x="12.318996875" y="23.078996875" size="1" layer="25"/>
-<attribute name="PACKAGE" value="BLGA-12 Murata Power Solutions" x="38.988996875" y="8.50899375" size="1.778" layer="27" display="off"/>
-<attribute name="PRICE" value="None" x="38.988996875" y="8.50899375" size="1.778" layer="27" display="off"/>
-<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/OKL-T/6-W12P-C/?ref=eda" x="38.988996875" y="8.50899375" size="1.778" layer="27" display="off"/>
+<element name="MD3" library="OKL-T_6-W12P-C" package="MURATA_OKL-T-6-W12P-C_0" value="OKL-T/6-W12P-CMURATA_OKL-T-6-W12P-C_0_0" x="-20.32" y="7.62" smashed="yes">
+<attribute name="AVAILABILITY" value="In Stock" x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="DESCRIPTION" value=" Non-Isolated PoL Module DC DC Converter 1 Output 0.591 ~ 5.5V - - 6A 4.5V - 14V Input " x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="MF" value="Murata Power Solutions Inc." x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="MP" value="OKL-T/6-W12P-C" x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="NAME" x="-26.67" y="14.57" size="1" layer="25"/>
+<attribute name="PACKAGE" value="BLGA-12 Murata Power Solutions" x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="PRICE" value="None" x="0" y="0" size="1.778" layer="27" display="off"/>
+<attribute name="PURCHASE-URL" value="https://pricing.snapeda.com/search/part/OKL-T/6-W12P-C/?ref=eda" x="0" y="0" size="1.778" layer="27" display="off"/>
 </element>
-<element name="R3" library="adafruit" package="M2012" value="20kΩ" x="46.99" y="27.94" smashed="yes">
-<attribute name="NAME" x="45.974" y="28.956" size="1.27" layer="25"/>
-<attribute name="VALUE" x="45.974" y="25.654" size="1.27" layer="27"/>
+<element name="R3" library="adafruit" package="M2012" value="20kΩ" x="-33.02" y="43.18" smashed="yes">
+<attribute name="NAME" x="-34.036" y="44.196" size="1.27" layer="25"/>
+<attribute name="VALUE" x="-34.036" y="40.894" size="1.27" layer="27"/>
 </element>
-<element name="R4" library="adafruit" package="M2012" value="1.2kΩ" x="55.88" y="19.05" smashed="yes">
-<attribute name="NAME" x="54.864" y="20.066" size="1.27" layer="25"/>
-<attribute name="VALUE" x="54.864" y="16.764" size="1.27" layer="27"/>
+<element name="R4" library="adafruit" package="M2012" value="1.2kΩ" x="-26.67" y="43.18" smashed="yes">
+<attribute name="NAME" x="-27.686" y="44.196" size="1.27" layer="25"/>
+<attribute name="VALUE" x="-27.686" y="40.894" size="1.27" layer="27"/>
 </element>
-<element name="R6" library="adafruit" package="0805-THM" value="1.2KΩ  1/6W" x="36.83" y="38.1" smashed="yes">
-<attribute name="NAME" x="33.782" y="39.624" size="1.27" layer="25" ratio="10"/>
-<attribute name="VALUE" x="33.6994" y="35.325" size="1.27" layer="27" ratio="10"/>
+<element name="R6" library="adafruit" package="0805-THM" value="1.2KΩ  1/6W" x="-21.59" y="36.83" smashed="yes">
+<attribute name="NAME" x="-24.638" y="38.354" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="-24.7206" y="34.055" size="1.27" layer="27" ratio="10"/>
 </element>
-<element name="U$4" library="by_hirame" package="R-TRIM" value="20kΩ" x="-22.86" y="22.86" smashed="yes"/>
-<element name="JP2" library="pinhead" package="1X02" value="" x="15.314040625" y="42.4872" smashed="yes" rot="R90">
-<attribute name="NAME" x="13.485240625" y="39.871" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="VALUE" x="18.489040625" y="39.9472" size="1.27" layer="27" rot="R90"/>
+<element name="RASPI" library="Rembrandt Electronics - JST XH Connectors v1-0" package="JST-XH-02-PACKAGE-LONG-PAD" value="JST-XH-02-PIN-LONG-PAD" x="-27.94" y="27.94" smashed="yes">
+<attribute name="NAME" x="-32.195" y="25.9" size="1.016" layer="25" ratio="10" rot="R90"/>
+<attribute name="VALUE" x="-31.2425" y="31.8325" size="1.016" layer="27" ratio="10"/>
 </element>
-<element name="JP4" library="pinhead" package="1X02" value="" x="14.224" y="6.858" smashed="yes" rot="R90">
-<attribute name="NAME" x="12.3952" y="4.2418" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="VALUE" x="17.399" y="4.318" size="1.27" layer="27" rot="R90"/>
-</element>
-<element name="JP1" library="pinhead" package="1X02" value="" x="23.061040625" y="48.3292" smashed="yes" rot="R90">
-<attribute name="NAME" x="21.232240625" y="45.713" size="1.27" layer="25" ratio="10" rot="R90"/>
-<attribute name="VALUE" x="26.236040625" y="45.7892" size="1.27" layer="27" rot="R90"/>
-</element>
-<element name="JP3" library="pinhead" package="1X02" value="" x="10.414" y="8.128" smashed="yes">
-<attribute name="NAME" x="7.7978" y="9.9568" size="1.27" layer="25" ratio="10"/>
-<attribute name="VALUE" x="7.874" y="4.953" size="1.27" layer="27"/>
-</element>
-<element name="SP1" library="buzzer" library_urn="urn:adsk.eagle:library:113" package="AL11P" package3d_urn="urn:adsk.eagle:package:5308/1" value="AL11P" x="14.224" y="29.972" smashed="yes">
-<attribute name="MF" value="" x="14.224" y="29.972" size="1.778" layer="27" font="vector" display="off"/>
-<attribute name="MPN" value="" x="14.224" y="29.972" size="1.778" layer="27" font="vector" display="off"/>
-<attribute name="NAME" x="11.049" y="36.322" size="1.27" layer="25" ratio="10"/>
-<attribute name="OC_FARNELL" value="unknown" x="14.224" y="29.972" size="1.778" layer="27" font="vector" display="off"/>
-<attribute name="OC_NEWARK" value="unknown" x="14.224" y="29.972" size="1.778" layer="27" font="vector" display="off"/>
-<attribute name="POPULARITY" value="3" x="14.224" y="29.972" size="1.778" layer="27" font="vector" display="off"/>
-<attribute name="VALUE" x="10.414" y="26.797" size="1.27" layer="27" ratio="10"/>
-</element>
+<element name="U$4" library="by_hirame" package="R-TRIM" value="20kΩ" x="-17.78" y="49.53" smashed="yes"/>
 </elements>
 <signals>
 <signal name="GND">
@@ -638,29 +563,23 @@ design rules under a new name.
 <contactref element="C2" pad="2"/>
 <contactref element="R6" pad="1"/>
 <contactref element="MAIN" pad="1"/>
-<contactref element="JP2" pad="1"/>
-<contactref element="JP2" pad="2"/>
-<wire x1="14.097" y1="16.129" x2="19.812" y2="20.701" width="0" layer="19" extent="1-1"/>
-<wire x1="18.669" y1="11.557" x2="14.097" y2="16.129" width="0" layer="19" extent="1-1"/>
-<wire x1="31.75" y1="38.1" x2="19.812" y2="20.701" width="0" layer="19" extent="1-1"/>
-<wire x1="20.22695625" y1="30.827040625" x2="31.75" y2="38.1" width="0" layer="19" extent="1-1"/>
-<wire x1="18.127040625" y1="32.92695625" x2="20.22695625" y2="30.827040625" width="0" layer="19" extent="1-1"/>
-<wire x1="15.314040625" y1="41.2172" x2="18.127040625" y2="32.92695625" width="0" layer="19" extent="1-1"/>
-<wire x1="15.314040625" y1="43.7572" x2="15.314040625" y2="41.2172" width="0" layer="19" extent="1-1"/>
-<wire x1="16.51" y1="48.26" x2="15.314040625" y2="43.7572" width="0" layer="19" extent="1-1"/>
-<wire x1="46.04" y1="27.94" x2="20.22695625" y2="30.827040625" width="0" layer="19" extent="1-1"/>
-<wire x1="54.93" y1="19.05" x2="46.04" y2="27.94" width="0" layer="19" extent="1-1"/>
+<contactref element="RASPI" pad="1"/>
+<wire x1="-27.62" y1="43.18" x2="-19.47" y2="43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="-33.97" y1="43.18" x2="-27.62" y2="43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="-34.71" y1="36.83" x2="-33.97" y2="43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="-26.67" y1="36.83" x2="-27.62" y2="43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="-29.21" y1="27.94" x2="-26.67" y2="36.83" width="0" layer="19" extent="1-1"/>
+<wire x1="-29.21" y1="19.05" x2="-29.21" y2="27.94" width="0" layer="19" extent="1-1"/>
+<wire x1="-19.177" y1="12.192" x2="-29.21" y2="19.05" width="0" layer="19" extent="1-1"/>
+<wire x1="-24.892" y1="7.62" x2="-19.177" y2="12.192" width="0" layer="19" extent="1-1"/>
+<wire x1="-20.32" y1="3.048" x2="-24.892" y2="7.62" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="VCC">
 <contactref element="R3" pad="2"/>
 <contactref element="MD3" pad="2"/>
 <contactref element="C1" pad="1"/>
-<contactref element="JP4" pad="1"/>
-<contactref element="JP4" pad="2"/>
-<wire x1="16.92495625" y1="34.129040625" x2="15.24" y2="20.701" width="0" layer="19" extent="1-1"/>
-<wire x1="47.94" y1="27.94" x2="16.92495625" y2="34.129040625" width="0" layer="19" extent="1-1"/>
-<wire x1="14.224" y1="8.128" x2="47.94" y2="27.94" width="0" layer="19" extent="1-1"/>
-<wire x1="14.224" y1="5.588" x2="14.224" y2="8.128" width="0" layer="19" extent="1-1"/>
+<wire x1="-36.41" y1="36.83" x2="-32.07" y2="43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="-23.749" y1="12.192" x2="-36.41" y2="36.83" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$8">
 <contactref element="MD3" pad="4"/>
@@ -668,31 +587,24 @@ design rules under a new name.
 <contactref element="C2" pad="1"/>
 <contactref element="R6" pad="2"/>
 <contactref element="MAIN" pad="2"/>
-<wire x1="23.241" y1="19.558" x2="41.91" y2="38.1" width="0" layer="19" extent="1-1"/>
-<wire x1="23.241" y1="16.129" x2="23.241" y2="19.558" width="0" layer="19" extent="1-1"/>
-<wire x1="21.429040625" y1="29.62495625" x2="41.91" y2="38.1" width="0" layer="19" extent="1-1"/>
-<wire x1="19.05" y1="48.26" x2="21.429040625" y2="29.62495625" width="0" layer="19" extent="1-1"/>
+<contactref element="RASPI" pad="2"/>
+<wire x1="-16.51" y1="36.83" x2="-21.17" y2="43.18" width="0" layer="19" extent="1-1"/>
+<wire x1="-26.67" y1="27.94" x2="-16.51" y2="36.83" width="0" layer="19" extent="1-1"/>
+<wire x1="-26.67" y1="19.05" x2="-26.67" y2="27.94" width="0" layer="19" extent="1-1"/>
+<wire x1="-15.748" y1="11.049" x2="-26.67" y2="19.05" width="0" layer="19" extent="1-1"/>
+<wire x1="-15.748" y1="7.62" x2="-15.748" y2="11.049" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$9">
 <contactref element="MD3" pad="6"/>
 <contactref element="U$4" pad="P$1"/>
-<wire x1="-25.4" y1="22.86" x2="23.241" y2="11.557" width="0" layer="19" extent="1-1"/>
+<wire x1="-15.748" y1="3.048" x2="-20.32" y2="49.53" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$7">
 <contactref element="R4" pad="2"/>
 <contactref element="U$4" pad="P$3"/>
 <contactref element="U$4" pad="P$2"/>
-<wire x1="-22.86" y1="22.86" x2="-20.32" y2="22.86" width="0" layer="19" extent="1-1"/>
-<wire x1="56.83" y1="19.05" x2="-22.86" y2="22.86" width="0" layer="19" extent="1-1"/>
-</signal>
-<signal name="N$5">
-<contactref element="JP3" pad="2"/>
-<contactref element="JP3" pad="1"/>
-<contactref element="JP1" pad="2"/>
-<contactref element="JP1" pad="1"/>
-<wire x1="23.061040625" y1="47.0592" x2="23.061040625" y2="49.5992" width="0" layer="19" extent="1-1"/>
-<wire x1="11.684" y1="8.128" x2="23.061040625" y2="47.0592" width="0" layer="19" extent="1-1"/>
-<wire x1="9.144" y1="8.128" x2="11.684" y2="8.128" width="0" layer="19" extent="1-1"/>
+<wire x1="-17.78" y1="49.53" x2="-15.24" y2="49.53" width="0" layer="19" extent="1-1"/>
+<wire x1="-25.72" y1="43.18" x2="-17.78" y2="49.53" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>
@@ -704,21 +616,4 @@ design rules under a new name.
 </mfgpreviewcolors>
 </board>
 </drawing>
-<compatibility>
-<note version="8.2" severity="warning">
-Since Version 8.2, EAGLE supports online libraries. The ids
-of those online libraries will not be understood (or retained)
-with this version.
-</note>
-<note version="8.3" severity="warning">
-Since Version 8.3, EAGLE supports URNs for individual library
-assets (packages, symbols, and devices). The URNs of those assets
-will not be understood (or retained) with this version.
-</note>
-<note version="8.3" severity="warning">
-Since Version 8.3, EAGLE supports the association of 3D packages
-with devices in libraries, schematics, and board files. Those 3D
-packages will not be understood (or retained) with this version.
-</note>
-</compatibility>
 </eagle>

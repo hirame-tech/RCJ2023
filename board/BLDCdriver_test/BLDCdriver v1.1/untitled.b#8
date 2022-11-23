@@ -156,19 +156,10 @@
 </layers>
 <board>
 <plain>
-<wire x1="0" y1="-3" x2="0" y2="56" width="0.001" layer="20"/>
-<wire x1="3" y1="59" x2="43" y2="59" width="0.001" layer="20"/>
-<wire x1="46" y1="56" x2="46" y2="-3" width="0.001" layer="20"/>
-<wire x1="43" y1="-6" x2="3" y2="-6" width="0.001" layer="20"/>
-<circle x="3" y="-3" radius="1.6" width="0.001" layer="20"/>
-<wire x1="0" y1="-3" x2="3" y2="-6" width="0.001" layer="20" curve="90"/>
-<wire x1="3" y1="59" x2="0" y2="56" width="0.001" layer="20" curve="90"/>
-<circle x="3" y="56" radius="1.6" width="0.001" layer="20"/>
-<circle x="43" y="56" radius="1.6" width="0.001" layer="20"/>
-<wire x1="46" y1="56" x2="43" y2="59" width="0.001" layer="20" curve="90"/>
-<circle x="43" y="-3" radius="1.6" width="0.001" layer="20"/>
-<wire x1="43" y1="-6" x2="46" y2="-3" width="0.001" layer="20" curve="90"/>
-<text x="12.7" y="-2.54" size="1.778" layer="25" font="vector">Designed by hirame</text>
+<wire x1="0" y1="0" x2="46.335" y2="0" width="0" layer="20"/>
+<wire x1="46.335" y1="0" x2="46.335" y2="53.01" width="0" layer="20"/>
+<wire x1="46.335" y1="53.01" x2="0" y2="53.01" width="0" layer="20"/>
+<wire x1="0" y1="53.01" x2="0" y2="0" width="0" layer="20"/>
 </plain>
 <libraries>
 <library name="Rembrandt Electronics - JST XH Connectors v1-0">
@@ -1364,7 +1355,7 @@ design rules under a new name.</description>
 </signal>
 </signals>
 <mfgpreviewcolors>
-<mfgpreviewcolor name="soldermaskcolor" color="0xC8000000"/>
+<mfgpreviewcolor name="soldermaskcolor" color="0xC8008000"/>
 <mfgpreviewcolor name="silkscreencolor" color="0xFFFEFEFE"/>
 <mfgpreviewcolor name="backgroundcolor" color="0xFF282828"/>
 <mfgpreviewcolor name="coppercolor" color="0xFFFFBF00"/>

@@ -55,7 +55,10 @@ void get_IR(int *pins,int *datas){
   const unsigned long start_time= micros();
   do{
     for (int i = 0; i < SENSOR_NUMBER; i++){
+      if((i < 5) || (11 < i)){
         datas[i] += (digitalRead(pins[i]) == LOW)*COEFFICIENT;
+      }
+      
     }
   }while ((micros() - start_time) < CYCLE_TIME);
 }

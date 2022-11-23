@@ -46,7 +46,7 @@ void setup() {
   Serial.begin(115200);
   Serial1.begin(115200);
 
-  Serial.println("Initializing I2C devices...");
+  Serial.println(F("Initializing I2C devices..."));
   mpu.initialize();
   pinMode(INTERRUPT_PIN, INPUT);
 
@@ -99,12 +99,11 @@ void setup() {
 }
 
 void loop() {
-
-  if (!dmpReady){
-    Serial.println("Failed");
-    
-    while(true);
+  if(digitalRead(RESET_PIN) == 0){
+    offset = angle;
   }
+
+  if (!dmpReady) return;
   if (mpu.dmpGetCurrentFIFOPacket(fifoBuffer)) {
     mpu.dmpGetQuaternion(&q, fifoBuffer);
     mpu.dmpGetGravity(&gravity, &q);
@@ -119,9 +118,7 @@ void loop() {
   }else{
     angle = angle;
   }
-  if(digitalRead(RESET_PIN) == 0){
-    offset = angle;
-  }
+
   angle -= offset;
   if(angle < 0){
     angle += 360;
@@ -132,5 +129,4 @@ void loop() {
 
   Serial.println(send_data);//180が存在してないからエラー提示等に使えるかも
   Serial1.write(send_data);
-  //Serial.println(digitalRead(RESET_PIN));
 }
