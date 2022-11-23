@@ -8095,14 +8095,14 @@ W = angled&lt;p&gt;
 <part name="R2" library="adafruit" deviceset="R-US_" device="M2012"/>
 <part name="R3" library="adafruit" deviceset="R-US_" device="M2012"/>
 <part name="R4" library="adafruit" deviceset="R-US_" device="M2012"/>
-<part name="C1" library="adafruit" deviceset="C-US" device="C2012"/>
-<part name="C2" library="adafruit" deviceset="C-US" device="C2012"/>
+<part name="C1" library="adafruit" deviceset="C-US" device="C2012" value="1uF"/>
+<part name="C2" library="adafruit" deviceset="C-US" device="C2012" value="1uF"/>
 <part name="P+1" library="supply1" deviceset="VCC" device=""/>
 <part name="P+2" library="supply1" deviceset="VCC" device=""/>
 <part name="P+3" library="supply1" deviceset="VCC" device=""/>
 <part name="R5" library="adafruit" deviceset="R-US_" device="M2012"/>
 <part name="R6" library="adafruit" deviceset="R-US_" device="M2012"/>
-<part name="C3" library="adafruit" deviceset="C-US" device="C2012"/>
+<part name="C3" library="adafruit" deviceset="C-US" device="C2012" value="1uF"/>
 <part name="D1" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="DIODE-" device="DO-214AC" package3d_urn="urn:adsk.eagle:package:43416/2"/>
 <part name="D2" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="DIODE-" device="DO-214AC" package3d_urn="urn:adsk.eagle:package:43416/2"/>
 <part name="D3" library="diode" library_urn="urn:adsk.eagle:library:210" deviceset="DIODE-" device="DO-214AC" package3d_urn="urn:adsk.eagle:package:43416/2"/>
@@ -8122,9 +8122,9 @@ W = angled&lt;p&gt;
 <part name="X4" library="Rembrandt Electronics - JST XH Connectors v1-0" deviceset="JST-XH-04-PIN" device="-ROUND-PAD"/>
 <part name="P+8" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
 <part name="GND6" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
-<part name="R7" library="adafruit" deviceset="R-US_" device="M2012"/>
-<part name="R8" library="adafruit" deviceset="R-US_" device="M2012"/>
-<part name="R9" library="adafruit" deviceset="R-US_" device="M2012"/>
+<part name="R7" library="adafruit" deviceset="R-US_" device="M2012" value="300Ω"/>
+<part name="R8" library="adafruit" deviceset="R-US_" device="M2012" value="300Ω"/>
+<part name="R9" library="adafruit" deviceset="R-US_" device="M2012" value="300Ω"/>
 </parts>
 <sheets>
 <sheet>

@@ -45,16 +45,19 @@ void loop() {
     strip.show();
 
     get_linesensor(set_port, read_port, sensor_value);
-    for (int i = 0; i < 29; i++) {
+    /*for (int i = 0; i < 29; i++) {
         Serial.print(sensor_value[i]);
         Serial.print(",");
     }
-    Serial.println(sensor_value[29]);
+    Serial.println(sensor_value[29]);*/
+    Serial.println(sensor_value[0]);
 
     get_rad(sensor_value, threshold, &angle, &distance);
-    Serial.print(angle);
+    /*Serial.print(angle);
     Serial.print(",");
-    Serial.println(distance);
+    Serial.println(distance);*/
+
+
 }
 
 /*
@@ -136,7 +139,7 @@ void get_rad(int data[], int threshold, float *angle, float *distance) {
     c = (-1) / a;
 
     *distance = (fabs(b) / sqrt(a * a + 1));
-    *angle = atan(c);
+    *angle = tan(c);
 }
 
 double degree_to_rad(int degree) {

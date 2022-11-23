@@ -1,13 +1,10 @@
-## Hardware spec
-- IC            AS5048A
-- Voltage       5V
-- Communication SPI
+AS5048A Arduino library
+=======================
 
-## Software memo
-angle data : 14bit
-(First time)write 0xFF → High byte
-(Second time)write 0xFF → Low byte
+A simple SPI library to interface with Austria Microsystem's AS5048A angle sensor with an Arduino or an ESP32.
 
-angle data = (High byte << 8 )+low byte
+The sensor should be connected to the hardware SPI pins (MISO, MOSI, SCK). The CS pin can be connected to any GPIO pin but should be passed to the constructor.
 
-(In program,you had better add &0x3FFF because angle data is 14bit.)
+---
+
+Original author: [ZoetropeLabs](https://github.com/ZoetropeLabs/AS5048A-Arduino)
