@@ -1,10 +1,9 @@
-AS5048A Arduino library
-=======================
-
-A simple SPI library to interface with Austria Microsystem's AS5048A angle sensor with an Arduino or an ESP32.
-
-The sensor should be connected to the hardware SPI pins (MISO, MOSI, SCK). The CS pin can be connected to any GPIO pin but should be passed to the constructor.
-
----
-
-Original author: [ZoetropeLabs](https://github.com/ZoetropeLabs/AS5048A-Arduino)
+# Serial通信内容
+|data|解釈|
+|----|----|
+|0|ロック(未実装)|
+|1~26|未定義|
+|27~126|逆転 100 ~ 1|
+|127|free stop|
+|128~227|正転1~100|
+|228~255|未定義|
