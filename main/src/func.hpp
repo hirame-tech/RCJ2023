@@ -124,13 +124,17 @@ void get_IR(Stream *serial,float *detection_r,int *distance){
 * @param *serial Serial class which using gyro
 * @return gyro value(0-255)
 */
-int get_gyro(Stream *serial){
+int get_gyro(Stream *serial,int led_pin){
     static int value;
     if(serial->available()){
-        value = serial->read();
-        return value;
-        
+        digitalWrite(led_pins,HIGH);
+        value = serial->read()+127;
+        if(value > 255){
+            value -= 256;
+        }
+        return value;  
     }else{
+        digitalWrite(led_pins,LOW);
         return value;
     }  
 }
