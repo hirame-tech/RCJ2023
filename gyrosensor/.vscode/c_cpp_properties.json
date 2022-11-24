@@ -1,0 +1,64 @@
+//
+// !!! WARNING !!! AUTO-GENERATED FILE!
+// PLEASE DO NOT MODIFY IT AND USE "platformio.ini":
+// https://docs.platformio.org/page/projectconf/section_env_build.html#build-flags
+//
+{
+    "configurations": [
+        {
+            "name": "PlatformIO",
+            "includePath": [
+                "c:/Users/Haruto_Hamakawa/Documents/RCJ2023/gyrosensor/include",
+                "c:/Users/Haruto_Hamakawa/Documents/RCJ2023/gyrosensor/src",
+                "c:/Users/Haruto_Hamakawa/Documents/RCJ2023/gyrosensor/lib/mpu6050/src",
+                "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/cores/arduino",
+                "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/variants/leonardo",
+                "c:/Users/Haruto_Hamakawa/Documents/RCJ2023/gyrosensor/.pio/libdeps/leonardo/Unity/src",
+                "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                ""
+            ],
+            "browse": {
+                "limitSymbolsToIncludedHeaders": true,
+                "path": [
+                    "c:/Users/Haruto_Hamakawa/Documents/RCJ2023/gyrosensor/include",
+                    "c:/Users/Haruto_Hamakawa/Documents/RCJ2023/gyrosensor/src",
+                    "c:/Users/Haruto_Hamakawa/Documents/RCJ2023/gyrosensor/lib/mpu6050/src",
+                    "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/libraries/Wire/src",
+                    "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/cores/arduino",
+                    "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/variants/leonardo",
+                    "c:/Users/Haruto_Hamakawa/Documents/RCJ2023/gyrosensor/.pio/libdeps/leonardo/Unity/src",
+                    "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/libraries/EEPROM/src",
+                    "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/libraries/HID/src",
+                    "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/libraries/SPI/src",
+                    "C:/Users/Haruto_Hamakawa/.platformio/packages/framework-arduino-avr/libraries/SoftwareSerial/src",
+                    ""
+                ]
+            },
+            "defines": [
+                "PLATFORMIO=60105",
+                "ARDUINO_AVR_LEONARDO",
+                "F_CPU=16000000L",
+                "ARDUINO_ARCH_AVR",
+                "ARDUINO=10808",
+                "USB_VID=0x2341",
+                "USB_PID=0x8036",
+                "USB_PRODUCT=\"Arduino Leonardo\"",
+                "USB_MANUFACTURER=\"Arduino\"",
+                "__AVR_ATmega32U4__",
+                ""
+            ],
+            "cStandard": "c11",
+            "cppStandard": "c++11",
+            "compilerPath": "C:/Users/Haruto_Hamakawa/.platformio/packages/toolchain-atmelavr/bin/avr-gcc.exe",
+            "compilerArgs": [
+                "-mmcu=atmega32u4",
+                ""
+            ]
+        }
+    ],
+    "version": 4
+}

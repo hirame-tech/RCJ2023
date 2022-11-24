@@ -1,15 +1,15 @@
 //#ifndef
-#define PI 3.1415926535
+#include <Arduino.h>
 
-struct LINEPIN
-{
+struct LINEPIN{
     int ICpin1[4];
     int ICpin2[4];
     int Apin1;
     int Apin2;
 };
+//LINEPIN set_linepin();
 
-struct LEDPIN
+typedef struct ledpin
 {
     int line_state;
     int cam_state;
@@ -17,7 +17,9 @@ struct LEDPIN
     int IR_state;
     int gyro_L;
     int gyro_R;
-};
+}LEDPIN;
+
+//LEDPIN set_ledpins();
 
 
 /**
@@ -28,21 +30,23 @@ struct LEDPIN
 float rad(int degree){
     if(degree < 0){
         degree += 360;
-    }else(degree >= 360){
+    }
+    else if(degree >= 360){
         degree -=360;
     }
     return ((float)degree * PI /180);
 }
 
+
+
 /**
  * @brief move motor
- * @param detection_d move direction(radian)
+ * @param direction_d move direction(radian)
  * @param speed motor speed(0~255)
  * @param jyro jyro(0~255 senter:127)
  * @param param PID parameter
  * @param pins motor driver pins
  * 
- */
 void move(float detection_r,int speed,int gyro,float param[],int pins[]){
     float detection_r,p,i,d;
     float motor_speed[4];
@@ -57,6 +61,8 @@ void move(float detection_r,int speed,int gyro,float param[],int pins[]){
     
 
 }
+*/
+
 /*
 * @brief get IR value
 * @param *serial Serial class which using IR
@@ -77,10 +83,19 @@ void get_IR(Stream *serial,float *detection_r,int *distance){
 * @param *serial Serial class which using gyro
 * @return gyro value(0-255)
 */
-int get_gyro(Stream *serial){
+int get_gyro(Stream *serial,int led_pin){
+    static int value = 127;
     if(serial->available()){
-        return serial->read();
-    }    
+        digitalWrite(led_pin,HIGH);
+        value = serial->read()+127;
+        if(value > 255){
+            value -= 256;
+        }
+        return value;  
+    }else{
+        digitalWrite(led_pin,LOW);
+        return value;
+    }  
 }
 
 bool get_line(LINEPIN pins,int value[],int threshold){
