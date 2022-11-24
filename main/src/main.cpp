@@ -20,23 +20,31 @@ void setup() {
   //pin_setup();
   Serial.begin(115200);
   GYRO_SERIAL.begin(115200);
-  //SERIAL.begin(115200);
   //motor1.begin(115200);
   //motor2.begin(115200);
   //motor3.begin(115200);
 
-led_pins.line_state = 1;
-led_pins.cam_state = 1;
-led_pins.gyro_state = 1;
-led_pins.IR_state = 1;
-led_pins.gyro_L = 1;
-led_pins.gyro_R = 1;
+  led_pins.line_state = 1;
+  led_pins.cam_state = 1;
+  led_pins.gyro_state = 1;
+  led_pins.IR_state = 1;
+  led_pins.gyro_L = 1;
+  led_pins.gyro_R = 1;
+  //pinMode(led_pins.line_state,OUTPUT);
+  //pinMode(led_pins.cam_state,OUTPUT);
+  //pinMode(led_pins.gyro_state,OUTPUT);
+  //pinMode(led_pins.IR_state,OUTPUT);
+  //pinMode(led_pins.gyro_L,OUTPUT);
+  //pinMode(led_pins.gyro_R,OUTPUT);
 
 }
 
 void loop() {
   //variable definition
+  static bool line_frag = 0;
   static int gyro_angle = 127;
+
+  static float IR_angle;
 
   //LED process
   if(gyro_angle < 120){
@@ -51,11 +59,14 @@ void loop() {
   }
 
 
-  Serial.println(get_gyro(&GYRO_SERIAL,led_pins.gyro_state));
-  
+  gyro_angle = get_gyro(&GYRO_SERIAL,led_pins.gyro_state);
+  if(IR_angle <= PI/4){
+
+  }else if(IR_angle >= PI*3/4){
+
+  }
   delay(1);
   /*
-  static bool line_frag = 0;
   static int line_state[30];
   static int line_threshold = 500;
   

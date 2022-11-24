@@ -62,47 +62,6 @@ void move(float detection_r,int speed,int gyro,float param[],int pins[]){
 
 }
 */
-/**
- * @brief move motor
- * @param direction_r move direction(radian)
- * @param speed motor speed(0~255)
- * @param gyro jyro(0~255 senter:127)
- * @param pins motor driver pins
- */
-void move(float direction_r,int speed,int gyro,Stream *serial[]){
-    int p = 2;//比例定数
-    gyro -= 127;
-    float motor_speed[4];
-    int speed_sign[4];
-    motor_speed[0] = speed * cos(- (PI/4) + direction_r);
-    motor_speed[1] = speed * cos((PI/4) + direction_r);
-    motor_speed[2] = speed * cos(- (PI/4) + direction_r);
-    motor_speed[3] = speed * cos((PI/4) + direction_r);
-    
-    
-    motor_speed[0] += p*gyro;
-    motor_speed[1] += p*gyro;
-    motor_speed[2] -= p*gyro;
-    motor_speed[3] -= p*gyro;
-
-    //normalize and Serial send
-    int max = 0;
-    for(int i = 0; i < 4; i++){
-        if( 0 <= motor_speed[i]){
-            speed_sign[i] = 1;
-        }else{
-            speed_sign[i] = -1;
-            motor_speed[i] = abs(motor_speed[i]);
-        }
-        if(max < motor_speed[i]){
-            max = motor_speed[i];
-        }
-    }
-    for (int i = 0; i < 4; i++){
-        motor_speed[i] = speed_sign[i] * map(motor_speed[i],0,max,0,100);
-        serial[i]->write(int8_t(motor_speed[i]));
-    } 
-}
 
 /*
 * @brief get IR value
@@ -125,16 +84,16 @@ void get_IR(Stream *serial,float *detection_r,int *distance){
 * @return gyro value(0-255)
 */
 int get_gyro(Stream *serial,int led_pin){
-    static int value;
+    static int value = 127;
     if(serial->available()){
-        digitalWrite(led_pins,HIGH);
+        digitalWrite(led_pin,HIGH);
         value = serial->read()+127;
         if(value > 255){
             value -= 256;
         }
         return value;  
     }else{
-        digitalWrite(led_pins,LOW);
+        digitalWrite(led_pin,LOW);
         return value;
     }  
 }
