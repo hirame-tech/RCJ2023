@@ -3,7 +3,7 @@ import numpy as np
 import time
 
 camera=cv2.VideoCapture(0)
-fps=1000
+fps=25
 
 #ワールド座標の長さの単位は[mm]統一
 
@@ -15,12 +15,12 @@ c=np.sqrt(a**2+b**2)
 
 f=3.29 #カメラ焦点距離
 
-nx=8#格子数：計算機の処理能力に応じて調整
+nx=4#格子数：計算機の処理能力に応じて調整
 ny=3 
-w=720 #w x h=変換画像のサイズ
-h=480 
+w=390 #w x h=変換画像のサイズ
+h=270 
 fh=200 #視点と変換画像間の距離
-alph=[0,pi/3,2*pi/3] #変換画像の方位角
+alph=[pi] #変換画像の方位角
 n=len(alph)
 beta=pi/2
 gamm=0 #変換画像のロール角
@@ -80,7 +80,8 @@ for a in range(0,n):
                 
 blank=np.zeros((4,h,w,3),dtype=np.uint8) #黒単色画像の生成、変形画像を貼り付けるためのもの
 while True:
-    ret,img=camera.read() #実装時に画像の幅方向を双曲面ぴったりにカットする必要あり！！！！！！（リサイズ時に入力画像座標上の双曲面の半径の長さを入力画像の幅のサイズから取得するため）
+    ret,img=camera.read() #実装時に画像の幅方向を双曲面ぴったりにカットする必要あり（リサイズ時に入力画像座標上の双曲面の半径の長さを入力画像の幅のサイズから取得するため）
+    img=img[46:480,95:553]
     hI,wI=img.shape[:2] #入力画像のサイズ
     hd=int((wI-hI)/2) #高さ方向の欠けたピクセル数（片方分)
 
@@ -97,6 +98,7 @@ while True:
 
     for a in range(0,n):
         cv2.imshow(str(a),blank[a])
+        cv2.imshow("img",img)
     
     key=cv2.waitKey(int(1000/fps))
 
