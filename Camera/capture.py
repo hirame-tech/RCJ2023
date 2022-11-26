@@ -1,7 +1,8 @@
 import cv2
 import numpy as np
 camera=cv2.VideoCapture(0)
-blue=[(93,59,68),(166,255,255)] #[(lower),(upper)]
+blue=[(93,59,68),(166,255,255)] #[(lower),(upper)],(色相(/2)、彩度(x2.55)、明度(x2.55))
+yellow=[(10,51,51),(35,255,255)]
 
 def nichika(img,lower,upper): #画像を二値化する引数は(画像、(hsvタプル),(hsvタプル))
     hsv=cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
@@ -27,6 +28,9 @@ while True:
     maskb=nichika(img,blue[0],blue[1])
     maskedb=cv2.bitwise_and(img,img,mask=maskb)
 
+    masky=nichika(img,yellow[0],yellow[1])
+    maskedy=cv2.bitwise_and(img,img,mask=masky)
+
     addshape(maskb,maskedb,width,height)    
     cv2.imshow("masked",maskedb)
     cv2.imshow("flat",img)
@@ -36,4 +40,3 @@ while True:
 
 camera.release()
 cv2.destroyAllWindows()
-#test
