@@ -2,7 +2,7 @@
 #include <Arduino.h>
 #include <math.h>
 
-#define BRIGHTNESS 50
+#define BRIGHTNESS 255
 #define LED_PIN 9
 
 Adafruit_NeoPixel strip(30, LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -36,8 +36,9 @@ void setup() {
 }
 
 void loop() {
-    int threshold = 100;  // any value
-    float angle, distance;
+    int threshold = 700;  // any value
+
+    float aaangle, angle, distance;
 
     for (int i = 0; i < 30; i++) {
         strip.setPixelColor(i, strip.Color(0, 255, 0));
@@ -45,19 +46,19 @@ void loop() {
     strip.show();
 
     get_linesensor(set_port, read_port, sensor_value);
+
     /*for (int i = 0; i < 29; i++) {
         Serial.print(sensor_value[i]);
         Serial.print(",");
     }
     Serial.println(sensor_value[29]);*/
-    Serial.println(sensor_value[0]);
+    // Serial.println(sensor_value[0]);
 
     get_rad(sensor_value, threshold, &angle, &distance);
-    /*Serial.print(angle);
+    aaangle = (180 / PI) * angle;
+    Serial.print(aaangle);
     Serial.print(",");
-    Serial.println(distance);*/
-
-
+    Serial.println(distance);
 }
 
 /*
@@ -108,13 +109,17 @@ void get_rad(int data[], int threshold, float *angle, float *distance) {
     double y[30];
 
     int i, k;
+    int s = 0;
     int tmp;
     int count1, count2;
-    for (i = 7, k = 0; i >= 0; i--, k++) {
+    int lightcount = 0;
+    int state[30];
+
+    for (i = 23, k = 0; i < 30; i++, k++) {
         x[i] = 47 * cos(degree_to_rad(12 * k + 6));
         y[i] = 47 * sin(degree_to_rad(12 * k + 6));
     }
-    for (i = 29, k = 8; i >= 8; i--, k++) {
+    for (i = 0, k = 7; i < 22; i++, k++) {
         x[i] = 47 * cos(degree_to_rad(12 * k + 6));
         y[i] = 47 * sin(degree_to_rad(12 * k + 6));
     }
@@ -122,11 +127,42 @@ void get_rad(int data[], int threshold, float *angle, float *distance) {
     //しきい値を満たすセンサの取得 *改善が必要
     for (i = 0; i < 30; i++) {
         if (data[i] > threshold) {
-            count1 = i;
-            tmp = data[i];
+            state[i] = 1;
+            lightcount++;
+        } else {
+            state[i] = 0;
         }
-        if (data[i] > tmp) {
-            count2 = i;
+        // Serial.print(lightcount);
+        // Serial.print(',');
+        // Serial.println(state[i]);
+    }
+
+    for (i = 0; i < 30; i++) {
+        if (state[i] == 1) {
+            // Serial.print(i);
+            s = i + 1;
+            if (state[s] == 1) {
+                // Serial.print(s);
+                count1 = s;
+            } else {
+                count1 = i;
+            }
+
+            break;
+        }
+    }
+
+    for (i = s + 1; i < 30; i++) {
+        if (state[i] == 1) {
+            // Serial.print(i);
+            s = i + 1;
+            if (state[s] == 1) {
+                // Serial.print(s);
+                count2 = s;
+            } else {
+                count2 = i;
+            }
+            break;
         }
     }
 
@@ -139,7 +175,7 @@ void get_rad(int data[], int threshold, float *angle, float *distance) {
     c = (-1) / a;
 
     *distance = (fabs(b) / sqrt(a * a + 1));
-    *angle = tan(c);
+    *angle = atan(c);
 }
 
 double degree_to_rad(int degree) {
