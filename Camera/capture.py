@@ -32,9 +32,10 @@ while True:
     masky=nichika(img,yellow[0],yellow[1])
     maskedy=cv2.bitwise_and(img,img,mask=masky)
 
-    addshape(maskb,maskedb,width,height)    
-    cv2.imshow("masked",maskedb)
-    cv2.imshow("flat",img)
+    addshape(maskb,maskedb,width,height) 
+    addshape(masky,maskedy,width,height)   
+    cv2.imshow("maskedBlue",maskedb)
+    cv2.imshow("maskedYellow",maskedy)
     key=cv2.waitKey(int(1000/fps))
     if key==27:
         break
