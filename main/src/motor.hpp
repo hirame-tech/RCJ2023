@@ -6,6 +6,7 @@ class MOTOR {
     MOTOR(Stream *A,Stream *B,Stream *C,Stream *D);//constructor
     ~MOTOR();//destructor
 
+    void free();
     void move(float direction_r,int speed,int gyro);
   private:
     int a;

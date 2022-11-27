@@ -11,11 +11,11 @@
 SoftwareSerial myserial(D7,17);
 
 #define OFFSET_A 
-#define OFFSET_B 
-#define OFFSET_C 
+#define OFFSET_B 52
+#define OFFSET_C 73
 #define OFFSET_D 321
 
-#define OFFSET  321//電気角
+#define OFFSET  OFFSET_A//電気角
 #define PI 3.1415926535
 
 #define RPM 1000
@@ -77,6 +77,7 @@ void loop() {
   }
   if(val_sq >= 360) val_sq -= 360;
   if(val_sq <  0) val_sq += 360;
+  //square_wave_drive(val_sq,MOTOR_SPEED);
   square_wave_drive(direction,speed);
   //fets(HA,LA,100,1);
   //fets(HB,LB,100,1);
@@ -85,23 +86,25 @@ void loop() {
 
 void loop1(){
   int angle = 0;
+  int tmp;
   if(myserial.available()){
-    speed = (myserial.read() - 127)*2;
+    tmp = myserial.read();
+    speed = (tmp - 127)*2;
+    //tmp = myserial.read();
+    //tmp = map(tmp,0,255,0,359);
   }
   if(speed > 0){
-    angle = 360 - caluculate_electorical_angle(OFFSET-20);
+    angle = 360 - caluculate_electorical_angle(OFFSET-60);//B = -60
   }else{
     angle = 360 - caluculate_electorical_angle(OFFSET-160);
   }
-  
+    
   if(angle >= 360) angle -= 360;
   if(angle <  0) angle += 360;
   direction = angle;
-
-  Serial.print(val_sq);
-  Serial.print(",");
- 
-  Serial.println(360 - caluculate_electorical_angle(OFFSET));
+  Serial.println(speed);
+  //Serial.print(",");
+  //Serial.println(360 - caluculate_electorical_angle(tmp));
   //Serial.println(map(offset,0,255,0,359));
 
 }
