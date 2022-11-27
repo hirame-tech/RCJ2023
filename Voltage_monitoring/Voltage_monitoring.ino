@@ -1,5 +1,5 @@
 #define SENSOR_PIN 1
-#define FET_PIN 7
+#define FET_PIN 2
 #define LED_PIN 0
 
 #define TRESHOLD 100
@@ -18,7 +18,7 @@ void loop() {
   }else{
     flag_trigger = 0;
   }
-  if(flag_trigger > TRESHOLD){
+  if(flag_trigger > 0){
     digitalWrite(FET_PIN,HIGH);//fet is negative
     digitalWrite(LED_PIN,LOW);
   }else{
