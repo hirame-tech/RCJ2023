@@ -10,6 +10,8 @@
 #define LC D5
 SoftwareSerial myserial(D7,17);
 
+#define MAX_SPEED 50
+
 #define OFFSET_A 
 #define OFFSET_B 52
 #define OFFSET_C 73
@@ -90,6 +92,9 @@ void loop1(){
   if(myserial.available()){
     tmp = myserial.read();
     speed = (tmp - 127)*2;
+    if(abs(speed) > MAX_SPEED){
+      speed = MAX_SPEED *{(speed > 0) - (speed < 0)};
+    }
     //tmp = myserial.read();
     //tmp = map(tmp,0,255,0,359);
   }
