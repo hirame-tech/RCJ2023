@@ -17,7 +17,7 @@ SoftwareSerial myserial(D7,17);
 #define OFFSET_C 73
 #define OFFSET_D 321
 
-#define OFFSET  OFFSET_A//電気角
+#define OFFSET  OFFSET_C//電気角
 #define PI 3.1415926535
 
 #define RPM 1000
@@ -93,7 +93,7 @@ void loop1(){
     tmp = myserial.read();
     speed = (tmp - 127)*2;
     if(abs(speed) > MAX_SPEED){
-      speed = MAX_SPEED *{(speed > 0) - (speed < 0)};
+      speed = MAX_SPEED * ((speed > 0) - (speed < 0));
     }
     //tmp = myserial.read();
     //tmp = map(tmp,0,255,0,359);

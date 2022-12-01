@@ -25,7 +25,6 @@ void MOTOR::free(){
  * @param direction_r move direction(radian)
  * @param speed motor speed(0~255)
  * @param gyro jyro(0~255 senter:127)
- * @param pins motor driver pins
  */
 void MOTOR::move(float direction_r,int speed,int gyro){
     int p = 2;//比例定数
