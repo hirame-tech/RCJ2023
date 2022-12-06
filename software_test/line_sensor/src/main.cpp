@@ -124,7 +124,7 @@ void get_rad(int data[], int threshold, float *angle, float *distance) {
         y[i] = 47 * sin(degree_to_rad(12 * i));
     }
 
-    //しきい値を満たすセンサの取得 *改善が必要
+    //しきい値を満たすセンサの取得
     for (i = 0; i < 30; i++) {
         if (data[i] > threshold) {
             state[i] = 1;
