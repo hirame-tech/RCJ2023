@@ -115,16 +115,16 @@ void get_rad(int data[], int threshold, float *angle, float *distance) {
     int lightcount = 0;
     int state[30];
 
-    for (i = 23, k = 0; i < 30; i++, k++) {
-        x[i] = 47 * cos(degree_to_rad(12 * k + 6));
-        y[i] = 47 * sin(degree_to_rad(12 * k + 6));
-    }
-    for (i = 0, k = 7; i < 22; i++, k++) {
-        x[i] = 47 * cos(degree_to_rad(12 * k + 6));
-        y[i] = 47 * sin(degree_to_rad(12 * k + 6));
+    // x[0]y[0]（各センサの座標をとる）
+    // x[0]y[0] を PT1 に対応させている。
+
+    // 2022-12-06:基準となるx軸を原点とPT1のセンサがなす直線にした。
+    for (i = 0; i < 30; i++) {
+        x[i] = 47 * cos(degree_to_rad(12 * i));
+        y[i] = 47 * sin(degree_to_rad(12 * i));
     }
 
-    //しきい値を満たすセンサの取得 *改善が必要
+    //しきい値を満たすセンサの取得
     for (i = 0; i < 30; i++) {
         if (data[i] > threshold) {
             state[i] = 1;

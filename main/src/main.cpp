@@ -3,7 +3,11 @@
 #include <motor_dc.hpp>
 #include <func.hpp>
 
+//**user settings**
 #define BRIGHTNESS 50
+#define MOVE_SPEED 50
+#define IR_r 3//適当
+
 #define LINE_LED_PIN 10
 
 Adafruit_NeoPixel line_led(30, LINE_LED_PIN, NEO_GRB + NEO_KHZ800);
@@ -108,7 +112,8 @@ void loop() {
 
 
   //delay(1);
-  /*
+  /*以下ひな形
+  
   static int line_state[30];
   static int line_threshold = 500;
   
@@ -116,7 +121,6 @@ void loop() {
   static int IR_distance;
 
   line_frag = get_line(line_pins,line_state,line_threshold);
-  gyro_angle = get_gyro(&GYRO_SERIAL);
   if(line_frag == 1){
     //add motor stop process
 
@@ -125,9 +129,19 @@ void loop() {
   }else{
     get_IR(&IR_SERIAL,&IR_angle,&IR_distance);
     if(IR_distance != 0){
-      //add chase ball process
+      // chase ball process
+      if(IR_angle < PI/4){
+        motor.move(2*IR_angle,MOVE_SPEED,gyro_angle);
+      }else if(IR_angle < PI){
+        motor.move(IR_angle + asin(IR_r/IR_distance),MOVE_SPEED,gyro_angle);
+      }else if(IR_angle < 3*PI/2){
+        motor.move(IR_angle - asin(IR_r/IR_distance),MOVE_SPEED,gyro_angle);
+      }else{
+        motor.move(2*IR_angle - 2*PI,MOVE_SPEED,gyro_angle);
+      }
     }else{
       //add move fixed position process
+      motor.move(PI,30,gyro_angle);//back only
     }
   }
   */
