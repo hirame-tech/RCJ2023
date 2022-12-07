@@ -1,6 +1,6 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
-#include <motor.hpp>
+#include <motor_dc.hpp>
 #include <func.hpp>
 
 #define BRIGHTNESS 50
@@ -13,11 +13,11 @@ Adafruit_NeoPixel line_led(30, LINE_LED_PIN, NEO_GRB + NEO_KHZ800);
 #define CAM_SERIAL Serial3
 
 #define MOTOR_A_SERIAL Serial4
-#define MOTOR_B_SERIAL Serial5
-#define MOTOR_C_SERIAL Serial2
+#define MOTOR_B_SERIAL Serial5//
+#define MOTOR_C_SERIAL Serial2//
 #define MOTOR_D_SERIAL Serial6
 
-MOTOR motor(&MOTOR_A_SERIAL,&MOTOR_B_SERIAL,&MOTOR_C_SERIAL,&MOTOR_D_SERIAL);
+MOTOR motor(&MOTOR_B_SERIAL,&MOTOR_C_SERIAL);
 
 #define TRANS_SENSOR null//Transparent sensor
 #define REF_SENSOR null//reflection sensor
@@ -37,10 +37,10 @@ void setup() {
   Serial.begin(115200);
   GYRO_SERIAL.begin(115200);
 
-  MOTOR_A_SERIAL.begin(9600);
-  MOTOR_B_SERIAL.begin(9600);
-  MOTOR_C_SERIAL.begin(9600);
-  MOTOR_D_SERIAL.begin(9600);
+  //MOTOR_A_SERIAL.begin(9600);
+  MOTOR_B_SERIAL.begin(115200);
+  MOTOR_C_SERIAL.begin(115200);
+ // MOTOR_D_SERIAL.begin(9600);
   motor.free();
 
   led_pins.line_state = 1;
