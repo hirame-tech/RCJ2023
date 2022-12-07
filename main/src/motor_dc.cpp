@@ -23,7 +23,7 @@ void MOTOR::free(){
  * @param gyro jyro(0~255 senter:127)
  */
 void MOTOR::move(float direction_r,int speed,int gyro){
-    float p = 0.2;//比例定数
+    float p = 0.4;//比例定数
     gyro -= 127;//-127~+128に調整
     float motor_speed[4];//速度管理用
     int speed_sign[4];//正転・逆転管理用
@@ -68,5 +68,5 @@ void MOTOR::move(float direction_r,int speed,int gyro){
     motorB->write(motor_speed[3] + 128);
     //motorA->write(50);
     //motorA->write(178);
-    Serial.println(motor_speed[1] + 128);
+    //Serial.println(motor_speed[1] + 128);
 }

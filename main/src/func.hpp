@@ -73,8 +73,9 @@ void get_IR(Stream *serial,float *detection_r,int *distance){
     uint8_t data;
     if(serial->available()){
         data = serial->read();
+        //Serial.println(data);
     }
-    *detection_r = (data & 0x0F) *PI/8;
+    *detection_r = 2*PI - (data & 0x0F) *PI/8;
     *distance = (data & 0XF0) >> 4;
 }
 
@@ -100,6 +101,7 @@ int get_gyro(Stream *serial,int led_pin){
 
 bool get_line(LINEPIN pins,int value[],int threshold){
     int sum = 0;
+    int value_a[30];
     uint8_t mux_channel[16][4] = {
         {0, 0, 0, 0},  // 0
         {1, 0, 0, 0},  // 1
@@ -122,16 +124,19 @@ bool get_line(LINEPIN pins,int value[],int threshold){
         for (int j = 0; j < 4; j++) {
             digitalWrite(pins.ICpin1[j], mux_channel[i][j]);
         }
-        value[i] = (analogRead(pins.Apin1) < threshold);
+        value_a[i] = analogRead(pins.Apin1);
+        value[i] = (value_a[i] > threshold);
         sum += value[i];
     }
     for (int i = 16; i < 30; i++) {
         for (int j = 0; j < 4; j++) {
             digitalWrite(pins.ICpin2[j], mux_channel[i - 16][j]);
         }
-        value[i] = (analogRead(pins.Apin2) < threshold);
+        value_a[i] = analogRead(pins.Apin2);
+        value[i] = (value_a[i] > threshold);
         sum += value[i];
     }
+    //Serial.println(value_a[0]);
     return (sum > 0);
 }
 
