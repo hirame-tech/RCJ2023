@@ -1,27 +1,27 @@
 #include <Arduino.h>
 #include <Adafruit_NeoPixel.h>
-#include <motor.hpp>
+#include <motor_dc.hpp>
 #include <func.hpp>
 
 //**user settings**
-#define BRIGHTNESS 50
-#define MOVE_SPEED 50
-#define IR_r 3//適当
+#define BRIGHTNESS 255
+#define MOVE_SPEED 25
+#define IR_r 6//適当
 
 #define LINE_LED_PIN 10
 
 Adafruit_NeoPixel line_led(30, LINE_LED_PIN, NEO_GRB + NEO_KHZ800);
 
 #define GYRO_SERIAL Serial7 //checked
-#define IR_SERIAL Serial2
+#define IR_SERIAL Serial3   //checked
 #define CAM_SERIAL Serial3
 
-#define MOTOR_A_SERIAL Serial4 //checked
-#define MOTOR_B_SERIAL Serial5 //checked
-#define MOTOR_C_SERIAL Serial2 //checked
-#define MOTOR_D_SERIAL Serial6 //checked
+#define MOTOR_A_SERIAL Serial4
+#define MOTOR_B_SERIAL Serial5//
+#define MOTOR_C_SERIAL Serial2//
+#define MOTOR_D_SERIAL Serial6
 
-MOTOR motor(&MOTOR_A_SERIAL,&MOTOR_B_SERIAL,&MOTOR_C_SERIAL,&MOTOR_D_SERIAL);
+MOTOR motor(&MOTOR_B_SERIAL,&MOTOR_C_SERIAL);
 
 #define TRANS_SENSOR null//Transparent sensor
 #define REF_SENSOR null//reflection sensor
@@ -40,12 +40,33 @@ void setup() {
   //pin_setup();
   Serial.begin(115200);
   GYRO_SERIAL.begin(115200);
+  IR_SERIAL.begin(115200);
 
-  MOTOR_A_SERIAL.begin(9600);
-  MOTOR_B_SERIAL.begin(9600);
-  MOTOR_C_SERIAL.begin(9600);
-  MOTOR_D_SERIAL.begin(9600);
+  MOTOR_B_SERIAL.begin(115200);
+  MOTOR_C_SERIAL.begin(115200);
+
   motor.free();
+
+  //line IO settings
+  line_pins.ICpin1[0] = 5;
+  line_pins.ICpin1[1] = 4;
+  line_pins.ICpin1[2] = 6;
+  line_pins.ICpin1[3] = 9;
+  line_pins.ICpin2[0] = 12;
+  line_pins.ICpin2[1] = 11;
+  line_pins.ICpin2[2] = 30;
+  line_pins.ICpin2[3] = 31;
+  line_pins.Apin1 = A12;
+  line_pins.Apin2 = A13;
+  for(int i = 0; i < 4; i++){
+    pinMode(line_pins.ICpin1[i],OUTPUT);
+    pinMode(line_pins.ICpin2[i],OUTPUT);
+  }
+  pinMode(line_pins.Apin1,INPUT_PULLDOWN);
+  pinMode(line_pins.Apin2,INPUT_PULLDOWN);
+
+
+  pinMode(SWITCH_PIN,INPUT_PULLUP);
 
   led_pins.line_state = 1;
   led_pins.cam_state = 1;
@@ -53,7 +74,6 @@ void setup() {
   led_pins.IR_state = 1;
   led_pins.gyro_L = 1;
   led_pins.gyro_R = 1;
-  pinMode(SWITCH_PIN,INPUT_PULLUP);
   //pinMode(led_pins.line_state,OUTPUT);
   //pinMode(led_pins.cam_state,OUTPUT);
   //pinMode(led_pins.gyro_state,OUTPUT);
@@ -65,17 +85,25 @@ void setup() {
 
     line_led.begin();
     line_led.show();  // Turn OFF
-    line_led.setBrightness(BRIGHTNESS);
 
+    line_led.setBrightness(BRIGHTNESS);
+  for (int i = 0; i < 30; i++) {
+      line_led.setPixelColor(i, line_led.Color(0, 255, 0));
+      line_led.show(); 
+      delay(10);
+  }
 }
 
 void loop() {
   //variable definition
   static bool line_frag = 0;
+  static int line_state[30];
+  static int line_threshold = 280;
   static int gyro_angle = 127;
   static bool start_flag = 0;
 
   static float IR_angle;
+  static int IR_distance;
 
   start_flag = digitalRead(SWITCH_PIN);
 
@@ -97,12 +125,27 @@ void loop() {
     line_led.show();
 
   gyro_angle = get_gyro(&GYRO_SERIAL,led_pins.gyro_state);
+  line_frag = get_line(line_pins,line_state,line_threshold);
+  Serial.println(line_frag);
   if(start_flag == 0){//start
-    motor.move(0,0,gyro_angle);//方向修正のみ
-    if(IR_angle <= PI/4){
-
-    }else if(IR_angle >= PI*3/4){
-
+    get_IR(&IR_SERIAL,&IR_angle,&IR_distance);
+    if(IR_distance != 0){
+      IR_distance = 16 - IR_distance;
+      if(IR_r > IR_distance){
+        IR_distance = IR_r;
+      }
+      // chase ball process
+      if(IR_angle < PI/4){
+        motor.move(2*IR_angle,MOVE_SPEED,gyro_angle);
+      }else if(IR_angle < PI){
+        motor.move(IR_angle + asin(IR_r/IR_distance),MOVE_SPEED,gyro_angle);
+      }else if(IR_angle < 3*PI/2){
+        motor.move(IR_angle - asin(IR_r/IR_distance),MOVE_SPEED,gyro_angle);
+      }else{
+        motor.move(2*IR_angle - 2*PI,MOVE_SPEED,gyro_angle);
+      }
+    }else{
+      motor.move(0,0,gyro_angle);//静止
     }
   }else{
     motor.move(0,0,127);//静止
@@ -120,7 +163,7 @@ void loop() {
   static float IR_angle;
   static int IR_distance;
 
-  line_frag = get_line(line_pins,line_state,line_threshold);
+
   if(line_frag == 1){
     //add motor stop process
 

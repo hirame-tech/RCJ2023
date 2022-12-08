@@ -44,6 +44,7 @@ void loop() {
   }else{
     Serial.println("ball is not found.");
   }
+  Serial1.write(send_data);
 }
 
 void get_IR(int *pins,int *datas){
