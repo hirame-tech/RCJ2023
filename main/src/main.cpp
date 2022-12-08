@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include <math.h>
 #include <Adafruit_NeoPixel.h>
 #include <motor_dc.hpp>
 #include <func.hpp>
@@ -7,7 +8,7 @@
 #define BRIGHTNESS 255
 #define MOVE_SPEED 25
 #define IR_r 6//適当
-#define LINE_THRESHOLD 280
+#define LINE_THRESHOLD 500
 
 #define LINE_LED_PIN 10
 
@@ -107,6 +108,7 @@ void loop() {
   static int IR_distance;
 
   static float line_angle;
+  static float line_depth;
 
   //LED process
   /*
@@ -134,9 +136,15 @@ void loop() {
   get_IR(&IR_SERIAL,&IR_angle,&IR_distance);
 
   //cal line
-  line_angle = cal_line_direction(line_state);
+  if(line_frag == 1){
+    cal_line_direction(line_state,&line_angle,&line_depth);
+    Serial.println(line_angle*180/PI);
+  }else{
+    Serial.println("can't find white");
+  }
 
-  Serial.println(line_frag);
+
+  //Serial.println(line_frag);
   if(start_flag == 1){//start
     if(line_frag == 1){
       // escape line zone
