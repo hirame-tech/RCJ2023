@@ -11,7 +11,7 @@ void get_linesensor(int *pins, int *a_pins, int *value);
 
 void get_rad(int data[], int threshold, float *angle, float *distance);
 
-double degree_to_rad(int degree);
+double degree_to_rad(int degree);//
 
 void exit_judge(float *angle, float *distance);
 
