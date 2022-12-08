@@ -7,6 +7,7 @@
 #define BRIGHTNESS 255
 #define MOVE_SPEED 25
 #define IR_r 6//適当
+#define LINE_THRESHOLD 280
 
 #define LINE_LED_PIN 10
 
@@ -68,12 +69,12 @@ void setup() {
 
   pinMode(SWITCH_PIN,INPUT_PULLUP);
 
-  led_pins.line_state = 1;
-  led_pins.cam_state = 1;
-  led_pins.gyro_state = 1;
-  led_pins.IR_state = 1;
-  led_pins.gyro_L = 1;
-  led_pins.gyro_R = 1;
+  //led_pins.line_state = 1;
+  //led_pins.cam_state = 1;
+  //led_pins.gyro_state = 1;
+  //led_pins.IR_state = 1;
+  //led_pins.gyro_L = 1;
+  //led_pins.gyro_R = 1;
   //pinMode(led_pins.line_state,OUTPUT);
   //pinMode(led_pins.cam_state,OUTPUT);
   //pinMode(led_pins.gyro_state,OUTPUT);
@@ -85,8 +86,8 @@ void setup() {
 
     line_led.begin();
     line_led.show();  // Turn OFF
-
     line_led.setBrightness(BRIGHTNESS);
+
   for (int i = 0; i < 30; i++) {
       line_led.setPixelColor(i, line_led.Color(0, 255, 0));
       line_led.show(); 
@@ -96,18 +97,19 @@ void setup() {
 
 void loop() {
   //variable definition
-  static bool line_frag = 0;
-  static int line_state[30];
-  static int line_threshold = 280;
-  static int gyro_angle = 127;
-  static bool start_flag = 0;
+  static bool line_frag = 0; //line reaction flag
+  static int line_state[30]; //binary data
+  static int line_threshold = LINE_THRESHOLD;//将来的な可変抵抗化に対応するための変数
+  static int gyro_angle = 127; // gyro angle data
+  static bool start_flag = 0; //start toggle switch status
 
   static float IR_angle;
   static int IR_distance;
 
-  start_flag = digitalRead(SWITCH_PIN);
+  static float line_angle;
 
   //LED process
+  /*
   if(gyro_angle < 120){
     digitalWrite(led_pins.gyro_L,HIGH);
     digitalWrite(led_pins.gyro_R,LOW);
@@ -118,34 +120,47 @@ void loop() {
     digitalWrite(led_pins.gyro_L,HIGH);
     digitalWrite(led_pins.gyro_R,HIGH);
   }
+  */
 
   for (int i = 0; i < 30; i++) {
       line_led.setPixelColor(i, line_led.Color(0, 255, 0));
   }
     line_led.show();
 
+  //get value of various sensors
+  start_flag = ~digitalRead(SWITCH_PIN);
   gyro_angle = get_gyro(&GYRO_SERIAL,led_pins.gyro_state);
   line_frag = get_line(line_pins,line_state,line_threshold);
+  get_IR(&IR_SERIAL,&IR_angle,&IR_distance);
+
+  //cal line
+  line_angle = cal_line_direction(line_state);
+
   Serial.println(line_frag);
-  if(start_flag == 0){//start
-    get_IR(&IR_SERIAL,&IR_angle,&IR_distance);
-    if(IR_distance != 0){
-      IR_distance = 16 - IR_distance;
-      if(IR_r > IR_distance){
-        IR_distance = IR_r;
-      }
-      // chase ball process
-      if(IR_angle < PI/4){
-        motor.move(2*IR_angle,MOVE_SPEED,gyro_angle);
-      }else if(IR_angle < PI){
-        motor.move(IR_angle + asin(IR_r/IR_distance),MOVE_SPEED,gyro_angle);
-      }else if(IR_angle < 3*PI/2){
-        motor.move(IR_angle - asin(IR_r/IR_distance),MOVE_SPEED,gyro_angle);
-      }else{
-        motor.move(2*IR_angle - 2*PI,MOVE_SPEED,gyro_angle);
-      }
+  if(start_flag == 1){//start
+    if(line_frag == 1){
+      // escape line zone
     }else{
-      motor.move(0,0,gyro_angle);//静止
+      if(IR_distance != 0){
+
+        IR_distance = 16 - IR_distance;
+        if(IR_r > IR_distance){
+          IR_distance = IR_r;
+        }
+
+        // chase ball process
+        if(IR_angle < PI/4){
+          motor.move(2*IR_angle,MOVE_SPEED,gyro_angle);
+        }else if(IR_angle < PI){
+          motor.move(IR_angle + asin(IR_r/IR_distance),MOVE_SPEED,gyro_angle);
+        }else if(IR_angle < 3*PI/2){
+          motor.move(IR_angle - asin(IR_r/IR_distance),MOVE_SPEED,gyro_angle);
+        }else{
+          motor.move(2*IR_angle - 2*PI,MOVE_SPEED,gyro_angle);
+        }
+      }else{
+        motor.move(0,0,gyro_angle);//静止
+      }
     }
   }else{
     motor.move(0,0,127);//静止
