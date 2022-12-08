@@ -13,6 +13,8 @@ void get_rad(int data[], int threshold, float *angle, float *distance);
 
 double degree_to_rad(int degree);
 
+void exit_judge(float *angle, float *distance);
+
 int set_port[8] = {7, 8, 6, 10, 3, 2, 4, 5};
 int read_port[2] = {A1, A0};
 
@@ -52,9 +54,11 @@ void loop() {
         Serial.print(",");
     }
     Serial.println(sensor_value[29]);*/
-    // Serial.println(sensor_value[0]);
 
     get_rad(sensor_value, threshold, &angle, &distance);
+
+    exit_judge(&angle, &distance);
+
     aaangle = (180 / PI) * angle;
     Serial.print(aaangle);
     Serial.print(",");
@@ -183,6 +187,24 @@ double degree_to_rad(int degree) {
 
     rad = degree * (PI / 180);
     return rad;
+}
+
+//脱出判定のプログラム
+//distanceが減少して、0近くになると180度反転させる
+
+void exit_judge(float *angle, float *distance) {
+    float old_distance = *distance;
+    float current_distance = *distance;
+    bool going_to_out = 0;
+
+    if(old_distance > current_distance){
+        if( 0 <= current_distance && current_distance <= 0.2 ){
+            *angle = *angle - 180;
+        }
+        going_to_out = 1;
+    } else {
+        going_to_out = 0;
+    }
 }
 
 /*
