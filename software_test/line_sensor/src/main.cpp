@@ -112,9 +112,8 @@ void get_rad(int data[], int threshold, float *angle, float *distance) {
     double x[30];
     double y[30];
 
-    int i, k;
+    int i;
     int s = 0;
-    int tmp;
     int count1, count2;
     int lightcount = 0;
     int state[30];
@@ -195,15 +194,15 @@ double degree_to_rad(int degree) {
 void exit_judge(float *angle, float *distance) {
     float old_distance = *distance;
     float current_distance = *distance;
-    bool going_to_out = 0;
+    //bool going_to_out = 0;
 
     if(old_distance > current_distance){
         if( 0 <= current_distance && current_distance <= 0.2 ){
             *angle = *angle - 180;
         }
-        going_to_out = 1;
+        //going_to_out = 1;
     } else {
-        going_to_out = 0;
+        //going_to_out = 0;
     }
 }
 
