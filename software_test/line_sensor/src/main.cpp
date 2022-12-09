@@ -59,8 +59,8 @@ void loop() {
 
     exit_judge(&angle, &distance);
 
-    aaangle = (180 / PI) * angle;
-    Serial.print(aaangle);
+    degree = (180 / PI) * angle;
+    Serial.print(degree);
     Serial.print(",");
     Serial.println(distance);
 }
