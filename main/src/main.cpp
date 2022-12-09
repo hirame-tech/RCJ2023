@@ -6,7 +6,7 @@
 
 //**user settings**
 #define BRIGHTNESS 255
-#define MOVE_SPEED 25
+#define MOVE_SPEED 50 //MAX50
 #define IR_r 6//適当
 #define LINE_THRESHOLD 500
 
