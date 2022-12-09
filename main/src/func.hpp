@@ -27,7 +27,7 @@ typedef struct ledpin
  * @param degree
  * @return float 
  */
-float rad(int degree){
+float degree_to_rad(int degree){
     if(degree < 0){
         degree += 360;
     }
@@ -101,7 +101,6 @@ int get_gyro(Stream *serial,int led_pin){
 
 bool get_line(LINEPIN pins,int value[],int threshold){
     int sum = 0;
-    int value_a[30];
     uint8_t mux_channel[16][4] = {
         {0, 0, 0, 0},  // 0
         {1, 0, 0, 0},  // 1
@@ -124,23 +123,115 @@ bool get_line(LINEPIN pins,int value[],int threshold){
         for (int j = 0; j < 4; j++) {
             digitalWrite(pins.ICpin1[j], mux_channel[i][j]);
         }
-        value_a[i] = analogRead(pins.Apin1);
-        value[i] = (value_a[i] > threshold);
+        value[i] = analogRead(pins.Apin1) > threshold;
         sum += value[i];
     }
     for (int i = 16; i < 30; i++) {
         for (int j = 0; j < 4; j++) {
             digitalWrite(pins.ICpin2[j], mux_channel[i - 16][j]);
         }
-        value_a[i] = analogRead(pins.Apin2);
-        value[i] = (value_a[i] > threshold);
+        value[i] = analogRead(pins.Apin2) > threshold;
         sum += value[i];
     }
-    //Serial.println(value_a[0]);
     return (sum > 0);
 }
 
-float cal_line_direction(int values[]){
-    
+void cal_line_direction(int data[], float *angle, float *distance) {
+    //座標の指定
+    double x[30];
+    double y[30];
+
+    int i, k;
+    int s = 0;
+    int tmp;
+    int count1, count2;
+    int lightcount = 0;
+    int state[30];
+    double a, b, c;
+    // x[0]y[0]（各センサの座標をとる）
+    // x[0]y[0] を PT1 に対応させている。
+
+    // 2022-12-06:基準となるx軸を原点とPT1のセンサがなす直線にした。
+    for (i = 0; i < 30; i++) {
+        x[i] = 47 * cos(degree_to_rad(12 * i));
+        y[i] = 47 * sin(degree_to_rad(12 * i));
+    }
+
+    //しきい値を満たすセンサの取得
+    for (i = 0; i < 30; i++) {
+        if (data[i]) {
+            state[i] = 1;
+            lightcount++;
+        } else {
+            state[i] = 0;
+        }
+        // Serial.print(lightcount);
+        // Serial.print(',');
+        // Serial.println(state[i]);
+    }
+    if(lightcount > 1){
+        for (i = 0; i < 30; i++) {
+            if (state[i] == 1) {
+                /*
+                s = i + 1;
+                if (state[s] == 1) {
+                    // Serial.print(s);
+                    count1 = s;
+                } else {
+                    count1 = i;
+                }
+
+                break;
+                */
+               count1 = i;
+               break;
+            }
+        }
+
+        for (i = 29; i > -1; i--) {
+            if ((state[i] == 1) && (i != count1)) {
+                /*
+                s = i + 1;
+                if (state[s] == 1) {
+                    // Serial.print(s);
+                    count2 = s;
+                } else {
+                    count2 = i;
+                }
+                break;
+                */
+               count2 = i;
+               break;
+            }
+        }
+
+        // y = ax + b -> a -1 b
+        // y = -1/a * x   tan(theta) = -1/a c = -1/a
+        // theta = arctan(c);
+        Serial.print(count1);
+        Serial.print(",");
+        Serial.print(count2);
+        a = (y[count1] - y[count2]) / (x[count1] - x[count2]);
+        b = y[count1] - a * x[count1];
+        *distance = (fabs(b) / sqrt(a * a + 1));
+        *angle = (float)atan2(-1 * (y[count1] - y[count2]),(x[count1] - x[count2]));
+        Serial.print(",");
+        
+    }else{//ここｱ正常
+        for (int i = 0; i < 30; i++){
+            if(state[i]){
+                count1 = i;
+                break;
+            }
+        }
+
+        *distance = 47;
+        *angle = (float)atan2(x[count1],y[count1]);
+    }
+    *angle += PI;
+    *angle -= PI/2;
+    if(*angle < 0){
+        *angle = 2*PI - *angle;
+    }
 }
 //#endif
