@@ -138,6 +138,12 @@ void loop() {
   start_flag = !(digitalRead(SWITCH_PIN));
   gyro_angle = get_gyro(&GYRO_SERIAL,led_pins.gyro_state);
   line_frag = get_line(line_pins,line_state,line_threshold);
+  for (int i = 0; i < 30; i++){
+    Serial.print(line_state[i]);
+    Serial.print(",");
+  }
+  //Serial.println();
+  
   if((line_frag - line_frag_old) > 0){
     line_approach_angle = line_angle;
   }else if((line_frag - line_frag_old) < 0){
@@ -150,9 +156,9 @@ void loop() {
     //Serial.println(line_angle*180/PI);
     
   }else{
-    //Serial.println("can't find white");
+    Serial.println("can't find white");
   }
-  Serial.println(IR_angle);
+  //Serial.println(IR_angle);
 
   //Serial.println(line_frag);
   if(start_flag == 1){//start
