@@ -119,19 +119,29 @@ bool get_line(LINEPIN pins,int value[],int threshold){
         {0, 1, 1, 1},  // 14
         {1, 1, 1, 1}   // 15
     };
-    for (int i = 0; i < 16; i++) {
+
+
+    for (int i = 0; i < 14; i++) {
         for (int j = 0; j < 4; j++) {
             digitalWrite(pins.ICpin1[j], mux_channel[i][j]);
         }
-        value[i] = analogRead(pins.Apin1) > threshold;
-        sum += value[i];
+        value[13 - i] = analogRead(pins.Apin1) > threshold;
+        //value[i] = analogRead(pins.Apin1) > threshold;
+        sum += value[13 - i];
+        //sum += value[i];
     }
-    for (int i = 16; i < 30; i++) {
+    for (int i = 14; i < 30; i++) {
         for (int j = 0; j < 4; j++) {
             digitalWrite(pins.ICpin2[j], mux_channel[i - 16][j]);
         }
-        value[i] = analogRead(pins.Apin2) > threshold;
-        sum += value[i];
+        value[43-i] = analogRead(pins.Apin2) > threshold;
+        //sum += value[i];
+        int tmp;
+        /*tmp = value[29];
+        value[29] = value[14];
+        value[14] = tmp;*/
+        sum += value[43 - i];
+        
     }
     return (sum > 0);
 }
@@ -171,7 +181,7 @@ void cal_line_direction(int data[], float *angle, float *distance) {
     }
 
     //labeling
-    int labelnum = 0;
+    /*int labelnum = 0;
     if(state[0] == 1){
         labelnum = 1;
     }
@@ -193,8 +203,10 @@ void cal_line_direction(int data[], float *angle, float *distance) {
         }
     }
     
-    Serial.println(labelnum);//反応したブロックの数
-    /*
+    Serial.println(labelnum);
+    */
+    //反応したブロックの数　
+    
 
     if(lightcount > 1){
         for (i = 0; i < 30; i++) {
@@ -214,16 +226,16 @@ void cal_line_direction(int data[], float *angle, float *distance) {
         // y = ax + b -> a -1 b
         // y = -1/a * x   tan(theta) = -1/a c = -1/a
         // theta = arctan(c);
-        Serial.print(count1);
-        Serial.print(",");
-        Serial.print(count2);
+        //Serial.print(count1);
+        //Serial.print(",");
+        //Serial.print(count2);
         a = (y[count1] - y[count2]) / (x[count1] - x[count2]);
         b = y[count1] - a * x[count1];
         *distance = (fabs(b) / sqrt(a * a + 1));
         *angle = (float)atan2((x[count1] + x[count2])/2,(y[count1] + y[count2])/2);
-        Serial.print(",");
+        //Serial.print(",");
         
-    }else{//ここｱ正常
+    }else if(lightcount == 1){//ここｱ正常
         for (int i = 0; i < 30; i++){
             if(state[i]){
                 count1 = i;
@@ -233,8 +245,10 @@ void cal_line_direction(int data[], float *angle, float *distance) {
 
         *distance = 47;
         *angle = (float)atan2(x[count1],y[count1]);
+    }else{
+        return;
     }
-    */
+
     *angle += PI;
     *angle -= PI/2;
     if(*angle < 0){

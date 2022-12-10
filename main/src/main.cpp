@@ -6,9 +6,10 @@
 
 //**user settings**
 #define BRIGHTNESS 255
-#define MOVE_SPEED 50 //MAX50
-#define IR_r 6//適当
+#define MOVE_SPEED 13//MAX50
+#define IR_r 7//適当
 #define LINE_THRESHOLD 500
+#define LINE_STOP_TIME 500
 
 #define LINE_LED_PIN 10
 
@@ -112,7 +113,7 @@ void loop() {
 
   static float IR_angle;
   static int IR_distance;
-
+  static int start_time = 0;
 
 
   //LED process
@@ -137,16 +138,21 @@ void loop() {
   //get value of various sensors
   start_flag = !(digitalRead(SWITCH_PIN));
   gyro_angle = get_gyro(&GYRO_SERIAL,led_pins.gyro_state);
+  line_frag_old = line_frag;
   line_frag = get_line(line_pins,line_state,line_threshold);
-  for (int i = 0; i < 30; i++){
-    Serial.print(line_state[i]);
+  
+  //for (int i = 0; i < 30; i++){
+    Serial.print(line_state[14]);
     Serial.print(",");
-  }
+  //}
+  
+  Serial.println();
   //Serial.println();
   
   if((line_frag - line_frag_old) > 0){
     line_approach_angle = line_angle;
-  }else if((line_frag - line_frag_old) < 0){
+    start_time = millis();
+  }else if(((line_frag - line_frag_old) < 0) && ((millis() - start_time) > 1000)){
     line_approach_angle = -1;
   }
   get_IR(&IR_SERIAL,&IR_angle,&IR_distance);
@@ -154,7 +160,6 @@ void loop() {
   if(line_frag == 1){
     cal_line_direction(line_state,&line_angle,&line_depth);
     //Serial.println(line_angle*180/PI);
-    
   }else{
     Serial.println("can't find white");
   }
@@ -164,9 +169,30 @@ void loop() {
   if(start_flag == 1){//start
     if(line_frag == 1){
       // escape line zone
-      if(fabs(line_angle - line_approach_angle) >= PI/2){
+      //Serial.println("a");
+      
+      while((millis() - start_time) < LINE_STOP_TIME){
+        motor.move(0,0,127);
+      }
+      /*
+      if(fabs(line_angle - line_approach_angle) >= PI){
+        if((fabs(line_angle - line_approach_angle)-PI) >= PI/2){
+          line_angle -= PI;
+        }
+        //line_angle += 2*PI;
+      }else{
+        if(fabs(line_angle - line_approach_angle) >= PI/2){
+          line_angle -= PI;
+        }
+      }
+      */
+      if((PI/2 < fabs(line_angle - line_approach_angle)) && (3*PI/2 > fabs(line_angle - line_approach_angle))){
         line_angle -= PI;
       }
+      Serial.print(line_approach_angle*180/PI);
+      Serial.print(",");
+      Serial.println((line_angle - PI)*180/PI);
+
       motor.move(line_angle - PI,MOVE_SPEED,gyro_angle);
 
     }else{
