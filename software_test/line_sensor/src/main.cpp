@@ -49,6 +49,7 @@ void loop() {
 
     get_linesensor(set_port, read_port, sensor_value);
 
+    //以下を各ラインセンサ値を調べるときに用いる。
     /*for (int i = 0; i < 29; i++) {
         Serial.print(sensor_value[i]);
         Serial.print(",");
