@@ -6,7 +6,7 @@
 
 //**user settings**
 #define BRIGHTNESS 255
-#define MOVE_SPEED 25
+#define MOVE_SPEED 50 //MAX50
 #define IR_r 6//適当
 #define LINE_THRESHOLD 500
 
@@ -99,16 +99,21 @@ void setup() {
 void loop() {
   //variable definition
   static bool line_frag = 0; //line reaction flag
+  static bool line_frag_old = 0; //line reaction flag
   static int line_state[30]; //binary data
   static int line_threshold = LINE_THRESHOLD;//将来的な可変抵抗化に対応するための変数
+  static float line_approach_angle;
+  static float line_angle;
+  static float line_depth;
+
+
   static int gyro_angle = 127; // gyro angle data
   static bool start_flag = 0; //start toggle switch status
 
   static float IR_angle;
   static int IR_distance;
 
-  static float line_angle;
-  static float line_depth;
+
 
   //LED process
   /*
@@ -130,24 +135,34 @@ void loop() {
     line_led.show();
 
   //get value of various sensors
-  start_flag = ~digitalRead(SWITCH_PIN);
+  start_flag = !(digitalRead(SWITCH_PIN));
   gyro_angle = get_gyro(&GYRO_SERIAL,led_pins.gyro_state);
   line_frag = get_line(line_pins,line_state,line_threshold);
+  if((line_frag - line_frag_old) > 0){
+    line_approach_angle = line_angle;
+  }else if((line_frag - line_frag_old) < 0){
+    line_approach_angle = -1;
+  }
   get_IR(&IR_SERIAL,&IR_angle,&IR_distance);
-
   //cal line
   if(line_frag == 1){
     cal_line_direction(line_state,&line_angle,&line_depth);
-    Serial.println(line_angle*180/PI);
+    //Serial.println(line_angle*180/PI);
+    
   }else{
-    Serial.println("can't find white");
+    //Serial.println("can't find white");
   }
-
+  Serial.println(IR_angle);
 
   //Serial.println(line_frag);
   if(start_flag == 1){//start
     if(line_frag == 1){
       // escape line zone
+      if(fabs(line_angle - line_approach_angle) >= PI){
+        line_angle -= PI;
+      }
+      motor.move(line_angle - PI,MOVE_SPEED,gyro_angle);
+
     }else{
       if(IR_distance != 0){
 
