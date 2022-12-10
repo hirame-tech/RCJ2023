@@ -42,7 +42,11 @@ void loop() {
         if(speed > 0){
           digitalWrite(IN_A_1,HIGH);
           digitalWrite(IN_B_1,LOW);
-          analogWrite(PWM1,speed);        
+          analogWrite(PWM1,speed); 
+        }else if(speed == 0){
+          digitalWrite(IN_A_1,HIGH);
+          digitalWrite(IN_B_1,HIGH);
+          analogWrite(PWM1,0);              
         }else{
           digitalWrite(IN_A_1,LOW);
           digitalWrite(IN_B_1,HIGH);
@@ -52,7 +56,11 @@ void loop() {
         if(speed > 0){
           digitalWrite(IN_A_2,LOW);
           digitalWrite(IN_B_2,HIGH);
-          analogWrite(PWM2,speed);        
+          analogWrite(PWM2,speed);
+        }else if(speed == 0){
+          digitalWrite(IN_A_2,HIGH);
+          digitalWrite(IN_B_2,HIGH);
+          analogWrite(PWM2,0);       
         }else{
           digitalWrite(IN_A_2,HIGH);
           digitalWrite(IN_B_2,LOW);
