@@ -135,7 +135,7 @@ bool get_line(LINEPIN pins,int value[],int threshold){
     }
     return (sum > 0);
 }
-
+//反応しているセンサがある前提
 void cal_line_direction(int data[], float *angle, float *distance) {
     //座標の指定
     double x[30];
@@ -169,20 +169,33 @@ void cal_line_direction(int data[], float *angle, float *distance) {
         // Serial.print(',');
         // Serial.println(state[i]);
     }
+
+    //labeling
+    int labelnum = 1;
+    state[0] *= labelnum;
+    for (int i = 1; i < 30; i++){
+        if((state[i] - state[i-1]) > 0){//微分
+            labelnum++;
+        }
+        state[i] *= labelnum;
+    }
+    if((state[0] * state[29]) > 0){//0と29が両方反応している
+        for(int i = 29; i > -1; i--){
+            if(state[i] != 0){
+                state[i] = 1;
+            }else{
+                labelnum --;
+                break;
+            }
+        }
+    }
+    
+    Serial.println(labelnum);//反応したブロックの数
+    /*
+
     if(lightcount > 1){
         for (i = 0; i < 30; i++) {
             if (state[i] == 1) {
-                /*
-                s = i + 1;
-                if (state[s] == 1) {
-                    // Serial.print(s);
-                    count1 = s;
-                } else {
-                    count1 = i;
-                }
-
-                break;
-                */
                count1 = i;
                break;
             }
@@ -190,16 +203,6 @@ void cal_line_direction(int data[], float *angle, float *distance) {
 
         for (i = 29; i > -1; i--) {
             if ((state[i] == 1) && (i != count1)) {
-                /*
-                s = i + 1;
-                if (state[s] == 1) {
-                    // Serial.print(s);
-                    count2 = s;
-                } else {
-                    count2 = i;
-                }
-                break;
-                */
                count2 = i;
                break;
             }
@@ -228,6 +231,7 @@ void cal_line_direction(int data[], float *angle, float *distance) {
         *distance = 47;
         *angle = (float)atan2(x[count1],y[count1]);
     }
+    */
     *angle += PI;
     *angle -= PI/2;
     if(*angle < 0){
