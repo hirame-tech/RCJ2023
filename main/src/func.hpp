@@ -217,7 +217,7 @@ void cal_line_direction(int data[], float *angle, float *distance) {
         a = (y[count1] - y[count2]) / (x[count1] - x[count2]);
         b = y[count1] - a * x[count1];
         *distance = (fabs(b) / sqrt(a * a + 1));
-        *angle = (float)atan2((y[count1] + y[count2])/2,(x[count1] + x[count2])/2);
+        *angle = (float)atan2((x[count1] + x[count2])/2,(y[count1] + y[count2])/2);
         Serial.print(",");
         
     }else{//ここｱ正常
@@ -237,5 +237,9 @@ void cal_line_direction(int data[], float *angle, float *distance) {
     if(*angle < 0){
         *angle = 2*PI - *angle;
     }
+    if(*angle > 2*PI){
+        *angle -= 2*PI;
+    }
+    *angle = 2*PI -*angle;
 }
 //#endif
