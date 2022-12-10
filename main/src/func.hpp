@@ -171,7 +171,10 @@ void cal_line_direction(int data[], float *angle, float *distance) {
     }
 
     //labeling
-    int labelnum = 1;
+    int labelnum = 0;
+    if(state[0] == 1){
+        labelnum = 1;
+    }
     state[0] *= labelnum;
     for (int i = 1; i < 30; i++){
         if((state[i] - state[i-1]) > 0){//微分
