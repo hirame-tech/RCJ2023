@@ -164,14 +164,13 @@ void loop() {
   if(start_flag == 1){//start
     if(line_frag == 1){
       // escape line zone
-      if(fabs(line_angle - line_approach_angle) >= PI){
+      if(fabs(line_angle - line_approach_angle) >= PI/2){
         line_angle -= PI;
       }
       motor.move(line_angle - PI,MOVE_SPEED,gyro_angle);
 
     }else{
       if(IR_distance != 0){
-
         IR_distance = 16 - IR_distance;
         if(IR_r > IR_distance){
           IR_distance = IR_r;
