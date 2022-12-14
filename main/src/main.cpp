@@ -2,6 +2,7 @@
 #include <math.h>
 #include <Adafruit_NeoPixel.h>
 #include <motor_dc.hpp>
+#include <line.hpp>
 #include <func.hpp>
 
 //**user settings**
@@ -25,6 +26,7 @@ Adafruit_NeoPixel line_led(30, LINE_LED_PIN, NEO_GRB + NEO_KHZ800);
 #define MOTOR_D_SERIAL Serial6
 
 MOTOR motor(&MOTOR_B_SERIAL,&MOTOR_C_SERIAL);
+LINE line;
 
 #define TRANS_SENSOR null//Transparent sensor
 #define REF_SENSOR null//reflection sensor
@@ -34,7 +36,6 @@ MOTOR motor(&MOTOR_B_SERIAL,&MOTOR_C_SERIAL);
 
 LEDPIN led_pins;
 
-LINEPIN line_pins;
 
 //prototype declaration
 
@@ -51,22 +52,7 @@ void setup() {
   motor.free();
 
   //line IO settings
-  line_pins.ICpin1[0] = 5;
-  line_pins.ICpin1[1] = 4;
-  line_pins.ICpin1[2] = 6;
-  line_pins.ICpin1[3] = 9;
-  line_pins.ICpin2[0] = 12;
-  line_pins.ICpin2[1] = 11;
-  line_pins.ICpin2[2] = 30;
-  line_pins.ICpin2[3] = 31;
-  line_pins.Apin1 = A12;
-  line_pins.Apin2 = A13;
-  for(int i = 0; i < 4; i++){
-    pinMode(line_pins.ICpin1[i],OUTPUT);
-    pinMode(line_pins.ICpin2[i],OUTPUT);
-  }
-  pinMode(line_pins.Apin1,INPUT_PULLDOWN);
-  pinMode(line_pins.Apin2,INPUT_PULLDOWN);
+  line.set_pin({5,4,6,9},A12,{12,11,30,31},A13);
 
 
   pinMode(SWITCH_PIN,INPUT_PULLUP);
