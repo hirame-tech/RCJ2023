@@ -52,7 +52,9 @@ void setup() {
   motor.free();
 
   //line IO settings
-  line.set_pin({5,4,6,9},A12,{12,11,30,31},A13);
+  const int d_pin1[] = {5,4,6,9};
+  const int d_pin2[] = {12,11,30,31};
+  line.set_pin(d_pin1,A12,d_pin2,A13);
 
 
   pinMode(SWITCH_PIN,INPUT_PULLUP);
@@ -125,14 +127,12 @@ void loop() {
   start_flag = !(digitalRead(SWITCH_PIN));
   gyro_angle = get_gyro(&GYRO_SERIAL,led_pins.gyro_state);
   line_frag_old = line_frag;
-  line_frag = get_line(line_pins,line_state,line_threshold);
+  line_frag = line.get_line(line_state,line_threshold);
   
-  //for (int i = 0; i < 30; i++){
-    Serial.print(line_state[14]);
+  for (int i = 0; i < 30; i++){
+    Serial.print(line_state[i]);
     Serial.print(",");
-  //}
-  
-  Serial.println();
+  }
   //Serial.println();
   
   if((line_frag - line_frag_old) > 0){
@@ -144,7 +144,7 @@ void loop() {
   get_IR(&IR_SERIAL,&IR_angle,&IR_distance);
   //cal line
   if(line_frag == 1){
-    cal_line_direction(line_state,&line_angle,&line_depth);
+    line.cal_line_direction(line_state,&line_angle,&line_depth);
     //Serial.println(line_angle*180/PI);
   }else{
     Serial.println("can't find white");
@@ -155,7 +155,6 @@ void loop() {
   if(start_flag == 1){//start
     if(line_frag == 1){
       // escape line zone
-      //Serial.println("a");
       
       while((millis() - start_time) < LINE_STOP_TIME){
         motor.move(0,0,127);
