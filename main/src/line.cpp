@@ -10,7 +10,7 @@ LINE::~LINE(){
 /**
  * 
 */
-void set_pin(int _ICpin1[], int _Apin1, int _ICpin2[],int _Apin2){
+void LINE::set_pin(int _ICpin1[], int _Apin1, int _ICpin2[],int _Apin2){
     for(int i = 0; i < 4; i++){
         ICpin1[i] = _ICpin1[i];
         ICpin2[i] = _ICpin2[i];
@@ -31,7 +31,7 @@ void set_pin(int _ICpin1[], int _Apin1, int _ICpin2[],int _Apin2){
  * @param degree
  * @return float 
  */
-float degree_to_rad(int degree){
+float LINE::degree_to_rad(int degree){
     if(degree < 0){
         degree += 360;
     }
@@ -41,7 +41,7 @@ float degree_to_rad(int degree){
     return ((float)degree * PI /180);
 }
 
-bool get_line(int value[],int threshold){
+bool LINE::get_line(int value[],int threshold){
     int sum = 0;
     uint8_t mux_channel[16][4] = {
         {0, 0, 0, 0},  // 0
@@ -85,7 +85,7 @@ bool get_line(int value[],int threshold){
 }
 
 //反応しているセンサがある前提
-void cal_line_direction(int data[], float *angle, float *distance) {
+void LINE::cal_line_direction(int data[], float *angle, float *distance) {
     //座標の指定
     double x[30];
     double y[30];
@@ -161,7 +161,6 @@ void cal_line_direction(int data[], float *angle, float *distance) {
                break;
             }
         }
-        */
         // y = ax + b -> a -1 b
         // y = -1/a * x   tan(theta) = -1/a c = -1/a
         // theta = arctan(c);
@@ -197,4 +196,5 @@ void cal_line_direction(int data[], float *angle, float *distance) {
         *angle -= 2*PI;
     }
     *angle = 2*PI -*angle;
+    */
 }
