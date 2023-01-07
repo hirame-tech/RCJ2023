@@ -1,6 +1,7 @@
 import cv2
 import numpy as np
 
+pi=np.pi
 fps=25
 camera=cv2.VideoCapture(0)
 blue=[(93,59,68),(166,255,255)] #[(lower),(upper)],(色相(/2)、彩度(x2.55)、明度(x2.55))
@@ -16,29 +17,134 @@ def addshape(binimg,img,w,h): #引数は（二値化画像、マスク処理後�
     nlabels,labels,stats,center=cv2.connectedComponentsWithStats(binimg)
     if nlabels!=1:
         big=np.argmax(stats[1:,4])+1 #最も大きい塊のラベルを取得
-        cv2.rectangle(img,(stats[big][0],stats[big][1]),(stats[big][0]+stats[big][2],stats[big][1]+stats[big][3]),(0,255,0),thickness=10) #物体を長方形で示す
-        angle=np.arctan2(h/2-center[big][1],center[big][0]-w/2) #物体の中心からの角度
-        return angle
+        obj=list(zip(*np.where(labels=big))) #最も大きい塊の座標群
+        rect=cv2.minAreaRect(obj) #傾き考慮の外接短形,obj=((左上座標),w,h,回転角)
+        box=np.int0(cv2.boxPoints(rect)) #傾き考慮の外接短形の四隅
 
-while True:
-    ret,img=camera.read()
-    if not ret:
-        break
-    width, height=img.shape[:2]
-    
-    maskb=nichika(img,blue[0],blue[1])
-    maskedb=cv2.bitwise_and(img,img,mask=maskb)
+        cv2.drawContours(img,[box],-1,color=(255,0,0),thickness=3)
+        angle=np.arctan2(h/2-center[big][1],center[big][0]-w/2) #物体の中心からの角度        
 
-    masky=nichika(img,yellow[0],yellow[1])
-    maskedy=cv2.bitwise_and(img,img,mask=masky)
 
-    addshape(maskb,maskedb,width,height) 
-    addshape(masky,maskedy,width,height)   
-    cv2.imshow("maskedBlue",maskedb)
-    cv2.imshow("maskedYellow",maskedy)
-    key=cv2.waitKey(int(1000/fps))
-    if key==27:
-        break
+        """l=stats[big][0] #left end
+        r=stats[big][0]+stats[big][2] #right end
+        u=stats[big][1] #upper end
+        b=stats[big][1]+stats[big][3] #bottom end
+        cv2.rectangle(img,(l,u),(r,b),(0,255,0),thickness=10) #物体を長方形で示す"""
+        return angle,box,center[big]
+    else:
+        return None,None,None
+        
+def det_own(box1,c1,box2,c2,w,h):
+    if box1!=None and box2!=None:
+
+        p11=box1[0]
+        p12=box1[1]
+        p13=box1[2]
+        p14=box1[3]
+        p21=box2[0]
+        p22=box2[1]
+        p23=box2[2]
+        p24=box2[3]
+        """l1=l1-w/2
+        r1=r1-w/2
+        u1=-(u1-h/2)
+        b1=-(b1-h/2)
+        
+        l2=l2-w/2
+        r2=r2-w/2
+        u2=-(u2-h/2)
+        b2=-(b2-h/2)"""
+        
+        x1=c1[0]
+        y1=c1[1]
+        x2=c2[0]
+        y2=c2[1]
+        #print("c1",c1)
+        grad=(y2-y1)/(x2-x1)
+
+        def det_center(p1,p2,q1,q2):
+            s1=p1[0]
+            t1=p1[1]
+            s2=p2[0]
+            t2=p2[1]
+            u1=q1[0]
+            r1=q1[1]
+            u2=q2[0]
+            r2=q2[1]
+            x=((u1-s2)*(u2-s1)*(t1-t2)+(r1-t2)*(u2-s1)*s2-(u1-s2)*(r2-t1)+s1)/((r1-t2)*(u2-s1)-(r2-t1)*(u1-s2))
+            y=(r2-t1)*(x-s1)/(u2-s1)+t1
+            return x,y
+        if(-1<grad<1):
+            if (abs((p11[0]+p13[0]))>abs((p12[0]+p14[0]))): #object1 is at the left
+                x,y=det_center(p12,p14,p11,p13)
+                if x>0:
+                    by="b"
+                else:
+                    by="y"
+                if y>0:
+                    lr="r"
+                else:
+                    lr="l"
+            else:
+                x,y=det_center(p22,p24,p11,p13)
+                if x>0:
+                    by="y"
+                else:
+                    by="b"
+                if y>0:
+                    lr="l"
+                else:
+                    lr="r"
+        else:
+            if(abs((p11[1]+p12[1]))>abs((p13[1]+p14[1]))): #object1 is at the top
+                x,y=det_center(p13,p14,p21,p22)
+                if y>0:
+                    by="y"
+                else:
+                    by="b"
+                if x>0:
+                    lr="r"
+                else:
+                    lr="l"
+            else:
+                x,y=det_center(p23,p24,p11,p12)
+                if y>0:
+                    by="b"
+                else:
+                    by="y"
+                if x>0:
+                    lr="l"
+                else:
+                    lr="r"
+        #r=abs(x**2+y**2)    
+        return by,lr,x,y
+    else:
+        return by,lr,x,y
+
+def main():
+    while True:
+        ret,img=camera.read()
+        if not ret:
+            break
+        width, height=img.shape[:2]
+        
+        maskb=nichika(img,blue[0],blue[1])
+        maskedb=cv2.bitwise_and(img,img,mask=maskb)
+
+        masky=nichika(img,yellow[0],yellow[1])
+        maskedy=cv2.bitwise_and(img,img,mask=masky)
+        angleb,boxb,cb=addshape(maskb,maskedb,width,height) 
+        angley,boxy,cy=addshape(masky,maskedy,width,height)   
+        by,lr,x,y=det_own(boxb,cb,boxy,cy,width,height)
+        cv2.imshow("maskedBlue",cv2.bitwise_or(maskedb,maskedy))
+        cv2.imshow("maskb",maskb)
+        key=cv2.waitKey(int(1000/fps))
+        print("by,lr",(by,lr))
+
+        if key==27:
+            break
+            
+main()
 
 camera.release()
 cv2.destroyAllWindows()
