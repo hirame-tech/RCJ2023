@@ -252,6 +252,22 @@
 </package>
 </packages>
 </library>
+<library name="generic">
+<packages>
+<package name="SMD1608">
+<description>1608M 0603</description>
+<wire x1="-0.725" y1="0.35" x2="0.725" y2="0.35" width="0.1016" layer="51"/>
+<wire x1="0.725" y1="-0.35" x2="-0.725" y2="-0.35" width="0.1016" layer="51"/>
+<smd name="1" x="-0.875" y="0" dx="1.05" dy="1.08" layer="1"/>
+<smd name="2" x="0.875" y="0" dx="1.05" dy="1.08" layer="1"/>
+<text x="-0.8" y="0.65" size="1.016" layer="25">&gt;NAME</text>
+<text x="-0.8" y="-1.65" size="1.016" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.8" y1="-0.4" x2="-0.45" y2="0.4" layer="51"/>
+<rectangle x1="0.45" y1="-0.4" x2="0.8" y2="0.4" layer="51"/>
+<rectangle x1="-1.4" y1="-0.8" x2="1.4" y2="0.8" layer="39"/>
+</package>
+</packages>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -481,6 +497,18 @@ design rules under a new name.</description>
 <element name="LED6" library="adafruit" package="WS2812B-NARROW" value="WS2812B_5050N" x="68" y="0" smashed="yes">
 <attribute name="NAME" x="71.4925" y="1.5875" size="0.8128" layer="25" ratio="10" rot="R270"/>
 </element>
+<element name="R1" library="generic" package="SMD1608" value="" x="55.88" y="-116.84" smashed="yes">
+<attribute name="NAME" x="55.08" y="-116.19" size="1.016" layer="25"/>
+<attribute name="VALUE" x="55.08" y="-118.49" size="1.016" layer="27"/>
+</element>
+<element name="R2" library="generic" package="SMD1608" value="" x="55.88" y="-120.65" smashed="yes">
+<attribute name="NAME" x="55.08" y="-120" size="1.016" layer="25"/>
+<attribute name="VALUE" x="55.08" y="-122.3" size="1.016" layer="27"/>
+</element>
+<element name="R3" library="generic" package="SMD1608" value="" x="55.88" y="-124.46" smashed="yes">
+<attribute name="NAME" x="55.08" y="-123.81" size="1.016" layer="25"/>
+<attribute name="VALUE" x="55.08" y="-126.11" size="1.016" layer="27"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
@@ -505,13 +533,25 @@ design rules under a new name.</description>
 <wire x1="99.979540625" y1="-17.707875" x2="100.80029375" y2="-13.718315625" width="0.508" layer="1"/>
 <wire x1="100.80029375" y1="-13.718315625" x2="100.9582375" y2="-11.38653125" width="0.508" layer="1"/>
 <wire x1="100.9582375" y1="-11.38653125" x2="101.219" y2="-5.08" width="0.508" layer="1"/>
+<contactref element="R1" pad="2"/>
+<contactref element="R2" pad="2"/>
+<contactref element="R3" pad="2"/>
 <wire x1="89.65" y1="1.65" x2="98.92731875" y2="9.98183125" width="0" layer="19" extent="1-1"/>
+<wire x1="56.755" y1="-116.84" x2="97.43515625" y2="-24.194303125" width="0" layer="19" extent="1-1"/>
+<wire x1="56.755" y1="-120.65" x2="56.755" y2="-116.84" width="0" layer="19" extent="1-1"/>
+<wire x1="56.755" y1="-124.46" x2="56.755" y2="-120.65" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+5V">
 <contactref element="U$3" pad="P$2"/>
 <contactref element="U$1" pad="P$2"/>
 <contactref element="U$2" pad="P$2"/>
-<wire x1="97.13625" y1="-1.421509375" x2="96.38731875" y2="15.73183125" width="0" layer="19" extent="1-1"/>
+<contactref element="U$4" pad="C"/>
+<contactref element="U$5" pad="C"/>
+<contactref element="U$6" pad="C"/>
+<wire x1="96.38731875" y1="15.73183125" x2="97.13625" y2="-1.421509375" width="0" layer="19" extent="1-1"/>
+<wire x1="84.73" y1="0" x2="97.13625" y2="-1.421509375" width="0" layer="19" extent="1-1"/>
+<wire x1="72.73" y1="0" x2="84.73" y2="0" width="0" layer="19" extent="1-1"/>
+<wire x1="60.73" y1="0" x2="72.73" y2="0" width="0" layer="19" extent="1-1"/>
 <wire x1="94.89515625" y1="-18.444303125" x2="97.13625" y2="-1.421509375" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="N$1">
@@ -533,8 +573,10 @@ design rules under a new name.</description>
 <contactref element="LED1" pad="A"/>
 <contactref element="LED3" pad="A"/>
 <contactref element="LED2" pad="A"/>
-<wire x1="97.13625" y1="4.296509375" x2="94.89515625" y2="21.319303125" width="0" layer="19" extent="1-1"/>
+<wire x1="93.08046875" y1="20.393678125" x2="97.13625" y2="4.296509375" width="0" layer="19" extent="1-1"/>
 <wire x1="96.38731875" y1="-12.85683125" x2="97.13625" y2="4.296509375" width="0" layer="19" extent="1-1"/>
+<wire x1="94.89515625" y1="21.319303125" x2="94.00609375" y2="21.319303125" width="0.508" layer="1"/>
+<wire x1="94.00609375" y1="21.319303125" x2="93.08046875" y2="20.393678125" width="0.508" layer="1"/>
 </signal>
 <signal name="N$6">
 <contactref element="LED5" pad="4-DIN"/>
@@ -552,6 +594,21 @@ design rules under a new name.</description>
 <contactref element="LED5" pad="1-VDD"/>
 <wire x1="82.35" y1="-1.65" x2="94.35" y2="-1.65" width="0" layer="19" extent="1-1"/>
 <wire x1="70.35" y1="-1.65" x2="82.35" y2="-1.65" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$9">
+<contactref element="U$6" pad="E"/>
+<contactref element="R2" pad="1"/>
+<wire x1="63.27" y1="0" x2="55.005" y2="-120.65" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$10">
+<contactref element="U$4" pad="E"/>
+<contactref element="R1" pad="1"/>
+<wire x1="55.005" y1="-116.84" x2="87.27" y2="0" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$11">
+<contactref element="U$5" pad="E"/>
+<contactref element="R3" pad="1"/>
+<wire x1="55.005" y1="-124.46" x2="75.27" y2="0" width="0" layer="19" extent="1-1"/>
 </signal>
 </signals>
 <mfgpreviewcolors>

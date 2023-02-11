@@ -1743,6 +1743,7 @@ Source: http://www.osram.convergy.de/</description>
 <part name="U$5" library="by_hirame" deviceset="NJL7502L" device=""/>
 <part name="U$6" library="by_hirame" deviceset="NJL7502L" device=""/>
 <part name="LED6" library="adafruit" deviceset="WS2812B" device="_5050N"/>
+<part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1770,21 +1771,24 @@ Source: http://www.osram.convergy.de/</description>
 <attribute name="NAME" x="-10.668" y="18.796" size="1.778" layer="95" rot="R180"/>
 <attribute name="VALUE" x="-10.668" y="20.955" size="1.778" layer="96" rot="R180"/>
 </instance>
-<instance part="LED4" gate="G$1" x="2.54" y="104.14" smashed="yes"/>
-<instance part="LED5" gate="G$1" x="45.72" y="106.68" smashed="yes"/>
-<instance part="U$4" gate="G$1" x="45.72" y="81.28" smashed="yes">
-<attribute name="NAME" x="35.56" y="88.9" size="1.778" layer="95"/>
-<attribute name="VALUE" x="35.56" y="86.36" size="1.778" layer="96"/>
+<instance part="LED4" gate="G$1" x="50.8" y="106.68" smashed="yes"/>
+<instance part="LED5" gate="G$1" x="2.54" y="106.68" smashed="yes"/>
+<instance part="U$4" gate="G$1" x="99.06" y="58.42" smashed="yes">
+<attribute name="NAME" x="88.9" y="66.04" size="1.778" layer="95"/>
+<attribute name="VALUE" x="88.9" y="63.5" size="1.778" layer="96"/>
 </instance>
-<instance part="U$5" gate="G$1" x="38.1" y="81.28" smashed="yes">
-<attribute name="NAME" x="27.94" y="88.9" size="1.778" layer="95"/>
-<attribute name="VALUE" x="27.94" y="86.36" size="1.778" layer="96"/>
+<instance part="U$5" gate="G$1" x="91.44" y="58.42" smashed="yes">
+<attribute name="NAME" x="81.28" y="66.04" size="1.778" layer="95"/>
+<attribute name="VALUE" x="81.28" y="63.5" size="1.778" layer="96"/>
 </instance>
-<instance part="U$6" gate="G$1" x="30.48" y="81.28" smashed="yes">
-<attribute name="NAME" x="20.32" y="88.9" size="1.778" layer="95"/>
-<attribute name="VALUE" x="20.32" y="86.36" size="1.778" layer="96"/>
+<instance part="U$6" gate="G$1" x="83.82" y="58.42" smashed="yes">
+<attribute name="NAME" x="73.66" y="66.04" size="1.778" layer="95"/>
+<attribute name="VALUE" x="73.66" y="63.5" size="1.778" layer="96"/>
 </instance>
-<instance part="LED6" gate="G$1" x="-33.02" y="104.14" smashed="yes"/>
+<instance part="LED6" gate="G$1" x="-33.02" y="106.68" smashed="yes"/>
+<instance part="GND2" gate="1" x="50.8" y="88.9" smashed="yes">
+<attribute name="VALUE" x="48.26" y="86.36" size="1.778" layer="96"/>
+</instance>
 </instances>
 <busses>
 </busses>
@@ -1803,6 +1807,20 @@ Source: http://www.osram.convergy.de/</description>
 <wire x1="38.1" y1="60.96" x2="38.1" y2="38.1" width="0.1524" layer="91"/>
 <junction x="38.1" y="38.1"/>
 <pinref part="GND1" gate="1" pin="GND"/>
+</segment>
+<segment>
+<pinref part="LED6" gate="G$1" pin="GND"/>
+<wire x1="2.54" y1="93.98" x2="-33.02" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="-33.02" y1="96.52" x2="-33.02" y2="93.98" width="0.1524" layer="91"/>
+<pinref part="LED5" gate="G$1" pin="GND"/>
+<wire x1="2.54" y1="96.52" x2="2.54" y2="93.98" width="0.1524" layer="91"/>
+<pinref part="LED4" gate="G$1" pin="GND"/>
+<wire x1="2.54" y1="93.98" x2="50.8" y2="93.98" width="0.1524" layer="91"/>
+<wire x1="50.8" y1="93.98" x2="50.8" y2="96.52" width="0.1524" layer="91"/>
+<junction x="2.54" y="93.98"/>
+<pinref part="GND2" gate="1" pin="GND"/>
+<wire x1="50.8" y1="93.98" x2="50.8" y2="91.44" width="0.1524" layer="91"/>
+<junction x="50.8" y="93.98"/>
 </segment>
 </net>
 <net name="+5V" class="0">
@@ -1840,6 +1858,46 @@ Source: http://www.osram.convergy.de/</description>
 <pinref part="LED3" gate="G$1" pin="C"/>
 <pinref part="U$3" gate="G$1" pin="K"/>
 <wire x1="-10.16" y1="15.24" x2="7.62" y2="15.24" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$4" class="0">
+<segment>
+<pinref part="LED1" gate="G$1" pin="A"/>
+<wire x1="-17.78" y1="60.96" x2="-20.32" y2="60.96" width="0.1524" layer="91"/>
+<pinref part="LED3" gate="G$1" pin="A"/>
+<wire x1="-20.32" y1="60.96" x2="-20.32" y2="38.1" width="0.1524" layer="91"/>
+<wire x1="-20.32" y1="38.1" x2="-20.32" y2="15.24" width="0.1524" layer="91"/>
+<wire x1="-20.32" y1="15.24" x2="-17.78" y2="15.24" width="0.1524" layer="91"/>
+<pinref part="LED2" gate="G$1" pin="A"/>
+<wire x1="-17.78" y1="38.1" x2="-20.32" y2="38.1" width="0.1524" layer="91"/>
+<junction x="-20.32" y="38.1"/>
+</segment>
+</net>
+<net name="N$6" class="0">
+<segment>
+<pinref part="LED5" gate="G$1" pin="DI"/>
+<pinref part="LED6" gate="G$1" pin="DO"/>
+<wire x1="-10.16" y1="104.14" x2="-20.32" y2="104.14" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$7" class="0">
+<segment>
+<pinref part="LED5" gate="G$1" pin="DO"/>
+<pinref part="LED4" gate="G$1" pin="DI"/>
+<wire x1="15.24" y1="104.14" x2="38.1" y2="104.14" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="N$8" class="0">
+<segment>
+<pinref part="LED4" gate="G$1" pin="VDD"/>
+<wire x1="55.88" y1="121.92" x2="55.88" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="55.88" y1="124.46" x2="7.62" y2="124.46" width="0.1524" layer="91"/>
+<pinref part="LED6" gate="G$1" pin="VDD"/>
+<wire x1="7.62" y1="124.46" x2="-27.94" y2="124.46" width="0.1524" layer="91"/>
+<wire x1="-27.94" y1="124.46" x2="-27.94" y2="121.92" width="0.1524" layer="91"/>
+<pinref part="LED5" gate="G$1" pin="VDD"/>
+<wire x1="7.62" y1="121.92" x2="7.62" y2="124.46" width="0.1524" layer="91"/>
+<junction x="7.62" y="124.46"/>
 </segment>
 </net>
 </nets>
