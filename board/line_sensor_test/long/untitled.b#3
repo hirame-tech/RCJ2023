@@ -157,16 +157,14 @@
 <board>
 <plain>
 <wire x1="1371.6" y1="114.3" x2="1371.6" y2="-114.3" width="0.025" layer="20"/>
-<wire x1="101.4352" y1="-17.885759375" x2="101.4352" y2="17.885759375" width="0.001" layer="20" curve="19.999997"/>
-<wire x1="54" y1="-4.5" x2="93.892228125" y2="-4.5" width="0.001" layer="20"/>
-<wire x1="93.892228125" y1="-4.5" x2="93.89223125" y2="-4.5" width="0.001" layer="20"/>
+<wire x1="100.36011875" y1="-23.169959375" x2="97.958821875" y2="31.82875" width="0.001" layer="20" curve="31"/>
+<wire x1="54" y1="-4.5" x2="93.89223125" y2="-4.5" width="0.001" layer="20"/>
 <wire x1="54" y1="4.5" x2="93.89223125" y2="4.5" width="0.001" layer="20"/>
 <wire x1="54" y1="4.5" x2="54" y2="-4.5" width="0.001" layer="20"/>
-<wire x1="92.57193125" y1="-16.32293125" x2="101.4352" y2="-17.885759375" width="0.001" layer="20"/>
-<wire x1="92.57193125" y1="16.32293125" x2="92.571934375" y2="16.32293125" width="0.001" layer="20"/>
-<wire x1="92.571934375" y1="16.32293125" x2="101.4352" y2="17.885759375" width="0.001" layer="20"/>
-<wire x1="93.89223125" y1="4.5" x2="92.571934375" y2="16.32293125" width="0.001" layer="20" curve="7.256069"/>
-<wire x1="92.57193125" y1="-16.32293125" x2="93.892228125" y2="-4.5" width="0.001" layer="20" curve="7.25607"/>
+<wire x1="93.89223125" y1="4.5" x2="89.399315625" y2="29.047603125" width="0.001" layer="20" curve="15.256071"/>
+<wire x1="91.590790625" y1="-21.1454" x2="93.89223125" y2="-4.5" width="0.001" layer="20" curve="10.256068"/>
+<wire x1="100.36011875" y1="-23.169959375" x2="91.590790625" y2="-21.1454" width="0.001" layer="20"/>
+<wire x1="97.958821875" y1="31.82875" x2="89.399315625" y2="29.047603125" width="0.001" layer="20"/>
 </plain>
 <libraries>
 <library name="S4282-51">
@@ -180,6 +178,27 @@
 <wire x1="-2.3" y1="-2.7" x2="2.3" y2="-2.7" width="0.127" layer="21"/>
 <wire x1="2.3" y1="-2.7" x2="2.3" y2="2.7" width="0.127" layer="21"/>
 <wire x1="2.3" y1="2.7" x2="-2.3" y2="2.7" width="0.127" layer="21"/>
+</package>
+</packages>
+</library>
+<library name="adafruit">
+<packages>
+<package name="LED5MM">
+<description>&lt;B&gt;LED&lt;/B&gt;&lt;p&gt;
+5 mm, round</description>
+<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.2032" layer="21"/>
+<wire x1="2.54" y1="-1.905" x2="2.54" y2="1.905" width="0.254" layer="21" curve="-286.260205" cap="flat"/>
+<wire x1="-1.143" y1="0" x2="0" y2="1.143" width="0.1524" layer="51" curve="-90" cap="flat"/>
+<wire x1="0" y1="-1.143" x2="1.143" y2="0" width="0.1524" layer="51" curve="90" cap="flat"/>
+<wire x1="-1.651" y1="0" x2="0" y2="1.651" width="0.1524" layer="51" curve="-90" cap="flat"/>
+<wire x1="0" y1="-1.651" x2="1.651" y2="0" width="0.1524" layer="51" curve="90" cap="flat"/>
+<wire x1="-2.159" y1="0" x2="0" y2="2.159" width="0.1524" layer="51" curve="-90" cap="flat"/>
+<wire x1="0" y1="-2.159" x2="2.159" y2="0" width="0.1524" layer="51" curve="90" cap="flat"/>
+<circle x="0" y="0" radius="2.54" width="0.1524" layer="21"/>
+<pad name="A" x="-1.27" y="0" drill="0.8128" diameter="1.6764" shape="octagon"/>
+<pad name="K" x="1.27" y="0" drill="0.8128" diameter="1.6764" shape="octagon"/>
+<text x="3.175" y="0.5334" size="1.27" layer="25" ratio="10">&gt;NAME</text>
+<text x="3.2004" y="-1.8034" size="1.27" layer="27" ratio="10">&gt;VALUE</text>
 </package>
 </packages>
 </library>
@@ -376,24 +395,51 @@ design rules under a new name.</description>
 </pass>
 </autorouter>
 <elements>
-<element name="U$1" library="S4282-51" package="S4282-51" value="S4282-51" x="97.79" y="-11.43" smashed="yes" rot="R270"/>
+<element name="U$1" library="S4282-51" package="S4282-51" value="S4282-51" x="97.0035625" y="-17.104346875" smashed="yes" rot="R270"/>
 <element name="U$2" library="S4282-51" package="S4282-51" value="S4282-51" x="98.5" y="0" smashed="yes" rot="R270"/>
-<element name="U$3" library="S4282-51" package="S4282-51" value="S4282-51" x="97.79" y="12.7" smashed="yes" rot="R270"/>
+<element name="U$3" library="S4282-51" package="S4282-51" value="S4282-51" x="97.0035625" y="17.104346875" smashed="yes" rot="R270"/>
+<element name="LED1" library="adafruit" package="LED5MM" value="" x="98.125178125" y="-8.584840625" smashed="yes">
+<attribute name="NAME" x="101.300178125" y="-8.051440625" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="101.325578125" y="-10.388240625" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="LED2" library="adafruit" package="LED5MM" value="" x="98.125178125" y="8.584840625" smashed="yes">
+<attribute name="NAME" x="101.300178125" y="9.118240625" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="101.325578125" y="6.781440625" size="1.27" layer="27" ratio="10"/>
+</element>
+<element name="LED3" library="adafruit" package="LED5MM" value="" x="95.14369375" y="25.493675" smashed="yes">
+<attribute name="NAME" x="98.31869375" y="26.027075" size="1.27" layer="25" ratio="10"/>
+<attribute name="VALUE" x="98.34409375" y="23.690275" size="1.27" layer="27" ratio="10"/>
+</element>
 </elements>
 <signals>
 <signal name="GND">
 <contactref element="U$2" pad="P$4"/>
 <contactref element="U$3" pad="P$4"/>
 <contactref element="U$1" pad="P$4"/>
-<wire x1="99.06" y1="-14.305" x2="99.06" y2="9.825" width="0" layer="19" extent="1-1"/>
-<wire x1="99.77" y1="-2.875" x2="99.06" y2="-14.305" width="0" layer="19" extent="1-1"/>
+<wire x1="99.77" y1="-2.875" x2="98.2735625" y2="14.229346875" width="0" layer="19" extent="1-1"/>
+<wire x1="98.2735625" y1="-19.979346875" x2="99.77" y2="-2.875" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+5V">
 <contactref element="U$3" pad="P$2"/>
 <contactref element="U$1" pad="P$2"/>
 <contactref element="U$2" pad="P$2"/>
-<wire x1="96.52" y1="-8.555" x2="96.52" y2="15.575" width="0" layer="19" extent="1-1"/>
-<wire x1="97.23" y1="2.875" x2="96.52" y2="15.575" width="0" layer="19" extent="1-1"/>
+<wire x1="97.23" y1="2.875" x2="95.7335625" y2="19.979346875" width="0" layer="19" extent="1-1"/>
+<wire x1="95.7335625" y1="-14.229346875" x2="97.23" y2="2.875" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$1">
+<contactref element="U$1" pad="P$1"/>
+<contactref element="LED1" pad="K"/>
+<wire x1="98.2735625" y1="-14.229346875" x2="99.395178125" y2="-8.584840625" width="1.016" layer="16"/>
+</signal>
+<signal name="N$2">
+<contactref element="LED2" pad="K"/>
+<contactref element="U$2" pad="P$1"/>
+<wire x1="99.395178125" y1="8.584840625" x2="99.77" y2="2.875" width="1.016" layer="16"/>
+</signal>
+<signal name="N$3">
+<contactref element="LED3" pad="K"/>
+<contactref element="U$3" pad="P$1"/>
+<wire x1="96.41369375" y1="25.493675" x2="98.2735625" y2="19.979346875" width="1.016" layer="16"/>
 </signal>
 </signals>
 <mfgpreviewcolors>

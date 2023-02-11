@@ -487,14 +487,25 @@ design rules under a new name.</description>
 <contactref element="U$2" pad="P$4"/>
 <contactref element="U$3" pad="P$4"/>
 <contactref element="U$1" pad="P$4"/>
-<contactref element="LED4" pad="3-GND"/>
-<contactref element="LED5" pad="3-GND"/>
 <contactref element="LED6" pad="3-GND"/>
+<contactref element="LED5" pad="3-GND"/>
+<contactref element="LED4" pad="3-GND"/>
+<wire x1="65.65" y1="1.65" x2="67.2295" y2="3.2295" width="0.508" layer="1"/>
+<wire x1="77.65" y1="1.65" x2="76.2" y2="3.2295" width="0.508" layer="1"/>
+<wire x1="67.2295" y1="3.2295" x2="76.2" y2="3.2295" width="0.508" layer="1"/>
+<wire x1="89.65" y1="1.65" x2="88.0705" y2="3.2295" width="0.508" layer="1"/>
+<wire x1="88.0705" y1="3.2295" x2="76.2" y2="3.2295" width="0.508" layer="1"/>
+<wire x1="98.92731875" y1="9.98183125" x2="101.18874375" y2="7.983421875" width="0.508" layer="1"/>
+<wire x1="101.18874375" y1="7.983421875" x2="101.215128125" y2="7.59393125" width="0.508" layer="1"/>
+<wire x1="101.215128125" y1="7.59393125" x2="101.219" y2="-5.08" width="0.508" layer="1"/>
+<wire x1="101.219" y1="-5.08" x2="99.67625" y2="-7.171509375" width="0.508" layer="1"/>
+<wire x1="97.43515625" y1="-24.194303125" x2="99.658696875" y2="-19.267453125" width="0.508" layer="1"/>
+<wire x1="99.658696875" y1="-19.267453125" x2="99.979534375" y2="-17.7079" width="0.508" layer="1"/>
+<wire x1="99.979534375" y1="-17.7079" x2="99.979540625" y2="-17.707875" width="0.508" layer="1"/>
+<wire x1="99.979540625" y1="-17.707875" x2="100.80029375" y2="-13.718315625" width="0.508" layer="1"/>
+<wire x1="100.80029375" y1="-13.718315625" x2="100.9582375" y2="-11.38653125" width="0.508" layer="1"/>
+<wire x1="100.9582375" y1="-11.38653125" x2="101.219" y2="-5.08" width="0.508" layer="1"/>
 <wire x1="89.65" y1="1.65" x2="98.92731875" y2="9.98183125" width="0" layer="19" extent="1-1"/>
-<wire x1="77.65" y1="1.65" x2="89.65" y2="1.65" width="0" layer="19" extent="1-1"/>
-<wire x1="65.65" y1="1.65" x2="77.65" y2="1.65" width="0" layer="19" extent="1-1"/>
-<wire x1="99.67625" y1="-7.171509375" x2="89.65" y2="1.65" width="0" layer="19" extent="1-1"/>
-<wire x1="97.43515625" y1="-24.194303125" x2="99.67625" y2="-7.171509375" width="0" layer="19" extent="1-1"/>
 </signal>
 <signal name="+5V">
 <contactref element="U$3" pad="P$2"/>
@@ -506,22 +517,39 @@ design rules under a new name.</description>
 <signal name="N$1">
 <contactref element="U$1" pad="P$1"/>
 <contactref element="LED1" pad="K"/>
-<wire x1="97.43515625" y1="-18.444303125" x2="98.92731875" y2="-12.85683125" width="0" layer="19" extent="1-1"/>
+<wire x1="97.43515625" y1="-18.444303125" x2="98.92731875" y2="-12.85683125" width="0.508" layer="1"/>
 </signal>
 <signal name="N$2">
 <contactref element="LED2" pad="K"/>
 <contactref element="U$2" pad="P$1"/>
-<wire x1="99.67625" y1="-1.421509375" x2="99.67625" y2="4.296509375" width="0" layer="19" extent="1-1"/>
+<wire x1="99.67625" y1="4.296509375" x2="99.67625" y2="-1.421509375" width="0.508" layer="1"/>
 </signal>
 <signal name="N$3">
 <contactref element="LED3" pad="K"/>
 <contactref element="U$3" pad="P$1"/>
-<wire x1="98.92731875" y1="15.73183125" x2="97.43515625" y2="21.319303125" width="0" layer="19" extent="1-1"/>
+<wire x1="97.43515625" y1="21.319303125" x2="98.92731875" y2="15.73183125" width="0.508" layer="1"/>
 </signal>
-<signal name="VDD">
+<signal name="N$4">
+<contactref element="LED1" pad="A"/>
+<contactref element="LED3" pad="A"/>
+<contactref element="LED2" pad="A"/>
+<wire x1="97.13625" y1="4.296509375" x2="94.89515625" y2="21.319303125" width="0" layer="19" extent="1-1"/>
+<wire x1="96.38731875" y1="-12.85683125" x2="97.13625" y2="4.296509375" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$6">
+<contactref element="LED5" pad="4-DIN"/>
+<contactref element="LED6" pad="2-DOUT"/>
+<wire x1="70.35" y1="1.65" x2="77.65" y2="-1.65" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$7">
+<contactref element="LED5" pad="2-DOUT"/>
+<contactref element="LED4" pad="4-DIN"/>
+<wire x1="82.35" y1="1.65" x2="89.65" y2="-1.65" width="0" layer="19" extent="1-1"/>
+</signal>
+<signal name="N$8">
 <contactref element="LED4" pad="1-VDD"/>
-<contactref element="LED5" pad="1-VDD"/>
 <contactref element="LED6" pad="1-VDD"/>
+<contactref element="LED5" pad="1-VDD"/>
 <wire x1="82.35" y1="-1.65" x2="94.35" y2="-1.65" width="0" layer="19" extent="1-1"/>
 <wire x1="70.35" y1="-1.65" x2="82.35" y2="-1.65" width="0" layer="19" extent="1-1"/>
 </signal>

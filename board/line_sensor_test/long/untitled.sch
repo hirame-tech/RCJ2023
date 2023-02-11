@@ -218,12 +218,31 @@
 <text x="-2.54" y="-2.54" size="1.778" layer="96">&gt;VALUE</text>
 <pin name="GND" x="0" y="2.54" visible="off" length="short" direction="sup" rot="R270"/>
 </symbol>
+<symbol name="+5V" urn="urn:adsk.eagle:symbol:26929/1" library_version="1">
+<wire x1="1.27" y1="-1.905" x2="0" y2="0" width="0.254" layer="94"/>
+<wire x1="0" y1="0" x2="-1.27" y2="-1.905" width="0.254" layer="94"/>
+<text x="-2.54" y="-5.08" size="1.778" layer="96" rot="R90">&gt;VALUE</text>
+<pin name="+5V" x="0" y="-2.54" visible="off" length="short" direction="sup" rot="R90"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="GND" urn="urn:adsk.eagle:component:26954/1" prefix="GND" library_version="1">
 <description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
 <gates>
 <gate name="1" symbol="GND" x="0" y="0"/>
+</gates>
+<devices>
+<device name="">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="+5V" urn="urn:adsk.eagle:component:26963/1" prefix="P+" library_version="1">
+<description>&lt;b&gt;SUPPLY SYMBOL&lt;/b&gt;</description>
+<gates>
+<gate name="1" symbol="+5V" x="0" y="0"/>
 </gates>
 <devices>
 <device name="">
@@ -1719,6 +1738,74 @@ Source: http://www.osram.convergy.de/</description>
 </deviceset>
 </devicesets>
 </library>
+<library name="generic">
+<packages>
+<package name="SMD1608">
+<description>1608M 0603</description>
+<wire x1="-0.725" y1="0.35" x2="0.725" y2="0.35" width="0.1016" layer="51"/>
+<wire x1="0.725" y1="-0.35" x2="-0.725" y2="-0.35" width="0.1016" layer="51"/>
+<smd name="1" x="-0.875" y="0" dx="1.05" dy="1.08" layer="1"/>
+<smd name="2" x="0.875" y="0" dx="1.05" dy="1.08" layer="1"/>
+<text x="-0.8" y="0.65" size="1.016" layer="25">&gt;NAME</text>
+<text x="-0.8" y="-1.65" size="1.016" layer="27">&gt;VALUE</text>
+<rectangle x1="-0.8" y1="-0.4" x2="-0.45" y2="0.4" layer="51"/>
+<rectangle x1="0.45" y1="-0.4" x2="0.8" y2="0.4" layer="51"/>
+<rectangle x1="-1.4" y1="-0.8" x2="1.4" y2="0.8" layer="39"/>
+</package>
+<package name="SMD2012">
+<description>2012M 0805</description>
+<wire x1="-0.925" y1="0.6" x2="0.925" y2="0.6" width="0.1016" layer="51"/>
+<wire x1="0.925" y1="-0.6" x2="-0.925" y2="-0.6" width="0.1016" layer="51"/>
+<smd name="1" x="-1" y="0" dx="1.3" dy="1.6" layer="1"/>
+<smd name="2" x="1" y="0" dx="1.3" dy="1.6" layer="1"/>
+<text x="-1" y="0.875" size="1.016" layer="25">&gt;NAME</text>
+<text x="-1" y="-1.9" size="1.016" layer="27">&gt;VALUE</text>
+<rectangle x1="-1" y1="-0.65" x2="-0.5" y2="0.65" layer="51"/>
+<rectangle x1="0.5" y1="-0.65" x2="1" y2="0.65" layer="51"/>
+<rectangle x1="-1.65" y1="-1.25" x2="1.65" y2="1.25" layer="39"/>
+</package>
+</packages>
+<symbols>
+<symbol name="RESISTOR">
+<wire x1="-0.762" y1="-2.54" x2="0.762" y2="-2.54" width="0.254" layer="94"/>
+<wire x1="0.762" y1="-2.54" x2="0.762" y2="2.54" width="0.254" layer="94"/>
+<wire x1="0.762" y1="2.54" x2="-0.762" y2="2.54" width="0.254" layer="94"/>
+<wire x1="-0.762" y1="2.54" x2="-0.762" y2="-2.54" width="0.254" layer="94"/>
+<text x="1.27" y="2.54" size="1.778" layer="95" font="vector" rot="MR180">&gt;NAME</text>
+<text x="1.27" y="-2.54" size="1.778" layer="96" font="vector">&gt;VALUE</text>
+<pin name="1" x="0" y="5.08" visible="off" length="short" direction="pas" swaplevel="1" rot="R270"/>
+<pin name="2" x="0" y="-5.08" visible="off" length="short" direction="pas" swaplevel="1" rot="R90"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="RESISTOR" prefix="R" uservalue="yes">
+<description>Generic Registor</description>
+<gates>
+<gate name="G$1" symbol="RESISTOR" x="0" y="0"/>
+</gates>
+<devices>
+<device name="1608" package="SMD1608">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+<device name="2012" package="SMD2012">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
 </libraries>
 <attributes>
 </attributes>
@@ -1744,6 +1831,11 @@ Source: http://www.osram.convergy.de/</description>
 <part name="U$6" library="by_hirame" deviceset="NJL7502L" device=""/>
 <part name="LED6" library="adafruit" deviceset="WS2812B" device="_5050N"/>
 <part name="GND2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
+<part name="R1" library="generic" deviceset="RESISTOR" device="1608"/>
+<part name="R2" library="generic" deviceset="RESISTOR" device="1608"/>
+<part name="R3" library="generic" deviceset="RESISTOR" device="1608"/>
+<part name="P+2" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="+5V" device=""/>
+<part name="GND3" library="supply1" library_urn="urn:adsk.eagle:library:371" deviceset="GND" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -1777,17 +1869,35 @@ Source: http://www.osram.convergy.de/</description>
 <attribute name="NAME" x="88.9" y="66.04" size="1.778" layer="95"/>
 <attribute name="VALUE" x="88.9" y="63.5" size="1.778" layer="96"/>
 </instance>
-<instance part="U$5" gate="G$1" x="91.44" y="58.42" smashed="yes">
-<attribute name="NAME" x="81.28" y="66.04" size="1.778" layer="95"/>
-<attribute name="VALUE" x="81.28" y="63.5" size="1.778" layer="96"/>
+<instance part="U$5" gate="G$1" x="73.66" y="58.42" smashed="yes">
+<attribute name="NAME" x="63.5" y="66.04" size="1.778" layer="95"/>
+<attribute name="VALUE" x="63.5" y="63.5" size="1.778" layer="96"/>
 </instance>
-<instance part="U$6" gate="G$1" x="83.82" y="58.42" smashed="yes">
-<attribute name="NAME" x="73.66" y="66.04" size="1.778" layer="95"/>
-<attribute name="VALUE" x="73.66" y="63.5" size="1.778" layer="96"/>
+<instance part="U$6" gate="G$1" x="86.36" y="58.42" smashed="yes">
+<attribute name="NAME" x="76.2" y="66.04" size="1.778" layer="95"/>
+<attribute name="VALUE" x="76.2" y="63.5" size="1.778" layer="96"/>
 </instance>
 <instance part="LED6" gate="G$1" x="-33.02" y="106.68" smashed="yes"/>
 <instance part="GND2" gate="1" x="50.8" y="88.9" smashed="yes">
 <attribute name="VALUE" x="48.26" y="86.36" size="1.778" layer="96"/>
+</instance>
+<instance part="R1" gate="G$1" x="101.6" y="43.18" smashed="yes">
+<attribute name="NAME" x="102.87" y="45.72" size="1.778" layer="95" font="vector" rot="MR180"/>
+<attribute name="VALUE" x="102.87" y="40.64" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="R2" gate="G$1" x="88.9" y="43.18" smashed="yes">
+<attribute name="NAME" x="90.17" y="45.72" size="1.778" layer="95" font="vector" rot="MR180"/>
+<attribute name="VALUE" x="90.17" y="40.64" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="R3" gate="G$1" x="76.2" y="43.18" smashed="yes">
+<attribute name="NAME" x="77.47" y="45.72" size="1.778" layer="95" font="vector" rot="MR180"/>
+<attribute name="VALUE" x="77.47" y="40.64" size="1.778" layer="96" font="vector"/>
+</instance>
+<instance part="P+2" gate="1" x="68.58" y="71.12" smashed="yes">
+<attribute name="VALUE" x="66.04" y="66.04" size="1.778" layer="96" rot="R90"/>
+</instance>
+<instance part="GND3" gate="1" x="68.58" y="30.48" smashed="yes">
+<attribute name="VALUE" x="66.04" y="27.94" size="1.778" layer="96"/>
 </instance>
 </instances>
 <busses>
@@ -1822,6 +1932,21 @@ Source: http://www.osram.convergy.de/</description>
 <wire x1="50.8" y1="93.98" x2="50.8" y2="91.44" width="0.1524" layer="91"/>
 <junction x="50.8" y="93.98"/>
 </segment>
+<segment>
+<pinref part="R1" gate="G$1" pin="2"/>
+<wire x1="101.6" y1="38.1" x2="101.6" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="35.56" x2="88.9" y2="35.56" width="0.1524" layer="91"/>
+<pinref part="R2" gate="G$1" pin="2"/>
+<wire x1="88.9" y1="35.56" x2="88.9" y2="38.1" width="0.1524" layer="91"/>
+<pinref part="R3" gate="G$1" pin="2"/>
+<wire x1="76.2" y1="38.1" x2="76.2" y2="35.56" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="35.56" x2="88.9" y2="35.56" width="0.1524" layer="91"/>
+<junction x="88.9" y="35.56"/>
+<wire x1="76.2" y1="35.56" x2="68.58" y2="35.56" width="0.1524" layer="91"/>
+<junction x="76.2" y="35.56"/>
+<wire x1="68.58" y1="35.56" x2="68.58" y2="33.02" width="0.1524" layer="91"/>
+<pinref part="GND3" gate="1" pin="GND"/>
+</segment>
 </net>
 <net name="+5V" class="0">
 <segment>
@@ -1837,6 +1962,21 @@ Source: http://www.osram.convergy.de/</description>
 <wire x1="7.62" y1="27.94" x2="0" y2="27.94" width="0.1524" layer="91"/>
 <junction x="0" y="27.94"/>
 <pinref part="P+1" gate="1" pin="+5V"/>
+</segment>
+<segment>
+<pinref part="U$4" gate="G$1" pin="C"/>
+<wire x1="101.6" y1="63.5" x2="101.6" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="66.04" x2="88.9" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="66.04" x2="76.2" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="66.04" x2="68.58" y2="66.04" width="0.1524" layer="91"/>
+<wire x1="68.58" y1="66.04" x2="68.58" y2="68.58" width="0.1524" layer="91"/>
+<pinref part="U$5" gate="G$1" pin="C"/>
+<wire x1="76.2" y1="63.5" x2="76.2" y2="66.04" width="0.1524" layer="91"/>
+<junction x="76.2" y="66.04"/>
+<pinref part="U$6" gate="G$1" pin="C"/>
+<wire x1="88.9" y1="63.5" x2="88.9" y2="66.04" width="0.1524" layer="91"/>
+<junction x="88.9" y="66.04"/>
+<pinref part="P+2" gate="1" pin="+5V"/>
 </segment>
 </net>
 <net name="N$1" class="0">
@@ -1898,6 +2038,36 @@ Source: http://www.osram.convergy.de/</description>
 <pinref part="LED5" gate="G$1" pin="VDD"/>
 <wire x1="7.62" y1="121.92" x2="7.62" y2="124.46" width="0.1524" layer="91"/>
 <junction x="7.62" y="124.46"/>
+</segment>
+</net>
+<net name="N$9" class="0">
+<segment>
+<pinref part="U$6" gate="G$1" pin="E"/>
+<wire x1="88.9" y1="53.34" x2="88.9" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="50.8" x2="88.9" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="88.9" y1="50.8" x2="91.44" y2="50.8" width="0.1524" layer="91"/>
+<junction x="88.9" y="50.8"/>
+<pinref part="R2" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="N$10" class="0">
+<segment>
+<pinref part="U$4" gate="G$1" pin="E"/>
+<wire x1="101.6" y1="53.34" x2="101.6" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="50.8" x2="104.14" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="101.6" y1="50.8" x2="101.6" y2="48.26" width="0.1524" layer="91"/>
+<junction x="101.6" y="50.8"/>
+<pinref part="R1" gate="G$1" pin="1"/>
+</segment>
+</net>
+<net name="N$11" class="0">
+<segment>
+<pinref part="U$5" gate="G$1" pin="E"/>
+<wire x1="76.2" y1="53.34" x2="76.2" y2="50.8" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="50.8" x2="76.2" y2="48.26" width="0.1524" layer="91"/>
+<wire x1="76.2" y1="50.8" x2="78.74" y2="50.8" width="0.1524" layer="91"/>
+<junction x="76.2" y="50.8"/>
+<pinref part="R3" gate="G$1" pin="1"/>
 </segment>
 </net>
 </nets>
