@@ -7,7 +7,7 @@
 
 //**user settings**
 #define BRIGHTNESS 255
-#define MOVE_SPEED 13//MAX50
+#define MOVE_SPEED 30//MAX50
 #define IR_r 7//適当
 #define LINE_THRESHOLD 500
 #define LINE_STOP_TIME 500
@@ -127,7 +127,7 @@ void loop() {
   start_flag = !(digitalRead(SWITCH_PIN));
   gyro_angle = get_gyro(&GYRO_SERIAL,led_pins.gyro_state);
   line_frag_old = line_frag;
-  line_frag = line.get_line(line_state,line_threshold);
+  line_frag = 0;//line.get_line(line_state,line_threshold);
   
   for (int i = 0; i < 30; i++){
     Serial.print(line_state[i]);
