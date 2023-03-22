@@ -295,8 +295,14 @@ if __name__=='__main__':
            /|¥
           / | ¥
          5  4  3      角度を左に様に3bitで表せるように変形"""
-        int_angleb=cvtangle(angleb)
-        int_angley=cvtangle(angley)
+        if angleb!=None:
+            int_angleb=cvtangle(angleb)
+        else:
+            int_angleb=-1
+        if angley!=None:
+            int_angley=cvtangle(angley)
+        else:
+            int_angley=-1
 
         data_string=f"{int_angleb},{int_angley},{lr},{by}\n"
         ser.write(data_string.encode())
