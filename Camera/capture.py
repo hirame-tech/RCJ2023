@@ -2,15 +2,26 @@ import cv2
 import numpy as np
 
 pi=np.pi
-fps=25
+fps=10
+print("r")
 camera=cv2.VideoCapture(0)
+#camera.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc("B","G","R","8"))
+camera.set(cv2.CAP_PROP_FRAME_HEIGHT,320)
+camera.set(cv2.CAP_PROP_FRAME_WIDTH,320)
+camera.set(cv2.CAP_PROP_BUFFERSIZE,1)
+camera.set(cv2.CAP_PROP_FPS,fps)
+
+print(camera.get(cv2.CAP_PROP_FOURCC))
+
 nans42=np.zeros([4,2])
 nans42[:,:]=np.nan
 blue=[(93,59,68),(166,255,255)] #[(lower),(upper)],(色相(/2)、彩度(x2.55)、明度(x2.55))
-yellow=[(10,51,51),(35,255,255)]
+yellow=[(10,51,51),(35,255,255)] 
+print("s")
 
 def atan(x,y):
     return np.arctan2(-x,y)+pi
+    
 def nichika(img,lower,upper): #画像を二値化する引数は(画像、(hsvタプル),(hsvタプル))
     hsv=cv2.cvtColor(img,cv2.COLOR_BGR2HSV)
     nichika=cv2.inRange(hsv,lower,upper)
@@ -22,7 +33,7 @@ def addshape(binimg,img,w,h,rgb): #引数は（二値化画像、マスク処理
     if nlabels!=1:
         big=np.argmax(stats[1:,4])+1 #最も大きい塊のラベルを取得
         obj=np.fliplr(np.array(list(zip(*np.where(labels==big))))) #最も大きい塊の座標群
-        rect=cv2.minAreaRect(obj) #傾き考慮の外接短形,obj=((左上座標),w,h,回転角)
+        rect=cv2.minAreaRect(obj) #傾き考慮の外接短形,rect=((左上座標),w,h,回転角)
         box=np.intp(cv2.boxPoints(rect)) #傾き考慮の外接短形の四隅
 
         cv2.drawContours(img,[box],-1,color=rgb,thickness=3)
@@ -49,6 +60,7 @@ def det_own(box1,c1,box2,c2,w,h):
         p22=box2[1]
         p23=box2[2]
         p24=box2[3]
+
         """l1=l1-w/2
         r1=r1-w/2
         u1=-(u1-h/2)
@@ -67,8 +79,8 @@ def det_own(box1,c1,box2,c2,w,h):
         #grad=(y2-y1)/(x2-x1)
 
         def det_center(p1,p2,q1,q2,w,h):
-            s1=p1[0]-w/2
-            t1=-p1[1]+h/2
+            s1=p1[0]-w/2 #gazou shuusinn ni henkou, migi ga x sei
+            t1=-p1[1]+h/2# ue ga y sei
             s2=p2[0]-w/2
             t2=-p2[1]+h/2
             u1=q1[0]-w/2
@@ -78,49 +90,94 @@ def det_own(box1,c1,box2,c2,w,h):
             x=((u1-s2)*(u2-s1)*(t1-t2)+(r1-t2)*(u2-s1)*s2-(u1-s2)*(r2-t1)+s1)/((r1-t2)*(u2-s1)-(r2-t1)*(u1-s2))
             y=(r2-t1)*(x-s1)/(u2-s1)+t1
             return x,y
-        
-        """if(-1<grad<1):
-            if (abs((p11[0]+p13[0]))>abs((p12[0]+p14[0]))): #object1 is at the left
-                x,y=det_center(p12,p14,p11,p13,w,h)
-                if x>0:
-                    by="b"
-                else:
-                    by="y"
-                if y>0:
-                    lr="r"
-                else:
-                    lr="l"
+        d11=(p11[0]-p12[0])**2+(p11[1]-p12[1])**2
+        d12=(p11[0]-p13[0])**2+(p11[1]-p13[1])**2
+        d21=(p23[0]-p24[0])**2+(p23[1]-p24[1])**2
+        d22=(p22[0]-p24[0])**2+(p22[1]-p24[1])**2
+        if(d11>d12):
+            if (d21>d22): 
+                x,y=det_center(p11,p12,p23,p24,w,h)
+                if (p11[1]+p12[1])>(p23[1]+p24[1]):#青が上
+                    if x>0:
+                        lr="r"
+                    else:
+                        lr="l"
+                    if y>0:
+                        by="y"
+                    else:
+                        by="b"
+                else:#青が下
+                    if x>0:
+                        lr="l"
+                    else:
+                        lr="r"
+                    if y>0:
+                        by="b"
+                    else:
+                        by="y"
+
             else:
-                x,y=det_center(p22,p24,p11,p13,w,h)
-                if x>0:
-                    by="y"
-                else:
-                    by="b"
-                if y>0:
-                    lr="l"
-                else:
-                    lr="r"
+                x,y=det_center(p11,p12,p22,p24,w,h)
+                if (p11[1]+p12[1])>(p22[1]+p24[1]):#青が上
+                    if x>0:
+                        lr="r"
+                    else:
+                        lr="l"
+                    if y>0:
+                        by="y"
+                    else:
+                        by="b"
+                else:#青が下
+                    if x>0:
+                        lr="l"
+                    else:
+                        lr="r"
+                    if y>0:
+                        by="b"
+                    else:
+                        by="y"
         else:
-            if(abs((p11[1]+p12[1]))>abs((p13[1]+p14[1]))): #object1 is at the top
-                x,y=det_center(p13,p14,p21,p22,w,h)
-                if y>0:
-                    by="y"
-                else:
-                    by="b"
-                if x>0:
-                    lr="r"
-                else:
-                    lr="l"
+            if (d21>d22): 
+                x,y=det_center(p11,p13,p23,p24,w,h)
+                if (p11[1]+p13[1])>(p23[1]+p24[1]):#青が上
+                    if x>0:
+                        lr="r"
+                    else:
+                        lr="l"
+                    if y>0:
+                        by="y"
+                    else:
+                        by="b"
+                else:#青が下
+                    if x>0:
+                        lr="l"
+                    else:
+                        lr="r"
+                    if y>0:
+                        by="b"
+                    else:
+                        by="y"
+
             else:
-                x,y=det_center(p23,p24,p11,p12,w,h)
-                if y>0:
-                    by="b"
-                else:
-                    by="y"
-                if x>0:
-                    lr="l"
-                else:
-                    lr="r""""
+                x,y=det_center(p11,p13,p22,p24,w,h)
+                if (p11[1]+p13[1])>(p22[1]+p24[1]):#青が上
+                    if x>0:
+                        lr="r"
+                    else:
+                        lr="l"
+                    if y>0:
+                        by="y"
+                    else:
+                        by="b"
+                else:#青が下
+                    if x>0:
+                        lr="l"
+                    else:
+                        lr="r"
+                    if y>0:
+                        by="b"
+                    else:
+                        by="y"
         #r=abs(x**2+y**2)    
         return by,lr,x,y
     elif (box1!=nans42).all:
@@ -153,14 +210,16 @@ def det_own(box1,c1,box2,c2,w,h):
 def main():
     while True:
         ret,img=camera.read()
-        img=img[0:399,106:529]
-        img=np.insert(img,0,np.zeros((16,423,3)),axis=0)
-        img=cv2.rotate(img,cv2.ROTATE_90_CLOCKWISE)
-        img=cv2.flip(img,1)
         if not ret:
             break
+        cv2.imshow("img_bf",img)
+        ##img=img[38:480,87:544]
+        #img=np.insert(img,0,np.zeros((28,457,3)),axis=0)
+        img=cv2.rotate(img,cv2.ROTATE_90_CLOCKWISE)
+        img=cv2.flip(img,1)
+
         width, height=img.shape[:2]
-        #img=cv2.circle(img,(int(width/2),int(height/2)),4,color=(0,0,255),thickness=1)
+        img=cv2.circle(img,(int(width/2),int(height/2)),4,color=(0,0,255),thickness=1)
         cv2.circle(img,(int(width/2),int(height/2)),256,color=(0,0,0),thickness=80)
         maskb=nichika(img,blue[0],blue[1])
         maskedb=cv2.bitwise_and(img,img,mask=maskb)
@@ -170,10 +229,13 @@ def main():
         angleb,boxb,cb=addshape(maskb,img,width,height,(255,0,0)) 
         angley,boxy,cy=addshape(masky,img,width,height,(0,255,0))   
         by,lr,x,y=det_own(boxb,cb,boxy,cy,width,height)
+        if (np.isnan(x)==0 and np.isinf(x)==0 and np.isinf(y)==0):
+            print("->")
+            cv2.arrowedLine(img,(int(width/2),int(height/2)),(int(x+width/2),int(-y+height/2)),(255,0,0),thickness=10)
         print(x,y,lr,by)
-        cv2.imshow("masked",cv2.bitwise_or(maskedb,maskedy))
-        cv2.imshow("img",img)
-        key=cv2.waitKey(int(1000/fps))
+        #cv2.imshow("masked",cv2.bitwise_or(maskedb,maskedy))
+        cv2.imshow("img_aft",img)
+        key=cv2.waitKey(1)
 
         if key==27:
             break
