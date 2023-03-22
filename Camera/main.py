@@ -298,11 +298,11 @@ if __name__=='__main__':
         if angleb!=None:
             int_angleb=cvtangle(angleb)
         else:
-            int_angleb=-1
+            int_angleb=8
         if angley!=None:
             int_angley=cvtangle(angley)
         else:
-            int_angley=-1
+            int_angley=8
 
         data_string=f"{int_angleb},{int_angley},{lr},{by}\n"
         ser.write(data_string.encode())
