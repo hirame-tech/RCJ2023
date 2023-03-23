@@ -1,7 +1,6 @@
 #include <Arduino.h>
 #include "line.hpp"
 
-
 LINE::LINE()
 {
 }
@@ -52,7 +51,7 @@ float LINE::degree_to_rad(int degree)
 int LINE::rad_to_degree(float rad)
 {
     int degree;
-    degree = rad * (180/PI);
+    degree = rad * (180 / PI);
     if (degree < 0)
     {
         degree += 360;
@@ -61,7 +60,7 @@ int LINE::rad_to_degree(float rad)
     {
         degree -= 360;
     }
-    return(degree);
+    return (degree);
 }
 
 bool LINE::get_line(int value[], int threshold)
@@ -186,27 +185,31 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
         }
     }
 
-    //state配列の確認
-    /*for(int i = 0; i<30; i++){
+    // state配列の確認
+    for (int i = 0; i < 30; i++)
+    {
         Serial.print(state[i]);
         Serial.print(",");
     }
-    Serial.println();*/
 
     // 反応したブロックの数の確認
-    //Serial.println(labelnum);
+    Serial.print(labelnum);
+    Serial.print(",");
+
+    // Serial.println();
 
     if (lightcount > 1)
     {
-        for (i = 0; i < 30; i++)
+        // 以下旧判定メソッド
+        /*for (i = 0; i < 30; i++)
         {
             if (data[i] == 1)
             {
-                
+
                 s = i + 1;
                 if (data[s] == 1)
                 {
-                    
+
                     count1 = s;
                 }
                 else
@@ -222,11 +225,11 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
         {
             if (data[i] == 1)
             {
-                
+
                 s = i + 1;
                 if (data[s] == 1)
                 {
-                    
+
                     count2 = s;
                 }
                 else
@@ -235,79 +238,122 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
                 }
                 break;
             }
-        }
-        // y = ax + b -> a -1 b
-        // y = -1/a * x   tan(theta) = -1/a c = -1/a
-        // theta = arctan(c);
-        
-        a = (y[count1] - y[count2]) / (x[count1] - x[count2]);
-        b = y[count1] - a * x[count1];
-        *distance = (fabs(b) / sqrt(a * a + 1));
-        *angle = (float)atan2((x[count1] + x[count2]) / 2, (y[count1] + y[count2]) / 2);
-        
-        
+        }*/
 
+        // 以下新判定メソッド
 
-        //以下テスト
-        //initialize testPT[30]
-        for(int i=0;i<30;i++){
-            testPT[29-i] = 12 * (i+1);
-        }
+        // int state[30] = {0, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        int tmp1_start;
+        int tmp1_end;
+        int tmp2_start;
+        int tmp2_end;
+        int i, s;
 
-        /*PT1 testPT[0] = 360
-        PT2 testPT[1] = 348
-            .
-            .
-            .
-        PT30 testPT[29] = 12 */
-        float testdegree;
-        testdegree = ((testPT[count2] - testPT[count1]) / 2) + testPT[count1];
-
-
-
-
-        Serial.print(*distance);
-        Serial.print(",");
-        Serial.print(rad_to_degree(*angle));
-        Serial.print(",");
-        Serial.print(count1);
-        Serial.print(",");
-        Serial.print(count2);
-        Serial.print(",");
-        Serial.print(testdegree);
-        Serial.println();
-    }
-    else if (lightcount == 1)
-    { // ここｱ正常
-        for (int i = 0; i < 30; i++)
+        for (i = 0; i < 30; i++)
         {
-            if (state[i])
+            if (state[i] == 1)
             {
-                count1 = i;
+                tmp1_start = i;
+                s = i + 1;
+                while (state[s] == 1)
+                {
+                    s++;
+                }
+                s = s - 1;
+                tmp1_end = s;
+
+                count1 = (int)(tmp1_end - tmp1_start) / 2 + tmp1_start;
+
                 break;
             }
         }
 
-        *distance = 47;
-        *angle = (float)atan2(x[count1], y[count1]);
-    }
-    else
-    {
-        return;
-    }
+        for (i = tmp1_end + 1; i < 30; i++)
+        {
+
+            if (state[i] == 2)
+            {
+                tmp2_start = i;
+                s = i + 1;
+                while (state[s] == 2)
+                {
+                    s++;
+                }
+                s = s - 1;
+                tmp2_end = s;
+
+                count2 = (int)(tmp2_end - tmp2_start) / 2 + tmp2_start;
+
+                break;
+            }
+        }
     
-        
 
-    *angle += PI;
-    *angle -= PI / 2;
-    if (*angle < 0)
+    // y = ax + b -> a -1 b
+    // y = -1/a * x   tan(theta) = -1/a c = -1/a
+    // theta = arctan(c);
+
+    a = (y[count1] - y[count2]) / (x[count1] - x[count2]);
+    b = y[count1] - a * x[count1];
+    *distance = (fabs(b) / sqrt(a * a + 1));
+    *angle = (float)atan2((x[count1] + x[count2]) / 2, (y[count1] + y[count2]) / 2);
+
+    // 以下テスト
+    // initialize testPT[30]
+    for (int i = 0; i < 30; i++)
     {
-        *angle = 2 * PI - *angle;
-    }
-    if (*angle > 2 * PI)
-    {
-        *angle -= 2 * PI;
+        testPT[29 - i] = 12 * (i + 1);
     }
 
+    /*PT1 testPT[0] = 360
+    PT2 testPT[1] = 348
+        .
+        .
+        .
+    PT30 testPT[29] = 12 */
+    float testdegree;
+    testdegree = ((testPT[count2] - testPT[count1]) / 2) + testPT[count1];
+
+    Serial.print(*distance);
+    Serial.print(",");
+    Serial.print(rad_to_degree(*angle));
+    Serial.print(",");
+    Serial.print(count1);
+    Serial.print(",");
+    Serial.print(count2);
+    Serial.print(",");
+    Serial.print(testdegree);
+    Serial.println();
+}
+else if (lightcount == 1)
+{ // ここｱ正常
+    for (int i = 0; i < 30; i++)
+    {
+        if (state[i])
+        {
+            count1 = i;
+            break;
+        }
+    }
+
+    *distance = 47;
+    *angle = (float)atan2(x[count1], y[count1]);
+}
+else
+{
+    return;
+}
+
+*angle += PI;
+*angle -= PI / 2;
+if (*angle < 0)
+{
     *angle = 2 * PI - *angle;
+}
+if (*angle > 2 * PI)
+{
+    *angle -= 2 * PI;
+}
+
+*angle = 2 * PI - *angle;
 }
