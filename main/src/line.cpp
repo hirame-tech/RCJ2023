@@ -38,7 +38,7 @@ void LINE::set_pin(int _ICpin1[], int _Apin1, int _ICpin2[], int _Apin2)
  */
 float LINE::degree_to_rad(int degree)
 {
-    /*if (degree < 0)
+    if (degree < 0)
     {
         degree += 360;
     }
@@ -46,7 +46,6 @@ float LINE::degree_to_rad(int degree)
     {
         degree -= 360;
     }
-    */
     return ((float)degree * PI / 180);
 }
 
@@ -54,7 +53,14 @@ int LINE::rad_to_degree(float rad)
 {
     int degree;
     degree = rad * (180/PI);
-
+    if (degree < 0)
+    {
+        degree += 360;
+    }
+    else if (degree >= 360)
+    {
+        degree -= 360;
+    }
     return(degree);
 }
 
@@ -115,6 +121,8 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
     // 座標の指定
     double x[30];
     double y[30];
+
+    int testPT[30];
 
     int i, k;
     int s = 0;
@@ -234,6 +242,28 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
         Serial.print(*distance);
         Serial.print(",");
         Serial.print(rad_to_degree(*angle));
+        Serial.print(",");
+        Serial.print(count1);
+        Serial.print(",");
+        Serial.print(count2);
+        Serial.println();
+
+
+        //以下テスト
+        //initialize testPT[30]
+        for(int i=0;i<30;i++){
+            testPT[29-i] = 12 * (i+1);
+        }
+
+        /*PT1 testPT[0] = 360
+        PT2 testPT[1] = 348
+            .
+            .
+            .
+        PT30 testPT[29] = 12 */
+        float testdegree;
+        testdegree = ((testPT[count2] - testPT[count1]) / 2) + testPT[count1];
+        Serial.print(testdegree);
         Serial.println();
     }
     else if (lightcount == 1)
