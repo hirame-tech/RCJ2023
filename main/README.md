@@ -9,3 +9,8 @@ Information of mainborad structure
 - Serial5 motor1
 - Serial6 motor2
 - Serial7 motor3
+- Serial8 none
+
+座標系に関する取り決め
+
+## 

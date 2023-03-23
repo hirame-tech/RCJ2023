@@ -25,10 +25,11 @@ void LINE::set_pin(int _ICpin1[], int _Apin1, int _ICpin2[], int _Apin2)
     Apin1 = _Apin1;
     Apin2 = _Apin2;
 
+
     // INPUT_PULLDOWN depends on Teensy
     pinMode(Apin1, INPUT_PULLDOWN);
     pinMode(Apin2, INPUT_PULLDOWN);
-}
+
 
 /**
  * @brief convert degree to radian
@@ -108,9 +109,12 @@ bool LINE::get_line(int value[], int threshold)
         sum += value[43 - i];
     }
 
+
     // value[29] = 0;
     // value[30] = 0;
 
+
+   
     return (sum > 0);
 }
 
