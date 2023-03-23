@@ -129,6 +129,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
     int count1, count2;
     int lightcount = 0;
     int state[30];
+    float testdegree;
     double a, b, c;
     // x[0]y[0]（各センサの座標をとる）
     // x[0]y[0] を PT1 に対応させている。
@@ -310,7 +311,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
             .
             .
         PT30 angle_PT[29] = 12 */
-        float testdegree;
+        
         testdegree = ((angle_PT[count2] - angle_PT[count1]) / 2) + angle_PT[count1];
 
         Serial.print(*distance);
@@ -322,7 +323,8 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
         Serial.print(count2);
         Serial.print(",");
         Serial.print(testdegree);
-        Serial.println();
+        Serial.print(",");
+        //Serial.println();
     }
     else if (lightcount == 1)
     { // ここｱ正常
@@ -373,6 +375,10 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
 
         *distance = 47;
         *angle = (float)atan2(x[count1], y[count1]);
+        testdegree = angle_PT[count1];
+        Serial.print(testdegree);
+        Serial.println();
+
     }
     else
     {
