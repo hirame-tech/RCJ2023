@@ -6,10 +6,10 @@
 #include <func.hpp>
 
 //**user settings**
-#define BRIGHTNESS 255
-#define MOVE_SPEED 30//MAX50
+#define BRIGHTNESS 200
+#define MOVE_SPEED 50//MAX50
 #define IR_r 7//適当
-#define LINE_THRESHOLD 500
+#define LINE_THRESHOLD 300
 #define LINE_STOP_TIME 500
 
 #define LINE_LED_PIN 10
@@ -101,7 +101,12 @@ void loop() {
 
   static float IR_angle;
   static int IR_distance;
-  static int start_time = 0;
+  static int start_time = 0;//what is this
+
+  static float my_goal_angle;
+  static float opponent_goal_angle;
+  static int my_goal_distance;
+  static int opponent_goal_distancce;
 
 
   //LED process
@@ -127,12 +132,9 @@ void loop() {
   start_flag = !(digitalRead(SWITCH_PIN));
   gyro_angle = get_gyro(&GYRO_SERIAL,led_pins.gyro_state);
   line_frag_old = line_frag;
-  line_frag = 0;//line.get_line(line_state,line_threshold);
+  line_frag = line.get_line(line_state,line_threshold);
   
-  for (int i = 0; i < 30; i++){
-    Serial.print(line_state[i]);
-    Serial.print(",");
-  }
+
   //Serial.println();
   
   if((line_frag - line_frag_old) > 0){
@@ -155,10 +157,12 @@ void loop() {
   if(start_flag == 1){//start
     if(line_frag == 1){
       // escape line zone
-      
+      motor.move(0,0,127);
+      /*
       while((millis() - start_time) < LINE_STOP_TIME){
         motor.move(0,0,127);
       }
+      */
       /*
       if(fabs(line_angle - line_approach_angle) >= PI){
         if((fabs(line_angle - line_approach_angle)-PI) >= PI/2){
@@ -171,6 +175,7 @@ void loop() {
         }
       }
       */
+      /*
       if((PI/2 < fabs(line_angle - line_approach_angle)) && (3*PI/2 > fabs(line_angle - line_approach_angle))){
         line_angle -= PI;
       }
@@ -179,8 +184,9 @@ void loop() {
       Serial.println((line_angle - PI)*180/PI);
 
       motor.move(line_angle - PI,MOVE_SPEED,gyro_angle);
-
+      */
     }else{
+      
       if(IR_distance != 0){
         IR_distance = 16 - IR_distance;
         if(IR_r > IR_distance){
@@ -201,6 +207,8 @@ void loop() {
         motor.move(0,0,gyro_angle);//静止
       }
     }
+    
+    //motor.move(0,0,(PI + my_goal_angle)*127/PI);//goal向き方向修正テスト用
   }else{
     motor.move(0,0,127);//静止
   }
