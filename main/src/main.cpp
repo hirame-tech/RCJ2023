@@ -130,8 +130,8 @@ void loop() {
   line_frag = line.get_line(line_state,line_threshold);
   
   for (int i = 0; i < 30; i++){
-    Serial.print(line_state[i]);
-    Serial.print(",");
+    //Serial.print(line_state[i]);
+    //Serial.print(",");
   }
   //Serial.println();
   
@@ -147,7 +147,7 @@ void loop() {
     line.cal_line_direction(line_state,&line_angle,&line_depth);
     //Serial.println(line_angle*180/PI);
   }else{
-    Serial.println("can't find white");
+    //Serial.println("can't find white");
   }
   //Serial.println(IR_angle);
 
@@ -174,9 +174,9 @@ void loop() {
       if((PI/2 < fabs(line_angle - line_approach_angle)) && (3*PI/2 > fabs(line_angle - line_approach_angle))){
         line_angle -= PI;
       }
-      Serial.print(line_approach_angle*180/PI);
-      Serial.print(",");
-      Serial.println((line_angle - PI)*180/PI);
+      //Serial.print(line_approach_angle*180/PI);
+      //Serial.print(",");
+      //Serial.println((line_angle - PI)*180/PI);
 
       motor.move(line_angle - PI,MOVE_SPEED,gyro_angle);
 

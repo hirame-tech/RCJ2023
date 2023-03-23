@@ -11,6 +11,7 @@ class LINE {
     void cal_line_direction(int data[], float *angle, float *distance);
   private:
     float degree_to_rad(int degree);
+    int rad_to_degree(float rad);
     
     int ICpin1[4];
     int ICpin2[4];
