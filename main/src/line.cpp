@@ -108,8 +108,8 @@ bool LINE::get_line(int value[], int threshold)
         sum += value[43 - i];
     }
 
-    value[29] = 0;
-    value[30] = 0;
+    // value[29] = 0;
+    // value[30] = 0;
 
     return (sum > 0);
 }
@@ -121,7 +121,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
     double x[30];
     double y[30];
 
-    int testPT[30];
+    int angle_PT[30];
 
     int i, k;
     int s = 0;
@@ -287,73 +287,108 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
                 break;
             }
         }
-    
 
-    // y = ax + b -> a -1 b
-    // y = -1/a * x   tan(theta) = -1/a c = -1/a
-    // theta = arctan(c);
+        // y = ax + b -> a -1 b
+        // y = -1/a * x   tan(theta) = -1/a c = -1/a
+        // theta = arctan(c);
 
-    a = (y[count1] - y[count2]) / (x[count1] - x[count2]);
-    b = y[count1] - a * x[count1];
-    *distance = (fabs(b) / sqrt(a * a + 1));
-    *angle = (float)atan2((x[count1] + x[count2]) / 2, (y[count1] + y[count2]) / 2);
+        a = (y[count1] - y[count2]) / (x[count1] - x[count2]);
+        b = y[count1] - a * x[count1];
+        *distance = (fabs(b) / sqrt(a * a + 1));
+        *angle = (float)atan2((x[count1] + x[count2]) / 2, (y[count1] + y[count2]) / 2);
 
-    // 以下テスト
-    // initialize testPT[30]
-    for (int i = 0; i < 30; i++)
-    {
-        testPT[29 - i] = 12 * (i + 1);
-    }
-
-    /*PT1 testPT[0] = 360
-    PT2 testPT[1] = 348
-        .
-        .
-        .
-    PT30 testPT[29] = 12 */
-    float testdegree;
-    testdegree = ((testPT[count2] - testPT[count1]) / 2) + testPT[count1];
-
-    Serial.print(*distance);
-    Serial.print(",");
-    Serial.print(rad_to_degree(*angle));
-    Serial.print(",");
-    Serial.print(count1);
-    Serial.print(",");
-    Serial.print(count2);
-    Serial.print(",");
-    Serial.print(testdegree);
-    Serial.println();
-}
-else if (lightcount == 1)
-{ // ここｱ正常
-    for (int i = 0; i < 30; i++)
-    {
-        if (state[i])
+        // 以下テスト
+        // initialize angle_PT[30]
+        for (int i = 0; i < 30; i++)
         {
-            count1 = i;
-            break;
+            angle_PT[29 - i] = 12 * (i + 1);
         }
+
+        /*PT1 angle_PT[0] = 360
+        PT2 angle_PT[1] = 348
+            .
+            .
+            .
+        PT30 angle_PT[29] = 12 */
+        float testdegree;
+        testdegree = ((angle_PT[count2] - angle_PT[count1]) / 2) + angle_PT[count1];
+
+        Serial.print(*distance);
+        Serial.print(",");
+        Serial.print(rad_to_degree(*angle));
+        Serial.print(",");
+        Serial.print(count1);
+        Serial.print(",");
+        Serial.print(count2);
+        Serial.print(",");
+        Serial.print(testdegree);
+        Serial.println();
+    }
+    else if (lightcount == 1)
+    { // ここｱ正常
+        int tmp1_start;
+        int tmp1_end;
+        for (int i = 0; i < 30; i++)
+        {
+            if (state[i] == 1)
+            {
+                tmp1_start = i;
+                s = i + 1;
+                while (state[s] == 1)
+                {
+                    s++;
+                }
+                s = s - 1;
+                tmp1_end = s;
+
+                //0と29が両方反応していた場合
+                if (state[29] == 1)
+                {
+                    s = 29;
+                    while (state[s] == 1)
+                    {
+                        s--;
+                    }
+                    tmp1_start = s + 1;
+
+                    int tmp1_start_minus = 30 - tmp1_start;
+                    int tmp1_mid = (int)(tmp1_start_minus + tmp1_end) / 2;
+                    if (tmp1_start_minus < tmp1_mid)
+                    {
+                        count1 = tmp1_end - tmp1_mid;
+                    }
+                    else
+                    {
+                        count1 = 30 + (tmp1_end - tmp1_mid);
+                    }
+                }
+                else
+                {
+                    count1 = (int)(tmp1_end - tmp1_start) / 2 + tmp1_start;
+                }
+
+                break;
+            }
+        }
+
+        *distance = 47;
+        *angle = (float)atan2(x[count1], y[count1]);
+    }
+    else
+    {
+        return;
     }
 
-    *distance = 47;
-    *angle = (float)atan2(x[count1], y[count1]);
-}
-else
-{
-    return;
-}
+    *angle += PI;
+    *angle -= PI / 2;
+    if (*angle < 0)
+    {
+        *angle = 2 * PI - *angle;
+    }
+    if (*angle > 2 * PI)
+    {
+        *angle -= 2 * PI;
+    }
 
-*angle += PI;
-*angle -= PI / 2;
-if (*angle < 0)
-{
     *angle = 2 * PI - *angle;
-}
-if (*angle > 2 * PI)
-{
-    *angle -= 2 * PI;
-}
-
-*angle = 2 * PI - *angle;
 }
