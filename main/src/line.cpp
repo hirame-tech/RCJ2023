@@ -186,9 +186,15 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
         }
     }
 
-    // Serial.println(labelnum);
+    //state配列の確認
+    /*for(int i = 0; i<30; i++){
+        Serial.print(state[i]);
+        Serial.print(",");
+    }
+    Serial.println();*/
 
-    // 反応したブロックの数　
+    // 反応したブロックの数の確認
+    //Serial.println(labelnum);
 
     if (lightcount > 1)
     {
@@ -239,14 +245,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
         *distance = (fabs(b) / sqrt(a * a + 1));
         *angle = (float)atan2((x[count1] + x[count2]) / 2, (y[count1] + y[count2]) / 2);
         
-        Serial.print(*distance);
-        Serial.print(",");
-        Serial.print(rad_to_degree(*angle));
-        Serial.print(",");
-        Serial.print(count1);
-        Serial.print(",");
-        Serial.print(count2);
-        Serial.println();
+        
 
 
         //以下テスト
@@ -263,6 +262,18 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
         PT30 testPT[29] = 12 */
         float testdegree;
         testdegree = ((testPT[count2] - testPT[count1]) / 2) + testPT[count1];
+
+
+
+
+        Serial.print(*distance);
+        Serial.print(",");
+        Serial.print(rad_to_degree(*angle));
+        Serial.print(",");
+        Serial.print(count1);
+        Serial.print(",");
+        Serial.print(count2);
+        Serial.print(",");
         Serial.print(testdegree);
         Serial.println();
     }
@@ -284,6 +295,8 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
     {
         return;
     }
+    
+        
 
     *angle += PI;
     *angle -= PI / 2;
