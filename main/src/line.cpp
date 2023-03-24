@@ -25,11 +25,10 @@ void LINE::set_pin(int _ICpin1[], int _Apin1, int _ICpin2[], int _Apin2)
     Apin1 = _Apin1;
     Apin2 = _Apin2;
 
-
     // INPUT_PULLDOWN depends on Teensy
     pinMode(Apin1, INPUT_PULLDOWN);
     pinMode(Apin2, INPUT_PULLDOWN);
-
+}
 
 /**
  * @brief convert degree to radian
@@ -109,12 +108,9 @@ bool LINE::get_line(int value[], int threshold)
         sum += value[43 - i];
     }
 
-
     // value[29] = 0;
     // value[30] = 0;
 
-
-   
     return (sum > 0);
 }
 
@@ -315,7 +311,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
             .
             .
         PT30 angle_PT[29] = 12 */
-        
+
         testdegree = ((angle_PT[count2] - angle_PT[count1]) / 2) + angle_PT[count1];
 
         Serial.print(*distance);
@@ -328,7 +324,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
         Serial.print(",");
         Serial.print(testdegree);
         Serial.print(",");
-        //Serial.println();
+        // Serial.println();
     }
     else if (lightcount == 1)
     { // ここｱ正常
@@ -347,7 +343,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
                 s = s - 1;
                 tmp1_end = s;
 
-                //0と29が両方反応していた場合
+                // 0と29が両方反応していた場合
                 if (state[29] == 1)
                 {
                     s = 29;
@@ -382,7 +378,6 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
         testdegree = angle_PT[count1];
         Serial.print(testdegree);
         Serial.println();
-
     }
     else
     {
