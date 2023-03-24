@@ -7,7 +7,7 @@
 
 //**user settings**
 #define BRIGHTNESS 255
-#define MOVE_SPEED 30 // MAX50
+#define MOVE_SPEED 20 // MAX50
 #define IR_r 7        // 適当
 #define LINE_THRESHOLD 350
 #define LINE_STOP_TIME 500
@@ -104,6 +104,8 @@ void loop()
   static int my_goal_distance;
   static int opponent_goal_distancce;
 
+  static float old_move_angle = 0;
+
   // LED process
   /*
   if(gyro_angle < 120){
@@ -161,7 +163,10 @@ void loop()
     if (line_frag == 1)
     {
       // escape line zone
+      motor.move(old_move_angle - PI,MOVE_SPEED,gyro_angle);
+      delay(700);
       motor.move(0, 0, 127);
+      delay(5000);
     }
     else
     {
@@ -177,18 +182,22 @@ void loop()
         // chase ball process
         if (IR_angle < PI / 4){
           motor.move(2 * IR_angle, MOVE_SPEED, gyro_angle);
+          old_move_angle = 2 * IR_angle;
         }
         else if (IR_angle < PI)
         {
           motor.move(IR_angle + asin(IR_r / IR_distance), MOVE_SPEED, gyro_angle);
+          old_move_angle = IR_angle + asin(IR_r / IR_distance);
         }
         else if (IR_angle < 3 * PI / 2)
         {
           motor.move(IR_angle - asin(IR_r / IR_distance), MOVE_SPEED, gyro_angle);
+          old_move_angle = IR_angle - asin(IR_r / IR_distance);
         }
         else
         {
           motor.move(2 * IR_angle - 2 * PI, MOVE_SPEED, gyro_angle);
+          old_move_angle = 2 * IR_angle - 2 * PI;
         }
       }
       else
