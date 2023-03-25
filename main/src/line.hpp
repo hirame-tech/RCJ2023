@@ -6,6 +6,7 @@ class LINE {
     LINE();//constructor
     ~LINE();//destructor
 
+
     void set_pin(int _ICpin1[], int _Apin1, int _ICpin2[],int _Apin2);
     bool get_line(int value[],int threshold);
     void cal_line_direction(int data[], float *angle, float *distance);
@@ -17,6 +18,7 @@ class LINE {
     int ICpin2[4];
     int Apin1;
     int Apin2;
+    int line_value[30];
 };
 
 #endif
