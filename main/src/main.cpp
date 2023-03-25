@@ -7,9 +7,9 @@
 
 //**user settings**
 #define BRIGHTNESS 255
-#define MOVE_SPEED 30 // MAX50
+#define MOVE_SPEED 27 // MAX50
 #define IR_r 7        // 適当
-#define LINE_THRESHOLD 350
+#define LINE_THRESHOLD 200
 #define LINE_STOP_TIME 500
 
 #define LINE_LED_PIN 10
@@ -130,27 +130,27 @@ void loop()
   // get value of various sensors
   start_flag = !(digitalRead(SWITCH_PIN));
   gyro_angle = get_gyro(&GYRO_SERIAL, led_pins.gyro_state);
-  // line_frag_old = line_frag;
+  line_frag_old = line_frag;
   line_frag = line.get_line(line_state, line_threshold);
 
   get_IR(&IR_SERIAL, &IR_angle, &IR_distance);
-  Serial.println(IR_distance);
+  // Serial.println(IR_distance);
 
   // set line approach angle
-  // if ((line_frag - line_frag_old) > 0)
-  //{
-  //  line_approach_angle = line_angle;
-  //  start_time = millis();
-  //}
-  // else if (((line_frag - line_frag_old) < 0) && ((millis() - start_time) > 1000))
-  //{
-  //  line_approach_angle = -1;
-  //}
+  if ((line_frag - line_frag_old) > 0)
+  {
+    line_approach_angle = line_angle;
+    start_time = millis();
+  }
+  else if (((line_frag - line_frag_old) < 0) && ((millis() - start_time) > 1000))
+  {
+    line_approach_angle = -1;
+  }
 
   // cal line
   if (line_frag == 1)
   {
-    // line.cal_line_direction(line_state, &line_angle, &line_depth);
+    line.cal_line_direction(line_state, &line_angle, &line_depth);
     //  Serial.println(line_angle*180/PI);
   }
   else
@@ -162,11 +162,32 @@ void loop()
   { // start
     if (line_frag == 1)
     {
+      // 以下ゴリ押し
+      if (line_state[0] == 1 || line_state[1] == 1)
+      {
+        motor.move(0, 0, 127);
+        delay(LINE_STOP_TIME);
+        motor.move(old_move_angle - PI, MOVE_SPEED, gyro_angle);
+        delay(300);
+      }
+
+      // Serial.print(line_approach_angle);
+      // Serial.print(",");
+      // Serial.println(old_move_angle);
+      if ((millis() - start_time) < LINE_STOP_TIME) // LINE_STOP_TIMEで指定した時間静止
+      {
+        motor.move(0, 0, gyro_angle);
+      }
+      else // 静止終了後、ラインへの入射角の反対方向へ進む
+      {
+        motor.move(line_approach_angle - PI, MOVE_SPEED, gyro_angle);
+      }
+
       // escape line zone
-      motor.move(old_move_angle - PI, MOVE_SPEED, gyro_angle);
-      delay(700);
-      motor.move(0, 0, 127);
-      delay(5000);
+      // motor.move();
+      // delay(700);
+      // motor.move(0, 0, 127);
+      // delay(2000);
     }
     else
     {

@@ -197,49 +197,10 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
     Serial.print(labelnum);
     Serial.print(",");
 
-    // Serial.println();
+    //Serial.println();
 
     if (lightcount > 1)
     {
-        // 以下旧判定メソッド
-        /*for (i = 0; i < 30; i++)
-        {
-            if (data[i] == 1)
-            {
-
-                s = i + 1;
-                if (data[s] == 1)
-                {
-
-                    count1 = s;
-                }
-                else
-                {
-                    count1 = i;
-                }
-
-                break;
-            }
-        }
-
-        for (i = s + 1; i < 30; i++)
-        {
-            if (data[i] == 1)
-            {
-
-                s = i + 1;
-                if (data[s] == 1)
-                {
-
-                    count2 = s;
-                }
-                else
-                {
-                    count2 = i;
-                }
-                break;
-            }
-        }*/
 
         // 以下新判定メソッド
 
@@ -313,18 +274,19 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
         PT30 angle_PT[29] = 12 */
 
         testdegree = ((angle_PT[count2] - angle_PT[count1]) / 2) + angle_PT[count1];
+        *angle = degree_to_rad(testdegree);
 
-        Serial.print(*distance);
-        Serial.print(",");
-        Serial.print(rad_to_degree(*angle));
-        Serial.print(",");
-        Serial.print(count1);
-        Serial.print(",");
-        Serial.print(count2);
-        Serial.print(",");
+        // Serial.print(*distance);
+        // Serial.print(",");
+        // Serial.print(rad_to_degree(*angle));
+        // Serial.print(",");
+        // Serial.print(count1);
+        // Serial.print(",");
+        // Serial.print(count2);
+        // Serial.print(",");
         Serial.print(testdegree);
-        Serial.print(",");
-        // Serial.println();
+        // Serial.print(",");
+        Serial.println();
     }
     else if (lightcount == 1)
     { // ここｱ正常
@@ -376,8 +338,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance)
         *distance = 47;
         *angle = (float)atan2(x[count1], y[count1]);
         testdegree = angle_PT[count1];
-        Serial.print(testdegree);
-        Serial.println();
+        *angle = degree_to_rad(testdegree);
     }
     else
     {
