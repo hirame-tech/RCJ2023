@@ -13,7 +13,7 @@ def decode_fourcc(v): #画像のフォーマットを確認する。デバッグ
     
 def shell(com): #コマンドシェルのコマンドを実行する。デバッグ用の関数
 	proc=subprocess.run(com,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE,text=True)
-	result=proc.stdout.split("=")
+	result=proc.stdout.split(" ")
 	return result
 
 def atan(x,y): #画像中心の座標から既定の向きの角度を返す
@@ -231,7 +231,6 @@ def running_exit(sig,frame):
     print("終了処理を実行完了")
     sys.exit(0)
 
-
 def main():
     
     lr="x"
@@ -293,12 +292,14 @@ def cvtangle(angle):
     if intn==8:
         intn=0
     return intn
-            
+
 """
 ::::::::::::::
 :::::main:::::
 ::::::::::::::
 """
+
+port=shell("ls /dev/ttyACM*")[0]
 
 signal.signal(signal.SIGTERM,running_exit)
 
@@ -325,7 +326,7 @@ blue=[(77,40,0),(97,255,255),(97,126,0),(208,255,255)] #[(lower),(upper)],(色�
 yellow=[(32,0,0),(52,255,255),(0,0,0),(255,115,255)] 
 
 try:
-    ser=serial.Serial('/dev/ttyACM0', 115200, timeout=0.1)
+    ser=serial.Serial(port, 115200, timeout=0.1)
 except:
     print("")
     pass
