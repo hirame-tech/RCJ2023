@@ -1,16 +1,18 @@
 import cv2
 import numpy as np
-import time
 import subprocess
 import serial
+import random
+import signal,sys
+import time
+import datetime
 
-i=0
-pi=np.pi
-fps=25
-rad=pi/3
+rand3=int(random.random()*999)
 
-lmin=30 #片方のゴールしか見えないとき、ゴールの長辺がこれを超えたら自己位置を確定する
-
+def printl(sent):
+    print(sent)
+    print(sent,file=f"/home/pi/Desktop/log/{rand3}.txt")
+    
 
 def decode_fourcc(v): #画像のフォーマットを確認する。デバッグ用の関数
     v=int(v)
@@ -18,24 +20,8 @@ def decode_fourcc(v): #画像のフォーマットを確認する。デバッグ
     
 def shell(com): #コマンドシェルのコマンドを実行する。デバッグ用の関数
 	proc=subprocess.run(com,shell=True,stdin=subprocess.PIPE,stdout=subprocess.PIPE,text=True)
-	result=proc.stdout.split("=")
+	result=proc.stdout.split(" ")
 	return result
-
-camera=cv2.VideoCapture(0)
-camera.set(cv2.CAP_PROP_FRAME_HEIGHT,320)
-camera.set(cv2.CAP_PROP_FRAME_WIDTH,320)
-camera.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc("R","G","B","3"))
-camera.set(cv2.CAP_PROP_BUFFERSIZE,1)
-camera.set(cv2.CAP_PROP_FPS,fps)
-
-
-#print(decode_fourcc(camera.get(cv2.CAP_PROP_FOURCC)))
-
-nans42=np.zeros([4,2])
-nans42[:,:]=np.nan
-blue=[(71,40,0),(97,255,255),(136,0,0),(196,255,255)] #[(lower),(upper)],(色相(/2)、彩度(x2.55)、明度(x2.55))
-yellow=[(32,0,0),(52,255,255),(0,0,0),(255,115,255)] 
-
 
 def atan(x,y): #画像中心の座標から既定の向きの角度を返す
     return np.arctan2(-x,y)+pi
@@ -66,7 +52,7 @@ def addshape(binimg,img,w,h,rgb): #引数は（二値化画像、マスク処理
         rect=cv2.minAreaRect(obj) #傾き考慮の外接短形,rect=((左上座標),w,h,回転角)
         box=np.intp(cv2.boxPoints(rect)) #実際の実行時はいらない
 
-        cv2.drawContours(img,[box],-1,color=rgb,thickness=3)
+        cv2.drawContours(img,[box],-1,color=rgb,thickness=1)
         angle=atan(rect[0][0]-w/2,rect[0][1]-h/2) #物体の中心からの角度     
 
 
@@ -82,7 +68,7 @@ def addshape(binimg,img,w,h,rgb): #引数は（二値化画像、マスク処理
 def det_own(rect1,rect2,w,h,img):
     if rect1==None:
         center1=None
-    elif rect1[1][0]>3 or rect1[1][1]>3:
+    elif rect1[1][0]>rectmin or rect1[1][1]>rectmin:
         center1=rect1[0]
         box1 = cv2.boxPoints(rect1).astype(int)
         if rect1[1][0] < rect1[1][1]:
@@ -96,13 +82,12 @@ def det_own(rect1,rect2,w,h,img):
             rx=(box1[2][0]+box1[3][0])/2
             ry=(box1[2][1]+box1[3][1])/2
         la=np.round([(qx,qy),(rx,ry)]).astype(int)
-        print("blue l:",length(la))
     else:
         center1=None
 
     if rect2==None:
         center2=None
-    elif rect2[1][0]>3 or rect2[1][1]>3:
+    elif rect2[1][0]>rectmin or rect2[1][1]>rectmin:
         center2=rect2[0]
         box2 = cv2.boxPoints(rect2).astype(int)
         if rect2[1][0] < rect2[1][1]:
@@ -116,15 +101,11 @@ def det_own(rect1,rect2,w,h,img):
             tx=(box2[2][0]+box2[3][0])/2
             ty=(box2[2][1]+box2[3][1])/2
         lb=np.round([(sx,sy),(tx,ty)]).astype(int)
-        print("yellow l:",length(lb))
     else:
         center2=None
 
-    print("rect1,recr2:",rect1,rect2)
-
     if center1!=None and center2!=None: #両方のゴールを視認
-        
-
+        """
         def det_center(p1,p2,q1,q2,w,h):
             global i
             if (not all(np.isnan(p1)))&(not all(np.isnan(p2)))&(not all(np.isnan(q1)))&(not all(np.isnan(q2))):
@@ -166,7 +147,9 @@ def det_own(rect1,rect2,w,h,img):
                     return x,-y
             else:
                 return np.nan,np.nan
-            
+        """
+
+        """
         rad1=atan(center1[0]-w/2,center1[1]-h/2)
         rad2=atan(center2[0]-w/2,center2[1]-h/2)
         drad=rad1-rad2
@@ -196,29 +179,37 @@ def det_own(rect1,rect2,w,h,img):
             else:
                 by="b"
         else:
-            print("rad<drad,drad<-rad");  
-            x,y=det_center(la[0],la[1],lb[0],lb[1],w,h) #x,yは画像中心、右と上が正
+            print("rad<drad,drad<-rad")
+        """
+        #x,y=det_center(la[0],la[1],lb[0],lb[1],w,h) #x,yは画像中心、右と上が正
+        if abs(length(la)-length(lb))>55:
             if length(la)<length(lb):
                 by="y"
             else:
                 by="b"
-            vby_x=center2[0]-center1[0]
-            vby_y=center2[1]-center1[1]
-            vbc_x=w/2-center1[0]
-            vbc_y=h/2-center1[1]
+        else:
+            by="m"
+        #青ゴールと黄色ゴールを結ぶベクトルBY
+        vby_x=center2[0]-center1[0]
+        vby_y=center2[1]-center1[1]
+        #青ゴールと画像中心を結ぶベクトルBC
+        vbc_x=w/2-center1[0]
+        vbc_y=h/2-center1[1]
 
-            crs=vby_x*vbc_y-vby_y*vbc_x
-            print(crs)
-            if crs>=0:
-                lr="r"
-            else:
-                lr="l"
-
-
+        #BYxBC(外積)
+        crs=vby_x*vbc_y-vby_y*vbc_x #
+        #BYとBCの成す角 [-pi/2,pi/2]
+        drad=np.arcsin(crs/(abs(vby_x**2+vby_y**2)*abs(vbc_x**2+vbc_y**2)))
+        if abs(drad)<rad:
+            lr="c"
+        elif crs>=0:
+            lr="r"
+        else:
+            lr="l"
+        
         return lr,by
     else:
         if center1!=None and center2==None: #青のみ認識
-            print("det blue")
             if length(la)>lmin:
                 by="b"
             else:
@@ -233,7 +224,15 @@ def det_own(rect1,rect2,w,h,img):
         
         return "x",by
 
-
+def running_exit(sig,frame):
+    try:
+        ser.close()
+    except:
+        pass
+    camera.release()
+    cv2.destroyAllWindows()
+    printl("終了処理を実行完了")
+    sys.exit(0)
 
 def main():
     
@@ -242,31 +241,48 @@ def main():
 
     ret,img=camera.read()
     if not ret:
-        print("notret")
-    #cv2.imshow("img_bf",img)
-    img=img[29:,0:303]
-    img=np.insert(img,291,np.zeros((15,303,3)),axis=0)
-    img=cv2.rotate(img,cv2.ROTATE_90_CLOCKWISE)
-    img=cv2.flip(img,1)
+        printl("notret")
+        return None,None,"x","x"
+    else:
+        #cv2.imshow("img_bf",img)
+        img=img[29:,0:303]
+        img=np.insert(img,291,np.zeros((15,303,3)),axis=0)
+        img=cv2.rotate(img,cv2.ROTATE_90_CLOCKWISE)
+        img=cv2.flip(img,1)
 
-    height, width=img.shape[:2]
 
-    cv2.imshow("img",img)
+        height, width=img.shape[:2]
 
-    img=cv2.circle(img,(int(width/2),int(height/2)),4,color=(0,0,255),thickness=1)
-    img=cv2.circle(img,(int(width/2),int(height/2)),int(width/2)+6+25,color=(0,0,0),thickness=50)
-    
-    maskb=nichika(img,blue[0],blue[1],blue[2],blue[3])
-    #maskedb=cv2.bitwise_and(img,img,mask=maskb)
+        #cv2.imshow("img",img)
 
-    masky=nichika(img,yellow[0],yellow[1],yellow[2],yellow[3])
-    #maskedy=cv2.bitwise_and(img,img,mask=masky)
-    angleb,rectb=addshape(maskb,img,width,height,(255,0,0)) 
-    angley,recty=addshape(masky,img,width,height,(0,255,0))
-    lr,by=det_own(rectb,recty,width,height,img)
-    cv2.imshow("img_aft",img)
+        img=cv2.circle(img,(int(width/2),int(height/2)),4,color=(0,0,255),thickness=1)
+        img=cv2.circle(img,(int(width/2),int(height/2)),int(width/2)+40,color=(0,0,0),thickness=80)
+        
+        maskb=nichika(img,blue[0],blue[1],blue[2],blue[3])
+        #maskedb=cv2.bitwise_and(img,img,mask=maskb)
 
-    return angleb,angley,lr,by
+        masky=nichika(img,yellow[0],yellow[1],yellow[2],yellow[3])
+        #maskedy=cv2.bitwise_and(img,img,mask=masky)
+        angleb,rectb=addshape(maskb,img,width,height,(255,0,0)) 
+        angley,recty=addshape(masky,img,width,height,(0,255,0))
+        lr,by=det_own(rectb,recty,width,height,img)
+
+        rand=int(random.random()*150)
+        if rand==20:
+            filenum=int(random.random()*100)
+            try:
+                cv2.imwrite(f"/home/pi/Desktop/imgs/{rand3}_{lr}{by}{filenum}.jpg",img)
+                printl("******\n*****\nsave img\n*****\n*****")
+            except:
+                printl("error:saveimg")
+
+        try:
+            cv2.imshow("img",img)
+        except:
+            printl("disable:show img")
+            pass
+
+        return angleb,angley,lr,by
 
 def cvtangle(angle):
     if angle>2*pi:
@@ -278,39 +294,74 @@ def cvtangle(angle):
     if intn==8:
         intn=0
     return intn
-            
-if __name__=='__main__':
-    ser=serial.Serial('/dev/ttyACM0', 115200, timeout=0.1)
-    ser.flush()
-    while True:
-        try:
-            angleb,angley,lr,by=main()
-        except:
-            angleb,angley,lr,by=None,None,"x","x"
-        """
-         7  0  1     
-          ¥ | /      
-           ¥|/
-        6---+----2
-           /|¥
-          / | ¥
-         5  4  3      角度を左に様に3bitで表せるように変形"""
-        if angleb!=None:
-            int_angleb=cvtangle(angleb)
-        else:
-            int_angleb=8
-        if angley!=None:
-            int_angley=cvtangle(angley)
-        else:
-            int_angley=8
 
-        data_string=f"{int_angleb},{int_angley},{lr},{by}\n"
+"""
+::::::::::::::
+:::::main:::::
+::::::::::::::
+"""
+
+printl(datetime.datetime.now())
+
+port=shell("ls /dev/ttyACM*")[0]
+printl(f"port:{port}")
+
+signal.signal(signal.SIGTERM,running_exit)
+
+i=0
+pi=np.pi
+fps=25
+rad=pi/4 #dradの値がrad以下ならlr自己位置を"c"(center)とする。
+
+imgnum=1 #試走で保存する画像に振る番号
+lmin=30 #片方のゴールしか見えないとき、ゴールの長辺がこれを超えたら自己位置を確定する
+
+rectmin=5 #長辺がこれより長くて初めて認識される。
+
+camera=cv2.VideoCapture(0)
+camera.set(cv2.CAP_PROP_FRAME_HEIGHT,320)
+camera.set(cv2.CAP_PROP_FRAME_WIDTH,320)
+camera.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc("R","G","B","3"))
+camera.set(cv2.CAP_PROP_BUFFERSIZE,1)
+camera.set(cv2.CAP_PROP_FPS,fps)
+
+nans42=np.zeros([4,2])
+nans42[:,:]=np.nan
+blue=[(77,40,0),(97,255,255),(97,126,0),(208,255,255)] #[(lower),(upper)],(色相(/2)、彩度(x2.55)、明度(x2.55))
+yellow=[(32,0,0),(52,255,255),(0,0,0),(255,115,255)] 
+
+try:
+    ser=serial.Serial(port, 115200, timeout=0.1)
+except:
+    printl("miss:serial")
+    pass
+
+while True:
+    start=time.time()
+    try:
+        angleb,angley,lr,by=main()
+    except Exception as e:
+        printl(e)
+        angleb,angley,lr,by=None,None,"x","x"
+    
+    if angleb!=None:
+        int_angleb=cvtangle(angleb)
+    else:
+        int_angleb=8
+    if angley!=None:
+        int_angley=cvtangle(angley)
+    else:
+        int_angley=8
+
+    data_string=f"{int_angleb},{int_angley},{lr},{by}\n"
+    try:
         ser.write(data_string.encode())
-        
-        key=cv2.waitKey(1)
-        if key==27:
-            break
-
-
-camera.release()
-cv2.destroyAllWindows()
+        ser.flush()
+        printl(data_string)
+    except:
+        pass
+    key=cv2.waitKey(1)
+    end=time.time()
+    printl(end-start)
+ #memo
+ #ret==Falseでreboot
