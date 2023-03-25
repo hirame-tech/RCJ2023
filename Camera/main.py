@@ -11,8 +11,8 @@ rand3=int(random.random()*999)
 
 def printl(sent):
     print(sent)
-    print(sent,file=f"/home/pi/Desktop/log/{rand3}.txt")
-    
+    with open(f"/home/pi/Desktop/log/{rand3}.txt", "w") as file:
+        print(sent, file=file)
 
 def decode_fourcc(v): #画像のフォーマットを確認する。デバッグ用の関数
     v=int(v)
@@ -303,9 +303,6 @@ def cvtangle(angle):
 
 printl(datetime.datetime.now())
 
-port=shell("ls /dev/ttyACM*")[0]
-printl(f"port:{port}")
-
 signal.signal(signal.SIGTERM,running_exit)
 
 i=0
@@ -331,7 +328,7 @@ blue=[(77,40,0),(97,255,255),(97,126,0),(208,255,255)] #[(lower),(upper)],(色�
 yellow=[(32,0,0),(52,255,255),(0,0,0),(255,115,255)] 
 
 try:
-    ser=serial.Serial(port, 115200, timeout=0.1)
+    ser=serial.Serial("/dev/ttyAMA0", 115200, timeout=0.1)
 except:
     printl("miss:serial")
     pass
@@ -358,7 +355,9 @@ while True:
         ser.write(data_string.encode())
         ser.flush()
         printl(data_string)
+        print("sent data")
     except:
+        print("NOT sent data")
         pass
     key=cv2.waitKey(1)
     end=time.time()
