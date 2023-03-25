@@ -1,7 +1,7 @@
 #include <Arduino.h>
 #include "motor_dc.hpp"
 
-#define MAX_SPEED 20 // <= 50
+#define MAX_SPEED 50 // <= 50
 
 MOTOR::MOTOR(Stream *A,Stream *B):motorA(A),motorB(B){
 }
@@ -23,7 +23,11 @@ void MOTOR::free(){
  * @param gyro jyro(0~255 senter:127)
  */
 void MOTOR::move(float direction_r,int speed,int gyro){
-    float p = 0.4;//比例定数
+    float p = 0.2;//比例定数
+    float i = -0;//積分項の係数
+    float d = 0;//微分項の係数
+    static float integral = 0;//積分量
+    static float old_angle = 127;  
     gyro -= 127;//-127~+128に調整
     float motor_speed[4];//速度管理用
     int speed_sign[4];//正転・逆転管理用
@@ -34,10 +38,13 @@ void MOTOR::move(float direction_r,int speed,int gyro){
     motor_speed[3] = speed * cos((PI/4) + direction_r);
     
     //方向修正
-    motor_speed[0] += p*gyro;
-    motor_speed[1] += p*gyro;
-    motor_speed[2] -= p*gyro;
-    motor_speed[3] -= p*gyro;
+    float manipulated_variable = p*gyro + i*(gyro - old_angle) + d*integral;
+    motor_speed[0] += manipulated_variable;
+    motor_speed[1] += manipulated_variable;
+    motor_speed[2] -= manipulated_variable;
+    motor_speed[3] -= manipulated_variable;
+
+
 
     //速さの最大値の探索
     int max = 0;
@@ -69,4 +76,6 @@ void MOTOR::move(float direction_r,int speed,int gyro){
     //motorA->write(50);
     //motorA->write(178);
     //Serial.println(motor_speed[1] + 128);
+    old_angle = gyro;
+    integral += gyro;
 }
