@@ -128,8 +128,8 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
 
     // 2022-12-06:基準となるx軸を原点とPT1のセンサがなす直線にした。
     for (i = 0; i < 30; i++) {
-        x[29 - i] = 47 * cos(degree_to_rad(12 * i));
-        y[29 - i] = 47 * sin(degree_to_rad(12 * i));
+        x[i] = 47 * cos(degree_to_rad(12 * i));
+        y[i] = 47 * sin(degree_to_rad(12 * i));
     }
 
     // しきい値を満たすセンサの取得
@@ -188,6 +188,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
         int tmp2_start;
         int tmp2_end;
         int i, s;
+        int normalize_tester = 0;
 
         for (i = 0; i < 30; i++) {
             if (state[i] == 1) {
@@ -233,8 +234,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
         a = (y[count1] - y[count2]) / (x[count1] - x[count2]);
         b = y[count1] - a * x[count1];
         *distance = (fabs(b) / sqrt(a * a + 1));
-        *angle = (float)atan2((x[count1] + x[count2]) / 2,
-                              (y[count1] + y[count2]) / 2);
+        *angle = (float)atan2((x[count1] + x[count2]) / 2, (y[count1] + y[count2]) / 2);
 
         *angle -= PI / 2;
         if (*angle < 0) {
@@ -244,10 +244,17 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
             *angle -= 2 * PI;
         }
 
+        for (int i = 23; i < 30; i++) {
+            normalize_tester += state[i];
+        }
+        if (normalize_tester != 0) {
+            *angle = 2 * PI - *angle;
+        }
+
         // 以下テスト
         // initialize angle_PT[30]
         // for (int i = 0; i < 30; i++) {
-        //     angle_PT[29 - i] = 12 * (i + 1);
+        //     angle_PT[i] = 12 * (i + 1);
         // }
 
         /*PT1 angle_PT[0] = 360
@@ -263,7 +270,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
 
         // Serial.print(*distance);
         // Serial.print(",");
-        Serial.print(rad_to_degree(*angle));
+        //Serial.print(rad_to_degree(*angle));
         // Serial.print(",");
         // Serial.print(count1);
         // Serial.print(",");
@@ -271,10 +278,13 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
         // Serial.print(",");
         // Serial.print(testdegree);
         // Serial.print(",");
-        Serial.println();
+        //Serial.println();
+
     } else if (labelnum == 1) { // ここｱ正常
         int tmp1_start;
         int tmp1_end;
+        int normalize_tester = 0;
+
         for (int i = 0; i < 30; i++) {
             if (state[i] == 1) {
                 tmp1_start = i;
@@ -286,7 +296,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
                 tmp1_end = s;
 
                 // 0と29が両方反応していた場合
-                if (state[29] == 1) {
+                if (state[0] == 1 && state[29] == 1) {
                     s = 29;
                     while (state[s] == 1) {
                         s--;
@@ -307,7 +317,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
                 break;
             }
         }
-        if (count1 == 31) {
+        if (count1 == 31 || count1 == 30) {
             count1 = 0;
         }
 
@@ -315,7 +325,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
         *angle = (float)atan2(x[count1], y[count1]);
 
         if (count1 == 30) {
-            *angle = PI/2;
+            *angle = PI / 2;
         }
 
         //*angle += PI;
@@ -327,6 +337,13 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
             *angle -= 2 * PI;
         }
 
+        for (int i = 23; i < 30; i++) {
+            normalize_tester += state[i];
+        }
+        if (normalize_tester != 0) {
+            *angle = 2 * PI - *angle;
+        }
+
         //*angle = 2 * PI - *angle;
 
         // testdegree = angle_PT[count1];
@@ -334,15 +351,13 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
         // Serial.print(*distance);
         // Serial.print(",");
 
-        Serial.print(rad_to_degree(*angle));
-        Serial.print(",");
-        Serial.print(count1);
+        // Serial.print(rad_to_degree(*angle));
         // Serial.print(",");
-        // Serial.print(count2);
+        // Serial.print(count1);
         // Serial.print(",");
         // Serial.print(testdegree);
         // Serial.print(",");
-        Serial.println();
+        //Serial.println();
     } else {
         return;
     }
