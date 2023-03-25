@@ -7,6 +7,13 @@ import signal,sys
 import time
 import datetime
 
+rand3=int(random.random()*999)
+
+def printl(sent):
+    print(sent)
+    print(sent,file=f"/home/pi/Desktop/log/{rand3}.txt")
+    
+
 def decode_fourcc(v): #画像のフォーマットを確認する。デバッグ用の関数
     v=int(v)
     return "".join([chr((v>>8*i)&0xFF) for i in range(4)])
@@ -75,7 +82,6 @@ def det_own(rect1,rect2,w,h,img):
             rx=(box1[2][0]+box1[3][0])/2
             ry=(box1[2][1]+box1[3][1])/2
         la=np.round([(qx,qy),(rx,ry)]).astype(int)
-        print("blue l:",length(la))
     else:
         center1=None
 
@@ -95,7 +101,6 @@ def det_own(rect1,rect2,w,h,img):
             tx=(box2[2][0]+box2[3][0])/2
             ty=(box2[2][1]+box2[3][1])/2
         lb=np.round([(sx,sy),(tx,ty)]).astype(int)
-        print("yellow l:",length(lb))
     else:
         center2=None
 
@@ -195,14 +200,12 @@ def det_own(rect1,rect2,w,h,img):
         crs=vby_x*vbc_y-vby_y*vbc_x #
         #BYとBCの成す角 [-pi/2,pi/2]
         drad=np.arcsin(crs/(abs(vby_x**2+vby_y**2)*abs(vbc_x**2+vbc_y**2)))
-        print(f"drad:{drad}\nrad:{rad}")
         if abs(drad)<rad:
             lr="c"
         elif crs>=0:
             lr="r"
         else:
             lr="l"
-        print(f"lr:{lr}")
         
         return lr,by
     else:
@@ -228,7 +231,7 @@ def running_exit(sig,frame):
         pass
     camera.release()
     cv2.destroyAllWindows()
-    print("終了処理を実行完了")
+    printl("終了処理を実行完了")
     sys.exit(0)
 
 def main():
@@ -237,9 +240,8 @@ def main():
     by="x"
 
     ret,img=camera.read()
-    print(ret)
     if not ret:
-        print("notret")
+        printl("notret")
         return None,None,"x","x"
     else:
         #cv2.imshow("img_bf",img)
@@ -269,15 +271,15 @@ def main():
         if rand==20:
             filenum=int(random.random()*100)
             try:
-                cv2.imwrite(f"/home/pi/Desktop/imgs/{lr}{by}{datetime.datetime.now()}.jpg",img)
-                print("******\n*****\nsave img\n*****\n*****")
+                cv2.imwrite(f"/home/pi/Desktop/imgs/{rand3}_{lr}{by}{filenum}.jpg",img)
+                printl("******\n*****\nsave img\n*****\n*****")
             except:
-                print("error:saveimg")
+                printl("error:saveimg")
 
         try:
             cv2.imshow("img",img)
         except:
-            print("disable:show img")
+            printl("disable:show img")
             pass
 
         return angleb,angley,lr,by
@@ -299,7 +301,10 @@ def cvtangle(angle):
 ::::::::::::::
 """
 
+printl(datetime.datetime.now())
+
 port=shell("ls /dev/ttyACM*")[0]
+printl(f"port:{port}")
 
 signal.signal(signal.SIGTERM,running_exit)
 
@@ -328,7 +333,7 @@ yellow=[(32,0,0),(52,255,255),(0,0,0),(255,115,255)]
 try:
     ser=serial.Serial(port, 115200, timeout=0.1)
 except:
-    print("")
+    printl("miss:serial")
     pass
 
 while True:
@@ -336,7 +341,7 @@ while True:
     try:
         angleb,angley,lr,by=main()
     except Exception as e:
-        print(e)
+        printl(e)
         angleb,angley,lr,by=None,None,"x","x"
     
     if angleb!=None:
@@ -352,11 +357,11 @@ while True:
     try:
         ser.write(data_string.encode())
         ser.flush()
-        print(data_string)
+        printl(data_string)
     except:
         pass
     key=cv2.waitKey(1)
     end=time.time()
-    print(end-start)
+    printl(end-start)
  #memo
  #ret==Falseでreboot
