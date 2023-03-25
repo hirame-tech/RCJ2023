@@ -6,6 +6,7 @@
 #define BIN2 D5
 
 void setup() {
+  Serial.begin(9600);
   Serial1.begin(115200);
   pinMode(AIN1,OUTPUT);
   pinMode(AIN2,OUTPUT);
@@ -17,13 +18,12 @@ void setup() {
 void loop() {
   if(Serial1.available()){
     int tmp = Serial1.read();
-    
+    Serial.println(tmp);
     int speed = tmp&B01111111;
     
     if(speed <= 100){
       speed = map(speed,0,100,-255,255);
       if(tmp&B10000000){
-        Serial.println(speed);
         if(speed > 0){
           digitalWrite(AIN1,LOW);
           analogWrite(AIN2,speed); 
@@ -31,8 +31,8 @@ void loop() {
           digitalWrite(AIN1,HIGH);
           digitalWrite(AIN2,HIGH);             
         }else{
-          digitalWrite(AIN1,LOW);
-          analogWrite(AIN2,-speed);        
+          digitalWrite(AIN2,LOW);
+          analogWrite(AIN1,-speed);        
         }
       }else{
         if(speed > 0){
@@ -42,8 +42,8 @@ void loop() {
           digitalWrite(BIN1,HIGH);
           digitalWrite(BIN2,HIGH);             
         }else{
-          digitalWrite(BIN1,LOW);
-          analogWrite(BIN2,-speed); 
+          digitalWrite(BIN2,LOW);
+          analogWrite(BIN1,-speed); 
         }
       }
     }else{
