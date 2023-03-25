@@ -52,5 +52,8 @@ int get_gyro(Stream *serial,int led_pin){
     }  
 }
 
+void get_cam(Stream *serial,int *yellow,int *blue){
+    
+}
 
 //#endif
