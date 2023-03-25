@@ -152,9 +152,9 @@ void loop() {
   if((line_frag - line_frag_old) > 0){
     line_approach_angle = line_angle;
     start_time = millis();
-  }else if(((line_frag - line_frag_old) < 0) && ((millis() - start_time) > 1000)){
+  }/* else if(((line_frag - line_frag_old) < 0) && ((millis() - start_time) > 1000)){
     line_approach_angle = -1;
-  }
+  } */
   get_IR(&IR_SERIAL,&IR_angle,&IR_distance);
   //cal line
   if(line_frag == 1){
@@ -171,11 +171,13 @@ void loop() {
       // escape line zone
       //Serial.println("a");
       
-      while((millis() - start_time) < LINE_STOP_TIME){
-        motor.move(0,0,127);
+      if((millis() - start_time) < LINE_STOP_TIME){
+        motor.move(0,0,gyro_angle);
+      }else{
+        motor.move(line_approach_angle - PI, MOVE_SPEED , gyro_angle);
       }
-      /*
-      if(fabs(line_angle - line_approach_angle) >= PI){
+      
+      /* if(fabs(line_angle - line_approach_angle) >= PI){
         if((fabs(line_angle - line_approach_angle)-PI) >= PI/2){
           line_angle -= PI;
         }
@@ -184,16 +186,18 @@ void loop() {
         if(fabs(line_angle - line_approach_angle) >= PI/2){
           line_angle -= PI;
         }
-      }
-      */
+      } 
+      
       if((PI/2 < fabs(line_angle - line_approach_angle)) && (3*PI/2 > fabs(line_angle - line_approach_angle))){
         line_angle -= PI;
       }
+      
       Serial.print(line_approach_angle*180/PI);
       Serial.print(",");
       Serial.println((line_angle - PI)*180/PI);
 
       motor.move(line_angle - PI,MOVE_SPEED,gyro_angle);
+      */
 
     }else{
       if(IR_distance != 0){
