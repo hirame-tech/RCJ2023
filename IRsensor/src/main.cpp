@@ -32,18 +32,18 @@ void loop() {
   distance = Ball_distance(sensor_data) & 0x0F;
   angle = Ball_angle(sensor_data) & 0xF;
   send_data = ((distance << 4) + angle) & 0xFF;
-  /*
+  
   for (int i = 0; i < SENSOR_NUMBER; i++){
     Serial.print(sensor_data[i]);
     Serial.print(" : ");
   }
-  */
-  //Serial.println();
-  if(distance != 0){
-    Serial.println(angle);
-  }else{
-    Serial.println("ball is not found.");
-  }
+  
+  Serial.println();
+  //if(distance != 0){
+  //  Serial.println(angle);
+  //}else{
+  //  Serial.println("ball is not found.");
+  //}
   Serial1.write(send_data);
 }
 

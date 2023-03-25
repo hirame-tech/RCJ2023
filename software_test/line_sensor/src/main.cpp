@@ -50,20 +50,20 @@ void loop() {
     get_linesensor(set_port, read_port, sensor_value);
 
     //以下を各ラインセンサ値を調べるときに用いる。
-    /*for (int i = 0; i < 29; i++) {
+    for (int i = 0; i < 29; i++) {
         Serial.print(sensor_value[i]);
         Serial.print(",");
     }
-    Serial.println(sensor_value[29]);*/
+    Serial.println(sensor_value[29]);
 
     get_rad(sensor_value, threshold, &angle, &distance);
 
     exit_judge(&angle, &distance);
 
-    degree = (180 / PI) * angle;
-    Serial.print(degree);
-    Serial.print(",");
-    Serial.println(distance);
+    //degree = (180 / PI) * angle;
+    //Serial.print(degree);
+    //Serial.print(",");
+    //Serial.println(distance);
 }
 
 /*
