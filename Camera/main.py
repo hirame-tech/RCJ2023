@@ -303,7 +303,7 @@ def cvtangle(angle):
 
 printl(datetime.datetime.now())
 
-port=shell("ls /dev/ttyACM*")[0]
+port=shell("ls /dev/ttyAMA*")[0]
 printl(f"port:{port}")
 
 signal.signal(signal.SIGTERM,running_exit)
