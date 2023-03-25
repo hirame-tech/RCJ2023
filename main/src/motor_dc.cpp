@@ -23,7 +23,7 @@ void MOTOR::free(){
  * @param gyro jyro(0~255 senter:127)
  */
 void MOTOR::move(float direction_r,int speed,int gyro){
-    float p = 0.2;//比例定数
+    float p = 0.1;//比例定数
     float i = -0;//積分項の係数
     float d = 0;//微分項の係数
     static float integral = 0;//積分量

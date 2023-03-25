@@ -27,9 +27,10 @@ void get_IR(Stream *serial,float *detection_r,int *distance){
     if(serial->available()){
         data = serial->read();
         //Serial.println(data);
+        *detection_r = 2*PI - (data & 0x0F) *PI/8;
+        *distance = (data & 0XF0) >> 4;
     }
-    *detection_r = 2*PI - (data & 0x0F) *PI/8;
-    *distance = (data & 0XF0) >> 4;
+
 }
 
 /**
