@@ -1,0 +1,10 @@
+[Unit]
+Description=Start main.py
+[Service]
+User=pi
+WorkingDerectory=/home/pi/Desktop
+Enviroment="PYTHONPATH=/home/pi/.local/lib/python3.9/site-packages/"
+ExecStart=/usr/bin/bash /home/pi/Desktop/run_main.sh
+
+[Install]
+WantedBy=multi-user.target
