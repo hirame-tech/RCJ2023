@@ -57,8 +57,25 @@ int get_gyro(Stream *serial,int led_pin){
     }  
 }
 
-void get_cam(Stream *serial,int *yellow,int *blue){
-    
+void get_cam(Stream *serial,int *blue){
+    int angleb;//angle of blue    0~7:angle(center:0) 8:can't detect
+    int angley;//angle of yellow
+    char lr;// x = can't detect l = left r = right
+    char by;// x = can't detect m = center b = blue y = yellow
+    if(serial->available()){
+        String input = serial->readStringUntil('\n');
+        Serial.println(input);
+        angleb = input[0] - '0';
+        angley = input[1] - '0';
+        lr = input[2];
+        by = input[3];
+        if(angleb > 3){
+            angleb =- 4;
+        }else{
+            angleb =+ 4;
+        }  
+        *blue = angleb;
+    }
 }
 
 //#endif
