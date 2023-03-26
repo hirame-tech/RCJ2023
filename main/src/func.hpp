@@ -57,7 +57,7 @@ int get_gyro(Stream *serial,int led_pin){
     }  
 }
 
-void get_cam(Stream *serial,int *blue){
+void get_cam(Stream *serial,char *side){
     int angleb;//angle of blue    0~7:angle(center:0) 8:can't detect
     int angley;//angle of yellow
     char lr;// x = can't detect l = left r = right
@@ -74,7 +74,7 @@ void get_cam(Stream *serial,int *blue){
         }else{
             angleb =+ 4;
         }  
-        *blue = angleb;
+        *side= lr;
     }
 }
 

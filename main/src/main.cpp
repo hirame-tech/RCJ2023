@@ -31,7 +31,7 @@ MOTOR motor(&MOTOR_B_SERIAL, &MOTOR_C_SERIAL);
 LINE line;
 
 #define TRANS_SENSOR null // Transparent sensor
-#define REF_SENSOR null   // reflection sensor
+#define REF_SENSOR 39     // reflection sensor
 
 #define SWITCH_PIN 41
 
@@ -56,6 +56,7 @@ void setup() {
     line.set_pin(d_pin1, A12, d_pin2, A13);
 
     pinMode(SWITCH_PIN, INPUT_PULLUP);
+    pinMode(REF_SENSOR, INPUT);
 
     // led_pins.line_state = 1;
     // led_pins.cam_state = 1;
@@ -91,22 +92,21 @@ void loop() {
     static float line_angle;
     static float line_depth;
 
-    static int previousMills;
-
     static int gyro_angle = 127; // gyro angle data
     static bool start_flag = 0;  // start toggle switch status
+    static int catch_flag = 0;
 
     static float IR_angle;
     static int IR_distance;
     static uint32_t start_time = 0; // line approach timing
     static uint32_t reverse_start_time = 0;
 
-    static float my_goal_angle;
-    static float opponent_goal_angle;
-    static int my_goal_distance;
-    static int opponent_goal_distancce;
+    // static float my_goal_angle;
+    // static float opponent_goal_angle;
+    // static int my_goal_distance;
+    // static int opponent_goal_distancce;
 
-    static int reverse_start = 0;
+    static char position_side;
 
     static float old_move_angle = 0;
 
@@ -134,8 +134,10 @@ void loop() {
     gyro_angle = get_gyro(&GYRO_SERIAL, led_pins.gyro_state);
     line_frag_old = line_frag;
     line_frag = line.get_line(line_state, line_threshold);
+    catch_flag = 0; // digitalRead(REF_SENSOR);
 
     get_IR(&IR_SERIAL, &IR_angle, &IR_distance);
+    get_cam(&CAM_SERIAL, &position_side);
 
     // Serial.print(IR_distance);
     // Serial.print(",");
@@ -254,19 +256,28 @@ void loop() {
                 }
 
                 // chase ball process
-                if (IR_angle < PI / 4) {
-                    motor.move(2 * IR_angle, MOVE_SPEED, gyro_angle);
-                    old_move_angle = 2 * IR_angle;
-                } else if (IR_angle < PI) {
-                    motor.move(IR_angle + asin(IR_r / IR_distance), MOVE_SPEED, gyro_angle);
-                    old_move_angle = IR_angle + asin(IR_r / IR_distance);
-                } else if (IR_angle < 3 * PI / 2) {
-                    motor.move(IR_angle - asin(IR_r / IR_distance), MOVE_SPEED, gyro_angle);
-                    old_move_angle = IR_angle - asin(IR_r / IR_distance);
+
+                if ((catch_flag == 1) && ((IR_angle < PI / 4) || (IR_angle > 3 * PI / 4))) {
+                    if ((position_side == 'c') || (position_side == 'x')) {
+                        motor.move(0, MOVE_SPEED, gyro_angle);
+                    } else if (position_side == 'r') {
+                    }
                 } else {
-                    motor.move(2 * IR_angle - 2 * PI, MOVE_SPEED, gyro_angle);
-                    old_move_angle = 2 * IR_angle - 2 * PI;
+                    if (IR_angle < PI / 4) {
+                        motor.move(2 * IR_angle, MOVE_SPEED, gyro_angle);
+                        old_move_angle = 2 * IR_angle;
+                    } else if (IR_angle < PI) {
+                        motor.move(IR_angle + asin(IR_r / IR_distance), MOVE_SPEED, gyro_angle);
+                        old_move_angle = IR_angle + asin(IR_r / IR_distance);
+                    } else if (IR_angle < 3 * PI / 2) {
+                        motor.move(IR_angle - asin(IR_r / IR_distance), MOVE_SPEED, gyro_angle);
+                        old_move_angle = IR_angle - asin(IR_r / IR_distance);
+                    } else {
+                        motor.move(2 * IR_angle - 2 * PI, MOVE_SPEED, gyro_angle);
+                        old_move_angle = 2 * IR_angle - 2 * PI;
+                    }
                 }
+
             } else {
                 // 定位置いれたいな
                 motor.move(0, 0, gyro_angle); // 静止
