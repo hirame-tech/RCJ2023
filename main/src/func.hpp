@@ -27,7 +27,11 @@ void get_IR(Stream *serial,float *detection_r,int *distance){
     if(serial->available()){
         data = serial->read();
         //Serial.println(data);
-        *detection_r = (data & 0x0F) *PI/8;
+        *detection_r = 2*PI - (data & 0x0F) *PI/8;
+
+        //以下2台目のIR反転用
+        *detection_r = 2*PI - *detection_r;
+
         *distance = (data & 0XF0) >> 4;
     }
 
