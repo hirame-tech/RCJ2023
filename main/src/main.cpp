@@ -237,20 +237,14 @@ void loop() {
                 motor.move(line_approach_angle - PI, MOVE_SPEED, gyro_angle);
                 Serial.println("first_______________REVERSE");
 
-            } else  
-            if ((millis() - start_time) < LINE_STOP_TIME) {
+            } else if ((millis() - start_time) < LINE_STOP_TIME) {
                 motor.move(0, 0, 127);
                 Serial.println("Stop!!!!!!!!!!!!!!!!!!!!!!");
-            } else if (line_frag == line_frag_old){
+            } else if (line_frag == line_frag_old) {
                 motor.move(line_approach_angle - PI, MOVE_SPEED, gyro_angle);
                 Serial.println("_______________REVERSE");
             }
 
-            // escape line zone
-            // motor.move();
-            // delay(700);
-            // motor.move(0, 0, 127);
-            // delay(2000);
         } else {
             if (IR_distance != 0) {
                 // adjust IR distance
