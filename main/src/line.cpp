@@ -166,14 +166,14 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
     }
 
     // state配列の確認
-    for (int i = 0; i < 30; i++) {
-        Serial.print(state[i]);
-        Serial.print(",");
-    }
+    // for (int i = 0; i < 30; i++) {
+    //     Serial.print(state[i]);
+    //     Serial.print(",");
+    // }
 
     // 反応したブロックの数の確認
-    Serial.print(labelnum);
-    Serial.print(",");
+    // Serial.print(labelnum);
+    // Serial.print(",");
 
     // Serial.println();
 
@@ -278,7 +278,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
         // Serial.print(",");
         // Serial.print(testdegree);
         // Serial.print(",");
-        //Serial.println();
+        // Serial.println();
 
     } else if (labelnum == 1) { // ここｱ正常
         int tmp1_start;
@@ -357,7 +357,7 @@ void LINE::cal_line_direction(int data[], float *angle, float *distance) {
         // Serial.print(",");
         // Serial.print(testdegree);
         // Serial.print(",");
-        //Serial.println();
+        // Serial.println();
     } else {
         return;
     }

@@ -1,16 +1,18 @@
-#include <Arduino.h>
-#include <math.h>
 #include <Adafruit_NeoPixel.h>
-#include <motor_dc.hpp>
-#include <line.hpp>
+#include <Arduino.h>
 #include <func.hpp>
+#include <line.hpp>
+#include <math.h>
+#include <motor_dc.hpp>
 
 //**user settings**
 #define BRIGHTNESS 255
-#define MOVE_SPEED 27 // MAX50
-#define IR_r 7        // 適当
-#define LINE_THRESHOLD 200
-#define LINE_STOP_TIME 500
+#define MOVE_SPEED 40 // MAX50
+#define IR_r (float)7 // 適当
+#define LINE_THRESHOLD 350
+#define FIRST_LINE_STOP_TIME 200
+#define LINE_STOP_TIME 400
+#define LINE_REVERSE_TIME 500
 
 #define LINE_LED_PIN 10
 
@@ -37,201 +39,248 @@ LEDPIN led_pins;
 
 // prototype declaration
 
-void setup()
-{
-  // pin_setup();
-  Serial.begin(115200);
-  GYRO_SERIAL.begin(115200);
-  IR_SERIAL.begin(115200);
+void setup() {
+    // pin_setup();
+    Serial.begin(115200);
+    GYRO_SERIAL.begin(115200);
+    IR_SERIAL.begin(115200);
 
-  MOTOR_B_SERIAL.begin(115200);
-  MOTOR_C_SERIAL.begin(115200);
+    MOTOR_B_SERIAL.begin(115200);
+    MOTOR_C_SERIAL.begin(115200);
 
-  motor.free();
+    motor.free();
 
-  // line IO settings
-  const int d_pin1[] = {5, 4, 6, 9};
-  const int d_pin2[] = {12, 11, 30, 31};
-  line.set_pin(d_pin1, A12, d_pin2, A13);
+    // line IO settings
+    int d_pin1[] = {5, 4, 6, 9};
+    int d_pin2[] = {12, 11, 30, 31};
+    line.set_pin(d_pin1, A12, d_pin2, A13);
 
-  pinMode(SWITCH_PIN, INPUT_PULLUP);
+    pinMode(SWITCH_PIN, INPUT_PULLUP);
 
-  // led_pins.line_state = 1;
-  // led_pins.cam_state = 1;
-  // led_pins.gyro_state = 1;
-  // led_pins.IR_state = 1;
-  // led_pins.gyro_L = 1;
-  // led_pins.gyro_R = 1;
-  // pinMode(led_pins.line_state,OUTPUT);
-  // pinMode(led_pins.cam_state,OUTPUT);
-  // pinMode(led_pins.gyro_state,OUTPUT);
-  // pinMode(led_pins.IR_state,OUTPUT);
-  // pinMode(led_pins.gyro_L,OUTPUT);
-  // pinMode(led_pins.gyro_R,OUTPUT);
+    // led_pins.line_state = 1;
+    // led_pins.cam_state = 1;
+    // led_pins.gyro_state = 1;
+    // led_pins.IR_state = 1;
+    // led_pins.gyro_L = 1;
+    // led_pins.gyro_R = 1;
+    // pinMode(led_pins.line_state,OUTPUT);
+    // pinMode(led_pins.cam_state,OUTPUT);
+    // pinMode(led_pins.gyro_state,OUTPUT);
+    // pinMode(led_pins.IR_state,OUTPUT);
+    // pinMode(led_pins.gyro_L,OUTPUT);
+    // pinMode(led_pins.gyro_R,OUTPUT);
 
-  line_led.begin();
-  line_led.show(); // Turn OFF
-  line_led.setBrightness(BRIGHTNESS);
+    line_led.begin();
+    line_led.show(); // Turn OFF
+    line_led.setBrightness(BRIGHTNESS);
 
-  for (int i = 0; i < 30; i++)
-  {
-    line_led.setPixelColor(i, line_led.Color(0, 255, 0));
-    line_led.show();
-    delay(10);
-  }
+    for (int i = 0; i < 30; i++) {
+        line_led.setPixelColor(i, line_led.Color(0, 255, 0));
+        line_led.show();
+        delay(10);
+    }
 }
 
-void loop()
-{
-  // variable definition
-  static bool line_frag = 0;                  // line reaction flag
-  static bool line_frag_old = 0;              // line reaction flag
-  static int line_state[30];                  // binary data
-  static int line_threshold = LINE_THRESHOLD; // 将来的な可変抵抗化に対応するための変数
-  static float line_approach_angle;
-  static float line_angle;
-  static float line_depth;
+void loop() {
+    // variable definition
+    static bool line_frag = 0;                  // line reaction flag
+    static bool line_frag_old = 0;              // line reaction flag
+    static int line_state[30];                  // binary data
+    static int line_threshold = LINE_THRESHOLD; // 将来的な可変抵抗化に対応するための変数
+    static float line_approach_angle;
+    static float line_angle;
+    static float line_depth;
 
-  static int gyro_angle = 127; // gyro angle data
-  static bool start_flag = 0;  // start toggle switch status
+    static int previousMills;
 
-  static float IR_angle;
-  static int IR_distance;
-  static int start_time = 0; // what is this
+    static int gyro_angle = 127; // gyro angle data
+    static bool start_flag = 0;  // start toggle switch status
 
-  static float my_goal_angle;
-  static float opponent_goal_angle;
-  static int my_goal_distance;
-  static int opponent_goal_distancce;
+    static float IR_angle;
+    static int IR_distance;
+    static uint32_t start_time = 0; // line approach timing
+    static uint32_t reverse_start_time = 0;
 
-  static float old_move_angle = 0;
+    static float my_goal_angle;
+    static float opponent_goal_angle;
+    static int my_goal_distance;
+    static int opponent_goal_distancce;
 
-  // LED process
-  /*
-  if(gyro_angle < 120){
-    digitalWrite(led_pins.gyro_L,HIGH);
-    digitalWrite(led_pins.gyro_R,LOW);
-  }else if(gyro_angle > 134){
-    digitalWrite(led_pins.gyro_L,LOW);
-    digitalWrite(led_pins.gyro_R,HIGH);
-  }else{
-    digitalWrite(led_pins.gyro_L,HIGH);
-    digitalWrite(led_pins.gyro_R,HIGH);
-  }
-  */
+    static int reverse_start = 0;
 
-  // light up line LEDs
-  for (int i = 0; i < 30; i++)
-  {
-    line_led.setPixelColor(i, line_led.Color(0, 255, 0));
-  }
-  line_led.show();
+    static float old_move_angle = 0;
 
-  // get value of various sensors
-  start_flag = !(digitalRead(SWITCH_PIN));
-  gyro_angle = get_gyro(&GYRO_SERIAL, led_pins.gyro_state);
-  line_frag_old = line_frag;
-  line_frag = line.get_line(line_state, line_threshold);
+    // LED process
 
-  get_IR(&IR_SERIAL, &IR_angle, &IR_distance);
-  // Serial.println(IR_distance);
+    /* if (gyro_angle < 120) {
+        digitalWrite(led_pins.gyro_L, HIGH);
+        digitalWrite(led_pins.gyro_R, LOW);
+    } else if (gyro_angle > 134) {
+        digitalWrite(led_pins.gyro_L, LOW);
+        digitalWrite(led_pins.gyro_R, HIGH);
+    } else {
+        digitalWrite(led_pins.gyro_L, HIGH);
+        digitalWrite(led_pins.gyro_R, HIGH);
+    } */
 
-  // set line approach angle
-  if ((line_frag - line_frag_old) > 0)
-  {
-    line_approach_angle = line_angle;
-    start_time = millis();
-  }
-  else if (((line_frag - line_frag_old) < 0) && ((millis() - start_time) > 1000))
-  {
-    line_approach_angle = -1;
-  }
+    // light up line LEDs
+    for (int i = 0; i < 30; i++) {
+        line_led.setPixelColor(i, line_led.Color(0, 255, 0));
+    }
+    line_led.show();
 
-  // cal line
-  if (line_frag == 1)
-  {
-    line.cal_line_direction(line_state, &line_angle, &line_depth);
-    //  Serial.println(line_angle*180/PI);
-  }
-  else
-  {
-    // Serial.println("can't find white");
-  }
+    // get value of various sensors
+    start_flag = !(digitalRead(SWITCH_PIN));
+    gyro_angle = get_gyro(&GYRO_SERIAL, led_pins.gyro_state);
+    line_frag_old = line_frag;
+    line_frag = line.get_line(line_state, line_threshold);
 
-  if (start_flag == 1)
-  { // start
-    if (line_frag == 1)
-    {
-      // 以下ゴリ押し
-      if (line_state[0] == 1 || line_state[1] == 1)
-      {
+    get_IR(&IR_SERIAL, &IR_angle, &IR_distance);
+
+    // Serial.print(IR_distance);
+    // Serial.print(",");
+    // Serial.print(IR_angle);
+    // Serial.print(",");
+    // Serial.println(gyro_angle);
+
+    // set line approach angle
+    if ((line_frag - line_frag_old) > 0) {
         motor.move(0, 0, 127);
-        delay(LINE_STOP_TIME);
-        motor.move(old_move_angle - PI, MOVE_SPEED, gyro_angle);
-        delay(300);
-      }
+        line_approach_angle = line_angle;
+        start_time = millis();
+    } /*  else if (((line_frag - line_frag_old) < 0) && ((millis() - start_time) > 1000)) {
+        line_approach_angle = -1;
+     } */
 
-      // Serial.print(line_approach_angle);
-      // Serial.print(",");
-      // Serial.println(old_move_angle);
-      if ((millis() - start_time) < LINE_STOP_TIME) // LINE_STOP_TIMEで指定した時間静止
-      {
-        motor.move(0, 0, gyro_angle);
-      }
-      else // 静止終了後、ラインへの入射角の反対方向へ進む
-      {
-        motor.move(line_approach_angle - PI, MOVE_SPEED, gyro_angle);
-      }
+    Serial.print(millis());
+    Serial.print(",");
+    Serial.print(start_time);
+    Serial.print(",");
+    Serial.print(line_frag);
+    Serial.print(",");
+    Serial.println(line_frag_old);
 
-      // escape line zone
-      // motor.move();
-      // delay(700);
-      // motor.move(0, 0, 127);
-      // delay(2000);
+    // cal line
+    if (line_frag == 1) {
+        line.cal_line_direction(line_state, &line_angle, &line_depth);
+        // Serial.println(line_angle * 180 / PI);
+    } else {
+        // Serial.println("can't find white");
     }
-    else
-    {
-      if (IR_distance != 0)
-      {
-        // adjust IR distance
-        IR_distance = 16 - IR_distance;
-        if (IR_r > IR_distance)
-        {
-          IR_distance = IR_r;
-        }
 
-        // chase ball process
-        if (IR_angle < PI / 4)
-        {
-          motor.move(2 * IR_angle, MOVE_SPEED, gyro_angle);
-          old_move_angle = 2 * IR_angle;
+    if (start_flag == 1) { // start
+        if (line_frag == 1) {
+
+            // 以下ゴリ押し8方位
+            // Serial.print(line_state[0]);
+            // Serial.print(",");
+            // Serial.print(line_state[3]);
+            // Serial.print(",");
+            // Serial.print(line_state[7]);
+            // Serial.print(",");
+            // Serial.print(line_state[10]);
+            // Serial.print(",");
+            // Serial.print(line_state[15]);
+            // Serial.print(",");
+            // Serial.print(line_state[18]);
+            // Serial.print(",");
+            // Serial.println(line_state[22]);
+            // Serial.print(",");
+            // Serial.println(line_state[25]);
+
+            /* if (line_state[0] == 1) {
+                motor.move(0, 0, 127);
+                delay(LINE_STOP_TIME);
+                motor.move(PI, MOVE_SPEED, gyro_angle);
+                delay(LINE_REVERSE_TIME);
+            } else if (line_state[3] == 1 || line_state[4] == 1) {
+                motor.move(0, 0, 127);
+                delay(LINE_STOP_TIME);
+                motor.move((5 * PI) / 4, MOVE_SPEED, gyro_angle);
+                delay(LINE_REVERSE_TIME);
+            } else if (line_state[7] == 1 || line_state[8] == 1) {
+                motor.move(0, 0, 127);
+                delay(LINE_STOP_TIME);
+                motor.move((3 * PI) / 2, MOVE_SPEED, gyro_angle);
+                delay(LINE_REVERSE_TIME);
+            } else if (line_state[10] == 1 || line_state[11] == 1) {
+                motor.move(0, 0, 127);
+                delay(LINE_STOP_TIME);
+                motor.move((7 * PI) / 4, MOVE_SPEED, gyro_angle);
+                delay(LINE_REVERSE_TIME);
+            } else if (line_state[15] == 1) {
+                motor.move(0, 0, 127);
+                delay(LINE_STOP_TIME);
+                motor.move(0, MOVE_SPEED, gyro_angle);
+                delay(LINE_REVERSE_TIME);
+            } else if (line_state[18] == 1 || line_state[19] == 1) {
+                motor.move(0, 0, 127);
+                delay(LINE_STOP_TIME);
+                motor.move(PI / 4, MOVE_SPEED, gyro_angle);
+                delay(LINE_REVERSE_TIME);
+            } else if (line_state[22] == 1 || line_state[23] == 1) {
+                motor.move(0, 0, 127);
+                delay(LINE_STOP_TIME);
+                motor.move(PI / 2, MOVE_SPEED, gyro_angle);
+                delay(LINE_REVERSE_TIME);
+            } else if (line_state[25] == 1 || line_state[26] == 1) {
+                motor.move(0, 0, 127);
+                delay(LINE_STOP_TIME);
+                motor.move((3 * PI) / 4, MOVE_SPEED, gyro_angle);
+                delay(LINE_REVERSE_TIME);
+            } */
+
+            // Serial.print(line_approach_angle);
+            // Serial.print(",");
+            // Serial.println(old_move_angle);
+            if ((millis() - start_time) < FIRST_LINE_STOP_TIME) {
+                motor.move(line_approach_angle - PI, MOVE_SPEED, gyro_angle);
+                Serial.println("first_______________REVERSE");
+
+            } else  
+            if ((millis() - start_time) < LINE_STOP_TIME) {
+                motor.move(0, 0, 127);
+                Serial.println("Stop!!!!!!!!!!!!!!!!!!!!!!");
+            } else if (line_frag == line_frag_old){
+                motor.move(line_approach_angle - PI, MOVE_SPEED, gyro_angle);
+                Serial.println("_______________REVERSE");
+            }
+
+            // escape line zone
+            // motor.move();
+            // delay(700);
+            // motor.move(0, 0, 127);
+            // delay(2000);
+        } else {
+            if (IR_distance != 0) {
+                // adjust IR distance
+                IR_distance = 16 - IR_distance;
+                if (IR_r > IR_distance) {
+                    IR_distance = IR_r;
+                }
+
+                // chase ball process
+                if (IR_angle < PI / 4) {
+                    motor.move(2 * IR_angle, MOVE_SPEED, gyro_angle);
+                    old_move_angle = 2 * IR_angle;
+                } else if (IR_angle < PI) {
+                    motor.move(IR_angle + asin(IR_r / IR_distance), MOVE_SPEED, gyro_angle);
+                    old_move_angle = IR_angle + asin(IR_r / IR_distance);
+                } else if (IR_angle < 3 * PI / 2) {
+                    motor.move(IR_angle - asin(IR_r / IR_distance), MOVE_SPEED, gyro_angle);
+                    old_move_angle = IR_angle - asin(IR_r / IR_distance);
+                } else {
+                    motor.move(2 * IR_angle - 2 * PI, MOVE_SPEED, gyro_angle);
+                    old_move_angle = 2 * IR_angle - 2 * PI;
+                }
+            } else {
+                // 定位置いれたいな
+                motor.move(0, 0, gyro_angle); // 静止
+            }
         }
-        else if (IR_angle < PI)
-        {
-          motor.move(IR_angle + asin(IR_r / IR_distance), MOVE_SPEED, gyro_angle);
-          old_move_angle = IR_angle + asin(IR_r / IR_distance);
-        }
-        else if (IR_angle < 3 * PI / 2)
-        {
-          motor.move(IR_angle - asin(IR_r / IR_distance), MOVE_SPEED, gyro_angle);
-          old_move_angle = IR_angle - asin(IR_r / IR_distance);
-        }
-        else
-        {
-          motor.move(2 * IR_angle - 2 * PI, MOVE_SPEED, gyro_angle);
-          old_move_angle = 2 * IR_angle - 2 * PI;
-        }
-      }
-      else
-      {
-        // 定位置いれたいな
-        motor.move(0, 0, gyro_angle); // 静止
-      }
+        // motor.move(0,0,(PI +
+        // my_goal_angle)*127/PI);//goal向き方向修正テスト用
+    } else {
+        motor.move(0, 0, 127); // 静止
     }
-    // motor.move(0,0,(PI + my_goal_angle)*127/PI);//goal向き方向修正テスト用
-  }
-  else
-  {
-    motor.move(0, 0, 127); // 静止
-  }
 }
