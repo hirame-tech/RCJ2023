@@ -199,7 +199,8 @@ def det_own(rect1,rect2,w,h,img):
         #BYxBC(外積)
         crs=vby_x*vbc_y-vby_y*vbc_x #
         #BYとBCの成す角 [-pi/2,pi/2]
-        drad=np.arcsin(crs/(abs(vby_x**2+vby_y**2)*abs(vbc_x**2+vbc_y**2)))
+        drad=np.arcsin(crs/(np.sqrt(vby_x**2+vby_y**2)*np.sqrt(vbc_x**2+vbc_y**2)))
+        print("drad:",drad)
         if abs(drad)<rad:
             lr="c"
         elif crs>=0:
@@ -308,12 +309,12 @@ signal.signal(signal.SIGTERM,running_exit)
 i=0
 pi=np.pi
 fps=25
-rad=pi/4 #dradの値がrad以下ならlr自己位置を"c"(center)とする。
+rad=pi/40 #dradの値がrad以下ならlr自己位置を"c"(center)とする。
 
 imgnum=1 #試走で保存する画像に振る番号
 lmin=30 #片方のゴールしか見えないとき、ゴールの長辺がこれを超えたら自己位置を確定する
 
-rectmin=5 #長辺がこれより長くて初めて認識される。
+rectmin=2 #長辺がこれより長くて初めて認識される。
 
 camera=cv2.VideoCapture(0)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT,320)
@@ -324,8 +325,8 @@ camera.set(cv2.CAP_PROP_FPS,fps)
 
 nans42=np.zeros([4,2])
 nans42[:,:]=np.nan
-blue=[(77,40,0),(97,255,255),(97,126,0),(208,255,255)] #[(lower),(upper)],(色相(/2)、彩度(x2.55)、明度(x2.55))
-yellow=[(32,0,0),(52,255,255),(0,0,0),(255,115,255)] 
+blue=[(77,40,0),(120,255,255),(0,0,0),(255,255,255)] #[(lower),(upper)],(色相(/2)、彩度(x2.55)、明度(x2.55))
+yellow=[(28,0,0),(52,255,255),(0,0,0),(255,115,255)] 
 
 try:
     ser=serial.Serial("/dev/ttyAMA0", 115200, timeout=0.1)
