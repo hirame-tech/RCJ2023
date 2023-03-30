@@ -98,11 +98,11 @@ bool LINE::get_line(int bool_value[], int threshold) {
     // value[29] = 0;
     // value[30] = 0;
 
-    // for (int i = 0; i < 30; i++) {
-    //     Serial.print(line_value[i]);
-    //     Serial.print(",");
-    // }
-    // Serial.println();
+    for (int i = 0; i < 30; i++) {
+        Serial.print(line_value[i]);
+        Serial.print(",");
+    }
+    Serial.println();
 
     return (sum > 0);
 }
