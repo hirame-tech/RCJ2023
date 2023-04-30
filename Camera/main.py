@@ -1,10 +1,8 @@
 import cv2
 import numpy as np
-import subprocess
 import serial
 import random
 import signal,sys
-import datetime
 
 rand3=int(random.random()*999)
 
