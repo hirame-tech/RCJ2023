@@ -141,7 +141,7 @@ def running_exit(sig,frame):#終了処理
         pass
     camera.release()
     cv2.destroyAllWindows()
-    print("終了処理を実行完了")
+    print("終了処理実行完了")
     sys.exit(0)
 
 def main():
